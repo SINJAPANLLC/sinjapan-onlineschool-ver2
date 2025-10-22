@@ -1,54 +1,65 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { X } from 'lucide-react';
+import { Mail, Lock, User, Eye, EyeOff, GraduationCap, BookOpen, Users, Trophy, Check } from 'lucide-react';
 import { useNavigate } from "react-router-dom"; 
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { auth, db } from "../firebase"; // ✅ Updated path to firebase.js
+import { auth, db } from "../firebase";
 
 export default function MyFansSignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [error, setError] = useState("");
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const navigate = useNavigate(); 
 
+  const features = [
+    { icon: BookOpen, text: '500+のコース' },
+    { icon: Users, text: '10,000+の学習者' },
+    { icon: Trophy, text: '98%の満足度' }
+  ];
+
+  const benefits = [
+    '無料トライアル期間付き',
+    'すべてのコースへのアクセス',
+    '修了証明書の発行',
+    '24時間いつでも学習可能'
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!agreedToTerms) {
+      setError("利用規約に同意してください");
+      return;
+    }
+    
     setError("");
     setIsVerifying(true);
 
     try {
-      // ✅ Create user with Firebase
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-      // ✅ Update display name
       await updateProfile(userCredential.user, { displayName: name });
 
-      // ✅ Save user profile to Firestore for messaging system
       await setDoc(doc(db, 'users', userCredential.user.uid), {
         displayName: name,
         email: email,
         photoURL: userCredential.user.photoURL || null,
         createdAt: new Date().toISOString(),
         lastSeen: new Date().toISOString(),
-        isOnline: true
+        isOnline: true,
+        role: 'student',
+        enrolledCourses: [],
+        completedCourses: []
       });
 
-      console.log("User created successfully:", userCredential.user);
-
-      setIsVerifying(false);
-
-      // ✅ Redirect to Home page
-      // Navigation will be handled automatically by the AuthContext
       navigate("/home");
 
     } catch (err) {
-      console.error("Signup error:", err.message);
-      
-      // エラーメッセージを日本語で表示
       let errorMessage = "登録に失敗しました";
       
       if (err.code === 'auth/email-already-in-use') {
@@ -58,7 +69,7 @@ export default function MyFansSignUp() {
       } else if (err.code === 'auth/weak-password') {
         errorMessage = "パスワードは6文字以上で設定してください";
       } else if (err.code === 'auth/network-request-failed') {
-        errorMessage = "ネットワークエラーが発生しました。接続を確認してください";
+        errorMessage = "ネットワークエラーが発生しました";
       } else if (err.code === 'auth/operation-not-allowed') {
         errorMessage = "メール/パスワードでの登録が無効になっています";
       }
@@ -69,124 +80,224 @@ export default function MyFansSignUp() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8 relative"
-      >
-        {/* Close Button */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          className="absolute top-6 left-6 p-2 hover:bg-gray-100 rounded-full transition-colors"
-        >
-          <X size={20} className="text-gray-600" />
-        </motion.button>
+    <div className="min-h-screen flex">
+      {/* Left Side - Sign Up Form */}
+      <div className="flex-1 flex items-center justify-center p-8 bg-white">
+        <div className="w-full max-w-md">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8"
+          >
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <GraduationCap className="w-10 h-10 text-white" />
+            </div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-2">
+              SIN JAPAN ONLINE SCHOOL
+            </h1>
+            <p className="text-gray-600">新しい学びを始めましょう</p>
+          </motion.div>
 
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-xl font-semibold text-gray-900 mb-8">新規登録</h1>
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            onSubmit={handleSubmit}
+            className="space-y-4"
+          >
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm"
+                data-testid="error-message"
+              >
+                {error}
+              </motion.div>
+            )}
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                お名前
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  placeholder="山田太郎"
+                  required
+                  data-testid="input-name"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                メールアドレス
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  placeholder="your@email.com"
+                  required
+                  data-testid="input-email"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                パスワード
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-11 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  placeholder="6文字以上"
+                  required
+                  data-testid="input-password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  data-testid="button-toggle-password"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">6文字以上で設定してください</p>
+            </div>
+
+            <div className="bg-blue-50 rounded-xl p-4 space-y-2">
+              <p className="text-sm font-semibold text-blue-900 mb-2">登録すると以下の特典が受けられます：</p>
+              {benefits.map((benefit, index) => (
+                <div key={index} className="flex items-center gap-2 text-sm text-blue-800">
+                  <Check className="w-4 h-4 text-blue-600" />
+                  <span>{benefit}</span>
+                </div>
+              ))}
+            </div>
+
+            <label className="flex items-start gap-3 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={agreedToTerms}
+                onChange={(e) => setAgreedToTerms(e.target.checked)}
+                className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                data-testid="checkbox-terms"
+              />
+              <span className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors">
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate('/terms');
+                  }}
+                  className="text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  利用規約
+                </button>
+                、
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate('/privacy');
+                  }}
+                  className="text-blue-600 hover:text-blue-700 font-medium"
+                >
+                  プライバシーポリシー
+                </button>
+                に同意します
+              </span>
+            </label>
+
+            <button
+              type="submit"
+              disabled={isVerifying || !agreedToTerms}
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              data-testid="button-signup"
+            >
+              {isVerifying ? '登録中...' : '無料で始める'}
+            </button>
+
+            <p className="text-center text-sm text-gray-600 mt-6">
+              すでにアカウントをお持ちの方は{' '}
+              <button
+                type="button"
+                onClick={() => navigate('/login')}
+                className="text-blue-600 hover:text-blue-700 font-semibold"
+                data-testid="link-login"
+              >
+                ログイン
+              </button>
+            </p>
+          </motion.form>
         </div>
+      </div>
 
-        {/* Logo */}
+      {/* Right Side - Info Panel */}
+      <div className="hidden lg:flex flex-1 bg-gradient-to-br from-blue-600 to-blue-800 p-12 items-center justify-center">
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          className="flex items-center justify-center mb-12"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-white max-w-md"
         >
-          <div className="flex items-center gap-2">
-            <img src="/logo.webp" alt="Logo" className="w-100 h-16" />
+          <h2 className="text-4xl font-bold mb-6">
+            今すぐ学習を
+            <br />
+            スタート
+          </h2>
+          <p className="text-blue-100 text-lg mb-8">
+            プロ講師による質の高い授業で、確実にスキルアップ。あなたの目標を実現しましょう。
+          </p>
+          
+          <div className="space-y-4">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
+                className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl p-4"
+              >
+                <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center">
+                  <feature.icon className="w-6 h-6" />
+                </div>
+                <span className="text-lg font-semibold">{feature.text}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-8 bg-white/10 backdrop-blur-sm rounded-xl p-6">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-2xl">
+                🎓
+              </div>
+              <div>
+                <p className="font-semibold">今なら</p>
+                <p className="text-sm text-blue-100">7日間無料トライアル</p>
+              </div>
+            </div>
+            <p className="text-sm text-blue-100">
+              すべてのコースに無制限アクセス可能
+            </p>
           </div>
         </motion.div>
-
-{/* Form */}
-<form onSubmit={handleSubmit} className="space-y-4">
-  <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 0.5 }}>
-    <input
-      type="email"
-      placeholder="メールアドレスを入力"
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      className="w-full px-4 py-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all placeholder-gray-400"
-      required
-    />
-  </motion.div>
-
-  <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.5 }}>
-    <input
-      type="password"
-      placeholder="パスワードを入力"
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-      className="w-full px-4 py-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all placeholder-gray-400"
-      required
-    />
-  </motion.div>
-
-  <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5, duration: 0.5 }}>
-    <input
-      type="text"
-      placeholder="名前を入力"
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-      className="w-full px-4 py-4 border border-gray-200 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all placeholder-gray-400"
-      required
-    />
-  </motion.div>
-
-  {/* Agreement text */}
-  <motion.div 
-    initial={{ opacity: 0, x: -20 }} 
-    animate={{ opacity: 1, x: 0 }} 
-    transition={{ delay: 0.6, duration: 0.5 }}
-    className="text-xs text-gray-600 text-center mb-4"
-  >
-    <p>利用規約、プライバシーポリシー、特商法に同意の上ご登録ください</p>
-      <p>新規登録を行うことでご自身が<br/>18歳以上であることにも同意したものとみなされます</p>
-  </motion.div>
-
-  {/* Error message */}
-  {error && <p className="text-red-500 text-sm">{error}</p>}
-
-  {/* Sign Up Button */}
-  <div className="flex flex-col gap-4">
-    <motion.button
-      type="submit"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.8, duration: 0.5 }}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      disabled={isVerifying}
-      className={`w-full py-4 rounded-lg font-medium transition-all ${
-        isVerifying
-          ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-          : "bg-pink-500 text-white hover:bg-pink-600"
-      }`}
-    >
-      {isVerifying ? "登録中..." : "新規登録"}
-    </motion.button>
-  </div>
-</form>
-
-
-
-        {/* Already have account */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.5 }} className="mt-8 text-center">
-          <div className="text-sm text-gray-600 mb-4">既にアカウントをお持ちの方</div>
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => navigate("/login")} 
-            className="w-full border-2 border-pink-500 text-pink-500 py-4 rounded-lg font-medium hover:bg-pink-50 transition-all"
-          >
-            ログイン
-          </motion.button>
-        </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 }
