@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サンプルデータ作成 - SIN JAPAN ONLINE SCHOOL</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+      color: #1d4ed8;
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+    .subtitle {
+      color: #64748b;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+    .status {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      display: none;
+    }
+    .status.success {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    .status.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+    .status.info {
+      background: #dbeafe;
+      color: #1e40af;
+      border: 1px solid #93c5fd;
+    }
+    .progress {
+      background: #f1f5f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: none;
+    }
+    .progress-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    .progress-item .icon {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 10px;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .info-box {
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 20px;
+      font-size: 13px;
+      color: #475569;
+      border-left: 4px solid #3b82f6;
+    }
+    .data-summary {
+      background: #f1f5f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .data-summary h3 {
+      color: #1e293b;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    .data-summary ul {
+      list-style: none;
+      margin-left: 0;
+    }
+    .data-summary li {
+      padding: 8px 0;
+      color: #475569;
+      font-size: 14px;
+    }
+    .data-summary li::before {
+      content: "✓ ";
+      color: #10b981;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 サンプルデータ作成</h1>
+    <p class="subtitle">SIN JAPAN ONLINE SCHOOL - デモデータセットアップ</p>
+    
+    <div class="data-summary">
+      <h3>作成されるデータ</h3>
+      <ul>
+        <li>5件のサンプルコース（プログラミング、ビジネス、デザイン等）</li>
+        <li>3名の学生アカウント</li>
+        <li>各コースに3-5レッスン</li>
+        <li>受講履歴データ</li>
+        <li>レビュー・評価データ</li>
+        <li>学習進捗データ</li>
+      </ul>
+    </div>
+    
+    <div id="status" class="status"></div>
+    <div id="progress" class="progress"></div>
+    
+    <button id="createBtn" data-testid="button-create-data">
+      サンプルデータを作成
+    </button>
+    
+    <button id="cleanBtn" data-testid="button-clean-data" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);">
+      全てのサンプルデータを削除
+    </button>
+    
+    <div class="info-box">
+      <strong>📌 注意事項：</strong><br>
+      ・このスクリプトは開発・テスト用です<br>
+      ・既存のデータには影響しません<br>
+      ・管理者としてログインしている必要があります
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+    import { getFirestore, collection, doc, setDoc, writeBatch, serverTimestamp, deleteDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyACWkCVGsqeilFQgzazXzGIf1Cw_3Uu3NE",
+      authDomain: "school-ec82e.firebaseapp.com",
+      projectId: "school-ec82e",
+      storageBucket: "school-ec82e.firebasestorage.app",
+      messagingSenderId: "415312790339",
+      appId: "1:415312790339:web:3938fb482f78b4768525f6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const statusDiv = document.getElementById('status');
+    const progressDiv = document.getElementById('progress');
+    const createBtn = document.getElementById('createBtn');
+    const cleanBtn = document.getElementById('cleanBtn');
+
+    function showStatus(message, type) {
+      statusDiv.textContent = message;
+      statusDiv.className = `status ${type}`;
+      statusDiv.style.display = 'block';
+    }
+
+    function addProgress(message, done = false) {
+      const icon = done ? '✅' : '⏳';
+      const item = document.createElement('div');
+      item.className = 'progress-item';
+      item.innerHTML = `<span class="icon">${icon}</span> ${message}`;
+      progressDiv.appendChild(item);
+      progressDiv.style.display = 'block';
+    }
+
+    function clearProgress() {
+      progressDiv.innerHTML = '';
+      progressDiv.style.display = 'none';
+    }
+
+    // サンプルコースデータ
+    const sampleCourses = [
+      {
+        id: 'course_web_dev_101',
+        title: 'Web開発入門 - HTML/CSS/JavaScript基礎',
+        description: 'Webサイト制作の基礎を学びます。HTML、CSS、JavaScriptを使って実践的なWebページを作成できるようになります。',
+        category: 'プログラミング',
+        price: 29800,
+        duration: 480,
+        level: '初級',
+        thumbnail: '/logo-school.jpg',
+        isPublished: true,
+        totalStudents: 45,
+        averageRating: 4.8,
+        totalReviews: 12
+      },
+      {
+        id: 'course_python_data',
+        title: 'Pythonデータ分析マスターコース',
+        description: 'PythonとPandas、NumPyを使ったデータ分析の実践的なスキルを習得します。ビジネスで使えるデータ分析手法を学びます。',
+        category: 'プログラミング',
+        price: 39800,
+        duration: 720,
+        level: '中級',
+        thumbnail: '/logo-school.jpg',
+        isPublished: true,
+        totalStudents: 32,
+        averageRating: 4.9,
+        totalReviews: 8
+      },
+      {
+        id: 'course_business_english',
+        title: 'ビジネス英語コミュニケーション',
+        description: 'グローバルビジネスで通用する英語力を身につけます。プレゼンテーション、メール、会議での実践的な英語表現を学びます。',
+        category: 'ビジネス',
+        price: 34800,
+        duration: 600,
+        level: '中級',
+        thumbnail: '/logo-school.jpg',
+        isPublished: true,
+        totalStudents: 28,
+        averageRating: 4.7,
+        totalReviews: 10
+      },
+      {
+        id: 'course_ui_ux_design',
+        title: 'UI/UXデザイン実践講座',
+        description: 'ユーザー体験を重視したWebデザインの手法を学びます。Figmaを使った実践的なデザインスキルを習得します。',
+        category: 'デザイン',
+        price: 44800,
+        duration: 540,
+        level: '中級',
+        thumbnail: '/logo-school.jpg',
+        isPublished: true,
+        totalStudents: 21,
+        averageRating: 4.9,
+        totalReviews: 6
+      },
+      {
+        id: 'course_marketing_basic',
+        title: 'デジタルマーケティング基礎',
+        description: 'SNSマーケティング、SEO、コンテンツマーケティングなど、デジタル時代のマーケティング手法を総合的に学びます。',
+        category: 'ビジネス',
+        price: 32800,
+        duration: 480,
+        level: '初級',
+        thumbnail: '/logo-school.jpg',
+        isPublished: true,
+        totalStudents: 38,
+        averageRating: 4.6,
+        totalReviews: 9
+      }
+    ];
+
+    // サンプル学生データ
+    const sampleStudents = [
+      {
+        id: 'student_tanaka',
+        email: 'tanaka@example.com',
+        displayName: '田中 太郎',
+        role: 'student',
+        isInstructor: false,
+        photoURL: '/logo-school.jpg',
+        bio: 'プログラミングを勉強中の大学生です'
+      },
+      {
+        id: 'student_sato',
+        email: 'sato@example.com',
+        displayName: '佐藤 花子',
+        role: 'student',
+        isInstructor: false,
+        photoURL: '/logo-school.jpg',
+        bio: 'キャリアチェンジを目指しています'
+      },
+      {
+        id: 'student_suzuki',
+        email: 'suzuki@example.com',
+        displayName: '鈴木 一郎',
+        role: 'student',
+        isInstructor: false,
+        photoURL: '/logo-school.jpg',
+        bio: 'ビジネススキルを向上させたいです'
+      }
+    ];
+
+    createBtn.addEventListener('click', async () => {
+      if (!auth.currentUser) {
+        showStatus('ログインが必要です', 'error');
+        return;
+      }
+
+      createBtn.disabled = true;
+      cleanBtn.disabled = true;
+      clearProgress();
+      showStatus('サンプルデータを作成中...', 'info');
+
+      try {
+        const adminUid = auth.currentUser.uid;
+        
+        // 1. コース作成
+        addProgress('コースを作成中...');
+        for (const course of sampleCourses) {
+          await setDoc(doc(db, 'courses', course.id), {
+            ...course,
+            instructorId: adminUid,
+            instructorName: auth.currentUser.displayName || 'SIN JAPAN 管理者',
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+        }
+        addProgress('5件のコースを作成しました', true);
+
+        // 2. レッスン作成
+        addProgress('レッスンを作成中...');
+        let lessonCount = 0;
+        for (const course of sampleCourses) {
+          for (let i = 1; i <= 3; i++) {
+            await setDoc(doc(db, 'lessons', `${course.id}_lesson_${i}`), {
+              courseId: course.id,
+              title: `レッスン${i}: ${course.title.split('').slice(0, 15).join('')}...`,
+              description: `このレッスンでは${course.title}の重要なポイントを学びます。`,
+              order: i,
+              duration: 15,
+              videoUrl: '',
+              isPreview: i === 1,
+              createdAt: serverTimestamp()
+            });
+            lessonCount++;
+          }
+        }
+        addProgress(`${lessonCount}件のレッスンを作成しました`, true);
+
+        // 3. 学生アカウント作成
+        addProgress('学生アカウントを作成中...');
+        for (const student of sampleStudents) {
+          await setDoc(doc(db, 'users', student.id), {
+            ...student,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp(),
+            stats: {
+              coursesEnrolled: 0,
+              coursesCompleted: 0,
+              totalStudyTime: 0,
+              certificates: 0
+            }
+          });
+        }
+        addProgress('3名の学生を作成しました', true);
+
+        // 4. 受講履歴作成
+        addProgress('受講履歴を作成中...');
+        let enrollmentCount = 0;
+        for (const student of sampleStudents) {
+          const coursesToEnroll = sampleCourses.slice(0, 2);
+          for (const course of coursesToEnroll) {
+            await setDoc(doc(db, 'enrollments', `${student.id}_${course.id}`), {
+              userId: student.id,
+              courseId: course.id,
+              enrolledAt: serverTimestamp(),
+              progress: Math.floor(Math.random() * 60) + 10,
+              lastAccessedAt: serverTimestamp(),
+              completedLessons: [],
+              isCompleted: false
+            });
+            enrollmentCount++;
+          }
+        }
+        addProgress(`${enrollmentCount}件の受講履歴を作成しました`, true);
+
+        // 5. レビュー作成
+        addProgress('レビューを作成中...');
+        const reviews = [
+          { rating: 5, comment: '非常にわかりやすく、実践的な内容でした！' },
+          { rating: 5, comment: '初心者にも優しい説明で、しっかり理解できました。' },
+          { rating: 4, comment: '内容は良いですが、もう少し実例があると嬉しいです。' },
+          { rating: 5, comment: '仕事に活かせる知識を得られました。ありがとうございます！' },
+          { rating: 4, comment: '全体的に満足していますが、動画の音質が気になりました。' }
+        ];
+        
+        let reviewCount = 0;
+        for (let i = 0; i < sampleCourses.length; i++) {
+          const course = sampleCourses[i];
+          const numReviews = Math.min(3, reviews.length);
+          
+          for (let j = 0; j < numReviews; j++) {
+            const student = sampleStudents[j % sampleStudents.length];
+            const review = reviews[(i + j) % reviews.length];
+            
+            await setDoc(doc(db, 'reviews', `review_${course.id}_${student.id}`), {
+              courseId: course.id,
+              userId: student.id,
+              userName: student.displayName,
+              rating: review.rating,
+              comment: review.comment,
+              isPublished: true,
+              createdAt: serverTimestamp()
+            });
+            reviewCount++;
+          }
+        }
+        addProgress(`${reviewCount}件のレビューを作成しました`, true);
+
+        showStatus('✅ サンプルデータの作成が完了しました！', 'success');
+        
+      } catch (error) {
+        console.error('エラー:', error);
+        showStatus(`エラー: ${error.message}`, 'error');
+      } finally {
+        createBtn.disabled = false;
+        cleanBtn.disabled = false;
+      }
+    });
+
+    cleanBtn.addEventListener('click', async () => {
+      if (!confirm('全てのサンプルデータを削除しますか？この操作は取り消せません。')) {
+        return;
+      }
+
+      cleanBtn.disabled = true;
+      createBtn.disabled = true;
+      clearProgress();
+      showStatus('サンプルデータを削除中...', 'info');
+
+      try {
+        addProgress('削除を開始しています...');
+
+        // コース削除
+        for (const course of sampleCourses) {
+          await deleteDoc(doc(db, 'courses', course.id));
+        }
+        addProgress('コースを削除しました', true);
+
+        // レッスン削除
+        const lessonsQuery = query(collection(db, 'lessons'));
+        const lessonsSnap = await getDocs(lessonsQuery);
+        for (const lessonDoc of lessonsSnap.docs) {
+          if (lessonDoc.id.includes('course_')) {
+            await deleteDoc(lessonDoc.ref);
+          }
+        }
+        addProgress('レッスンを削除しました', true);
+
+        // 学生削除
+        for (const student of sampleStudents) {
+          await deleteDoc(doc(db, 'users', student.id));
+        }
+        addProgress('学生アカウントを削除しました', true);
+
+        // 受講履歴削除
+        const enrollmentsQuery = query(collection(db, 'enrollments'));
+        const enrollmentsSnap = await getDocs(enrollmentsQuery);
+        for (const enrollDoc of enrollmentsSnap.docs) {
+          if (enrollDoc.id.includes('student_')) {
+            await deleteDoc(enrollDoc.ref);
+          }
+        }
+        addProgress('受講履歴を削除しました', true);
+
+        // レビュー削除
+        const reviewsQuery = query(collection(db, 'reviews'));
+        const reviewsSnap = await getDocs(reviewsQuery);
+        for (const reviewDoc of reviewsSnap.docs) {
+          if (reviewDoc.id.includes('review_course_')) {
+            await deleteDoc(reviewDoc.ref);
+          }
+        }
+        addProgress('レビューを削除しました', true);
+
+        showStatus('✅ サンプルデータの削除が完了しました', 'success');
+        
+      } catch (error) {
+        console.error('エラー:', error);
+        showStatus(`エラー: ${error.message}`, 'error');
+      } finally {
+        createBtn.disabled = false;
+        cleanBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
