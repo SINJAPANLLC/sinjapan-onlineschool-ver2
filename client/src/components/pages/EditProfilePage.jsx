@@ -1,9 +1,8 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
-  Camera,
   Save,
   User,
   Mail,
@@ -21,8 +20,6 @@ import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 const EditProfilePage = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
-  const fileInputRef = useRef(null);
-  const coverInputRef = useRef(null);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -36,8 +33,6 @@ const EditProfilePage = () => {
     isCreator: false
   });
 
-  const [avatar, setAvatar] = useState('/logo-school.jpg');
-  const [coverImage, setCoverImage] = useState('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=200&fit=crop');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -62,8 +57,6 @@ const EditProfilePage = () => {
             yearsOfExperience: userData.yearsOfExperience || '',
             isCreator: userData.isCreator || false
           });
-          setAvatar(userData.photoURL || userData.avatar || '/logo-school.jpg');
-          setCoverImage(userData.coverImage || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=200&fit=crop');
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -79,28 +72,6 @@ const EditProfilePage = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
-  };
-
-  const handleAvatarUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setAvatar(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleCoverUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setCoverImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   const handleSubmit = async (e) => {
@@ -121,9 +92,6 @@ const EditProfilePage = () => {
         expertise: formData.expertise,
         yearsOfExperience: formData.yearsOfExperience,
         isCreator: formData.isCreator,
-        photoURL: avatar,
-        avatar: avatar,
-        coverImage: coverImage,
         updatedAt: serverTimestamp()
       }, { merge: true });
 
@@ -169,57 +137,6 @@ const EditProfilePage = () => {
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Cover Image */}
-          <div className="bg-white rounded-2xl shadow-md overflow-hidden">
-            <div className="relative h-48 group">
-              <img
-                src={coverImage}
-                alt="Cover"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <button
-                  type="button"
-                  onClick={() => coverInputRef.current?.click()}
-                  className="px-6 py-3 bg-white text-gray-800 rounded-xl font-semibold hover:bg-gray-100 transition-all"
-                  data-testid="button-upload-cover"
-                >
-                  カバー画像を変更
-                </button>
-              </div>
-              <input
-                ref={coverInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleCoverUpload}
-                className="hidden"
-              />
-            </div>
-
-            {/* Avatar */}
-            <div className="relative px-8 pb-8 -mt-16">
-              <div className="relative inline-block">
-                <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden bg-white shadow-lg">
-                  <img src={avatar} alt="Avatar" className="w-full h-full object-cover" />
-                </div>
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="absolute bottom-2 right-2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-all shadow-lg"
-                  data-testid="button-upload-avatar"
-                >
-                  <Camera className="w-5 h-5" />
-                </button>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleAvatarUpload}
-                  className="hidden"
-                />
-              </div>
-            </div>
-          </div>
 
           {/* Basic Info */}
           <div className="bg-white rounded-2xl shadow-md p-6">

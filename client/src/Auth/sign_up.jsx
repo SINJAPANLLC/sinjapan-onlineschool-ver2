@@ -48,7 +48,6 @@ export default function MyFansSignUp() {
       await setDoc(doc(db, 'users', userCredential.user.uid), {
         displayName: name,
         email: email,
-        photoURL: userCredential.user.photoURL || null,
         createdAt: new Date().toISOString(),
         lastSeen: new Date().toISOString(),
         isOnline: true,

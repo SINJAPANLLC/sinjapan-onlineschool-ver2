@@ -44,7 +44,6 @@ export default function MyFansLogin() {
         await setDoc(userRef, {
           displayName: user.displayName || 'ユーザー',
           email: user.email,
-          photoURL: user.photoURL || null,
           createdAt: new Date().toISOString(),
           lastSeen: new Date().toISOString(),
           isOnline: true,
@@ -133,7 +132,6 @@ export default function MyFansLogin() {
           await setDoc(userDocRef, {
             displayName: userCredential.user.displayName || 'ユーザー',
             email: userCredential.user.email,
-            photoURL: userCredential.user.photoURL || null,
             createdAt: new Date().toISOString(),
             lastSeen: new Date().toISOString(),
             isOnline: true,
