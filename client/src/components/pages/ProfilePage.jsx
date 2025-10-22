@@ -235,23 +235,39 @@ const ProfilePage = () => {
             const posts = [];
             querySnapshot.forEach((doc) => {
                 const data = doc.data();
-                const originalUrl = data.files && data.files[0]?.url;
-                const proxyUrl = convertToProxyUrl(originalUrl);
+                // コースデータからサムネイルを取得（CreatePostPageで保存した形式）
+                let thumbnailUrl = data.thumbnail || data.thumbnailUrl || (data.files && data.files[0]?.url);
                 
-                console.log('ProfilePage - Original URL:', originalUrl, '→ Proxy URL:', proxyUrl);
+                // Blob URLは使用不可なので、プレースホルダー画像を使用
+                if (thumbnailUrl && thumbnailUrl.startsWith('blob:')) {
+                    thumbnailUrl = 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop';
+                }
+                
+                // ローカルパスの場合も外部URLに変換
+                if (thumbnailUrl && thumbnailUrl.startsWith('/logo-school.jpg')) {
+                    thumbnailUrl = 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop';
+                }
+                
+                console.log('ProfilePage - Course data:', { 
+                    id: doc.id, 
+                    title: data.title,
+                    thumbnail: thumbnailUrl 
+                });
                 
                 posts.push({
                     ...data,
                     id: doc.id,
-                    type: data.files && data.files[0]?.type?.startsWith('video') ? 'video' : 'image',
-                    thumbnail: proxyUrl,
+                    type: 'course', // コースタイプ
+                    thumbnail: thumbnailUrl || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop',
                     duration: data.duration || '',
                     likes: data.likes || 0,
-                    comments: data.comments || 0,
+                    comments: data.comments || data.reviews || 0,
+                    students: data.students || 0,
+                    rating: data.rating || 0,
                     isFree: data.isFree || false,
                     isLiked: false,
-                    watermark: data.watermark || '',
                     title: data.title || data.explanation,
+                    description: data.description || '',
                     createdAt: data.createdAt
                 });
             });

@@ -1,451 +1,464 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import {
-    ArrowLeft,
-    Share2,
-    Heart,
-    MessageCircle,
-    Bookmark,
-    MoreHorizontal,
-    Download,
-    Flag,
-    User,
-    Clock,
-    Eye,
-    ThumbsUp,
-    ThumbsDown,
-    CheckCircle,
-    ZoomIn,
-    ZoomOut,
-    RotateCw,
-    Maximize2,
-    Minimize2,
-    X,
-    ChevronLeft,
-    ChevronRight
+  ArrowLeft,
+  Share2,
+  Heart,
+  BookOpen,
+  Clock,
+  Users,
+  Star,
+  Play,
+  CheckCircle,
+  Lock,
+  GraduationCap,
+  FileText,
+  Award,
+  TrendingUp
 } from 'lucide-react';
 import BottomNavigationWithCreator from '../BottomNavigationWithCreator';
+import { useAuth } from '../../context/AuthContext';
+import { db } from '../../firebase';
+import { doc, getDoc, updateDoc, increment } from 'firebase/firestore';
 
 const ImagePage = () => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    
-    const [isLiked, setIsLiked] = useState(false);
-    const [isBookmarked, setIsBookmarked] = useState(false);
-    const [showComments, setShowComments] = useState(false);
-    const [showShareModal, setShowShareModal] = useState(false);
-    const [isZoomed, setIsZoomed] = useState(false);
-    const [zoomLevel, setZoomLevel] = useState(1);
-    const [showFullscreen, setShowFullscreen] = useState(false);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  
+  const [course, setCourse] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [activeTab, setActiveTab] = useState('overview');
 
-    // サンプル画像データ
-    const imageData = {
-        id: id,
-        title: '特別な写真 - ミルク',
-        description: '学生の皆様への特別な写真です。\n\n#SIN JAPAN SCHOOL #ミルク #特別写真',
-        creator: {
-            name: 'ミルク',
-            username: '@milk_av',
-            avatar: '/logo-school.jpg',
-            isVerified: true
-        },
-        imageUrl: '/images/logo-school.jpg',
-        views: 8750,
-        likes: 456,
-        comments: 89,
-        uploadDate: '2024-03-14',
-        tags: ['特別', '学生限定', 'ミルク', '写真'],
-        isFree: true,
-        price: 0,
-        width: 800,
-        height: 1200
-    };
-
-    // 複数画像のサンプル（ギャラリー表示用）
-    const galleryImages = [
-        '/images/logo-school.jpg',
-        '/images/logo-school.jpg',
-        '/images/sample-3.png'
-    ];
-
-    const comments = [
-        {
-            id: 1,
-            user: {
-                name: '学生1',
-                avatar: '/logo-school.jpg',
-                username: '@fan1'
-            },
-            content: 'とても美しい写真ですね！',
-            time: '1時間前',
-            likes: 5
-        },
-        {
-            id: 2,
-            user: {
-                name: '学生2',
-                avatar: '/logo-school.jpg',
-                username: '@fan2'
-            },
-            content: 'いつも素晴らしいコンテンツをありがとうございます！',
-            time: '2時間前',
-            likes: 3
-        }
-    ];
-
-    const handleLike = () => {
-        setIsLiked(!isLiked);
-    };
-
-    const handleBookmark = () => {
-        setIsBookmarked(!isBookmarked);
-    };
-
-    const handleShare = async () => {
-        const shareData = {
-            title: imageData.title,
-            text: `${imageData.creator.name}の写真をチェック！`,
-            url: window.location.href
-        };
-
-        try {
-            if (navigator.share) {
-                await navigator.share(shareData);
-            } else {
-                await navigator.clipboard.writeText(shareData.url);
-                alert('画像URLをクリップボードにコピーしました！');
-            }
-        } catch (error) {
-            console.error('シェアに失敗しました:', error);
-            setShowShareModal(true);
-        }
-    };
-
-    const handleZoom = (direction) => {
-        if (direction === 'in') {
-            setZoomLevel(prev => Math.min(prev + 0.5, 3));
+  useEffect(() => {
+    const fetchCourse = async () => {
+      if (!id) return;
+      
+      setLoading(true);
+      try {
+        const courseDoc = await getDoc(doc(db, 'courses', id));
+        
+        if (courseDoc.exists()) {
+          const courseData = courseDoc.data();
+          setCourse({
+            id: courseDoc.id,
+            title: courseData.title || 'Untitled Course',
+            description: courseData.description || '',
+            thumbnail: courseData.thumbnail || courseData.thumbnailUrl || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop',
+            instructor: courseData.instructorName || courseData.username || 'Unknown',
+            instructorId: courseData.creatorId || '',
+            duration: courseData.duration || '0時間',
+            students: courseData.students || 0,
+            rating: courseData.rating || 0,
+            reviews: courseData.reviews || 0,
+            category: courseData.category || 'other',
+            level: courseData.level || 'beginner',
+            lessons: courseData.lessons || [],
+            requirements: courseData.requirements || [],
+            learningObjectives: courseData.learningObjectives || [],
+            tags: courseData.tags || [],
+            createdAt: courseData.createdAt,
+            updatedAt: courseData.updatedAt
+          });
         } else {
-            setZoomLevel(prev => Math.max(prev - 0.5, 0.5));
+          console.log('Course not found');
         }
-        setIsZoomed(zoomLevel !== 1);
+      } catch (error) {
+        console.error('Error fetching course:', error);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    const handleDownload = () => {
-        // 実際のアプリでは画像のダウンロード処理を実装
-        alert('画像をダウンロードしました！');
-    };
+    fetchCourse();
+  }, [id]);
 
-    const handlePreviousImage = () => {
-        if (currentImageIndex > 0) {
-            setCurrentImageIndex(currentImageIndex - 1);
-        }
-    };
+  const handleEnroll = () => {
+    if (!currentUser) {
+      navigate('/login');
+      return;
+    }
+    
+    if (course?.instructorId) {
+      navigate(`/profile/${course.instructorId}`);
+    }
+  };
 
-    const handleNextImage = () => {
-        if (currentImageIndex < galleryImages.length - 1) {
-            setCurrentImageIndex(currentImageIndex + 1);
-        }
+  const getCategoryLabel = (category) => {
+    const labels = {
+      programming: 'プログラミング',
+      design: 'デザイン',
+      business: 'ビジネス',
+      language: '語学',
+      data: 'データサイエンス',
+      marketing: 'マーケティング',
+      other: 'その他'
     };
+    return labels[category] || category;
+  };
 
+  const getLevelLabel = (level) => {
+    const labels = {
+      beginner: '初級',
+      intermediate: '中級',
+      advanced: '上級'
+    };
+    return labels[level] || level;
+  };
+
+  const getLevelColor = (level) => {
+    const colors = {
+      beginner: 'bg-green-100 text-green-700',
+      intermediate: 'bg-blue-100 text-blue-700',
+      advanced: 'bg-purple-100 text-purple-700'
+    };
+    return colors[level] || 'bg-gray-100 text-gray-700';
+  };
+
+  if (loading) {
     return (
-        <div className="min-h-screen bg-black">
-            {/* Header */}
-            <div className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between p-4 bg-gradient-to-b from-black/50 to-transparent">
-                <button onClick={() => navigate(-1)} className="p-2 bg-black/50 rounded-full">
-                    <ArrowLeft size={20} className="text-white" />
-                </button>
-                <div className="flex items-center space-x-2">
-                    <button onClick={handleDownload} className="p-2 bg-black/50 rounded-full">
-                        <Download size={20} className="text-white" />
-                    </button>
-                    <button onClick={handleShare} className="p-2 bg-black/50 rounded-full">
-                        <Share2 size={20} className="text-white" />
-                    </button>
-                </div>
-            </div>
-
-            {/* Image Viewer */}
-            <div className="relative w-full h-screen flex items-center justify-center">
-                <div className="relative max-w-full max-h-full">
-                    <img
-                        src={galleryImages[currentImageIndex]}
-                        alt={imageData.title}
-                        className={`max-w-full max-h-full object-contain transition-transform duration-300 ${
-                            isZoomed ? 'cursor-move' : 'cursor-zoom-in'
-                        }`}
-                        style={{ transform: `scale(${zoomLevel})` }}
-                        onClick={() => !isZoomed && setShowFullscreen(true)}
-                    />
-                    
-                    {/* Zoom Controls */}
-                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-2 bg-black/50 rounded-full px-3 py-2">
-                        <button
-                            onClick={() => handleZoom('out')}
-                            className="p-1 text-white hover:bg-white/20 rounded"
-                        >
-                            <ZoomOut size={20} />
-                        </button>
-                        <span className="text-white text-sm px-2">
-                            {Math.round(zoomLevel * 100)}%
-                        </span>
-                        <button
-                            onClick={() => handleZoom('in')}
-                            className="p-1 text-white hover:bg-white/20 rounded"
-                        >
-                            <ZoomIn size={20} />
-                        </button>
-                        <button
-                            onClick={() => {
-                                setZoomLevel(1);
-                                setIsZoomed(false);
-                            }}
-                            className="p-1 text-white hover:bg-white/20 rounded"
-                        >
-                            <RotateCw size={20} />
-                        </button>
-                    </div>
-
-                    {/* Gallery Navigation */}
-                    {galleryImages.length > 1 && (
-                        <>
-                            <button
-                                onClick={handlePreviousImage}
-                                disabled={currentImageIndex === 0}
-                                className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-black/50 rounded-full text-white disabled:opacity-50"
-                            >
-                                <ChevronLeft size={24} />
-                            </button>
-                            <button
-                                onClick={handleNextImage}
-                                disabled={currentImageIndex === galleryImages.length - 1}
-                                className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-black/50 rounded-full text-white disabled:opacity-50"
-                            >
-                                <ChevronRight size={24} />
-                            </button>
-                        </>
-                    )}
-                </div>
-            </div>
-
-            {/* Fullscreen Modal */}
-            {showFullscreen && (
-                <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
-                    <div className="relative w-full h-full flex items-center justify-center">
-                        <button
-                            onClick={() => setShowFullscreen(false)}
-                            className="absolute top-4 right-4 p-2 bg-black/50 rounded-full text-white z-10"
-                        >
-                            <X size={24} />
-                        </button>
-                        
-                        <img
-                            src={galleryImages[currentImageIndex]}
-                            alt={imageData.title}
-                            className="max-w-full max-h-full object-contain"
-                        />
-                        
-                        {galleryImages.length > 1 && (
-                            <>
-                                <button
-                                    onClick={handlePreviousImage}
-                                    disabled={currentImageIndex === 0}
-                                    className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 bg-black/50 rounded-full text-white disabled:opacity-50"
-                                >
-                                    <ChevronLeft size={24} />
-                                </button>
-                                <button
-                                    onClick={handleNextImage}
-                                    disabled={currentImageIndex === galleryImages.length - 1}
-                                    className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 bg-black/50 rounded-full text-white disabled:opacity-50"
-                                >
-                                    <ChevronRight size={24} />
-                                </button>
-                            </>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {/* Image Info */}
-            <div className="bg-white p-4 space-y-4">
-                <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                        <h1 className="text-lg font-bold text-gray-900 mb-2">{imageData.title}</h1>
-                        <div className="flex items-center space-x-4 text-sm text-gray-500 mb-2">
-                            <span className="flex items-center">
-                                <Eye size={16} className="mr-1" />
-                                {imageData.views.toLocaleString()}回閲覧
-                            </span>
-                            <span className="flex items-center">
-                                <Clock size={16} className="mr-1" />
-                                {imageData.uploadDate}
-                            </span>
-                        </div>
-                    </div>
-                    <button className="p-2">
-                        <MoreHorizontal size={20} className="text-gray-600" />
-                    </button>
-                </div>
-
-                {/* Creator Info */}
-                <div className="flex items-center space-x-3">
-                    <img
-                        src={imageData.creator.avatar}
-                        alt={imageData.creator.name}
-                        className="w-12 h-12 rounded-full"
-                    />
-                    <div className="flex-1">
-                        <div className="flex items-center">
-                            <h3 className="font-semibold text-gray-900">{imageData.creator.name}</h3>
-                            {imageData.creator.isVerified && (
-                                <CheckCircle className="w-4 h-4 text-green-500 ml-1" />
-                            )}
-                        </div>
-                        <p className="text-sm text-gray-500">{imageData.creator.username}</p>
-                    </div>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">
-                        フォロー
-                    </button>
-                </div>
-
-                {/* Description */}
-                <div className="bg-gray-50 rounded-lg p-3">
-                    <p className="text-gray-800 whitespace-pre-line">{imageData.description}</p>
-                    <div className="flex flex-wrap gap-2 mt-2">
-                        {imageData.tags.map((tag, index) => (
-                            <span key={index} className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">
-                                #{tag}
-                            </span>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Actions */}
-                <div className="flex items-center justify-between py-2">
-                    <div className="flex items-center space-x-6">
-                        <button
-                            onClick={handleLike}
-                            className={`flex items-center space-x-2 ${isLiked ? 'text-red-500' : 'text-gray-600'}`}
-                        >
-                            <Heart size={24} className={isLiked ? 'fill-current' : ''} />
-                            <span className="font-medium">{imageData.likes}</span>
-                        </button>
-                        
-                        <button
-                            onClick={() => setShowComments(!showComments)}
-                            className="flex items-center space-x-2 text-gray-600"
-                        >
-                            <MessageCircle size={24} />
-                            <span className="font-medium">{imageData.comments}</span>
-                        </button>
-                        
-                        <button
-                            onClick={handleBookmark}
-                            className={`${isBookmarked ? 'text-yellow-500' : 'text-gray-600'}`}
-                        >
-                            <Bookmark size={24} className={isBookmarked ? 'fill-current' : ''} />
-                        </button>
-                    </div>
-                    
-                    <div className="flex items-center space-x-4">
-                        <button
-                            onClick={handleDownload}
-                            className="flex items-center space-x-2 text-gray-600"
-                        >
-                            <Download size={24} />
-                        </button>
-                        <button
-                            onClick={handleShare}
-                            className="flex items-center space-x-2 text-gray-600"
-                        >
-                            <Share2 size={24} />
-                        </button>
-                    </div>
-                </div>
-
-                {/* Comments Section */}
-                {showComments && (
-                    <div className="border-t pt-4">
-                        <h3 className="font-semibold text-gray-900 mb-4">コメント ({imageData.comments})</h3>
-                        <div className="space-y-4">
-                            {comments.map((comment) => (
-                                <div key={comment.id} className="flex space-x-3">
-                                    <img
-                                        src={comment.user.avatar}
-                                        alt={comment.user.name}
-                                        className="w-8 h-8 rounded-full"
-                                    />
-                                    <div className="flex-1">
-                                        <div className="flex items-center space-x-2 mb-1">
-                                            <span className="font-medium text-gray-900">{comment.user.name}</span>
-                                            <span className="text-sm text-gray-500">{comment.time}</span>
-                                        </div>
-                                        <p className="text-gray-800 text-sm">{comment.content}</p>
-                                        <div className="flex items-center space-x-4 mt-2">
-                                            <button className="flex items-center space-x-1 text-gray-500 hover:text-red-500">
-                                                <ThumbsUp size={16} />
-                                                <span className="text-xs">{comment.likes}</span>
-                                            </button>
-                                            <button className="text-gray-500 hover:text-gray-700">
-                                                <ThumbsDown size={16} />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        
-                        {/* Add Comment */}
-                        <div className="mt-4 flex space-x-3">
-                            <img
-                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=32&h=32&fit=crop&crop=face"
-                                alt="Your avatar"
-                                className="w-8 h-8 rounded-full"
-                            />
-                            <div className="flex-1 flex">
-                                <input
-                                    type="text"
-                                    placeholder="コメントを追加..."
-                                    className="flex-1 p-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                />
-                                <button className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 transition-colors">
-                                    送信
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
-
-            {/* Share Modal */}
-            {showShareModal && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                    <div className="bg-white rounded-xl p-6 w-full max-w-sm">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">画像をシェア</h3>
-                        <div className="space-y-3">
-                            <button className="w-full flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                                <span className="text-2xl">📱</span>
-                                <span className="text-gray-900">アプリでシェア</span>
-                            </button>
-                            <button className="w-full flex items-center space-x-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
-                                <span className="text-2xl">📋</span>
-                                <span className="text-gray-900">リンクをコピー</span>
-                            </button>
-                            <button
-                                onClick={() => setShowShareModal(false)}
-                                className="w-full p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-                            >
-                                キャンセル
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            <BottomNavigationWithCreator active="home" />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-600">読み込み中...</p>
         </div>
+      </div>
     );
+  }
+
+  if (!course) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <BookOpen className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-gray-800 mb-2">コースが見つかりません</h2>
+          <button
+            onClick={() => navigate('/feed')}
+            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
+          >
+            コースカタログに戻る
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white sticky top-0 z-40 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <button
+              onClick={() => navigate(-1)}
+              className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+              data-testid="button-back"
+            >
+              <ArrowLeft className="w-6 h-6" />
+            </button>
+            <h1 className="text-lg font-bold">コース詳細</h1>
+            <button
+              onClick={() => {}}
+              className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+              data-testid="button-share"
+            >
+              <Share2 className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Course Hero */}
+      <div className="bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Thumbnail */}
+            <div className="relative">
+              <img
+                src={course.thumbnail}
+                alt={course.title}
+                className="w-full h-64 md:h-96 object-cover"
+                data-testid="img-course-thumbnail"
+              />
+              <div className="absolute top-4 right-4 flex gap-2">
+                <span className={`px-3 py-1 rounded-full text-sm font-semibold ${getLevelColor(course.level)}`}>
+                  {getLevelLabel(course.level)}
+                </span>
+              </div>
+            </div>
+
+            {/* Course Info */}
+            <div className="p-6">
+              <div className="mb-4">
+                <span className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-3">
+                  {getCategoryLabel(course.category)}
+                </span>
+                <h1 className="text-3xl font-bold text-gray-800 mb-4">
+                  {course.title}
+                </h1>
+                <p className="text-gray-600 mb-4">
+                  {course.description}
+                </p>
+              </div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Clock className="w-5 h-5 text-blue-600" />
+                  <span className="text-sm">{course.duration}</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Users className="w-5 h-5 text-blue-600" />
+                  <span className="text-sm">{course.students}人の学生</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                  <span className="text-sm">{course.rating} ({course.reviews}件)</span>
+                </div>
+                <div className="flex items-center gap-2 text-gray-700">
+                  <BookOpen className="w-5 h-5 text-blue-600" />
+                  <span className="text-sm">{course.lessons.length}レッスン</span>
+                </div>
+              </div>
+
+              {/* Instructor */}
+              <div
+                onClick={() => navigate(`/profile/${course.instructorId}`)}
+                className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl mb-6 cursor-pointer hover:bg-gray-100 transition-colors"
+              >
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
+                  <GraduationCap className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600">講師</p>
+                  <p className="font-semibold text-gray-800">{course.instructor}</p>
+                </div>
+              </div>
+
+              {/* Enrollment Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white rounded-2xl shadow-xl p-6 border-2 border-blue-100"
+              >
+                {isEnrolled ? (
+                  <div>
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-bold text-gray-800">学習進捗</h3>
+                      <span className="text-2xl font-bold text-blue-600">{progress}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
+                      <div
+                        className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all"
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                    <button
+                      onClick={() => navigate(`/video/${course.id}`)}
+                      className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl font-bold hover:shadow-lg transition-all"
+                      data-testid="button-continue-learning"
+                    >
+                      学習を続ける
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="text-center mb-6">
+                      <p className="text-sm text-gray-600 mb-2">このコースは</p>
+                      <p className="text-xl font-bold text-gray-800 mb-2">講師のサブスクリプションで受講可能</p>
+                      <p className="text-sm text-gray-600">講師プロフィールから購読してください</p>
+                    </div>
+                    <button
+                      onClick={handleEnroll}
+                      className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all mb-3"
+                      data-testid="button-view-instructor"
+                    >
+                      講師プロフィールを見る
+                    </button>
+                    <div className="flex gap-2">
+                      <button className="flex-1 border-2 border-gray-200 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
+                        <Heart className="w-5 h-5" />
+                        保存
+                      </button>
+                      <button className="flex-1 border-2 border-gray-200 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
+                        <Share2 className="w-5 h-5" />
+                        共有
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Tabs */}
+        <div className="flex gap-4 mb-6 border-b border-gray-200">
+          {[
+            { id: 'overview', label: '概要', icon: FileText },
+            { id: 'curriculum', label: 'カリキュラム', icon: BookOpen },
+            { id: 'instructor', label: '講師', icon: GraduationCap }
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 px-4 py-3 font-semibold transition-all ${
+                activeTab === tab.id
+                  ? 'text-blue-600 border-b-2 border-blue-600'
+                  : 'text-gray-600 hover:text-gray-800'
+              }`}
+              data-testid={`tab-${tab.id}`}
+            >
+              <tab.icon className="w-5 h-5" />
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content */}
+        <div className="bg-white rounded-2xl shadow-md p-6">
+          {activeTab === 'overview' && (
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                  <Award className="w-6 h-6 text-blue-600" />
+                  学習目標
+                </h3>
+                <ul className="space-y-2">
+                  {course.learningObjectives.map((objective, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{objective}</span>
+                    </li>
+                  ))}
+                  {course.learningObjectives.length === 0 && (
+                    <li className="text-gray-500">学習目標が設定されていません</li>
+                  )}
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                  <FileText className="w-6 h-6 text-blue-600" />
+                  必要な前提知識
+                </h3>
+                <ul className="space-y-2">
+                  {course.requirements.map((requirement, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0 mt-2"></div>
+                      <span className="text-gray-700">{requirement}</span>
+                    </li>
+                  ))}
+                  {course.requirements.length === 0 && (
+                    <li className="text-gray-500">特に必要な前提知識はありません</li>
+                  )}
+                </ul>
+              </div>
+
+              {course.tags.length > 0 && (
+                <div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-4">タグ</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {course.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-sm font-medium"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {activeTab === 'curriculum' && (
+            <div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-blue-600" />
+                カリキュラム ({course.lessons.length}レッスン)
+              </h3>
+              <div className="space-y-3">
+                {course.lessons.map((lesson, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center justify-center w-10 h-10 bg-blue-100 text-blue-600 rounded-lg font-bold">
+                        {index + 1}
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-800">{lesson.title}</h4>
+                        {lesson.description && (
+                          <p className="text-sm text-gray-600 mt-1">{lesson.description}</p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      {lesson.duration && (
+                        <span className="text-sm text-gray-600 flex items-center gap-1">
+                          <Clock className="w-4 h-4" />
+                          {lesson.duration}
+                        </span>
+                      )}
+                      {!isEnrolled && (
+                        <Lock className="w-5 h-5 text-gray-400" />
+                      )}
+                      {isEnrolled && (
+                        <Play className="w-5 h-5 text-blue-600" />
+                      )}
+                    </div>
+                  </div>
+                ))}
+                {course.lessons.length === 0 && (
+                  <div className="text-center py-8 text-gray-500">
+                    <BookOpen className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+                    <p>レッスンがまだ追加されていません</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'instructor' && (
+            <div>
+              <h3 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+                <GraduationCap className="w-6 h-6 text-blue-600" />
+                講師について
+              </h3>
+              <div
+                onClick={() => navigate(`/profile/${course.instructorId}`)}
+                className="flex items-start gap-4 p-6 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-100 cursor-pointer hover:shadow-lg transition-all"
+              >
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <GraduationCap className="w-8 h-8 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-xl font-bold text-gray-800 mb-2">{course.instructor}</h4>
+                  <p className="text-gray-600 mb-4">
+                    このコースの講師です。詳細はプロフィールページをご覧ください。
+                  </p>
+                  <button className="px-6 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-semibold hover:shadow-lg transition-all">
+                    プロフィールを見る
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <BottomNavigationWithCreator active="courses" />
+    </div>
+  );
 };
 
 export default ImagePage;
