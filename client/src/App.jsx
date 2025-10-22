@@ -95,68 +95,33 @@ const AccountWrapper = () => {
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
-  const [isVerified, setIsVerified] = useState(
-    localStorage.getItem('ageVerified') === 'true'
-  );
 
-  const handleVerification = (verified) => {
-    if (verified) {
-      setIsVerified(true);
-      localStorage.setItem('ageVerified', 'true');
-    }
-  };
-
-  // If not age verified, show age verification
-  if (!isVerified) {
-    return <AgeVerification onVerify={handleVerification} />;
-  }
-
-  // If age verified but not authenticated, redirect to login
+  // If not authenticated, redirect to login
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 
-  // If both age verified and authenticated, show the protected content
+  // If authenticated, show the protected content
   return children;
 };
 
 // App Routes Component
 const AppRoutes = () => {
   const { isAuthenticated } = useAuth();
-  const [isVerified, setIsVerified] = useState(
-    localStorage.getItem('ageVerified') === 'true'
-  );
-
-  const handleVerification = (verified) => {
-    if (verified) {
-      setIsVerified(true);
-      localStorage.setItem('ageVerified', 'true');
-    }
-  };
 
   return (
     <Routes>
-      {/* Age verification route */}
-      <Route
-        path="/age-verification"
-        element={<AgeVerification onVerify={handleVerification} />}
-      />
-
-      {/* Authentication routes - only accessible if age verified */}
+      {/* Authentication routes */}
       <Route
         path="/login"
         element={
-          isAuthenticated ? <Navigate to="/home" replace /> :
-            !isVerified ? <Navigate to="/age-verification" replace /> :
-              <MyFansLogin />
+          isAuthenticated ? <Navigate to="/home" replace /> : <MyFansLogin />
         }
       />
       <Route
         path="/signup"
         element={
-          isAuthenticated ? <Navigate to="/home" replace /> :
-            !isVerified ? <Navigate to="/age-verification" replace /> :
-              <MyFansSignUp />
+          isAuthenticated ? <Navigate to="/home" replace /> : <MyFansSignUp />
         }
       />
 
