@@ -22,6 +22,7 @@ import TermsOfUse from './components/pages/TermsOfUse'; // Import TermsOfUse com
 import PrivacyPolicy from './components/pages/PrivacyPolicy';
 import LegalNotice from './components/pages/LegalNotice';
 import ContentGuidelines from './components/pages/ContentGuidelines';
+import CommercialTransactions from './components/pages/CommercialTransactions';
 import LanguageSettings from './components/pages/LanguagePage';
 import RegisterCreatorPage from './components/pages/RegisterCreatorPage';
 import ProfilePage from './components/pages/ProfilePage';
@@ -152,6 +153,7 @@ const AppRoutes = () => {
       <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/legal" element={<LegalNotice />} />
       <Route path="/guidelines" element={<ContentGuidelines />} />
+      <Route path="/commercial" element={<CommercialTransactions />} />
       {/* <Route path="/help" element={<HelpPage />} /> */}
       <Route path="/settings/languages" element={<LanguageSettings />} />
       {/* Default route */}

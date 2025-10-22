@@ -43,7 +43,7 @@ const TermsOfUse = () => {
                     </h1>
 
                     <p className="text-gray-700 leading-relaxed mb-8">
-                        合同会社SIN JAPAN KANAGAWA（以下「当社」といいます。）は、当社が運営するオンライン学習プラットフォーム「SIN JAPAN ONLINE SCHOOL」（以下「本サービス」といいます。）の利用について、以下のとおり規約（以下「本規約」といいます。）を定めます。本規約は、当社とすべての利用者との間に適用されます。
+                        合同会社SIN JAPAN（以下「当社」といいます。）は、当社が運営するオンライン学習プラットフォーム「SIN JAPAN ONLINE SCHOOL」（以下「本サービス」といいます。）の利用について、以下のとおり規約（以下「本規約」といいます。）を定めます。本規約は、当社とすべての利用者との間に適用されます。
                     </p>
 
                     <h2 className="text-2xl font-bold text-blue-600 mb-4">第１章 総則</h2>
@@ -180,7 +180,7 @@ const TermsOfUse = () => {
                             2025年1月1日 制定
                         </p>
                         <p className="text-gray-600 mt-2">
-                            合同会社SIN JAPAN KANAGAWA
+                            合同会社SIN JAPAN
                         </p>
                     </div>
                 </div>

@@ -71,7 +71,10 @@ The platform features a React frontend built with Vite, Tailwind CSS, Framer Mot
 *   **Admin Dashboard**: Redesigned with blue gradient, educational statistics, and proper terminology
 *   **Instructor Features**: Enhanced course creation, dashboard analytics, and student engagement tracking
 *   **Search & Discovery**: Rebuilt search page for course and instructor discovery
-*   **Documentation**: Updated Terms of Service and Privacy Policy for educational platform
+*   **Legal Pages**: Updated Terms of Service and Privacy Policy for educational platform
+*   **Company Update**: Changed operating company from "合同会社SIN JAPAN KANAGAWA" to "合同会社SIN JAPAN"
+*   **New Legal Pages**: Created Commercial Transactions (特定商取引法) and Content Guidelines pages
+*   **Admin Account**: Set up admin credentials (info@sinjapan.jp / Kazuya8008)
 
 ## External Dependencies
 *   **Firebase**: Authentication, Realtime Database, Firestore
