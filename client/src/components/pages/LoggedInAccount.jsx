@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, FileText, MoreHorizontal, CreditCard, UserCheck, Lock, BarChart, PenTool, Video, ChevronRight, Sparkles, Crown, Star, TrendingUp, DollarSign, Users, Bell, CheckCircle, Clock, XCircle, AlertTriangle } from 'lucide-react';
+import { Settings, FileText, MoreHorizontal, CreditCard, UserCheck, Lock, BarChart, PenTool, Video, ChevronRight, Sparkles, Crown, Star, TrendingUp, DollarSign, Users, Bell, CheckCircle, Clock, XCircle, AlertTriangle, GraduationCap, User } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import BottomNavigationWithCreator from '../BottomNavigationWithCreator';
@@ -42,8 +42,8 @@ const LoggedInAccountPage = () => {
     const user = {
         name: userData?.displayName || currentUser?.displayName || 'User Name',
         profileUrl: `/profile/${currentUser?.uid || 'default'}`,
-        avatar: userData?.photoURL || userData?.avatar || currentUser?.photoURL || '/logo.webp',
         subscriptionStatus: t('account.purchaseSave.notSubscribed'),
+        isInstructor: userData?.isCreator || userData?.isInstructor || false,
     };
 
     const handleNavigation = (path) => {
@@ -98,12 +98,12 @@ const LoggedInAccountPage = () => {
                         animate={{ opacity: 1, y: 0 }}
                         className="flex items-center space-x-4 relative z-10"
                     >
-                        <div>
-                            <img
-                                src={user.avatar}
-                                alt={user.name}
-                                className="w-24 h-24 rounded-full border-4 border-white shadow-2xl object-cover"
-                            />
+                        <div className="w-24 h-24 rounded-full border-4 border-white shadow-2xl bg-white flex items-center justify-center">
+                            {user.isInstructor ? (
+                                <GraduationCap className="w-12 h-12 text-blue-600" />
+                            ) : (
+                                <User className="w-12 h-12 text-blue-600" />
+                            )}
                         </div>
                         <div className="flex-1">
                             <p className="font-bold text-2xl text-white mb-1">{user.name}</p>
