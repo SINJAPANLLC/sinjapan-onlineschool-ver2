@@ -54,7 +54,7 @@ const UserContentPage = () => {
         }
     }, [location.state]);
     
-    // Firestoreから投稿データを取得
+    // Firestoreからコースデータを取得
     useEffect(() => {
         const fetchUserPosts = async () => {
             if (!currentUser) {
@@ -68,7 +68,7 @@ const UserContentPage = () => {
 
                 let postIds = [];
                 
-                // activeTabに応じて投稿IDを取得
+                // activeTabに応じてコースIDを取得
                 switch (activeTab) {
                     case 'liked':
                         postIds = await getUserLikedPosts(currentUser.uid);
@@ -90,7 +90,7 @@ const UserContentPage = () => {
                         postIds = [];
                 }
 
-                // 投稿IDが空の場合
+                // コースIDが空の場合
                 if (postIds.length === 0) {
                     setContentData(prev => ({
                         ...prev,
@@ -100,7 +100,7 @@ const UserContentPage = () => {
                     return;
                 }
 
-                // Firestoreから投稿データを取得
+                // Firestoreからコースデータを取得
                 const postsRef = collection(db, 'posts');
                 const q = query(postsRef, where('__name__', 'in', postIds.slice(0, 10))); // 最大10件
                 const querySnapshot = await getDocs(q);

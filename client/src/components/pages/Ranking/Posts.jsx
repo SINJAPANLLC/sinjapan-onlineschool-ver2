@@ -10,11 +10,11 @@ import rankingImg4 from '@assets/00220-1604543024_0_1760917144953.png';
 import rankingImg5 from '@assets/00021-2650716505_0_1760917144954.jpg';
 import rankingImg6 from '@assets/00465-2336099699_0_1760917144954.jpg';
 
-const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
-    const [activeTab] = useState('Post');
+const RankingCourses = ({ activeTimeFilter = 'Daily' }) => {
+    const [activeTab] = useState('Course');
     const [visibleSection, setVisibleSection] = useState('overall');
-    const [likedPosts, setLikedPosts] = useState(new Set());
-    const [bookmarkedPosts, setBookmarkedPosts] = useState(new Set());
+    const [likedCourses, setLikedCourses] = useState(new Set());
+    const [bookmarkedCourses, setBookmarkedCourses] = useState(new Set());
     const { t } = useTranslation();
     const navigate = useNavigate();
 
@@ -40,36 +40,36 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
     };
     
     // Toggle like function
-    const toggleLike = (postId) => {
-        setLikedPosts(prev => {
+    const toggleLike = (courseId) => {
+        setLikedCourses(prev => {
             const newSet = new Set(prev);
-            if (newSet.has(postId)) {
-                newSet.delete(postId);
+            if (newSet.has(courseId)) {
+                newSet.delete(courseId);
             } else {
-                newSet.add(postId);
+                newSet.add(courseId);
             }
             return newSet;
         });
     };
 
     // Toggle bookmark function
-    const toggleBookmark = (postId) => {
-        setBookmarkedPosts(prev => {
+    const toggleBookmark = (courseId) => {
+        setBookmarkedCourses(prev => {
             const newSet = new Set(prev);
-            if (newSet.has(postId)) {
-                newSet.delete(postId);
+            if (newSet.has(courseId)) {
+                newSet.delete(courseId);
             } else {
-                newSet.add(postId);
+                newSet.add(courseId);
             }
             return newSet;
         });
     };
     
-    // Helper function to check if a post is new (within 3 days)
-    const isPostNew = (createdAt) => {
+    // Helper function to check if a course is new (within 3 days)
+    const isCourseNew = (createdAt) => {
         const now = new Date();
-        const postDate = new Date(createdAt);
-        const diffInDays = (now - postDate) / (1000 * 60 * 60 * 24);
+        const courseDate = new Date(createdAt);
+        const diffInDays = (now - courseDate) / (1000 * 60 * 60 * 24);
         return diffInDays <= 3;
     };
 
@@ -85,7 +85,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 15000,
                 createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
                 thumbnail: rankingImg1,
-                creator: "Creator Name",
+                instructor: "Instructor Name",
                 timeAgo: "2 hours ago"
             },
             {
@@ -97,7 +97,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 12000,
                 createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
                 thumbnail: rankingImg2,
-                creator: "Creator Name",
+                instructor: "Instructor Name",
                 timeAgo: "1 day ago"
             },
             {
@@ -109,7 +109,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 8500,
                 createdAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(), // 5 hours ago
                 thumbnail: rankingImg3,
-                creator: "Creator Name",
+                instructor: "Instructor Name",
                 timeAgo: "5 hours ago"
             },
             {
@@ -121,7 +121,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 6200,
                 createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
                 thumbnail: rankingImg4,
-                creator: "Creator Name",
+                instructor: "Instructor Name",
                 timeAgo: "2 days ago"
             },
             {
@@ -133,7 +133,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 5800,
                 createdAt: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(), // 6 hours ago
                 thumbnail: rankingImg5,
-                creator: "Creator Name",
+                instructor: "Instructor Name",
                 timeAgo: "6 hours ago"
             },
             {
@@ -145,7 +145,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 3200,
                 createdAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000).toISOString(), // 8 days ago
                 thumbnail: rankingImg6,
-                creator: "Creator Name",
+                instructor: "Instructor Name",
                 timeAgo: "8 days ago"
             }
         ],
@@ -159,7 +159,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 45000,
                 createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
                 thumbnail: rankingImg1,
-                creator: "Top Creator",
+                instructor: "Top Instructor",
                 timeAgo: "2 days ago"
             },
             {
@@ -171,7 +171,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 32000,
                 createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(), // 4 days ago
                 thumbnail: rankingImg2,
-                creator: "Popular Creator",
+                instructor: "Popular Instructor",
                 timeAgo: "4 days ago"
             },
             {
@@ -183,7 +183,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 28000,
                 createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5 days ago
                 thumbnail: rankingImg3,
-                creator: "Rising Creator",
+                instructor: "Rising Instructor",
                 timeAgo: "5 days ago"
             },
             {
@@ -195,7 +195,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 18000,
                 createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
                 thumbnail: rankingImg4,
-                creator: "New Creator",
+                instructor: "New Instructor",
                 timeAgo: "1 day ago"
             },
             {
@@ -207,7 +207,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 15000,
                 createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), // 1 week ago
                 thumbnail: rankingImg5,
-                creator: "Veteran Creator",
+                instructor: "Veteran Instructor",
                 timeAgo: "1 week ago"
             },
             {
@@ -219,7 +219,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 12000,
                 createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000).toISOString(), // 6 days ago
                 thumbnail: rankingImg6,
-                creator: "Trending Creator",
+                instructor: "Trending Instructor",
                 timeAgo: "6 days ago"
             }
         ],
@@ -233,7 +233,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 185000,
                 createdAt: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(), // 2 weeks ago
                 thumbnail: rankingImg1,
-                creator: "Champion Creator",
+                instructor: "Champion Instructor",
                 timeAgo: "2 weeks ago"
             },
             {
@@ -245,7 +245,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 125000,
                 createdAt: new Date(Date.now() - 21 * 24 * 60 * 60 * 1000).toISOString(), // 3 weeks ago
                 thumbnail: rankingImg2,
-                creator: "Elite Creator",
+                instructor: "Elite Instructor",
                 timeAgo: "3 weeks ago"
             },
             {
@@ -257,7 +257,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 98000,
                 createdAt: new Date(Date.now() - 28 * 24 * 60 * 60 * 1000).toISOString(), // 1 month ago
                 thumbnail: rankingImg3,
-                creator: "Popular Creator",
+                instructor: "Popular Instructor",
                 timeAgo: "1 month ago"
             },
             {
@@ -269,7 +269,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 76000,
                 createdAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(), // ~3 weeks ago
                 thumbnail: rankingImg4,
-                creator: "Consistent Creator",
+                instructor: "Consistent Instructor",
                 timeAgo: "3 weeks ago"
             },
             {
@@ -281,7 +281,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 65000,
                 createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(), // 2 days ago
                 thumbnail: rankingImg5,
-                creator: "Rising Star",
+                instructor: "Rising Star",
                 timeAgo: "2 days ago"
             },
             {
@@ -293,7 +293,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 52000,
                 createdAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000).toISOString(), // ~1 month ago
                 thumbnail: rankingImg6,
-                creator: "Quality Creator",
+                instructor: "Quality Instructor",
                 timeAgo: "1 month ago"
             }
         ],
@@ -307,7 +307,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 850000,
                 createdAt: new Date(Date.now() - 180 * 24 * 60 * 60 * 1000).toISOString(), // 6 months ago
                 thumbnail: rankingImg1,
-                creator: "Legend Creator",
+                instructor: "Legend Instructor",
                 timeAgo: "6 months ago"
             },
             {
@@ -319,7 +319,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 620000,
                 createdAt: new Date(Date.now() - 240 * 24 * 60 * 60 * 1000).toISOString(), // 8 months ago
                 thumbnail: rankingImg2,
-                creator: "Master Creator",
+                instructor: "Master Instructor",
                 timeAgo: "8 months ago"
             },
             {
@@ -331,7 +331,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 490000,
                 createdAt: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year ago
                 thumbnail: rankingImg3,
-                creator: "Legendary Creator",
+                instructor: "Legendary Instructor",
                 timeAgo: "1 year ago"
             },
             {
@@ -343,7 +343,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 380000,
                 createdAt: new Date(Date.now() - 300 * 24 * 60 * 60 * 1000).toISOString(), // 10 months ago
                 thumbnail: rankingImg4,
-                creator: "Classic Creator",
+                instructor: "Classic Instructor",
                 timeAgo: "10 months ago"
             },
             {
@@ -355,7 +355,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 290000,
                 createdAt: new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year ago
                 thumbnail: rankingImg5,
-                creator: "Timeless Creator",
+                instructor: "Timeless Instructor",
                 timeAgo: "1 year ago"
             },
             {
@@ -367,7 +367,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                 purchaseAmount: 210000,
                 createdAt: new Date(Date.now() - 240 * 24 * 60 * 60 * 1000).toISOString(), // 8 months ago
                 thumbnail: rankingImg6,
-                creator: "Hall of Fame Creator",
+                instructor: "Hall of Fame Instructor",
                 timeAgo: "8 months ago"
             }
         ]
@@ -380,7 +380,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
         // Add isNew flag based on createdAt
         acc[period] = sorted.map(item => ({
             ...item,
-            isNew: isPostNew(item.createdAt)
+            isNew: isCourseNew(item.createdAt)
         }));
         return acc;
     }, {});
@@ -394,7 +394,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 36,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "1 day ago"
         },
         {
@@ -405,7 +405,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 3,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "10 hours ago"
         },
         {
@@ -416,7 +416,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 1,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "1 day ago"
         },
         {
@@ -427,7 +427,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 1,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "1 day ago"
         },
         {
@@ -438,7 +438,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 1,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "1 day ago"
         },
         {
@@ -449,7 +449,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 1,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "1 day ago"
         }
     ];
@@ -463,7 +463,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 3,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "15 hours ago"
         },
         {
@@ -474,7 +474,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 0,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "8 hours ago"
         },
         {
@@ -485,7 +485,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -496,7 +496,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -507,7 +507,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -518,7 +518,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -529,7 +529,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         }
     ];
@@ -542,7 +542,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 3,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "15 hours ago"
         },
         {
@@ -553,7 +553,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 0,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "8 hours ago"
         },
         {
@@ -564,7 +564,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -575,7 +575,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -586,7 +586,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -597,7 +597,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -608,7 +608,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         }
     ];
@@ -621,7 +621,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 3,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "15 hours ago"
         },
         {
@@ -632,7 +632,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 0,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "8 hours ago"
         },
         {
@@ -643,7 +643,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -654,7 +654,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -665,7 +665,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -676,7 +676,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -687,7 +687,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         }
     ];
@@ -700,7 +700,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 3,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "15 hours ago"
         },
         {
@@ -711,7 +711,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 0,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "8 hours ago"
         },
         {
@@ -722,7 +722,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -733,7 +733,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -744,7 +744,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -755,7 +755,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -766,7 +766,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         }
     ];
@@ -779,7 +779,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 3,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "15 hours ago"
         },
         {
@@ -790,7 +790,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 0,
             isNew: true,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "8 hours ago"
         },
         {
@@ -801,7 +801,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -812,7 +812,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -823,7 +823,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -834,7 +834,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         },
         {
@@ -845,7 +845,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
             bookmarks: 234,
             isNew: false,
             thumbnail: rankingImg1,
-            creator: "Creator Name",
+            instructor: "Instructor Name",
             timeAgo: "3 months ago"
         }
     ];
@@ -891,8 +891,8 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
 
     // Content card for carousel sections
     const ContentCard = ({ item, showRanking = false, rank }) => {
-        const isLiked = likedPosts.has(item.id);
-        const isBookmarked = bookmarkedPosts.has(item.id);
+        const isLiked = likedCourses.has(item.id);
+        const isBookmarked = bookmarkedCourses.has(item.id);
         
         return (
             <motion.div
@@ -956,10 +956,10 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                     >
                         <img
                             src="https://via.placeholder.com/24x24/cccccc/ffffff?text=U"
-                            alt="Creator"
+                            alt="Instructor"
                             className="w-6 h-6 rounded-full"
                         />
-                        <span className="text-xs text-gray-600 truncate">{item.creator}</span>
+                        <span className="text-xs text-gray-600 truncate">{item.instructor}</span>
                     </motion.div>
 
                     <motion.div 
@@ -1032,8 +1032,8 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
 
     // Grid card for overall ranking
     const GridCard = ({ item, rank }) => {
-        const isLiked = likedPosts.has(item.id);
-        const isBookmarked = bookmarkedPosts.has(item.id);
+        const isLiked = likedCourses.has(item.id);
+        const isBookmarked = bookmarkedCourses.has(item.id);
         
         return (
             <motion.div
@@ -1095,10 +1095,10 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                     >
                         <img
                             src="/logo.webp"
-                            alt="Creator"
+                            alt="Instructor"
                             className="w-6 h-6 rounded-full"
                         />
-                        <span className="text-xs text-gray-600 truncate">{t('rankingPage.creatorName')}</span>
+                        <span className="text-xs text-gray-600 truncate">{t('rankingPage.instructorName')}</span>
                     </motion.div>
 
                     <motion.div 
@@ -1255,7 +1255,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
 
             {/* Content */}
             <div className="max-w-6xl mx-auto px-2 sm:px-4 py-4 sm:py-6">
-                {activeTab === 'Post' && (
+                {activeTab === 'Course' && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -1384,13 +1384,13 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                                 onClick={handleGenreList}
                                 className="bg-blue-500 text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full text-sm sm:text-base font-semibold hover:bg-blue-600 transition-colors"
                             >
-                                {t('postPage.allgenres')}
+                                {t('coursePage.allgenres')}
                             </motion.button>
                         </div>
                     </motion.div>
                 )}
 
-                {activeTab === 'Creator' && (
+                {activeTab === 'Instructor' && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -1398,7 +1398,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                         className="text-center py-20"
                     >
                         <div className="text-gray-500 text-lg">
-                            {t('postPage.creatorcomingsoon')}
+                            {t('coursePage.instructorcomingsoon')}
                         </div>
                     </motion.div>
                 )}
@@ -1430,4 +1430,4 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
     );
 };
 
-export default RankingPosts;
+export default RankingCourses;

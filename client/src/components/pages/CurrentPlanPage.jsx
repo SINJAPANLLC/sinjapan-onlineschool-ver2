@@ -124,7 +124,7 @@ const CurrentPlanPage = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl p-12 text-center shadow-lg border-2 border-blue-100">
             <Star className="w-16 h-16 text-gray-300 mx-auto mb-4" />
             <h3 className="text-xl font-bold text-gray-900 mb-2">加入中のプランはありません</h3>
-            <p className="text-gray-600 mb-6">お気に入りのクリエイターをサポートしてみましょう！</p>
+            <p className="text-gray-600 mb-6">お気に入りの講師をサポートしてみましょう！</p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -132,7 +132,7 @@ const CurrentPlanPage = () => {
               className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-3 rounded-xl font-bold"
               data-testid="button-explore"
             >
-              クリエイターを探す
+              講師を探す
             </motion.button>
           </motion.div>
         ) : (
@@ -142,7 +142,7 @@ const CurrentPlanPage = () => {
               <div className="flex items-center justify-between mb-4 relative z-10">
                 <div>
                   <h2 className="text-xl font-bold text-blue-900">加入中のサブスク</h2>
-                  <p className="text-blue-700 font-medium">{subscribedCreators.length}人のクリエイター</p>
+                  <p className="text-blue-700 font-medium">{subscribedCreators.length}人の講師</p>
                 </div>
                 <div className="text-right">
                   <p className="text-3xl font-bold text-blue-900" data-testid="text-total-amount">{formatCurrency(totalAmount)}</p>

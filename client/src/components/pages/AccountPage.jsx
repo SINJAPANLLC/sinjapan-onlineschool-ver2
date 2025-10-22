@@ -37,7 +37,7 @@ const AccountPage = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const [isInstructor, setIsInstructor] = useState(false);
+  const [isCreator, setIsInstructor] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // 学生用の統計
@@ -67,6 +67,7 @@ const AccountPage = () => {
         const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
         if (userDoc.exists()) {
           const userData = userDoc.data();
+          // 後方互換性：isCreatorとisInstructor両方をチェック
           setIsInstructor(userData.isCreator || userData.isInstructor || false);
         }
       } catch (error) {
@@ -188,7 +189,7 @@ const AccountPage = () => {
                 <h1 className="text-2xl font-bold" data-testid="text-username">
                   {currentUser?.displayName || 'ユーザー'}
                 </h1>
-                {isInstructor && (
+                {isCreator && (
                   <div className="flex items-center gap-1 px-3 py-1 bg-yellow-400 text-yellow-900 rounded-full text-xs font-bold">
                     <GraduationCap className="w-3 h-3" />
                     <span>講師</span>
@@ -209,7 +210,7 @@ const AccountPage = () => {
           </div>
 
           {/* Stats Grid - 学生または講師によって異なる */}
-          {isInstructor ? (
+          {isCreator ? (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -332,7 +333,7 @@ const AccountPage = () => {
       {/* Menu Sections */}
       <div className="max-w-6xl mx-auto px-6 -mt-24">
         {/* 講師登録バナー（学生のみ表示） */}
-        {!isInstructor && (
+        {!isCreator && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -356,7 +357,7 @@ const AccountPage = () => {
 
         {/* Menu Items */}
         <div className="space-y-4">
-          {(isInstructor ? [...instructorMenuSections, ...studentMenuSections] : studentMenuSections).map((section, sectionIndex) => (
+          {(isCreator ? [...instructorMenuSections, ...studentMenuSections] : studentMenuSections).map((section, sectionIndex) => (
             <motion.div
               key={section.title}
               initial={{ opacity: 0, y: 20 }}

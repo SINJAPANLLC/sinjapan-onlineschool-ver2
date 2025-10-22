@@ -118,7 +118,7 @@ const GenrePage = () => {
     const posts = [
         {
             id: 1,
-            title: '😘 反響殺到すぎて－ 限定投稿 23時59分まで...',
+            title: '😘 反響殺到すぎて－ 限定コース 23時59分まで...',
             author: '姫木(ナン)/TOKYO',
             likes: 820,
             bookmarks: 788,
@@ -149,7 +149,7 @@ const GenrePage = () => {
         {
             id: 3,
             title: '【限定公開】スレンダー美女との激しいハメ撮り動画',
-            author: '人気クリエイター A',
+            author: '人気講師 A',
             likes: 542,
             bookmarks: 498,
             timeAgo: '2 days ago',
@@ -157,14 +157,14 @@ const GenrePage = () => {
             thumbnail: '/sample-3.jpg',
             user: {
                 id: 'creator_3',
-                name: '人気クリエイター A',
+                name: '人気講師 A',
                 avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
             }
         },
         {
             id: 4,
             title: '【新作】Fカップ美女との濃厚プレイ映像',
-            author: '人気クリエイター B',
+            author: '人気講師 B',
             likes: 423,
             bookmarks: 387,
             timeAgo: '3 days ago',
@@ -172,13 +172,13 @@ const GenrePage = () => {
             thumbnail: '/sample-1.png',
             user: {
                 id: 'creator_4',
-                name: '人気クリエイター B',
+                name: '人気講師 B',
                 avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face'
             }
         }
     ];
 
-    // 投稿を人気順でソート
+    // コースを人気順でソート
     const sortedPosts = [...posts].sort((a, b) => (b.likes + b.bookmarks) - (a.likes + a.bookmarks));
 
     return (
@@ -256,7 +256,7 @@ const GenrePage = () => {
                                 animate={{ opacity: [0.7, 1, 0.7] }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             >
-                                このジャンルにはまだ投稿がありません
+                                このジャンルにはまだコースがありません
                             </motion.p>
                         </motion.div>
                            ) : (

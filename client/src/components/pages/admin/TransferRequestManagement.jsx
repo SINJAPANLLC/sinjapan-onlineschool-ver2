@@ -264,7 +264,7 @@ export default function TransferRequestManagement() {
     <AdminPageContainer>
       <AdminPageHeader
         title="振込申請管理"
-        description="クリエイターからの振込申請を管理"
+        description="講師からの振込申請を管理"
         icon={DollarSign}
         actions={
           <motion.button

@@ -33,7 +33,7 @@ const EditProfilePage = () => {
     location: '',
     expertise: '',
     yearsOfExperience: '',
-    isInstructor: false
+    isCreator: false
   });
 
   const [avatar, setAvatar] = useState('/logo192.png');
@@ -60,7 +60,7 @@ const EditProfilePage = () => {
             location: userData.location || '',
             expertise: userData.expertise || '',
             yearsOfExperience: userData.yearsOfExperience || '',
-            isInstructor: userData.isCreator || userData.isInstructor || false
+            isCreator: userData.isCreator || false
           });
           setAvatar(userData.photoURL || userData.avatar || '/logo192.png');
           setCoverImage(userData.coverImage || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=200&fit=crop');
@@ -120,8 +120,7 @@ const EditProfilePage = () => {
         location: formData.location,
         expertise: formData.expertise,
         yearsOfExperience: formData.yearsOfExperience,
-        isInstructor: formData.isInstructor,
-        isCreator: formData.isInstructor,
+        isCreator: formData.isCreator,
         photoURL: avatar,
         avatar: avatar,
         coverImage: coverImage,
@@ -335,8 +334,8 @@ const EditProfilePage = () => {
               <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-xl">
                 <input
                   type="checkbox"
-                  name="isInstructor"
-                  checked={formData.isInstructor}
+                  name="isCreator"
+                  checked={formData.isCreator}
                   onChange={handleInputChange}
                   className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
                   data-testid="checkbox-instructor"
@@ -347,7 +346,7 @@ const EditProfilePage = () => {
                 </div>
               </div>
 
-              {formData.isInstructor && (
+              {formData.isCreator && (
                 <>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">

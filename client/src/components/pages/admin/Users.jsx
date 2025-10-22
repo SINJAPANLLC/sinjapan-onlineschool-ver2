@@ -227,7 +227,7 @@ export default function Users() {
             {/* 統計カード */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <AdminStatsCard
-                    title="総ユーザー数"
+                    title="総学生数"
                     value={<AnimatedNumber value={stats.total} />}
                     icon={UsersIcon}
                     color="blue"

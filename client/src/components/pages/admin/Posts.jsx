@@ -53,9 +53,9 @@ const AnimatedNumber = ({ value, duration = 2 }) => {
   return <span>{displayValue.toLocaleString()}</span>;
 };
 
-export default function Posts() {
-    const [posts, setPosts] = useState([]);
-    const [filteredPosts, setFilteredPosts] = useState([]);
+export default function Courses() {
+    const [courses, setCourses] = useState([]);
+    const [filteredCourses, setFilteredCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -84,58 +84,58 @@ export default function Posts() {
 
     // 検索・フィルター処理
     useEffect(() => {
-        let filtered = posts;
+        let filtered = courses;
 
         if (searchTerm) {
-            filtered = filtered.filter(post =>
-                post.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                post.userName?.toLowerCase().includes(searchTerm.toLowerCase())
+            filtered = filtered.filter(course =>
+                course.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                course.userName?.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
 
         if (filterStatus !== 'all') {
-            filtered = filtered.filter(post => post.status === filterStatus);
+            filtered = filtered.filter(course => course.status === filterStatus);
         }
 
         if (filterType !== 'all') {
             if (filterType === 'image') {
-                filtered = filtered.filter(post => post.hasImages);
+                filtered = filtered.filter(course => course.hasImages);
             } else if (filterType === 'video') {
-                filtered = filtered.filter(post => post.hasVideos);
+                filtered = filtered.filter(course => course.hasVideos);
             }
         }
 
-        setFilteredPosts(filtered);
-    }, [posts, searchTerm, filterStatus, filterType]);
+        setFilteredCourses(filtered);
+    }, [courses, searchTerm, filterStatus, filterType]);
 
     // 統計を更新
     useEffect(() => {
         const newStats = {
-            total: posts.length,
-            published: posts.filter(p => p.status === 'Public').length,
-            private: posts.filter(p => p.status === 'Private').length,
-            images: posts.filter(p => p.hasImages).length,
-            videos: posts.filter(p => p.hasVideos).length
+            total: courses.length,
+            published: courses.filter(p => p.status === 'Public').length,
+            private: courses.filter(p => p.status === 'Private').length,
+            images: courses.filter(p => p.hasImages).length,
+            videos: courses.filter(p => p.hasVideos).length
         };
         setStats(newStats);
-    }, [posts]);
+    }, [courses]);
 
-    // Fetch all posts from Firebase
-    const fetchPosts = async () => {
+    // Fetch all courses from Firebase
+    const fetchCourses = async () => {
         try {
             setLoading(true);
             setIsRefreshing(true);
             
-            const postsQuery = query(
-                collection(db, 'posts'),
+            const coursesQuery = query(
+                collection(db, 'courses'),
                 orderBy('createdAt', 'desc')
             );
             
-            const postsSnapshot = await getDocs(postsQuery);
+            const coursesSnapshot = await getDocs(coursesQuery);
             
             // Step 1: ユニークなuserIdを収集
             const userIds = [...new Set(
-                postsSnapshot.docs
+                coursesSnapshot.docs
                     .map(doc => doc.data().userId)
                     .filter(userId => userId)
             )];
@@ -163,79 +163,79 @@ export default function Posts() {
                 }
             }
             
-            // Step 3: 投稿データを処理
-            const postsData = postsSnapshot.docs.map(postDoc => {
-                const postData = postDoc.data();
-                const userName = postData.userId ? 
-                    (userDataMap.get(postData.userId) || 'Unknown User') : 
+            // Step 3: コースデータを処理
+            const coursesData = coursesSnapshot.docs.map(courseDoc => {
+                const courseData = courseDoc.data();
+                const userName = courseData.userId ? 
+                    (userDataMap.get(courseData.userId) || 'Unknown User') : 
                     'Unknown User';
                 
                 return {
-                    id: postDoc.id,
-                    title: postData.explanation || postData.title || 'Untitled Post',
-                    userId: postData.userId || 'Unknown',
+                    id: courseDoc.id,
+                    title: courseData.explanation || courseData.title || 'Untitled Course',
+                    userId: courseData.userId || 'Unknown',
                     userName: userName,
-                    status: postData.isPublic !== false ? 'Public' : 'Private',
-                    isPublic: postData.isPublic !== false,
-                    createdAt: postData.createdAt || null,
-                    likes: postData.likes || 0,
-                    comments: postData.comments || 0,
-                    views: postData.views || 0,
-                    filesCount: postData.files ? postData.files.length : 0,
-                    hasImages: postData.files ? postData.files.some(f => f.type && f.type.startsWith('image/')) : false,
-                    hasVideos: postData.files ? postData.files.some(f => f.type && f.type.startsWith('video/')) : false,
-                    thumbnailUrl: postData.files && postData.files.length > 0 ? 
-                        (postData.files[0].url || postData.files[0].secure_url || null) : null
+                    status: courseData.isPublic !== false ? 'Public' : 'Private',
+                    isPublic: courseData.isPublic !== false,
+                    createdAt: courseData.createdAt || null,
+                    likes: courseData.likes || 0,
+                    comments: courseData.comments || 0,
+                    views: courseData.views || 0,
+                    filesCount: courseData.files ? courseData.files.length : 0,
+                    hasImages: courseData.files ? courseData.files.some(f => f.type && f.type.startsWith('image/')) : false,
+                    hasVideos: courseData.files ? courseData.files.some(f => f.type && f.type.startsWith('video/')) : false,
+                    thumbnailUrl: courseData.files && courseData.files.length > 0 ? 
+                        (courseData.files[0].url || courseData.files[0].secure_url || null) : null
                 };
             });
             
-            setPosts(postsData);
-            setFilteredPosts(postsData);
+            setCourses(coursesData);
+            setFilteredCourses(coursesData);
         } catch (error) {
-            console.error('Error fetching posts:', error);
+            console.error('Error fetching courses:', error);
         } finally {
             setLoading(false);
             setIsRefreshing(false);
         }
     };
 
-    const handleToggleVisibility = async (postId, currentStatus) => {
+    const handleToggleVisibility = async (courseId, currentStatus) => {
         try {
-            const postRef = doc(db, 'posts', postId);
+            const courseRef = doc(db, 'courses', courseId);
             const newStatus = !currentStatus;
             
-            await updateDoc(postRef, {
+            await updateDoc(courseRef, {
                 isPublic: newStatus,
                 lastModified: new Date().toISOString()
             });
             
-            setPosts(posts.map(post => 
-                post.id === postId 
-                    ? { ...post, isPublic: newStatus, status: newStatus ? 'Public' : 'Private' }
-                    : post
+            setCourses(courses.map(course => 
+                course.id === courseId 
+                    ? { ...course, isPublic: newStatus, status: newStatus ? 'Public' : 'Private' }
+                    : course
             ));
         } catch (error) {
-            console.error('Error updating post visibility:', error);
-            alert('Failed to update post visibility.');
+            console.error('Error updating course visibility:', error);
+            alert('Failed to update course visibility.');
         }
     };
 
-    const handleDeletePost = async (postId) => {
-        if (!window.confirm('この投稿を削除しますか？この操作は取り消せません。')) {
+    const handleDeleteCourse = async (courseId) => {
+        if (!window.confirm('このコースを削除しますか？この操作は取り消せません。')) {
             return;
         }
 
         try {
-            await deleteDoc(doc(db, 'posts', postId));
-            setPosts(posts.filter(post => post.id !== postId));
+            await deleteDoc(doc(db, 'courses', courseId));
+            setCourses(courses.filter(course => course.id !== courseId));
         } catch (error) {
-            console.error('Error deleting post:', error);
-            alert('Failed to delete post.');
+            console.error('Error deleting course:', error);
+            alert('Failed to delete course.');
         }
     };
 
     useEffect(() => {
-        fetchPosts();
+        fetchCourses();
     }, []);
 
     const formatDate = (dateString) => {
@@ -261,22 +261,22 @@ export default function Posts() {
     };
 
     if (loading) {
-        return <AdminLoadingState message="投稿データを読み込み中..." />;
+        return <AdminLoadingState message="コースデータを読み込み中..." />;
     }
 
     return (
         <AdminPageContainer>
             {/* ページヘッダー */}
             <AdminPageHeader
-                title="投稿管理"
-                description="投稿の管理、公開/非公開、削除を行います"
+                title="コース管理"
+                description="コースの管理、公開/非公開、削除を行います"
                 icon={FileText}
                 actions={
                     <>
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            onClick={fetchPosts}
+                            onClick={fetchCourses}
                             disabled={isRefreshing}
                             className="flex items-center space-x-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
                             data-testid="button-refresh"
@@ -301,7 +301,7 @@ export default function Posts() {
             {/* 統計カード */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                 <AdminStatsCard
-                    title="総投稿数"
+                    title="総コース数"
                     value={<AnimatedNumber value={stats.total} />}
                     icon={FileText}
                     color="blue"
@@ -340,7 +340,7 @@ export default function Posts() {
                             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                             <input
                                 type="text"
-                                placeholder="投稿を検索..."
+                                placeholder="コースを検索..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
                                 className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -381,14 +381,14 @@ export default function Posts() {
                 </div>
             </AdminContentCard>
 
-            {/* 投稿一覧テーブル */}
+            {/* コース一覧テーブル */}
             <AdminTableContainer>
-                {filteredPosts.length > 0 ? (
+                {filteredCourses.length > 0 ? (
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    投稿
+                                    コース
                                 </th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     作成者
@@ -400,7 +400,7 @@ export default function Posts() {
                                     統計
                                 </th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    投稿日
+                                    コース日
                                 </th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     操作
@@ -408,76 +408,76 @@ export default function Posts() {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {filteredPosts.map((post, index) => (
+                            {filteredCourses.map((course, index) => (
                                 <motion.tr 
-                                    key={post.id}
+                                    key={course.id}
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.2, delay: index * 0.05 }}
                                     className="hover:bg-blue-50 transition-colors"
-                                    data-testid={`row-post-${post.id}`}
+                                    data-testid={`row-course-${course.id}`}
                                 >
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center">
-                                            {post.thumbnailUrl && (
+                                            {course.thumbnailUrl && (
                                                 <div className="flex-shrink-0 h-12 w-12">
                                                     <img 
                                                         className="h-12 w-12 rounded-lg object-cover ring-2 ring-blue-100" 
-                                                        src={post.thumbnailUrl} 
-                                                        alt={post.title}
+                                                        src={course.thumbnailUrl} 
+                                                        alt={course.title}
                                                     />
                                                 </div>
                                             )}
-                                            <div className={post.thumbnailUrl ? "ml-4" : ""}>
+                                            <div className={course.thumbnailUrl ? "ml-4" : ""}>
                                                 <div className="text-sm font-semibold text-gray-900 line-clamp-1">
-                                                    {post.title}
+                                                    {course.title}
                                                 </div>
                                                 <div className="text-xs text-gray-500">
-                                                    {post.filesCount} ファイル
+                                                    {course.filesCount} ファイル
                                                 </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        <div className="text-sm text-gray-900">{post.userName}</div>
+                                        <div className="text-sm text-gray-900">{course.userName}</div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(post.status)}`}>
-                                            {post.status}
+                                        <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(course.status)}`}>
+                                            {course.status}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex items-center space-x-3 text-xs">
                                             <span className="flex items-center space-x-1">
                                                 <Heart className="w-3 h-3 text-red-500" />
-                                                <span className="text-gray-900 font-semibold">{post.likes || 0}</span>
+                                                <span className="text-gray-900 font-semibold">{course.likes || 0}</span>
                                             </span>
                                             <span className="flex items-center space-x-1">
                                                 <MessageCircle className="w-3 h-3 text-blue-500" />
-                                                <span className="text-gray-900 font-semibold">{post.comments || 0}</span>
+                                                <span className="text-gray-900 font-semibold">{course.comments || 0}</span>
                                             </span>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                        {formatDate(post.createdAt)}
+                                        {formatDate(course.createdAt)}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                         <div className="flex items-center space-x-2">
                                             <motion.button
                                                 whileHover={{ scale: 1.1 }}
                                                 whileTap={{ scale: 0.95 }}
-                                                onClick={() => handleToggleVisibility(post.id, post.isPublic)}
+                                                onClick={() => handleToggleVisibility(course.id, course.isPublic)}
                                                 className="text-blue-600 hover:text-blue-900"
-                                                data-testid={`button-toggle-${post.id}`}
+                                                data-testid={`button-toggle-${course.id}`}
                                             >
-                                                {post.isPublic ? <Eye className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
+                                                {course.isPublic ? <Eye className="w-4 h-4" /> : <XCircle className="w-4 h-4" />}
                                             </motion.button>
                                             <motion.button
                                                 whileHover={{ scale: 1.1 }}
                                                 whileTap={{ scale: 0.95 }}
-                                                onClick={() => handleDeletePost(post.id)}
+                                                onClick={() => handleDeleteCourse(course.id)}
                                                 className="text-red-600 hover:text-red-900"
-                                                data-testid={`button-delete-${post.id}`}
+                                                data-testid={`button-delete-${course.id}`}
                                             >
                                                 <Trash2 className="w-4 h-4" />
                                             </motion.button>
@@ -490,7 +490,7 @@ export default function Posts() {
                 ) : (
                     <AdminEmptyState
                         icon={FileText}
-                        title="投稿が見つかりません"
+                        title="コースが見つかりません"
                         description="検索条件を変更してください"
                     />
                 )}

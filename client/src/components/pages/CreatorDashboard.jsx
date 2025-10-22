@@ -52,8 +52,21 @@ const CreatorDashboard = () => {
         const userData = userDoc.data();
 
         const coursesRef = collection(db, 'courses');
-        const coursesQuery = query(coursesRef, where('instructorId', '==', currentUser.uid));
-        const coursesSnapshot = await getDocs(coursesQuery);
+        // 後方互換性：creatorIdとinstructorId両方をクエリ
+        const creatorIdQuery = query(coursesRef, where('creatorId', '==', currentUser.uid));
+        const instructorIdQuery = query(coursesRef, where('instructorId', '==', currentUser.uid));
+        
+        const [creatorSnapshot, instructorSnapshot] = await Promise.all([
+          getDocs(creatorIdQuery),
+          getDocs(instructorIdQuery)
+        ]);
+        
+        // 結果をマージして重複を削除
+        const coursesDocs = new Map();
+        [...creatorSnapshot.docs, ...instructorSnapshot.docs].forEach(doc => {
+          coursesDocs.set(doc.id, doc);
+        });
+        const coursesSnapshot = { docs: Array.from(coursesDocs.values()) };
         
         let totalStudents = 0;
         let totalRevenue = 0;

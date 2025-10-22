@@ -24,8 +24,8 @@ export default function Sidebar({ open, setOpen, onLogout }) {
   const navItems = [
     { name: 'ダッシュボード', path: "/admin", icon: BarChart3 },
     { name: '学生管理', path: "/admin/users", icon: Users },
-    { name: '講師管理', path: "/admin/creators", icon: GraduationCap },
-    { name: 'コース管理', path: "/admin/posts", icon: BookOpen },
+    { name: '講師管理', path: "/admin/instructors", icon: GraduationCap },
+    { name: 'コース管理', path: "/admin/courses", icon: BookOpen },
     { name: 'レポート管理', path: "/admin/reports", icon: FileText },
     { name: '注目コース管理', path: "/admin/featured-pickup", icon: Star },
     { name: 'スライダー管理', path: "/admin/home-slider", icon: Image },

@@ -201,7 +201,7 @@ export default function Dashboard() {
         
         usersSnapshot.docs.forEach(doc => {
           const data = doc.data();
-          if (data.isCreator || data.isInstructor) {
+          if (data.isCreator || data.isCreator) {
             instructorCount++;
           } else {
             studentCount++;

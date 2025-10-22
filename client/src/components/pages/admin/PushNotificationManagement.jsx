@@ -232,7 +232,7 @@ export default function PushNotificationManagement() {
   const getRecipientTypeLabel = (type) => {
     switch (type) {
       case 'all': return '全ユーザー';
-      case 'creators': return 'クリエイターのみ';
+      case 'instructors': return '講師のみ';
       case 'specific': return '特定ユーザー';
       default: return type;
     }
@@ -491,7 +491,7 @@ export default function PushNotificationManagement() {
                     data-testid="select-recipient-type"
                   >
                     <option value="all">全ユーザー</option>
-                    <option value="creators">クリエイターのみ</option>
+                    <option value="instructors">講師のみ</option>
                     <option value="specific">特定ユーザー</option>
                   </select>
                 </div>

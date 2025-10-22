@@ -68,7 +68,7 @@ export default function AdminLayout() {
   const handleLogout = async () => {
     try {
       await fetch('/api/admin/logout', {
-        method: 'POST',
+        method: 'COURSE',
         credentials: 'include',
       });
     } catch (error) {

@@ -134,7 +134,7 @@ const PDCAManagement = () => {
       {
         id: 'PDCA_002',
         title: '収益最適化',
-        description: 'クリエイターの収益を最大化する施策の検証',
+        description: '講師の収益を最大化する施策の検証',
         category: '収益',
         status: 'checking',
         phase: 'Check',
@@ -177,7 +177,7 @@ const PDCAManagement = () => {
         actions: [
           { id: '1', title: 'ユーザー調査', status: 'completed', assignee: '田中花子' },
           { id: '2', title: 'コンテンツガイドライン策定', status: 'completed', assignee: '佐藤次郎' },
-          { id: '3', title: 'クリエイター教育', status: 'doing', assignee: '鈴木美咲' }
+          { id: '3', title: '講師教育', status: 'doing', assignee: '鈴木美咲' }
         ],
         success: null
       }

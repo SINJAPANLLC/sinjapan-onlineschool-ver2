@@ -45,7 +45,7 @@ const EnhancedProfilePage = () => {
             price: '¥5,000',
             period: 'month',
             posts: 99,
-            description: 'こちらのプランでは全ての投稿を見ることができます。入会日から翌...'
+            description: 'こちらのプランでは全てのコースを見ることができます。入会日から翌...'
         },
         postsData: {
             total: 685,

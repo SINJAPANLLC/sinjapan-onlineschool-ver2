@@ -127,7 +127,7 @@ const FollowingPage = () => {
               className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-blue-100"
             >
               <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500 font-medium mb-4">フォロー中のクリエイターがいません</p>
+              <p className="text-gray-500 font-medium mb-4">フォロー中の講師がいません</p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -135,7 +135,7 @@ const FollowingPage = () => {
                 className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg"
                 data-testid="button-find-creators"
               >
-                クリエイターを探す
+                講師を探す
               </motion.button>
             </motion.div>
           ) : (
@@ -165,7 +165,7 @@ const FollowingPage = () => {
                         フォロワー: {user.followersCount}人
                       </span>
                       <span data-testid={`text-posts-${index}`}>
-                        投稿: {user.postsCount}件
+                        コース: {user.postsCount}件
                       </span>
                     </div>
                     <p className="text-xs text-gray-500 mt-1">

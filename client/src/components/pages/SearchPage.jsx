@@ -75,8 +75,8 @@ const SearchPage = () => {
         navigate(`/feed?search=${encodeURIComponent(term)}`);
     };
 
-    const handleInstructorClick = (instructorId) => {
-        navigate(`/profile/${instructorId}`);
+    const handleInstructorClick = (creatorId) => {
+        navigate(`/profile/${creatorId}`);
     };
 
     return (

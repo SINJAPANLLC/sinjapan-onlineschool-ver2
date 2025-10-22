@@ -101,7 +101,7 @@ const RevenueManagement = () => {
           netAmount: amount - fees.totalFees,
           status: data.status || 'pending',
           userName: data.userName || data.customerName || 'Unknown',
-          creatorName: data.creatorName || 'Unknown',
+          instructorName: data.instructorName || 'Unknown',
           createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : new Date(),
           completedAt: data.completedAt?.toDate ? data.completedAt.toDate() : null,
           paymentMethod: data.paymentMethod || 'credit_card',
@@ -125,7 +125,7 @@ const RevenueManagement = () => {
       filtered = filtered.filter(transaction =>
         transaction.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
         transaction.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        transaction.creatorName.toLowerCase().includes(searchTerm.toLowerCase())
+        transaction.instructorName.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -367,7 +367,7 @@ const RevenueManagement = () => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">{transaction.userName}</div>
-                    <div className="text-xs text-gray-500">→ {transaction.creatorName}</div>
+                    <div className="text-xs text-gray-500">→ {transaction.instructorName}</div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-semibold text-gray-900">{formatCurrency(transaction.amount)}</div>

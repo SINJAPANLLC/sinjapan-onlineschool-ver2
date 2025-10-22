@@ -49,9 +49,9 @@ const AnimatedNumber = ({ value, duration = 2 }) => {
   return <span>{displayValue.toLocaleString()}</span>;
 };
 
-export default function Creators() {
-  const [creators, setCreators] = useState([]);
-  const [filteredCreators, setFilteredCreators] = useState([]);
+export default function Instructors() {
+  const [instructors, setInstructors] = useState([]);
+  const [filteredInstructors, setFilteredInstructors] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterVerification, setFilterVerification] = useState('all');
@@ -82,11 +82,11 @@ export default function Creators() {
   ];
 
   useEffect(() => {
-    loadCreators();
+    loadInstructors();
   }, []);
 
-  const loadCreators = () => {
-    const mockCreators = [
+  const loadInstructors = () => {
+    const mockInstructors = [
       { 
         id: 1, 
         name: "田中花子", 
@@ -95,7 +95,7 @@ export default function Creators() {
         verification: "verified",
         joinDate: "2024-01-15",
         lastLogin: "2024-01-20",
-        posts: 45,
+        courses: 45,
         followers: 1250,
         revenue: 125000,
         rating: 4.8,
@@ -109,7 +109,7 @@ export default function Creators() {
         verification: "pending",
         joinDate: "2024-01-18",
         lastLogin: "2024-01-19",
-        posts: 12,
+        courses: 12,
         followers: 89,
         revenue: 0,
         rating: 4.2,
@@ -123,7 +123,7 @@ export default function Creators() {
         verification: "verified",
         joinDate: "2024-01-10",
         lastLogin: "2024-01-15",
-        posts: 23,
+        courses: 23,
         followers: 456,
         revenue: 0,
         rating: 3.1,
@@ -131,46 +131,46 @@ export default function Creators() {
       }
     ];
     
-    setCreators(mockCreators);
-    setFilteredCreators(mockCreators);
+    setInstructors(mockInstructors);
+    setFilteredInstructors(mockInstructors);
     
     setStats({
-      total: mockCreators.length,
-      verified: mockCreators.filter(c => c.verification === 'verified').length,
-      pending: mockCreators.filter(c => c.status === 'pending').length,
-      banned: mockCreators.filter(c => c.status === 'banned').length,
-      active: mockCreators.filter(c => c.status === 'active').length
+      total: mockInstructors.length,
+      verified: mockInstructors.filter(c => c.verification === 'verified').length,
+      pending: mockInstructors.filter(c => c.status === 'pending').length,
+      banned: mockInstructors.filter(c => c.status === 'banned').length,
+      active: mockInstructors.filter(c => c.status === 'active').length
     });
     
     setLoading(false);
   };
 
   useEffect(() => {
-    let filtered = [...creators];
+    let filtered = [...instructors];
 
     if (searchTerm) {
-      filtered = filtered.filter(creator =>
-        creator.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        creator.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        creator.category.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(instructor =>
+        instructor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        instructor.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        instructor.category.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     if (filterStatus !== 'all') {
-      filtered = filtered.filter(creator => creator.status === filterStatus);
+      filtered = filtered.filter(instructor => instructor.status === filterStatus);
     }
 
     if (filterVerification !== 'all') {
-      filtered = filtered.filter(creator => creator.verification === filterVerification);
+      filtered = filtered.filter(instructor => instructor.verification === filterVerification);
     }
 
-    setFilteredCreators(filtered);
-  }, [creators, searchTerm, filterStatus, filterVerification]);
+    setFilteredInstructors(filtered);
+  }, [instructors, searchTerm, filterStatus, filterVerification]);
 
   const handleRefresh = () => {
     setIsRefreshing(true);
     setTimeout(() => {
-      loadCreators();
+      loadInstructors();
       setIsRefreshing(false);
     }, 1000);
   };
@@ -203,14 +203,14 @@ export default function Creators() {
   };
 
   if (loading) {
-    return <AdminLoadingState message="クリエイターデータを読み込み中..." />;
+    return <AdminLoadingState message="講師データを読み込み中..." />;
   }
 
   return (
     <AdminPageContainer>
       <AdminPageHeader
-        title="クリエイター管理"
-        description="クリエイターアカウントの管理、認証、ステータス確認を行います"
+        title="講師管理"
+        description="講師アカウントの管理、認証、ステータス確認を行います"
         icon={Crown}
         actions={
           <>
@@ -241,7 +241,7 @@ export default function Creators() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         <AdminStatsCard
-          title="総クリエイター数"
+          title="総講師数"
           value={<AnimatedNumber value={stats.total} />}
           icon={Users}
           color="blue"
@@ -279,7 +279,7 @@ export default function Creators() {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                placeholder="クリエイターを検索..."
+                placeholder="講師を検索..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -321,12 +321,12 @@ export default function Creators() {
       </AdminContentCard>
 
       <AdminTableContainer>
-        {filteredCreators.length > 0 ? (
+        {filteredInstructors.length > 0 ? (
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  クリエイター
+                  講師
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   ステータス
@@ -349,38 +349,38 @@ export default function Creators() {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredCreators.map((creator, index) => (
+              {filteredInstructors.map((instructor, index) => (
                 <motion.tr 
-                  key={creator.id}
+                  key={instructor.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
                   className="hover:bg-blue-50 transition-colors"
-                  data-testid={`row-creator-${creator.id}`}
+                  data-testid={`row-instructor-${instructor.id}`}
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-10 w-10">
                         <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold ring-2 ring-blue-100">
-                          {creator.name.charAt(0)}
+                          {instructor.name.charAt(0)}
                         </div>
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-semibold text-gray-900">
-                          {creator.name}
+                          {instructor.name}
                         </div>
-                        <div className="text-sm text-gray-500">{creator.email}</div>
+                        <div className="text-sm text-gray-500">{instructor.email}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(creator.status)}`}>
-                      {statusOptions.find(s => s.value === creator.status)?.label || creator.status}
+                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(instructor.status)}`}>
+                      {statusOptions.find(s => s.value === instructor.status)?.label || instructor.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getVerificationColor(creator.verification)}`}>
-                      {verificationOptions.find(v => v.value === creator.verification)?.label || creator.verification}
+                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getVerificationColor(instructor.verification)}`}>
+                      {verificationOptions.find(v => v.value === instructor.verification)?.label || instructor.verification}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -388,11 +388,11 @@ export default function Creators() {
                       <div className="flex items-center space-x-3 text-xs">
                         <span className="flex items-center text-gray-600">
                           <FileText className="w-3 h-3 mr-1" />
-                          <span className="font-semibold text-gray-900">{creator.posts}</span>
+                          <span className="font-semibold text-gray-900">{instructor.courses}</span>
                         </span>
                         <span className="flex items-center text-gray-600">
                           <Users className="w-3 h-3 mr-1" />
-                          <span className="font-semibold text-gray-900">{creator.followers}</span>
+                          <span className="font-semibold text-gray-900">{instructor.followers}</span>
                         </span>
                       </div>
                     </div>
@@ -400,18 +400,18 @@ export default function Creators() {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center text-sm font-semibold text-gray-900">
                       <DollarSign className="w-4 h-4 text-green-600" />
-                      {creator.revenue.toLocaleString()}円
+                      {instructor.revenue.toLocaleString()}円
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDate(creator.joinDate)}
+                    {formatDate(instructor.joinDate)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.95 }}
                       className="text-blue-600 hover:text-blue-900 flex items-center space-x-1"
-                      data-testid={`button-view-${creator.id}`}
+                      data-testid={`button-view-${instructor.id}`}
                     >
                       <Eye className="w-4 h-4" />
                       <span>詳細</span>
@@ -424,7 +424,7 @@ export default function Creators() {
         ) : (
           <AdminEmptyState
             icon={Crown}
-            title="クリエイターが見つかりません"
+            title="講師が見つかりません"
             description="検索条件を変更してください"
           />
         )}

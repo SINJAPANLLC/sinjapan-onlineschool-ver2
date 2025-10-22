@@ -24,7 +24,7 @@ const CreatePostPage = () => {
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
-  const [isInstructor, setIsInstructor] = useState(false);
+  const [isCreator, setIsInstructor] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -78,6 +78,7 @@ const CreatePostPage = () => {
         
         if (userDoc.exists()) {
           const userData = userDoc.data();
+          // 後方互換性：isCreatorとisInstructor両方をチェック
           setIsInstructor(userData.isCreator || userData.isInstructor || false);
         }
       } catch (error) {
@@ -163,7 +164,7 @@ const CreatePostPage = () => {
         requirements: requirements.filter(r => r.trim()),
         learningObjectives: learningObjectives.filter(l => l.trim()),
         tags: tags.filter(t => t.trim()),
-        instructorId: currentUser.uid,
+        creatorId: currentUser.uid,
         instructorName: currentUser.displayName || 'Unknown',
         thumbnail: thumbnail || '/logo-school.jpg',
         students: 0,
@@ -199,7 +200,7 @@ const CreatePostPage = () => {
     );
   }
 
-  if (!isInstructor) {
+  if (!isCreator) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
         <div className="bg-white rounded-2xl shadow-lg p-8 max-w-md w-full text-center">

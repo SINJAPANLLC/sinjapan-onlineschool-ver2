@@ -36,7 +36,7 @@ const MyPostsPage = () => {
 
     const coursesQuery = query(
       collection(db, 'courses'),
-      where('instructorId', '==', currentUser.uid),
+      where('creatorId', '==', currentUser.uid),
       orderBy('createdAt', 'desc')
     );
 

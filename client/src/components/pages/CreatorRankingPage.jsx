@@ -87,7 +87,7 @@ const CreatorRankingPage = () => {
             <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }}>
               <Trophy className="w-7 h-7 text-white mr-3" />
             </motion.div>
-            <h1 className="text-2xl font-bold text-white">クリエイターランキング</h1>
+            <h1 className="text-2xl font-bold text-white">講師ランキング</h1>
           </div>
         </motion.div>
         
@@ -110,7 +110,7 @@ const CreatorRankingPage = () => {
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }}>
             <Trophy className="w-7 h-7 text-white mr-3" />
           </motion.div>
-          <h1 className="text-2xl font-bold text-white">クリエイターランキング</h1>
+          <h1 className="text-2xl font-bold text-white">講師ランキング</h1>
         </div>
       </motion.div>
 

@@ -54,24 +54,24 @@ const AnalyticsDashboard = () => {
       activeUsers: 8940,
       totalRevenue: 12500000,
       totalViews: 2500000,
-      totalPosts: 15680,
+      totalCourses: 15680,
       totalLikes: 890000,
       totalComments: 125000
     },
     rankings: {
-      topCreators: [
-        { id: '1', name: '田中花子', username: 'hanako_tanaka', followers: 125000, revenue: 2500000, posts: 156, engagement: 8.5 },
-        { id: '2', name: '佐藤美咲', username: 'misaki_sato', followers: 98000, revenue: 1800000, posts: 134, engagement: 7.8 },
-        { id: '3', name: '鈴木あい', username: 'ai_suzuki', followers: 87000, revenue: 1650000, posts: 98, engagement: 9.2 },
-        { id: '4', name: '高橋ゆき', username: 'yuki_takahashi', followers: 76000, revenue: 1400000, posts: 112, engagement: 7.5 },
-        { id: '5', name: '山田みく', username: 'miku_yamada', followers: 65000, revenue: 1200000, posts: 89, engagement: 8.1 }
+      topInstructors: [
+        { id: '1', name: '田中花子', username: 'hanako_tanaka', followers: 125000, revenue: 2500000, courses: 156, engagement: 8.5 },
+        { id: '2', name: '佐藤美咲', username: 'misaki_sato', followers: 98000, revenue: 1800000, courses: 134, engagement: 7.8 },
+        { id: '3', name: '鈴木あい', username: 'ai_suzuki', followers: 87000, revenue: 1650000, courses: 98, engagement: 9.2 },
+        { id: '4', name: '高橋ゆき', username: 'yuki_takahashi', followers: 76000, revenue: 1400000, courses: 112, engagement: 7.5 },
+        { id: '5', name: '山田みく', username: 'miku_yamada', followers: 65000, revenue: 1200000, courses: 89, engagement: 8.1 }
       ],
-      topPosts: [
-        { id: '1', title: '特別な動画', creator: '田中花子', views: 125000, likes: 8900, comments: 450, revenue: 125000 },
-        { id: '2', title: '限定コンテンツ', creator: '佐藤美咲', views: 98000, likes: 7200, comments: 320, revenue: 98000 },
-        { id: '3', title: '新作動画', creator: '鈴木あい', views: 87000, likes: 6500, comments: 280, revenue: 87000 },
-        { id: '4', title: 'コラボ動画', creator: '高橋ゆき', views: 76000, likes: 5800, comments: 210, revenue: 76000 },
-        { id: '5', title: 'ライブ配信', creator: '山田みく', views: 65000, likes: 4900, comments: 180, revenue: 65000 }
+      topCourses: [
+        { id: '1', title: '特別な動画', instructor: '田中花子', views: 125000, likes: 8900, comments: 450, revenue: 125000 },
+        { id: '2', title: '限定コンテンツ', instructor: '佐藤美咲', views: 98000, likes: 7200, comments: 320, revenue: 98000 },
+        { id: '3', title: '新作動画', instructor: '鈴木あい', views: 87000, likes: 6500, comments: 280, revenue: 87000 },
+        { id: '4', title: 'コラボ動画', instructor: '高橋ゆき', views: 76000, likes: 5800, comments: 210, revenue: 76000 },
+        { id: '5', title: 'ライブ配信', instructor: '山田みく', views: 65000, likes: 4900, comments: 180, revenue: 65000 }
       ]
     }
   });
@@ -158,7 +158,7 @@ const AnalyticsDashboard = () => {
       {/* 統計カード */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <AdminStatsCard
-          title="総ユーザー数"
+          title="総学生数"
           value={<AnimatedNumber value={analytics.overview.totalUsers} />}
           icon={Users}
           trend="up"
@@ -194,8 +194,8 @@ const AnalyticsDashboard = () => {
       {/* エンゲージメント統計 */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <AdminStatsCard
-          title="総投稿数"
-          value={<AnimatedNumber value={analytics.overview.totalPosts} />}
+          title="総コース数"
+          value={<AnimatedNumber value={analytics.overview.totalCourses} />}
           icon={MessageCircle}
           trend="up"
           trendValue="+5.4%"
@@ -221,12 +221,12 @@ const AnalyticsDashboard = () => {
 
       {/* ランキングセクション */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* トップクリエイター */}
-        <AdminContentCard title="トップクリエイター">
+        {/* トップ講師 */}
+        <AdminContentCard title="トップ講師">
           <div className="space-y-4">
-            {analytics.rankings.topCreators.map((creator, index) => (
+            {analytics.rankings.topInstructors.map((instructor, index) => (
               <motion.div
-                key={creator.id}
+                key={instructor.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -237,12 +237,12 @@ const AnalyticsDashboard = () => {
                     {index + 1}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">{creator.name}</p>
-                    <p className="text-xs text-gray-500">@{creator.username}</p>
+                    <p className="text-sm font-medium text-gray-900">{instructor.name}</p>
+                    <p className="text-xs text-gray-500">@{instructor.username}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">{formatNumber(creator.followers)}</p>
+                  <p className="text-sm font-medium text-gray-900">{formatNumber(instructor.followers)}</p>
                   <p className="text-xs text-gray-500">フォロワー</p>
                 </div>
               </motion.div>
@@ -250,12 +250,12 @@ const AnalyticsDashboard = () => {
           </div>
         </AdminContentCard>
 
-        {/* トップ投稿 */}
-        <AdminContentCard title="トップ投稿">
+        {/* トップコース */}
+        <AdminContentCard title="トップコース">
           <div className="space-y-4">
-            {analytics.rankings.topPosts.map((post, index) => (
+            {analytics.rankings.topCourses.map((course, index) => (
               <motion.div
-                key={post.id}
+                key={course.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -266,12 +266,12 @@ const AnalyticsDashboard = () => {
                     {index + 1}
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-gray-900">{post.title}</p>
-                    <p className="text-xs text-gray-500">by {post.creator}</p>
+                    <p className="text-sm font-medium text-gray-900">{course.title}</p>
+                    <p className="text-xs text-gray-500">by {course.instructor}</p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-medium text-gray-900">{formatNumber(post.views)}</p>
+                  <p className="text-sm font-medium text-gray-900">{formatNumber(course.views)}</p>
                   <p className="text-xs text-gray-500">再生数</p>
                 </div>
               </motion.div>

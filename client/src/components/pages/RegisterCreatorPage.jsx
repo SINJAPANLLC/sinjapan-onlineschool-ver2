@@ -62,7 +62,7 @@ const RegisterCreatorPage = () => {
                     // If already a creator, redirect to dashboard
                     if (userData.isCreator === true) {
                         console.log('User is already a creator, redirecting to dashboard');
-                        alert('既にクリエイターとして登録済みです。');
+                        alert('既に講師として登録済みです。');
                         navigate('/creator-dashboard');
                         return;
                     }
@@ -70,7 +70,7 @@ const RegisterCreatorPage = () => {
                     // If application is pending, show message
                     if (userData.creatorStatus === 'pending') {
                         console.log('Creator application is pending');
-                        alert('クリエイター申請は現在審査中です。結果をお待ちください。');
+                        alert('講師申請は現在審査中です。結果をお待ちください。');
                         navigate('/account');
                         return;
                     }

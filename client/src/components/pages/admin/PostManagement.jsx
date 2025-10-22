@@ -52,10 +52,10 @@ const AnimatedNumber = ({ value, duration = 2 }) => {
   return <span>{displayValue.toLocaleString()}</span>;
 };
 
-const PostManagement = () => {
+const CourseManagement = () => {
   const { toast } = useToast();
-  const [posts, setPosts] = useState([]);
-  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterType, setFilterType] = useState('all');
@@ -71,7 +71,7 @@ const PostManagement = () => {
   });
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const statusOptions = [
@@ -89,18 +89,18 @@ const PostManagement = () => {
     { value: 'text', label: 'テキスト' }
   ];
 
-  // Firestoreから投稿データをリアルタイム取得
+  // Firestoreからコースデータをリアルタイム取得
   useEffect(() => {
-    const postsQuery = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+    const coursesQuery = query(collection(db, 'courses'), orderBy('createdAt', 'desc'));
     
-    const unsubscribe = onSnapshot(postsQuery, (snapshot) => {
-      const postsData = snapshot.docs.map(doc => {
+    const unsubscribe = onSnapshot(coursesQuery, (snapshot) => {
+      const coursesData = snapshot.docs.map(doc => {
         const data = doc.data();
         return {
           id: doc.id,
           title: data.title || 'Untitled',
           description: data.description || '',
-          creator: data.creatorName || data.username || 'Unknown',
+          instructor: data.instructorName || data.username || 'Unknown',
           creatorId: data.userId || data.creatorId || '',
           type: data.mediaType || (data.videoUrl ? 'video' : data.imageUrl ? 'image' : 'text'),
           status: data.visibility === 'private' ? 'hidden' : 'published',
@@ -118,7 +118,7 @@ const PostManagement = () => {
         };
       });
       
-      setPosts(postsData);
+      setCourses(coursesData);
       setLoading(false);
       setIsRefreshing(false);
     });
@@ -128,39 +128,39 @@ const PostManagement = () => {
 
   // フィルタリング
   useEffect(() => {
-    let filtered = [...posts];
+    let filtered = [...courses];
 
     if (searchTerm) {
-      filtered = filtered.filter(post =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.creator.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.description.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(course =>
+        course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        course.instructor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        course.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     if (filterStatus !== 'all') {
-      filtered = filtered.filter(post => post.status === filterStatus);
+      filtered = filtered.filter(course => course.status === filterStatus);
     }
 
     if (filterType !== 'all') {
-      filtered = filtered.filter(post => post.type === filterType);
+      filtered = filtered.filter(course => course.type === filterType);
     }
 
-    setFilteredPosts(filtered);
-  }, [posts, searchTerm, filterStatus, filterType]);
+    setFilteredCourses(filtered);
+  }, [courses, searchTerm, filterStatus, filterType]);
 
   // 統計を更新
   useEffect(() => {
     const newStats = {
-      total: posts.length,
-      published: posts.filter(p => p.status === 'published').length,
-      draft: posts.filter(p => p.status === 'draft').length,
-      hidden: posts.filter(p => p.status === 'hidden').length,
-      flagged: posts.filter(p => p.flagged).length,
-      violations: posts.filter(p => p.violations.length > 0).length
+      total: courses.length,
+      published: courses.filter(p => p.status === 'published').length,
+      draft: courses.filter(p => p.status === 'draft').length,
+      hidden: courses.filter(p => p.status === 'hidden').length,
+      flagged: courses.filter(p => p.flagged).length,
+      violations: courses.filter(p => p.violations.length > 0).length
     };
     setStats(newStats);
-  }, [posts]);
+  }, [courses]);
 
   const handleRefresh = () => {
     setIsRefreshing(true);
@@ -192,20 +192,20 @@ const PostManagement = () => {
     });
   };
 
-  const handleToggleVisibility = async (post) => {
+  const handleToggleVisibility = async (course) => {
     setIsProcessing(true);
     try {
-      const postRef = doc(db, 'posts', post.id);
-      const newVisibility = post.status === 'published' ? 'private' : 'public';
+      const courseRef = doc(db, 'courses', course.id);
+      const newVisibility = course.status === 'published' ? 'private' : 'public';
       
-      await updateDoc(postRef, {
+      await updateDoc(courseRef, {
         visibility: newVisibility,
         updatedAt: serverTimestamp()
       });
 
       toast({
         title: '成功',
-        description: `投稿を${newVisibility === 'private' ? '非公開' : '公開'}に設定しました`,
+        description: `コースを${newVisibility === 'private' ? '非公開' : '公開'}に設定しました`,
       });
     } catch (error) {
       console.error('Error toggling visibility:', error);
@@ -219,25 +219,25 @@ const PostManagement = () => {
     }
   };
 
-  const handleDeletePost = async () => {
-    if (!selectedPost) return;
+  const handleDeleteCourse = async () => {
+    if (!selectedCourse) return;
 
     setIsProcessing(true);
     try {
-      await deleteDoc(doc(db, 'posts', selectedPost.id));
+      await deleteDoc(doc(db, 'courses', selectedCourse.id));
 
       toast({
         title: '成功',
-        description: '投稿を削除しました',
+        description: 'コースを削除しました',
       });
 
       setDeleteModalOpen(false);
-      setSelectedPost(null);
+      setSelectedCourse(null);
     } catch (error) {
-      console.error('Error deleting post:', error);
+      console.error('Error deleting course:', error);
       toast({
         title: 'エラー',
-        description: '投稿の削除に失敗しました',
+        description: 'コースの削除に失敗しました',
         variant: 'destructive'
       });
     } finally {
@@ -245,21 +245,21 @@ const PostManagement = () => {
     }
   };
 
-  const openDeleteModal = (post) => {
-    setSelectedPost(post);
+  const openDeleteModal = (course) => {
+    setSelectedCourse(course);
     setDeleteModalOpen(true);
   };
 
   if (loading) {
-    return <AdminLoadingState message="投稿データを読み込み中..." />;
+    return <AdminLoadingState message="コースデータを読み込み中..." />;
   }
 
   return (
     <AdminPageContainer>
       {/* ページヘッダー */}
       <AdminPageHeader
-        title="投稿管理"
-        description="投稿の管理、ステータス確認を行います"
+        title="コース管理"
+        description="コースの管理、ステータス確認を行います"
         icon={FileText}
         actions={
           <>
@@ -291,7 +291,7 @@ const PostManagement = () => {
       {/* 統計カード */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
         <AdminStatsCard
-          title="総投稿数"
+          title="総コース数"
           value={<AnimatedNumber value={stats.total} />}
           icon={FileText}
           color="blue"
@@ -336,7 +336,7 @@ const PostManagement = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               <input
                 type="text"
-                placeholder="投稿を検索..."
+                placeholder="コースを検索..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
@@ -377,14 +377,14 @@ const PostManagement = () => {
         </div>
       </AdminContentCard>
 
-      {/* 投稿一覧テーブル */}
+      {/* コース一覧テーブル */}
       <AdminTableContainer>
-        {filteredPosts.length > 0 ? (
+        {filteredCourses.length > 0 ? (
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  投稿
+                  コース
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   タイプ
@@ -396,7 +396,7 @@ const PostManagement = () => {
                   統計
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  投稿日
+                  コース日
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   操作
@@ -404,64 +404,64 @@ const PostManagement = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {filteredPosts.map((post, index) => (
+              {filteredCourses.map((course, index) => (
                 <motion.tr 
-                  key={post.id}
+                  key={course.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
                   className="hover:bg-blue-50 transition-colors"
-                  data-testid={`row-post-${post.id}`}
+                  data-testid={`row-course-${course.id}`}
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-16 w-24">
                         <img 
                           className="h-16 w-24 rounded-lg object-cover ring-2 ring-blue-100" 
-                          src={post.thumbnail} 
-                          alt={post.title}
+                          src={course.thumbnail} 
+                          alt={course.title}
                         />
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-semibold text-gray-900 line-clamp-1">
-                          {post.title}
+                          {course.title}
                         </div>
-                        <div className="text-sm text-gray-500">by {post.creator}</div>
+                        <div className="text-sm text-gray-500">by {course.instructor}</div>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-2">
-                      {getTypeIcon(post.type)}
-                      <span className="text-sm text-gray-900 capitalize">{post.type}</span>
+                      {getTypeIcon(course.type)}
+                      <span className="text-sm text-gray-900 capitalize">{course.type}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(post.status)}`}>
-                      {statusOptions.find(s => s.value === post.status)?.label || post.status}
+                    <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(course.status)}`}>
+                      {statusOptions.find(s => s.value === course.status)?.label || course.status}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">
                       <div className="flex items-center space-x-3 text-xs">
-                        <span className="text-gray-600">閲覧: <span className="font-semibold text-gray-900">{post.views}</span></span>
-                        <span className="text-gray-600">いいね: <span className="font-semibold text-gray-900">{post.likes}</span></span>
+                        <span className="text-gray-600">閲覧: <span className="font-semibold text-gray-900">{course.views}</span></span>
+                        <span className="text-gray-600">いいね: <span className="font-semibold text-gray-900">{course.likes}</span></span>
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatDate(post.createdAt)}
+                    {formatDate(course.createdAt)}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex items-center space-x-2">
-                      {post.status === 'published' ? (
+                      {course.status === 'published' ? (
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          onClick={() => handleToggleVisibility(post)}
+                          onClick={() => handleToggleVisibility(course)}
                           disabled={isProcessing}
                           className="flex items-center space-x-1 px-3 py-1 bg-orange-100 text-orange-700 rounded-lg hover:bg-orange-200 transition-colors disabled:opacity-50"
-                          data-testid={`button-hide-${post.id}`}
+                          data-testid={`button-hide-${course.id}`}
                         >
                           <EyeOff className="w-3 h-3" />
                           <span>非公開</span>
@@ -470,10 +470,10 @@ const PostManagement = () => {
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          onClick={() => handleToggleVisibility(post)}
+                          onClick={() => handleToggleVisibility(course)}
                           disabled={isProcessing}
                           className="flex items-center space-x-1 px-3 py-1 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors disabled:opacity-50"
-                          data-testid={`button-publish-${post.id}`}
+                          data-testid={`button-publish-${course.id}`}
                         >
                           <Eye className="w-3 h-3" />
                           <span>公開</span>
@@ -482,10 +482,10 @@ const PostManagement = () => {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        onClick={() => openDeleteModal(post)}
+                        onClick={() => openDeleteModal(course)}
                         disabled={isProcessing}
                         className="flex items-center space-x-1 px-3 py-1 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors disabled:opacity-50"
-                        data-testid={`button-delete-${post.id}`}
+                        data-testid={`button-delete-${course.id}`}
                       >
                         <Trash2 className="w-3 h-3" />
                         <span>削除</span>
@@ -499,7 +499,7 @@ const PostManagement = () => {
         ) : (
           <AdminEmptyState
             icon={FileText}
-            title="投稿が見つかりません"
+            title="コースが見つかりません"
             description="検索条件を変更してください"
           />
         )}
@@ -521,14 +521,14 @@ const PostManagement = () => {
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
               className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6"
-              data-testid="modal-delete-post"
+              data-testid="modal-delete-course"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <div className="p-2 bg-red-100 rounded-lg">
                     <AlertTriangle className="w-6 h-6 text-red-600" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900">投稿を削除</h3>
+                  <h3 className="text-xl font-bold text-gray-900">コースを削除</h3>
                 </div>
                 <button
                   onClick={() => !isProcessing && setDeleteModalOpen(false)}
@@ -540,25 +540,25 @@ const PostManagement = () => {
                 </button>
               </div>
 
-              {selectedPost && (
+              {selectedCourse && (
                 <>
                   <div className="mb-4 p-4 bg-gray-50 rounded-lg">
                     <div className="flex items-center space-x-3">
                       <img
-                        src={selectedPost.thumbnail}
-                        alt={selectedPost.title}
+                        src={selectedCourse.thumbnail}
+                        alt={selectedCourse.title}
                         className="w-20 h-14 rounded-lg object-cover"
                       />
                       <div className="flex-1">
-                        <div className="font-semibold text-gray-900 line-clamp-1">{selectedPost.title}</div>
-                        <div className="text-sm text-gray-500">by {selectedPost.creator}</div>
+                        <div className="font-semibold text-gray-900 line-clamp-1">{selectedCourse.title}</div>
+                        <div className="text-sm text-gray-500">by {selectedCourse.instructor}</div>
                       </div>
                     </div>
                   </div>
 
                   <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                     <p className="text-sm text-red-800">
-                      <strong>警告:</strong> この投稿を削除すると、すべてのコメント、いいね、統計情報が完全に削除されます。この操作は取り消せません。
+                      <strong>警告:</strong> このコースを削除すると、すべてのコメント、いいね、統計情報が完全に削除されます。この操作は取り消せません。
                     </p>
                   </div>
                 </>
@@ -578,7 +578,7 @@ const PostManagement = () => {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={handleDeletePost}
+                  onClick={handleDeleteCourse}
                   disabled={isProcessing}
                   className="flex-1 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all disabled:opacity-50"
                   data-testid="button-confirm-delete"
@@ -594,4 +594,4 @@ const PostManagement = () => {
   );
 };
 
-export default PostManagement;
+export default CourseManagement;

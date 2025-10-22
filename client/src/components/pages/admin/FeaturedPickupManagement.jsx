@@ -68,9 +68,9 @@ export default function FeaturedPickupManagement() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [posts, setPosts] = useState([]);
-  const [loadingPosts, setLoadingPosts] = useState(false);
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [courses, setCourses] = useState([]);
+  const [loadingCourses, setLoadingCourses] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
 
   const [stats, setStats] = useState({
@@ -94,23 +94,23 @@ export default function FeaturedPickupManagement() {
           snapshot.docs.map(async (pickupDoc) => {
             const pickupData = pickupDoc.data();
             
-            // 投稿データを取得
+            // コースデータを取得
             try {
-              const postRef = doc(db, 'posts', pickupData.postId);
-              const postSnap = await getDoc(postRef);
+              const courseRef = doc(db, 'courses', pickupData.courseId);
+              const courseSnap = await getDoc(courseRef);
               
-              if (postSnap.exists()) {
-                const postData = postSnap.data();
+              if (courseSnap.exists()) {
+                const courseData = courseSnap.data();
                 return {
                   id: pickupDoc.id,
                   position: pickupData.position || 0,
-                  postId: pickupData.postId,
-                  postTitle: postData.title || 'タイトルなし',
-                  thumbnail: postData.thumbnailUrl || postData.imageUrl || '',
-                  userName: postData.creatorName || postData.userName || 'Unknown',
-                  likes: postData.likesCount || postData.likes || 0,
-                  bookmarks: postData.bookmarksCount || postData.bookmarks || 0,
-                  views: postData.viewsCount || postData.views || 0,
+                  courseId: pickupData.courseId,
+                  courseTitle: courseData.title || 'タイトルなし',
+                  thumbnail: courseData.thumbnailUrl || courseData.imageUrl || '',
+                  userName: courseData.instructorName || courseData.userName || 'Unknown',
+                  likes: courseData.likesCount || courseData.likes || 0,
+                  bookmarks: courseData.bookmarksCount || courseData.bookmarks || 0,
+                  views: courseData.viewsCount || courseData.views || 0,
                   addedDate: pickupData.addedAt?.toDate ? 
                     pickupData.addedAt.toDate().toLocaleDateString('ja-JP') : 
                     '不明',
@@ -118,7 +118,7 @@ export default function FeaturedPickupManagement() {
                 };
               }
             } catch (error) {
-              console.error('Error fetching post data:', error);
+              console.error('Error fetching course data:', error);
             }
             
             return null;
@@ -153,46 +153,46 @@ export default function FeaturedPickupManagement() {
     return () => unsubscribe();
   }, [toast]);
 
-  // 投稿を検索
-  const handleSearchPosts = async () => {
+  // コースを検索
+  const handleSearchCourses = async () => {
     if (!searchTerm.trim()) {
-      setPosts([]);
+      setCourses([]);
       return;
     }
 
-    setLoadingPosts(true);
+    setLoadingCourses(true);
     try {
-      const postsQuery = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
-      const postsSnapshot = await getDocs(postsQuery);
+      const coursesQuery = query(collection(db, 'courses'), orderBy('createdAt', 'desc'));
+      const coursesSnapshot = await getDocs(coursesQuery);
       
-      const postsData = postsSnapshot.docs
+      const coursesData = coursesSnapshot.docs
         .map(doc => ({
           id: doc.id,
           ...doc.data()
         }))
-        .filter(post => 
-          post.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          post.creatorName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          post.userName?.toLowerCase().includes(searchTerm.toLowerCase())
+        .filter(course => 
+          course.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          course.instructorName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          course.userName?.toLowerCase().includes(searchTerm.toLowerCase())
         )
         .slice(0, 20);
 
-      setPosts(postsData);
+      setCourses(coursesData);
     } catch (error) {
-      console.error('Error searching posts:', error);
+      console.error('Error searching courses:', error);
       toast({
         title: 'エラー',
-        description: '投稿の検索に失敗しました',
+        description: 'コースの検索に失敗しました',
         variant: 'destructive'
       });
     } finally {
-      setLoadingPosts(false);
+      setLoadingCourses(false);
     }
   };
 
-  // 投稿を追加
-  const handleAddPost = async () => {
-    if (!selectedPost) return;
+  // コースを追加
+  const handleAddCourse = async () => {
+    if (!selectedCourse) return;
 
     setIsAdding(true);
     try {
@@ -202,7 +202,7 @@ export default function FeaturedPickupManagement() {
       );
 
       await addDoc(collection(db, 'featuredPickups'), {
-        postId: selectedPost.id,
+        courseId: selectedCourse.id,
         position: maxPosition + 1,
         addedAt: serverTimestamp(),
         addedBy: 'admin'
@@ -210,18 +210,18 @@ export default function FeaturedPickupManagement() {
 
       toast({
         title: '成功',
-        description: '投稿を運営Pick UPに追加しました'
+        description: 'コースを運営Pick UPに追加しました'
       });
 
       setShowAddModal(false);
       setSearchTerm('');
-      setPosts([]);
-      setSelectedPost(null);
+      setCourses([]);
+      setSelectedCourse(null);
     } catch (error) {
       console.error('Error adding pickup:', error);
       toast({
         title: 'エラー',
-        description: '投稿の追加に失敗しました',
+        description: 'コースの追加に失敗しました',
         variant: 'destructive'
       });
     } finally {
@@ -229,9 +229,9 @@ export default function FeaturedPickupManagement() {
     }
   };
 
-  // 投稿を削除
+  // コースを削除
   const handleDelete = async (pickupId) => {
-    if (!window.confirm('この投稿を運営Pick UPから削除しますか？')) {
+    if (!window.confirm('このコースを運営Pick UPから削除しますか？')) {
       return;
     }
 
@@ -239,13 +239,13 @@ export default function FeaturedPickupManagement() {
       await deleteDoc(doc(db, 'featuredPickups', pickupId));
       toast({
         title: '成功',
-        description: '投稿を削除しました'
+        description: 'コースを削除しました'
       });
     } catch (error) {
       console.error('Error deleting pickup:', error);
       toast({
         title: 'エラー',
-        description: '投稿の削除に失敗しました',
+        description: 'コースの削除に失敗しました',
         variant: 'destructive'
       });
     }
@@ -263,7 +263,7 @@ export default function FeaturedPickupManagement() {
     <AdminPageContainer>
       <AdminPageHeader
         title="運営Pick UP管理"
-        description="ホーム画面に表示される注目投稿を管理"
+        description="ホーム画面に表示される注目コースを管理"
         icon={Star}
         actions={
           <>
@@ -287,7 +287,7 @@ export default function FeaturedPickupManagement() {
               data-testid="button-add-pickup"
             >
               <Plus className="w-4 h-4" />
-              <span className="font-medium">投稿を追加</span>
+              <span className="font-medium">コースを追加</span>
             </motion.button>
           </>
         }
@@ -295,7 +295,7 @@ export default function FeaturedPickupManagement() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <AdminStatsCard
-          title="掲載中の投稿"
+          title="掲載中のコース"
           value={<AnimatedNumber value={stats.total} />}
           icon={Star}
           color="pink"
@@ -320,7 +320,7 @@ export default function FeaturedPickupManagement() {
         />
       </div>
 
-      <AdminContentCard title="掲載中の投稿">
+      <AdminContentCard title="掲載中のコース">
         {featuredPicks.length > 0 ? (
           <div className="space-y-3">
             {featuredPicks.map((pick, index) => (
@@ -337,7 +337,7 @@ export default function FeaturedPickupManagement() {
                     {pick.thumbnail ? (
                       <img
                         src={pick.thumbnail}
-                        alt={pick.postTitle}
+                        alt={pick.courseTitle}
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -353,7 +353,7 @@ export default function FeaturedPickupManagement() {
 
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-gray-900 truncate mb-1">
-                    {pick.postTitle}
+                    {pick.courseTitle}
                   </h3>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-sm text-gray-600">{pick.userName}</span>
@@ -391,13 +391,13 @@ export default function FeaturedPickupManagement() {
         ) : (
           <AdminEmptyState
             icon={Star}
-            title="運営Pick UPに投稿が登録されていません"
-            description="投稿を追加ボタンから最初の投稿を追加してください"
+            title="運営Pick UPにコースが登録されていません"
+            description="コースを追加ボタンから最初のコースを追加してください"
           />
         )}
       </AdminContentCard>
 
-      {/* 投稿追加モーダル */}
+      {/* コース追加モーダル */}
       <AnimatePresence>
         {showAddModal && (
           <motion.div
@@ -416,7 +416,7 @@ export default function FeaturedPickupManagement() {
               data-testid="modal-add-pickup"
             >
               <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                <h2 className="text-2xl font-bold text-gray-900">投稿を追加</h2>
+                <h2 className="text-2xl font-bold text-gray-900">コースを追加</h2>
                 <button
                   onClick={() => setShowAddModal(false)}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -434,15 +434,15 @@ export default function FeaturedPickupManagement() {
                       type="text"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleSearchPosts()}
-                      placeholder="投稿タイトルやクリエイター名で検索..."
+                      onKeyPress={(e) => e.key === 'Enter' && handleSearchCourses()}
+                      placeholder="コースタイトルや講師名で検索..."
                       className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      data-testid="input-search-posts"
+                      data-testid="input-search-courses"
                     />
                   </div>
                   <button
-                    onClick={handleSearchPosts}
-                    disabled={loadingPosts}
+                    onClick={handleSearchCourses}
+                    disabled={loadingCourses}
                     className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-colors disabled:opacity-50"
                     data-testid="button-search"
                   >
@@ -451,28 +451,28 @@ export default function FeaturedPickupManagement() {
                 </div>
 
                 <div className="max-h-96 overflow-y-auto">
-                  {loadingPosts ? (
+                  {loadingCourses ? (
                     <div className="text-center py-8">
                       <div className="inline-block w-8 h-8 border-4 border-blue-200 border-t-blue-500 rounded-full animate-spin" />
                     </div>
-                  ) : posts.length > 0 ? (
+                  ) : courses.length > 0 ? (
                     <div className="space-y-2">
-                      {posts.map((post) => (
+                      {courses.map((course) => (
                         <div
-                          key={post.id}
-                          onClick={() => setSelectedPost(post)}
+                          key={course.id}
+                          onClick={() => setSelectedCourse(course)}
                           className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
-                            selectedPost?.id === post.id
+                            selectedCourse?.id === course.id
                               ? 'bg-blue-100 border-2 border-blue-500'
                               : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
                           }`}
-                          data-testid={`post-option-${post.id}`}
+                          data-testid={`course-option-${course.id}`}
                         >
                           <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-gray-200">
-                            {post.thumbnailUrl || post.imageUrl ? (
+                            {course.thumbnailUrl || course.imageUrl ? (
                               <img
-                                src={post.thumbnailUrl || post.imageUrl}
-                                alt={post.title}
+                                src={course.thumbnailUrl || course.imageUrl}
+                                alt={course.title}
                                 className="w-full h-full object-cover"
                               />
                             ) : (
@@ -483,19 +483,19 @@ export default function FeaturedPickupManagement() {
                           </div>
                           <div className="flex-1 min-w-0">
                             <h4 className="font-semibold text-gray-900 truncate">
-                              {post.title || 'タイトルなし'}
+                              {course.title || 'タイトルなし'}
                             </h4>
                             <p className="text-sm text-gray-600">
-                              {post.creatorName || post.userName || 'Unknown'}
+                              {course.instructorName || course.userName || 'Unknown'}
                             </p>
                             <div className="flex items-center gap-3 text-xs text-gray-500 mt-1">
                               <span className="flex items-center gap-1">
                                 <Heart className="w-3 h-3" />
-                                {post.likesCount || post.likes || 0}
+                                {course.likesCount || course.likes || 0}
                               </span>
                               <span className="flex items-center gap-1">
                                 <Bookmark className="w-3 h-3" />
-                                {post.bookmarksCount || post.bookmarks || 0}
+                                {course.bookmarksCount || course.bookmarks || 0}
                               </span>
                             </div>
                           </div>
@@ -508,7 +508,7 @@ export default function FeaturedPickupManagement() {
                     </div>
                   ) : (
                     <div className="text-center py-8 text-gray-500">
-                      投稿を検索してください
+                      コースを検索してください
                     </div>
                   )}
                 </div>
@@ -523,8 +523,8 @@ export default function FeaturedPickupManagement() {
                   キャンセル
                 </button>
                 <button
-                  onClick={handleAddPost}
-                  disabled={!selectedPost || isAdding}
+                  onClick={handleAddCourse}
+                  disabled={!selectedCourse || isAdding}
                   className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   data-testid="button-confirm-add"
                 >

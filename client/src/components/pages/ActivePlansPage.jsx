@@ -9,9 +9,9 @@ const ActivePlansPage = () => {
   const [showInactive, setShowInactive] = useState(false);
 
   const plans = [
-    { id: 1, name: 'ベーシックプラン', price: 1980, subscribers: 1250, revenue: 2475000, status: 'active', description: '基本的なコンテンツを提供するプラン', features: ['月5本の動画投稿', 'DM機能', '基本サポート'], createdAt: '2024-01-15', lastUpdated: '2024-01-20' },
-    { id: 2, name: 'プレミアムプラン', price: 3980, subscribers: 850, revenue: 3383000, status: 'active', description: '高品質なコンテンツと特別な特典', features: ['月10本の動画投稿', 'DM機能', '優先サポート', '限定コンテンツ'], createdAt: '2024-01-10', lastUpdated: '2024-01-18' },
-    { id: 3, name: 'VIPプラン', price: 5980, subscribers: 420, revenue: 2511600, status: 'active', description: '最高級のコンテンツと専用サービス', features: ['無制限動画投稿', 'DM機能', '24時間サポート', '限定コンテンツ', '個別相談'], createdAt: '2024-01-05', lastUpdated: '2024-01-22' },
+    { id: 1, name: 'ベーシックプラン', price: 1980, subscribers: 1250, revenue: 2475000, status: 'active', description: '基本的なコンテンツを提供するプラン', features: ['月5本の動画コース', 'DM機能', '基本サポート'], createdAt: '2024-01-15', lastUpdated: '2024-01-20' },
+    { id: 2, name: 'プレミアムプラン', price: 3980, subscribers: 850, revenue: 3383000, status: 'active', description: '高品質なコンテンツと特別な特典', features: ['月10本の動画コース', 'DM機能', '優先サポート', '限定コンテンツ'], createdAt: '2024-01-10', lastUpdated: '2024-01-18' },
+    { id: 3, name: 'VIPプラン', price: 5980, subscribers: 420, revenue: 2511600, status: 'active', description: '最高級のコンテンツと専用サービス', features: ['無制限動画コース', 'DM機能', '24時間サポート', '限定コンテンツ', '個別相談'], createdAt: '2024-01-05', lastUpdated: '2024-01-22' },
     { id: 4, name: 'テストプラン', price: 500, subscribers: 0, revenue: 0, status: 'inactive', description: 'テスト用のプラン', features: ['テスト機能'], createdAt: '2024-01-25', lastUpdated: '2024-01-25' }
   ];
 

@@ -335,7 +335,7 @@ const BlockedUsersPage = () => {
               <ul className="text-base text-blue-800 space-y-2">
                 <li className="flex items-center">
                   <UserX className="w-4 h-4 mr-2 text-blue-600" />
-                  あなたのプロフィールや投稿を見ることができません
+                  あなたのプロフィールやコースを見ることができません
                 </li>
                 <li className="flex items-center">
                   <UserX className="w-4 h-4 mr-2 text-blue-600" />

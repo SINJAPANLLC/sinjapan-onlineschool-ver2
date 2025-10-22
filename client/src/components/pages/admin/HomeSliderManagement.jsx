@@ -156,7 +156,7 @@ export default function HomeSliderManagement() {
     formData.append('file', file);
 
     const response = await fetch('/api/upload-slider-image', {
-      method: 'POST',
+      method: 'COURSE',
       body: formData
     });
 

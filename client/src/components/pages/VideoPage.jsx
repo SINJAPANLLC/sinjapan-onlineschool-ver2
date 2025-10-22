@@ -95,7 +95,7 @@ const VideoPage = () => {
         return url;
     };
 
-    // Firestoreから投稿データを取得
+    // Firestoreからコースデータを取得
     useEffect(() => {
         const fetchPostData = async () => {
             try {
@@ -114,14 +114,14 @@ const VideoPage = () => {
                     
                     console.log('📹 VideoPage - Video URL:', videoUrl);
                     
-                    // クリエイター情報を取得
+                    // 講師情報を取得
                     let creatorData = {};
                     if (postData.userId) {
                         const userDoc = await getDoc(doc(db, 'users', postData.userId));
                         if (userDoc.exists()) {
                             const userData = userDoc.data();
                             creatorData = {
-                                name: userData.displayName || userData.username || 'クリエイター',
+                                name: userData.displayName || userData.username || '講師',
                                 username: userData.username ? `@${userData.username}` : '@creator',
                                 avatar: userData.photoURL || 'https://via.placeholder.com/150',
                                 isVerified: userData.isVerified || false,
@@ -162,12 +162,12 @@ const VideoPage = () => {
                     }
                 } else {
                     console.error('Post not found:', id);
-                    alert('投稿が見つかりません');
+                    alert('コースが見つかりません');
                     navigate('/feed');
                 }
             } catch (error) {
                 console.error('Error fetching post data:', error);
-                alert('投稿データの取得に失敗しました');
+                alert('コースデータの取得に失敗しました');
             } finally {
                 setLoading(false);
             }
@@ -234,28 +234,28 @@ const VideoPage = () => {
         }
     };
 
-    // 投稿削除
+    // コース削除
     const handleDeletePost = async () => {
         if (!currentUser || !videoData || videoData.userId !== currentUser.uid) {
-            alert('この投稿を削除する権限がありません');
+            alert('このコースを削除する権限がありません');
             return;
         }
 
-        if (!window.confirm('本当にこの投稿を削除しますか？この操作は取り消せません。')) {
+        if (!window.confirm('本当にこのコースを削除しますか？この操作は取り消せません。')) {
             return;
         }
 
         setIsDeleting(true);
 
         try {
-            // Firestoreから投稿を削除
+            // Firestoreからコースを削除
             await deleteDoc(doc(db, 'posts', id));
             
-            alert('投稿を削除しました');
+            alert('コースを削除しました');
             navigate('/'); // ホームページにリダイレクト
         } catch (error) {
             console.error('Error deleting post:', error);
-            alert(`投稿の削除に失敗しました: ${error.message}`);
+            alert(`コースの削除に失敗しました: ${error.message}`);
         } finally {
             setIsDeleting(false);
             setShowOptionsModal(false);
@@ -875,7 +875,7 @@ const VideoPage = () => {
                                     <div className="text-center text-gray-500 py-8">読み込み中...</div>
                                 ) : comments.length === 0 ? (
                                     <div className="text-center text-gray-500 py-8">
-                                        まだコメントがありません<br />最初のコメントを投稿しましょう！
+                                        まだコメントがありません<br />最初のコメントをコースしましょう！
                                     </div>
                                 ) : (
                                     comments.map((comment) => (
@@ -978,7 +978,7 @@ const VideoPage = () => {
                                         className="w-full py-3 text-left px-4 rounded-lg hover:bg-red-50 text-red-600 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                         data-testid="button-delete-post"
                                     >
-                                        {isDeleting ? '削除中...' : '投稿を削除'}
+                                        {isDeleting ? '削除中...' : 'コースを削除'}
                                     </button>
                                 )}
                                 

@@ -43,78 +43,78 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
             title: 'ビジュアル',
             icon: User,
             subcategories: [
-                { name: 'ロリ顔', posts: '97,902 posts' },
-                { name: '地味顔', posts: '66,327 posts' },
-                { name: 'ギャル', posts: '60,570 posts' },
-                { name: 'お姉さん', posts: '24,470 posts' },
-                { name: '熟女', posts: '23,472 posts' },
-                { name: 'デカ尻', posts: '18,726 posts' },
-                { name: '巨乳', posts: '17,467 posts' },
-                { name: '貧乳', posts: '16,680 posts' },
-                { name: '入れ墨', posts: '13,701 posts' }
+                { name: 'ロリ顔', courses: '97,902 courses' },
+                { name: '地味顔', courses: '66,327 courses' },
+                { name: 'ギャル', courses: '60,570 courses' },
+                { name: 'お姉さん', courses: '24,470 courses' },
+                { name: '熟女', courses: '23,472 courses' },
+                { name: 'デカ尻', courses: '18,726 courses' },
+                { name: '巨乳', courses: '17,467 courses' },
+                { name: '貧乳', courses: '16,680 courses' },
+                { name: '入れ墨', courses: '13,701 courses' }
             ]
         },
         play: {
             title: 'プレイ',
             icon: Play,
             subcategories: [
-                { name: '正常位', posts: '11,804 posts' },
-                { name: '騎乗位', posts: '5,576 posts' },
-                { name: 'バック', posts: '4,676 posts' },
-                { name: '種付けプレス', posts: '3,770 posts' },
-                { name: 'フェラチオ', posts: '2,227 posts' },
-                { name: 'パイずり', posts: '1,500 posts' },
-                { name: '中だし', posts: '1,200 posts' },
-                { name: '顔射', posts: '1,000 posts' },
-                { name: '言葉責め', posts: '900 posts' },
-                { name: 'クンニ', posts: '800 posts' },
-                { name: '玩具', posts: '700 posts' },
-                { name: '潮吹き（女）', posts: '600 posts' },
-                { name: 'アナル', posts: '500 posts' },
-                { name: '企画', posts: '400 posts' }
+                { name: '正常位', courses: '11,804 courses' },
+                { name: '騎乗位', courses: '5,576 courses' },
+                { name: 'バック', courses: '4,676 courses' },
+                { name: '種付けプレス', courses: '3,770 courses' },
+                { name: 'フェラチオ', courses: '2,227 courses' },
+                { name: 'パイずり', courses: '1,500 courses' },
+                { name: '中だし', courses: '1,200 courses' },
+                { name: '顔射', courses: '1,000 courses' },
+                { name: '言葉責め', courses: '900 courses' },
+                { name: 'クンニ', courses: '800 courses' },
+                { name: '玩具', courses: '700 courses' },
+                { name: '潮吹き（女）', courses: '600 courses' },
+                { name: 'アナル', courses: '500 courses' },
+                { name: '企画', courses: '400 courses' }
             ]
         },
         situation: {
             title: 'シチュエーション',
             icon: MapPin,
             subcategories: [
-                { name: '複数プレイ', posts: '350 posts' },
-                { name: '女性優位', posts: '300 posts' },
-                { name: '寝取られ', posts: '280 posts' },
-                { name: '野外・露出', posts: '250 posts' },
-                { name: 'オナニー', posts: '220 posts' },
-                { name: 'ハメ撮り', posts: '200 posts' },
-                { name: 'コスプレ', posts: '180 posts' },
-                { name: '主観', posts: '160 posts' },
-                { name: '盗撮', posts: '140 posts' },
-                { name: 'レイプ', posts: '120 posts' },
-                { name: 'ＧＬ', posts: '100 posts' },
-                { name: 'ＢＬ', posts: '90 posts' }
+                { name: '複数プレイ', courses: '350 courses' },
+                { name: '女性優位', courses: '300 courses' },
+                { name: '寝取られ', courses: '280 courses' },
+                { name: '野外・露出', courses: '250 courses' },
+                { name: 'オナニー', courses: '220 courses' },
+                { name: 'ハメ撮り', courses: '200 courses' },
+                { name: 'コスプレ', courses: '180 courses' },
+                { name: '主観', courses: '160 courses' },
+                { name: '盗撮', courses: '140 courses' },
+                { name: 'レイプ', courses: '120 courses' },
+                { name: 'ＧＬ', courses: '100 courses' },
+                { name: 'ＢＬ', courses: '90 courses' }
             ]
         },
         abnormal: {
             title: 'アブノーマル',
             icon: Heart,
             subcategories: [
-                { name: '緊縛', posts: '80 posts' },
-                { name: '浣腸', posts: '70 posts' },
-                { name: '調教', posts: '60 posts' },
-                { name: '拡張', posts: '50 posts' },
-                { name: '殴打', posts: '40 posts' },
-                { name: '女装・男の娘', posts: '35 posts' },
-                { name: '潮吹き（男）', posts: '30 posts' },
-                { name: '尿道', posts: '25 posts' },
-                { name: 'その他フェチ', posts: '20 posts' }
+                { name: '緊縛', courses: '80 courses' },
+                { name: '浣腸', courses: '70 courses' },
+                { name: '調教', courses: '60 courses' },
+                { name: '拡張', courses: '50 courses' },
+                { name: '殴打', courses: '40 courses' },
+                { name: '女装・男の娘', courses: '35 courses' },
+                { name: '潮吹き（男）', courses: '30 courses' },
+                { name: '尿道', courses: '25 courses' },
+                { name: 'その他フェチ', courses: '20 courses' }
             ]
         },
         other: {
             title: 'その他',
             icon: Shirt,
             subcategories: [
-                { name: '会いに行ける', posts: '15 posts' },
-                { name: 'イベント', posts: '12 posts' },
-                { name: 'HowTo', posts: '10 posts' },
-                { name: 'ASMR', posts: '8 posts' }
+                { name: '会いに行ける', courses: '15 courses' },
+                { name: 'イベント', courses: '12 courses' },
+                { name: 'HowTo', courses: '10 courses' },
+                { name: 'ASMR', courses: '8 courses' }
             ]
         }
     };
@@ -159,7 +159,7 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
                     {subcategory.name}
                 </h3>
                 <p className="text-xs text-gray-600 font-medium">
-                    {subcategory.posts}
+                    {subcategory.courses}
                 </p>
             </div>
             <motion.div

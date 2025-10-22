@@ -195,7 +195,7 @@ const LegalNotice = () => {
                                 className="p-4 bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 rounded-xl border-2 border-blue-200 transition-all"
                             >
                                 <h3 className="font-bold text-gray-800 mb-1">コンテンツガイドライン</h3>
-                                <p className="text-sm text-gray-600">コンテンツ投稿の基準</p>
+                                <p className="text-sm text-gray-600">コンテンツコースの基準</p>
                             </a>
                         </div>
                     </div>

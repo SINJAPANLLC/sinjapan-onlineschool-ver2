@@ -126,8 +126,8 @@ const KPIDashboard = () => {
       },
       {
         id: 'KPI_002',
-        name: 'アクティブユーザー数',
-        description: '月間アクティブユーザー数の目標達成',
+        name: 'アクティブ学生数',
+        description: '月間アクティブ学生数の目標達成',
         category: 'users',
         currentValue: 45000,
         targetValue: 50000,

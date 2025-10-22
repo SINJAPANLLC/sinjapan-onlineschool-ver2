@@ -89,7 +89,7 @@ export default function KYCManagement() {
   const loadApplications = () => {
     setLoading(true);
     
-    const q = query(collection(db, 'creatorApplications'), orderBy('submittedAt', 'desc'));
+    const q = query(collection(db, 'instructorApplications'), orderBy('submittedAt', 'desc'));
     
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const applicationsData = snapshot.docs.map(doc => {
@@ -114,7 +114,7 @@ export default function KYCManagement() {
           reviewedDate: reviewedDate ? reviewedDate.toISOString().split('T')[0] : null,
           reviewedBy: data.reviewedBy || null,
           rejectionReason: data.rejectionReason || '',
-          documentType: 'クリエイター登録申請',
+          documentType: '講師登録申請',
           notes: data.rejectionReason || ''
         };
       });
@@ -133,11 +133,11 @@ export default function KYCManagement() {
       setStats(newStats);
       setLoading(false);
     }, (error) => {
-      console.error('Error loading creator applications:', error);
+      console.error('Error loading instructor applications:', error);
       setLoading(false);
       toast({
         title: 'エラー',
-        description: 'クリエイター申請データの読み込みに失敗しました',
+        description: '講師申請データの読み込みに失敗しました',
         variant: 'destructive'
       });
     });
@@ -212,7 +212,7 @@ export default function KYCManagement() {
   const handleApproveApplication = async (application) => {
     setIsProcessing(true);
     try {
-      const applicationRef = doc(db, 'creatorApplications', application.id);
+      const applicationRef = doc(db, 'instructorApplications', application.id);
       await updateDoc(applicationRef, {
         status: 'approved',
         reviewedAt: serverTimestamp(),
@@ -223,7 +223,7 @@ export default function KYCManagement() {
         const userRef = doc(db, 'users', application.userId);
         await updateDoc(userRef, {
           isCreator: true,
-          creatorStatus: 'approved',
+          instructorStatus: 'approved',
           kycStatus: 'approved',
           isVerified: true,
           updatedAt: serverTimestamp()
@@ -232,7 +232,7 @@ export default function KYCManagement() {
 
       toast({
         title: '成功',
-        description: `${application.userName}のクリエイター申請を承認しました`,
+        description: `${application.userName}の講師申請を承認しました`,
       });
       
       setDetailModalOpen(false);
@@ -240,7 +240,7 @@ export default function KYCManagement() {
       console.error('Error approving application:', error);
       toast({
         title: 'エラー',
-        description: 'クリエイター承認処理に失敗しました',
+        description: '講師承認処理に失敗しました',
         variant: 'destructive'
       });
     } finally {
@@ -254,7 +254,7 @@ export default function KYCManagement() {
 
     setIsProcessing(true);
     try {
-      const applicationRef = doc(db, 'creatorApplications', application.id);
+      const applicationRef = doc(db, 'instructorApplications', application.id);
       await updateDoc(applicationRef, {
         status: 'rejected',
         rejectionReason: reason,
@@ -266,7 +266,7 @@ export default function KYCManagement() {
         const userRef = doc(db, 'users', application.userId);
         await updateDoc(userRef, {
           isCreator: false,
-          creatorStatus: 'rejected',
+          instructorStatus: 'rejected',
           kycStatus: 'rejected',
           isVerified: false,
           updatedAt: serverTimestamp()
@@ -275,7 +275,7 @@ export default function KYCManagement() {
 
       toast({
         title: '成功',
-        description: `${application.userName}のクリエイター申請を却下しました`,
+        description: `${application.userName}の講師申請を却下しました`,
       });
       
       setDetailModalOpen(false);
@@ -283,7 +283,7 @@ export default function KYCManagement() {
       console.error('Error rejecting application:', error);
       toast({
         title: 'エラー',
-        description: 'クリエイター却下処理に失敗しました',
+        description: '講師却下処理に失敗しました',
         variant: 'destructive'
       });
     } finally {

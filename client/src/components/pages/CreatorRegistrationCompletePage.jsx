@@ -66,7 +66,7 @@ const CreatorRegistrationCompletePage = () => {
                         transition={{ delay: 0.4 }}
                         className="text-blue-100"
                     >
-                        クリエイター登録の申請を受け付けました
+                        講師登録の申請を受け付けました
                     </motion.p>
                 </div>
 
@@ -162,7 +162,7 @@ const CreatorRegistrationCompletePage = () => {
                                     </li>
                                     <li className="flex items-start">
                                         <span className="mr-2">•</span>
-                                        <span>承認後、すぐにクリエイターとして活動を開始できます</span>
+                                        <span>承認後、すぐに講師として活動を開始できます</span>
                                     </li>
                                 </ul>
                             </div>

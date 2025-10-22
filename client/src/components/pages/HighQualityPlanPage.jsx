@@ -123,7 +123,7 @@ const HighQualityPlanPage = () => {
   const [isLoadingPayment, setIsLoadingPayment] = useState(false);
   
   // Creator's set price (base amount)
-  const creatorPrice = 1000; // クリエイターが設定した金額
+  const creatorPrice = 1000; // 講師が設定した金額
   const consumptionTaxRate = 0.10; // 消費税10%
   const purchaseFeeRate = 0.10; // 購入手数料10%
   
@@ -136,7 +136,7 @@ const HighQualityPlanPage = () => {
     {
       id: 'monthly',
       name: '月額プラン',
-      price: creatorPrice, // クリエイター設定金額を表示
+      price: creatorPrice, // 講師設定金額を表示
       originalPrice: null,
       discount: null,
       features: [

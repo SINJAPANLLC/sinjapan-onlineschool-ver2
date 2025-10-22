@@ -59,7 +59,7 @@ const MessagesUI = () => {
               name: data.displayName || data.name || data.email || 'Unknown',
               avatar: data.photoURL || data.avatar || '',
               username: data.username || data.email || '',
-              isInstructor: data.isCreator || data.isInstructor || false,
+              isCreator: data.isCreator || false,
               isOnline: data.isOnline || false
             };
           })
@@ -180,7 +180,7 @@ const MessagesUI = () => {
         userId: user.id,
         userName: user.name || user.displayName || 'Unknown',
         userAvatar: user.avatar || user.photoURL || '',
-        isInstructor: user.isInstructor || false,
+        isCreator: user.isCreator || false,
         lastMessage: '',
         lastMessageTime: Date.now()
       };
@@ -213,8 +213,8 @@ const MessagesUI = () => {
   });
 
   const filteredUsers = allUsers.filter(user => {
-    if (userSelectTab === 'instructors' && !user.isInstructor) return false;
-    if (userSelectTab === 'students' && user.isInstructor) return false;
+    if (userSelectTab === 'instructors' && !user.isCreator) return false;
+    if (userSelectTab === 'students' && user.isCreator) return false;
     if (searchQuery && !user.name?.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
   });
@@ -336,7 +336,7 @@ const MessagesUI = () => {
                           <h3 className="font-semibold text-gray-800 truncate">
                             {conv.userName || 'Unknown'}
                           </h3>
-                          {conv.isInstructor && (
+                          {conv.isCreator && (
                             <GraduationCap className="w-4 h-4 text-blue-600" />
                           )}
                         </div>
@@ -379,7 +379,7 @@ const MessagesUI = () => {
               <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <h2 className="font-bold text-gray-800">{activeChat.userName}</h2>
-                  {activeChat.isInstructor && (
+                  {activeChat.isCreator && (
                     <div className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full flex items-center gap-1">
                       <GraduationCap className="w-3 h-3" />
                       講師
@@ -545,7 +545,7 @@ const MessagesUI = () => {
                       <div className="flex-1">
                         <div className="flex items-center gap-2">
                           <h3 className="font-semibold text-gray-800">{user.name}</h3>
-                          {user.isInstructor && (
+                          {user.isCreator && (
                             <GraduationCap className="w-4 h-4 text-blue-600" />
                           )}
                         </div>

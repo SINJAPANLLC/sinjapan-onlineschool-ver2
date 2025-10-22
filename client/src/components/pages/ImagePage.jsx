@@ -43,7 +43,7 @@ const ImagePage = () => {
     const imageData = {
         id: id,
         title: '特別な写真 - ミルク',
-        description: 'ファンの皆様への特別な写真です。\n\n#OnlyU #ミルク #特別写真',
+        description: '学生の皆様への特別な写真です。\n\n#OnlyU #ミルク #特別写真',
         creator: {
             name: 'ミルク',
             username: '@milk_av',
@@ -55,7 +55,7 @@ const ImagePage = () => {
         likes: 456,
         comments: 89,
         uploadDate: '2024-03-14',
-        tags: ['特別', 'ファン限定', 'ミルク', '写真'],
+        tags: ['特別', '学生限定', 'ミルク', '写真'],
         isFree: true,
         price: 0,
         width: 800,
@@ -73,7 +73,7 @@ const ImagePage = () => {
         {
             id: 1,
             user: {
-                name: 'ファン1',
+                name: '学生1',
                 avatar: '/logo-school.jpg',
                 username: '@fan1'
             },
@@ -84,7 +84,7 @@ const ImagePage = () => {
         {
             id: 2,
             user: {
-                name: 'ファン2',
+                name: '学生2',
                 avatar: '/logo-school.jpg',
                 username: '@fan2'
             },

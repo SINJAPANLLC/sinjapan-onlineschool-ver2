@@ -145,7 +145,7 @@ const PostCommentsPage = () => {
             <ArrowLeft className="w-5 h-5" />
             <span className="font-medium">戻る</span>
           </button>
-          <h1 className="text-lg font-semibold text-gray-900">投稿へのコメント</h1>
+          <h1 className="text-lg font-semibold text-gray-900">コースへのコメント</h1>
           <div className="w-16"></div>
         </div>
       </div>
@@ -296,7 +296,7 @@ const PostCommentsPage = () => {
               <MessageCircle className="w-16 h-16 mx-auto" />
             </div>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">コメントがありません</h3>
-            <p className="text-gray-600">投稿にコメントがつくとここに表示されます</p>
+            <p className="text-gray-600">コースにコメントがつくとここに表示されます</p>
           </div>
         )}
       </div>

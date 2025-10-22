@@ -216,7 +216,7 @@ const ProfilePage = () => {
                     });
                 }
 
-                // ユーザーの投稿を取得（エラーが発生しても処理を継続）
+                // ユーザーのコースを取得（エラーが発生しても処理を継続）
                 try {
                     await fetchUserPosts(userId);
                 } catch (postError) {
@@ -285,10 +285,10 @@ const ProfilePage = () => {
         return url;
     };
 
-    // ユーザーの投稿を取得
+    // ユーザーのコースを取得
     const fetchUserPosts = async (userId) => {
         try {
-            // Firestoreから投稿を取得
+            // Firestoreからコースを取得
             // Note: orderByを削除してインデックス不要にし、クライアント側でソート
             const postsRef = collection(db, 'posts');
             const q = query(
@@ -321,7 +321,7 @@ const ProfilePage = () => {
                 });
             });
 
-            // クライアント側で作成日時の降順にソート（新しい投稿が上）
+            // クライアント側で作成日時の降順にソート（新しいコースが上）
             posts.sort((a, b) => {
                 const aTime = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
                 const bTime = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
@@ -528,7 +528,7 @@ const ProfilePage = () => {
     const handleDeletePost = async (postId, event) => {
         event.stopPropagation();
         
-        if (!window.confirm('この投稿を削除してもよろしいですか？')) {
+        if (!window.confirm('このコースを削除してもよろしいですか？')) {
             return;
         }
 
@@ -539,10 +539,10 @@ const ProfilePage = () => {
             setUserPosts(prev => prev.filter(post => post.id !== postId));
             setContentData(prev => prev.filter(post => post.id !== postId));
             
-            alert('投稿を削除しました');
+            alert('コースを削除しました');
         } catch (error) {
-            console.error('投稿削除エラー:', error);
-            alert('投稿の削除に失敗しました');
+            console.error('コース削除エラー:', error);
+            alert('コースの削除に失敗しました');
         }
     };
 
@@ -832,7 +832,7 @@ const ProfilePage = () => {
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-blue-600/10 group-hover:from-blue-400/20 group-hover:to-blue-600/20 transition-all duration-300" />
                         <div className="relative z-10">
                             <div className="font-black text-2xl bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid="text-posts-count">{profileData.stats.posts}</div>
-                            <div className="text-xs text-blue-700 font-semibold mt-1">投稿</div>
+                            <div className="text-xs text-blue-700 font-semibold mt-1">コース</div>
                         </div>
                     </motion.div>
                     <motion.div 
@@ -970,7 +970,7 @@ const ProfilePage = () => {
                                             </h4>
                                             <div className="flex items-center text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full inline-flex">
                                                 <Video className="w-3 h-3 mr-1" />
-                                                {plan.posts}投稿
+                                                {plan.posts}コース
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-end gap-2">
@@ -1012,7 +1012,7 @@ const ProfilePage = () => {
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="font-bold text-blue-900 text-lg flex items-center">
                             <Video className="w-5 h-5 mr-2" />
-                            投稿
+                            コース
                         </h3>
                         <div className="flex space-x-2">
                             <motion.button
@@ -1116,7 +1116,7 @@ const ProfilePage = () => {
                             >
                                 <Video className="w-16 h-16 mx-auto text-blue-300 mb-4" />
                             </motion.div>
-                            <p className="text-blue-600 font-medium">まだ投稿がありません</p>
+                            <p className="text-blue-600 font-medium">まだコースがありません</p>
                         </div>
                     )}
                 </div>

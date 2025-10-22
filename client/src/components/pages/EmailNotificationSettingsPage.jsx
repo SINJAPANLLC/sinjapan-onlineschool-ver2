@@ -36,9 +36,9 @@ const EmailNotificationSettingsPage = () => {
   const notificationItems = [
     { id: 'newMessages', title: '新しいメッセージ', description: '新しいメッセージを受信した時', icon: Bell },
     { id: 'newFollowers', title: '新しいフォロワー', description: '誰かがあなたをフォローした時', icon: UserPlus },
-    { id: 'newLikes', title: 'いいね通知', description: 'あなたの投稿にいいねがついた時', icon: Star },
-    { id: 'newComments', title: '新しいコメント', description: 'あなたの投稿にコメントがついた時', icon: Bell },
-    { id: 'newPosts', title: '新しい投稿', description: 'フォロー中のユーザーの新しい投稿', icon: Star },
+    { id: 'newLikes', title: 'いいね通知', description: 'あなたのコースにいいねがついた時', icon: Star },
+    { id: 'newComments', title: '新しいコメント', description: 'あなたのコースにコメントがついた時', icon: Bell },
+    { id: 'newPosts', title: '新しいコース', description: 'フォロー中のユーザーの新しいコース', icon: Star },
     { id: 'systemUpdates', title: 'システム更新', description: 'アプリの更新やメンテナンス情報', icon: Settings },
     { id: 'marketingEmails', title: 'マーケティングメール', description: 'プロモーションやおすすめ情報', icon: Mail },
     { id: 'weeklyDigest', title: '週間ダイジェスト', description: '週間の活動サマリー', icon: Clock },

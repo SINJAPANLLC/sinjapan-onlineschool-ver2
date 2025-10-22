@@ -118,7 +118,7 @@ const ReportManagement = () => {
           reporterName: data.reporterName || 'Anonymous',
           reportedUserId: data.reportedUserId || '',
           reportedUserName: data.reportedUserName || 'Unknown',
-          reportedContentType: data.reportedContentType || 'post',
+          reportedContentType: data.reportedContentType || 'course',
           reportedContentTitle: data.reportedContentTitle || '',
           description: data.description || '',
           createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : new Date(),

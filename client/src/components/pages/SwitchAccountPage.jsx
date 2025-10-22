@@ -258,7 +258,7 @@ const SwitchAccountPage = () => {
                         <div className="flex items-center space-x-2 mb-2">
                           <AccountTypeIcon className="w-4 h-4 text-blue-500" />
                           <span className="text-sm font-semibold text-blue-600">
-                            {account.accountType === 'creator' ? 'クリエイター' : 'ファン'}
+                            {account.accountType === 'creator' ? '講師' : '学生'}
                           </span>
                           {account.followers > 0 && (
                             <span className="text-sm text-gray-500 font-medium">

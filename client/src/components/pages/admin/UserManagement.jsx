@@ -68,7 +68,7 @@ const UserManagement = () => {
     active: 0,
     banned: 0,
     pending: 0,
-    creators: 0
+    instructors: 0
   });
 
   const [banModalOpen, setBanModalOpen] = useState(false);
@@ -87,7 +87,7 @@ const UserManagement = () => {
   const roleOptions = [
     { value: 'all', label: 'すべて' },
     { value: 'user', label: '一般ユーザー' },
-    { value: 'creator', label: 'クリエイター' }
+    { value: 'instructor', label: '講師' }
   ];
 
   // Firestoreからユーザーデータをリアルタイム取得
@@ -102,11 +102,11 @@ const UserManagement = () => {
           username: data.username || data.displayName || 'Unknown',
           email: data.email || 'No email',
           displayName: data.displayName || data.username || 'Unknown',
-          role: data.isCreator ? 'creator' : 'user',
+          role: data.isCreator ? 'instructor' : 'user',
           status: data.isBanned ? 'banned' : 'active',
           createdAt: data.createdAt?.toDate ? data.createdAt.toDate() : new Date(),
           lastLogin: data.lastLoginAt?.toDate ? data.lastLoginAt.toDate() : new Date(),
-          postsCount: data.postsCount || 0,
+          coursesCount: data.coursesCount || 0,
           followersCount: data.followersCount || 0,
           followingCount: data.followingCount || 0,
           totalEarnings: data.totalEarnings || 0,
@@ -153,7 +153,7 @@ const UserManagement = () => {
       active: users.filter(u => u.status === 'active').length,
       banned: users.filter(u => u.status === 'banned').length,
       pending: users.filter(u => u.status === 'pending').length,
-      creators: users.filter(u => u.role === 'creator').length
+      instructors: users.filter(u => u.role === 'instructor').length
     };
     setStats(newStats);
   }, [users]);
@@ -173,7 +173,7 @@ const UserManagement = () => {
 
   const getRoleColor = (role) => {
     switch (role) {
-      case 'creator': return 'text-blue-600 bg-blue-100';
+      case 'instructor': return 'text-blue-600 bg-blue-100';
       case 'user': return 'text-blue-600 bg-blue-100';
       default: return 'text-gray-600 bg-gray-100';
     }
@@ -332,7 +332,7 @@ const UserManagement = () => {
       {/* 統計カード */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         <AdminStatsCard
-          title="総ユーザー数"
+          title="総学生数"
           value={<AnimatedNumber value={stats.total} />}
           icon={Users}
           color="blue"
@@ -356,8 +356,8 @@ const UserManagement = () => {
           color="orange"
         />
         <AdminStatsCard
-          title="クリエイター"
-          value={<AnimatedNumber value={stats.creators} />}
+          title="講師"
+          value={<AnimatedNumber value={stats.instructors} />}
           icon={Shield}
           color="purple"
         />
@@ -491,7 +491,7 @@ const UserManagement = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">
                       <div className="flex items-center space-x-3 text-xs">
-                        <span className="text-gray-600">投稿: <span className="font-semibold text-gray-900">{user.postsCount}</span></span>
+                        <span className="text-gray-600">コース: <span className="font-semibold text-gray-900">{user.coursesCount}</span></span>
                         <span className="text-gray-600">フォロワー: <span className="font-semibold text-gray-900">{user.followersCount}</span></span>
                       </div>
                     </div>
@@ -710,7 +710,7 @@ const UserManagement = () => {
 
                   <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
                     <p className="text-sm text-red-800">
-                      <strong>警告:</strong> このユーザーを削除すると、すべての投稿、コメント、フォロワー情報が完全に削除されます。この操作は取り消せません。
+                      <strong>警告:</strong> このユーザーを削除すると、すべてのコース、コメント、フォロワー情報が完全に削除されます。この操作は取り消せません。
                     </p>
                   </div>
                 </>

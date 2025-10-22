@@ -37,8 +37,8 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
     // Function to get genre count from Firestore
     const getGenreCount = async (genreName) => {
         try {
-            const postsRef = collection(db, 'posts');
-            const q = query(postsRef, where('genres', 'array-contains', genreName));
+            const coursesRef = collection(db, 'courses');
+            const q = query(coursesRef, where('genres', 'array-contains', genreName));
             const querySnapshot = await getDocs(q);
             return querySnapshot.size;
         } catch (error) {
@@ -83,78 +83,78 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
             title: 'ビジュアル',
             icon: User,
             subcategories: [
-                { name: 'ロリ顔', posts: `${(genreCounts['ロリ顔'] || 0).toLocaleString()} posts` },
-                { name: '地味顔', posts: `${(genreCounts['地味顔'] || 0).toLocaleString()} posts` },
-                { name: 'ギャル', posts: `${(genreCounts['ギャル'] || 0).toLocaleString()} posts` },
-                { name: 'お姉さん', posts: `${(genreCounts['お姉さん'] || 0).toLocaleString()} posts` },
-                { name: '熟女', posts: `${(genreCounts['熟女'] || 0).toLocaleString()} posts` },
-                { name: 'デカ尻', posts: `${(genreCounts['デカ尻'] || 0).toLocaleString()} posts` },
-                { name: '巨乳', posts: `${(genreCounts['巨乳'] || 0).toLocaleString()} posts` },
-                { name: '貧乳', posts: `${(genreCounts['貧乳'] || 0).toLocaleString()} posts` },
-                { name: '入れ墨', posts: `${(genreCounts['入れ墨'] || 0).toLocaleString()} posts` }
+                { name: 'ロリ顔', courses: `${(genreCounts['ロリ顔'] || 0).toLocaleString()} courses` },
+                { name: '地味顔', courses: `${(genreCounts['地味顔'] || 0).toLocaleString()} courses` },
+                { name: 'ギャル', courses: `${(genreCounts['ギャル'] || 0).toLocaleString()} courses` },
+                { name: 'お姉さん', courses: `${(genreCounts['お姉さん'] || 0).toLocaleString()} courses` },
+                { name: '熟女', courses: `${(genreCounts['熟女'] || 0).toLocaleString()} courses` },
+                { name: 'デカ尻', courses: `${(genreCounts['デカ尻'] || 0).toLocaleString()} courses` },
+                { name: '巨乳', courses: `${(genreCounts['巨乳'] || 0).toLocaleString()} courses` },
+                { name: '貧乳', courses: `${(genreCounts['貧乳'] || 0).toLocaleString()} courses` },
+                { name: '入れ墨', courses: `${(genreCounts['入れ墨'] || 0).toLocaleString()} courses` }
             ]
         },
         play: {
             title: 'プレイ',
             icon: Play,
             subcategories: [
-                { name: '正常位', posts: `${(genreCounts['正常位'] || 0).toLocaleString()} posts` },
-                { name: '騎乗位', posts: `${(genreCounts['騎乗位'] || 0).toLocaleString()} posts` },
-                { name: 'バック', posts: `${(genreCounts['バック'] || 0).toLocaleString()} posts` },
-                { name: '種付けプレス', posts: `${(genreCounts['種付けプレス'] || 0).toLocaleString()} posts` },
-                { name: 'フェラチオ', posts: `${(genreCounts['フェラチオ'] || 0).toLocaleString()} posts` },
-                { name: 'パイずり', posts: `${(genreCounts['パイずり'] || 0).toLocaleString()} posts` },
-                { name: '中だし', posts: `${(genreCounts['中だし'] || 0).toLocaleString()} posts` },
-                { name: '顔射', posts: `${(genreCounts['顔射'] || 0).toLocaleString()} posts` },
-                { name: '言葉責め', posts: `${(genreCounts['言葉責め'] || 0).toLocaleString()} posts` },
-                { name: 'クンニ', posts: `${(genreCounts['クンニ'] || 0).toLocaleString()} posts` },
-                { name: '玩具', posts: `${(genreCounts['玩具'] || 0).toLocaleString()} posts` },
-                { name: '潮吹き（女）', posts: `${(genreCounts['潮吹き（女）'] || 0).toLocaleString()} posts` },
-                { name: 'アナル', posts: `${(genreCounts['アナル'] || 0).toLocaleString()} posts` },
-                { name: '企画', posts: `${(genreCounts['企画'] || 0).toLocaleString()} posts` }
+                { name: '正常位', courses: `${(genreCounts['正常位'] || 0).toLocaleString()} courses` },
+                { name: '騎乗位', courses: `${(genreCounts['騎乗位'] || 0).toLocaleString()} courses` },
+                { name: 'バック', courses: `${(genreCounts['バック'] || 0).toLocaleString()} courses` },
+                { name: '種付けプレス', courses: `${(genreCounts['種付けプレス'] || 0).toLocaleString()} courses` },
+                { name: 'フェラチオ', courses: `${(genreCounts['フェラチオ'] || 0).toLocaleString()} courses` },
+                { name: 'パイずり', courses: `${(genreCounts['パイずり'] || 0).toLocaleString()} courses` },
+                { name: '中だし', courses: `${(genreCounts['中だし'] || 0).toLocaleString()} courses` },
+                { name: '顔射', courses: `${(genreCounts['顔射'] || 0).toLocaleString()} courses` },
+                { name: '言葉責め', courses: `${(genreCounts['言葉責め'] || 0).toLocaleString()} courses` },
+                { name: 'クンニ', courses: `${(genreCounts['クンニ'] || 0).toLocaleString()} courses` },
+                { name: '玩具', courses: `${(genreCounts['玩具'] || 0).toLocaleString()} courses` },
+                { name: '潮吹き（女）', courses: `${(genreCounts['潮吹き（女）'] || 0).toLocaleString()} courses` },
+                { name: 'アナル', courses: `${(genreCounts['アナル'] || 0).toLocaleString()} courses` },
+                { name: '企画', courses: `${(genreCounts['企画'] || 0).toLocaleString()} courses` }
             ]
         },
         situation: {
             title: 'シチュエーション',
             icon: MapPin,
             subcategories: [
-                { name: '複数プレイ', posts: `${(genreCounts['複数プレイ'] || 0).toLocaleString()} posts` },
-                { name: '女性優位', posts: `${(genreCounts['女性優位'] || 0).toLocaleString()} posts` },
-                { name: '寝取られ', posts: `${(genreCounts['寝取られ'] || 0).toLocaleString()} posts` },
-                { name: '野外・露出', posts: `${(genreCounts['野外・露出'] || 0).toLocaleString()} posts` },
-                { name: 'オナニー', posts: `${(genreCounts['オナニー'] || 0).toLocaleString()} posts` },
-                { name: 'ハメ撮り', posts: `${(genreCounts['ハメ撮り'] || 0).toLocaleString()} posts` },
-                { name: 'コスプレ', posts: `${(genreCounts['コスプレ'] || 0).toLocaleString()} posts` },
-                { name: '主観', posts: `${(genreCounts['主観'] || 0).toLocaleString()} posts` },
-                { name: '盗撮', posts: `${(genreCounts['盗撮'] || 0).toLocaleString()} posts` },
-                { name: 'レイプ', posts: `${(genreCounts['レイプ'] || 0).toLocaleString()} posts` },
-                { name: 'ＧＬ', posts: `${(genreCounts['ＧＬ'] || 0).toLocaleString()} posts` },
-                { name: 'ＢＬ', posts: `${(genreCounts['ＢＬ'] || 0).toLocaleString()} posts` }
+                { name: '複数プレイ', courses: `${(genreCounts['複数プレイ'] || 0).toLocaleString()} courses` },
+                { name: '女性優位', courses: `${(genreCounts['女性優位'] || 0).toLocaleString()} courses` },
+                { name: '寝取られ', courses: `${(genreCounts['寝取られ'] || 0).toLocaleString()} courses` },
+                { name: '野外・露出', courses: `${(genreCounts['野外・露出'] || 0).toLocaleString()} courses` },
+                { name: 'オナニー', courses: `${(genreCounts['オナニー'] || 0).toLocaleString()} courses` },
+                { name: 'ハメ撮り', courses: `${(genreCounts['ハメ撮り'] || 0).toLocaleString()} courses` },
+                { name: 'コスプレ', courses: `${(genreCounts['コスプレ'] || 0).toLocaleString()} courses` },
+                { name: '主観', courses: `${(genreCounts['主観'] || 0).toLocaleString()} courses` },
+                { name: '盗撮', courses: `${(genreCounts['盗撮'] || 0).toLocaleString()} courses` },
+                { name: 'レイプ', courses: `${(genreCounts['レイプ'] || 0).toLocaleString()} courses` },
+                { name: 'ＧＬ', courses: `${(genreCounts['ＧＬ'] || 0).toLocaleString()} courses` },
+                { name: 'ＢＬ', courses: `${(genreCounts['ＢＬ'] || 0).toLocaleString()} courses` }
             ]
         },
         abnormal: {
             title: 'アブノーマル',
             icon: Heart,
             subcategories: [
-                { name: '緊縛', posts: `${(genreCounts['緊縛'] || 0).toLocaleString()} posts` },
-                { name: '浣腸', posts: `${(genreCounts['浣腸'] || 0).toLocaleString()} posts` },
-                { name: '調教', posts: `${(genreCounts['調教'] || 0).toLocaleString()} posts` },
-                { name: '拡張', posts: `${(genreCounts['拡張'] || 0).toLocaleString()} posts` },
-                { name: '殴打', posts: `${(genreCounts['殴打'] || 0).toLocaleString()} posts` },
-                { name: '女装・男の娘', posts: `${(genreCounts['女装・男の娘'] || 0).toLocaleString()} posts` },
-                { name: '潮吹き（男）', posts: `${(genreCounts['潮吹き（男）'] || 0).toLocaleString()} posts` },
-                { name: '尿道', posts: `${(genreCounts['尿道'] || 0).toLocaleString()} posts` },
-                { name: 'その他フェチ', posts: `${(genreCounts['その他フェチ'] || 0).toLocaleString()} posts` }
+                { name: '緊縛', courses: `${(genreCounts['緊縛'] || 0).toLocaleString()} courses` },
+                { name: '浣腸', courses: `${(genreCounts['浣腸'] || 0).toLocaleString()} courses` },
+                { name: '調教', courses: `${(genreCounts['調教'] || 0).toLocaleString()} courses` },
+                { name: '拡張', courses: `${(genreCounts['拡張'] || 0).toLocaleString()} courses` },
+                { name: '殴打', courses: `${(genreCounts['殴打'] || 0).toLocaleString()} courses` },
+                { name: '女装・男の娘', courses: `${(genreCounts['女装・男の娘'] || 0).toLocaleString()} courses` },
+                { name: '潮吹き（男）', courses: `${(genreCounts['潮吹き（男）'] || 0).toLocaleString()} courses` },
+                { name: '尿道', courses: `${(genreCounts['尿道'] || 0).toLocaleString()} courses` },
+                { name: 'その他フェチ', courses: `${(genreCounts['その他フェチ'] || 0).toLocaleString()} courses` }
             ]
         },
         other: {
             title: 'その他',
             icon: Shirt,
             subcategories: [
-                { name: '会いに行ける', posts: `${(genreCounts['会いに行ける'] || 0).toLocaleString()} posts` },
-                { name: 'イベント', posts: `${(genreCounts['イベント'] || 0).toLocaleString()} posts` },
-                { name: 'HowTo', posts: `${(genreCounts['HowTo'] || 0).toLocaleString()} posts` },
-                { name: 'ASMR', posts: `${(genreCounts['ASMR'] || 0).toLocaleString()} posts` }
+                { name: '会いに行ける', courses: `${(genreCounts['会いに行ける'] || 0).toLocaleString()} courses` },
+                { name: 'イベント', courses: `${(genreCounts['イベント'] || 0).toLocaleString()} courses` },
+                { name: 'HowTo', courses: `${(genreCounts['HowTo'] || 0).toLocaleString()} courses` },
+                { name: 'ASMR', courses: `${(genreCounts['ASMR'] || 0).toLocaleString()} courses` }
             ]
         }
     };
@@ -191,7 +191,7 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
                     {subcategory.name}
                 </h3>
                 <p className="text-sm text-gray-600">
-                    {subcategory.posts}
+                    {subcategory.courses}
                 </p>
             </div>
             <ChevronRight className="w-5 h-5 text-gray-400 flex-shrink-0" />

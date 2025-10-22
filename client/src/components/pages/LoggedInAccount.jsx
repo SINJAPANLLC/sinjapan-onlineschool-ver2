@@ -164,14 +164,14 @@ const LoggedInAccountPage = () => {
                                             userData?.creatorStatus === 'rejected' ? 'text-red-600' :
                                             'bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent'
                                         }`}>
-                                            {userData?.creatorStatus === 'pending' ? 'クリエイター申請審査中' :
-                                             userData?.creatorStatus === 'rejected' ? 'クリエイター申請却下' :
-                                             'クリエイター登録'}
+                                            {userData?.creatorStatus === 'pending' ? '講師申請審査中' :
+                                             userData?.creatorStatus === 'rejected' ? '講師申請却下' :
+                                             '講師登録'}
                                         </h2>
                                         <p className="text-sm text-gray-500 mt-1">
                                             {userData?.creatorStatus === 'pending' ? '承認までお待ちください' :
                                              userData?.creatorStatus === 'rejected' ? 'サポートにお問い合わせください' :
-                                             'コンテンツを投稿するには登録が必要'}
+                                             'コンテンツをコースするには登録が必要'}
                                         </p>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@ const LoggedInAccountPage = () => {
                                 >
                                     <p className="text-sm text-yellow-800 flex items-center">
                                         <AlertTriangle className="w-4 h-4 mr-2" />
-                                        管理者が申請を確認しています。承認されるまでコンテンツの投稿はできません。
+                                        管理者が申請を確認しています。承認されるまでコンテンツのコースはできません。
                                     </p>
                                 </motion.div>
                             )}
@@ -211,9 +211,9 @@ const LoggedInAccountPage = () => {
                                 </motion.div>
                                 <div>
                                     <h2 className="text-xl font-bold text-green-600">
-                                        クリエイター承認済み
+                                        講師承認済み
                                     </h2>
-                                    <p className="text-sm text-gray-500 mt-1">コンテンツの投稿が可能です</p>
+                                    <p className="text-sm text-gray-500 mt-1">コンテンツのコースが可能です</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -381,7 +381,7 @@ const LoggedInAccountPage = () => {
                                     onClick={() => handleNavigation('/creator-ranking')}
                                     data-testid="button-creator-ranking"
                                 >
-                                    クリエイターランキング
+                                    講師ランキング
                                 </motion.button>
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
@@ -399,7 +399,7 @@ const LoggedInAccountPage = () => {
                                     onClick={() => handleNavigation('/my-posts')}
                                     data-testid="button-my-posts"
                                 >
-                                    あなたの投稿
+                                    あなたのコース
                                 </motion.button>
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
@@ -408,7 +408,7 @@ const LoggedInAccountPage = () => {
                                     onClick={() => handleNavigation('/post-comments')}
                                     data-testid="button-post-comments"
                                 >
-                                    投稿へのコメント
+                                    コースへのコメント
                                 </motion.button>
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
@@ -808,7 +808,7 @@ const LoggedInAccountPage = () => {
                                 <Crown className="w-8 h-8 text-white" />
                             </motion.div>
                             <p className="text-gray-800 font-bold mb-6 text-center text-lg">
-                                クリエイターとして投稿するには登録が必要です
+                                講師としてコースするには登録が必要です
                             </p>
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
@@ -817,7 +817,7 @@ const LoggedInAccountPage = () => {
                                 className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-full w-full font-bold shadow-xl mb-3"
                                 data-testid="button-register-creator-modal"
                             >
-                                クリエイター登録
+                                講師登録
                             </motion.button>
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
