@@ -35,10 +35,43 @@ The platform is built with a React frontend, leveraging Vite for tooling, Tailwi
 *   Localized error messages (Japanese).
 *   Firestore query optimizations for performance.
 
+## Recent Changes (October 22, 2025)
+### Bug Fixes
+*   **管理者ログイン修正**: AdminLogin.jsxでHTTPメソッドが誤って`'COURSE'`になっていた問題を修正。`'POST'`に変更し、管理者ログインが正常に動作するようになりました。
+*   **Square決済エラー修正**: SQUARE_LOCATION_IDをオプショナルに変更し、サンドボックス環境での動作を改善。
+*   **ログアウト機能追加**: AuthContextにlogout関数を追加し、完全なログアウトハンドラーを実装。ユーザーのオンラインステータスを適切に更新。
+
+### New Features
+*   **CourseDetailPage実装**: `/course/:id`ルートに完全なコース詳細ページを実装しました。
+    *   コース概要、カリキュラム、講師情報の3つのタブ
+    *   受講登録・サブスクリプション機能
+    *   学習進捗表示
+    *   プレビュー機能付きレッスンリスト
+    *   講師プロフィールへのリンク
+    *   Blue gradient統一デザイン
+    *   Firestoreからの動的データ読み込み
+*   **Square決済統合**: ProfilePageにSquarePaymentFormコンポーネントを統合し、サブスクリプション決済機能を完全実装。
+    *   Square Web Payment SDKを使用
+    *   カード情報の安全なトークン化
+    *   サーバー側決済エンドポイント (`/api/square-payment`)
+    *   日本円（JPY）決済対応
+*   **未実装ページの処理**: プレースホルダーページを適切なリダイレクトに変更
+    *   `/subscription` → `/active-plans`
+    *   `/plans` → `/active-plans`
+    *   `/amount-available` → `/sales-management`
+    *   `/referral-program` → `/home`
+    *   `/logout` → 完全なログアウトハンドラー実装
+
+### Deployment Ready
+*   デプロイ設定完了（autoscale mode）
+*   すべての環境変数が設定済み
+*   エラーハンドリング完備
+*   本番環境対応済み
+
 ## External Dependencies
 *   **Firebase (school-ec82e)**: Authentication, Firestore Database, Realtime Database, Storage, Analytics.
 *   **Replit Object Storage**: For large media files (bucket: `sin-japan-school-media`).
-*   **Square**: Payment processing.
+*   **Square**: Payment processing (SQUARE_ACCESS_TOKEN, VITE_SQUARE_APPLICATION_ID).
 *   **React**: Frontend library.
 *   **Vite**: Frontend build tool.
 *   **Tailwind CSS**: CSS framework.

@@ -40,7 +40,7 @@ const RankingPage = () => {
       students: 1250,
       rating: 4.8,
       category: 'プログラミング',
-      thumbnail: '/logo-school.jpg',
+      thumbnail: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&h=300&fit=crop',
       change: 'up'
     },
     {
@@ -51,7 +51,7 @@ const RankingPage = () => {
       students: 980,
       rating: 4.9,
       category: 'プログラミング',
-      thumbnail: '/logo-school.jpg',
+      thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop',
       change: 'same'
     },
     {
@@ -62,7 +62,7 @@ const RankingPage = () => {
       students: 850,
       rating: 4.7,
       category: '語学',
-      thumbnail: '/logo-school.jpg',
+      thumbnail: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=300&fit=crop',
       change: 'down'
     },
     {
@@ -73,7 +73,7 @@ const RankingPage = () => {
       students: 720,
       rating: 4.9,
       category: 'AI/機械学習',
-      thumbnail: '/logo-school.jpg',
+      thumbnail: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=300&fit=crop',
       change: 'up'
     },
     {
@@ -84,7 +84,7 @@ const RankingPage = () => {
       students: 680,
       rating: 4.8,
       category: 'デザイン',
-      thumbnail: '/logo-school.jpg',
+      thumbnail: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
       change: 'up'
     }
   ];
@@ -94,7 +94,7 @@ const RankingPage = () => {
       id: 1,
       rank: 1,
       name: '鈴木一郎',
-      avatar: '/logo-school.jpg',
+      avatar: 'https://i.pravatar.cc/150?img=12',
       points: 15420,
       coursesCompleted: 24,
       badges: 18,
@@ -104,7 +104,7 @@ const RankingPage = () => {
       id: 2,
       rank: 2,
       name: '佐藤花子',
-      avatar: '/logo-school.jpg',
+      avatar: 'https://i.pravatar.cc/150?img=5',
       points: 14890,
       coursesCompleted: 22,
       badges: 16,
@@ -114,7 +114,7 @@ const RankingPage = () => {
       id: 3,
       rank: 3,
       name: '田中健太',
-      avatar: '/logo-school.jpg',
+      avatar: 'https://i.pravatar.cc/150?img=33',
       points: 13560,
       coursesCompleted: 20,
       badges: 15,
@@ -124,7 +124,7 @@ const RankingPage = () => {
       id: 4,
       rank: 4,
       name: '山本美咲',
-      avatar: '/logo-school.jpg',
+      avatar: 'https://i.pravatar.cc/150?img=9',
       points: 12340,
       coursesCompleted: 18,
       badges: 14,
@@ -134,7 +134,7 @@ const RankingPage = () => {
       id: 5,
       rank: 5,
       name: '中村太郎',
-      avatar: '/logo-school.jpg',
+      avatar: 'https://i.pravatar.cc/150?img=15',
       points: 11890,
       coursesCompleted: 17,
       badges: 13,

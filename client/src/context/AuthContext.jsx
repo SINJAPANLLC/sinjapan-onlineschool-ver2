@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth, db } from '../firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
@@ -77,10 +77,30 @@ export const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
+  const logout = async () => {
+    try {
+      // Update user status to offline before logout
+      if (currentUser) {
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        await setDoc(userDocRef, {
+          isOnline: false,
+          lastSeen: new Date().toISOString()
+        }, { merge: true });
+      }
+      
+      await signOut(auth);
+      console.log('User logged out successfully');
+    } catch (error) {
+      console.error('Error logging out:', error);
+      throw error;
+    }
+  };
+
   const value = {
     currentUser,
     isAuthenticated,
-    loading
+    loading,
+    logout
   };
 
   return (

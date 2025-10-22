@@ -31,7 +31,9 @@ const SquarePaymentForm = ({ amount, planData, onSuccess, onCancel }) => {
           return;
         }
 
-        const payments = window.Square.payments(applicationId, import.meta.env.VITE_SQUARE_LOCATION_ID);
+        // SQUARE_LOCATION_ID is optional for sandbox environment
+        const locationId = import.meta.env.VITE_SQUARE_LOCATION_ID || undefined;
+        const payments = window.Square.payments(applicationId, locationId);
         const cardInstance = await payments.card();
         await cardInstance.attach('#card-container');
         
@@ -39,7 +41,7 @@ const SquarePaymentForm = ({ amount, planData, onSuccess, onCancel }) => {
         setSquareReady(true);
       } catch (error) {
         console.error('Square initialization error:', error);
-        setErrorMessage('決済システムの初期化に失敗しました');
+        setErrorMessage('決済システムの初期化に失敗しました: ' + (error.message || ''));
       }
     };
 

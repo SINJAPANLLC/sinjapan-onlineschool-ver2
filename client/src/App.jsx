@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import './App.css';
 import SocialFeedScreen from './components/pages/feed';
 import MessagesUI from './components/pages/msg';
@@ -62,6 +62,7 @@ import EditProfilePage from './components/pages/EditProfilePage';
 import ImagePage from './components/pages/ImagePage';
 import LandingPage from './components/pages/LandingPage';
 import AdminLoginPage from './components/pages/AdminLoginPage';
+import CourseDetailPage from './components/pages/CourseDetailPage';
 
 // import AdminLayout from "./components/admin/AdminLayout";
 import AdminLayout from './components/pages/admin/AdminLayout';
@@ -94,6 +95,36 @@ const AccountWrapper = () => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? <LoggedInAccountPage /> : <AccountPage />;
 };
+
+// Logout Handler Component
+const LogoutHandler = () => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const performLogout = async () => {
+      try {
+        await logout();
+        navigate('/login', { replace: true });
+      } catch (error) {
+        console.error('Logout error:', error);
+        navigate('/login', { replace: true });
+      }
+    };
+    
+    performLogout();
+  }, [logout, navigate]);
+  
+  return (
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto mb-4"></div>
+        <p className="text-gray-600">ログアウト中...</p>
+      </div>
+    </div>
+  );
+};
+
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -140,6 +171,7 @@ const AppRoutes = () => {
       <Route path="/search" element={<SearchPage />} />
 
       <Route path="/genre/:genreName" element={<ProtectedRoute><GenreDataPage /></ProtectedRoute>} />
+      <Route path="/course/:id" element={<ProtectedRoute><CourseDetailPage /></ProtectedRoute>} />
       <Route path="/video/:id" element={<ProtectedRoute><VideoPage /></ProtectedRoute>} />
       <Route path="/profile/:id" element={<ProtectedRoute><ProfilePageNew /></ProtectedRoute>} />
 
@@ -159,8 +191,8 @@ const AppRoutes = () => {
       {/* <Route path="/help" element={<HelpPage />} /> */}
       <Route path="/settings/languages" element={<LanguageSettings />} />
       {/* Default route */}
-      <Route path="/subscription" element={<ProtectedRoute><div>Subscription Page</div></ProtectedRoute>} />
-      <Route path="/plans" element={<ProtectedRoute><div>Plans Page</div></ProtectedRoute>} />
+      <Route path="/subscription" element={<Navigate to="/active-plans" replace />} />
+      <Route path="/plans" element={<Navigate to="/active-plans" replace />} />
       <Route path="/high-quality-plan" element={<ProtectedRoute><HighQualityPlanPage /></ProtectedRoute>} />
       <Route path="/current-plan" element={<ProtectedRoute><CurrentPlanPage /></ProtectedRoute>} />
       <Route path="/payment-methods" element={<ProtectedRoute><PaymentMethodsPage /></ProtectedRoute>} />
@@ -185,10 +217,10 @@ const AppRoutes = () => {
       <Route path="/settings/notifications" element={<ProtectedRoute><NotificationPage /></ProtectedRoute>} />
       <Route path="/settings/language" element={<ProtectedRoute><LanguageSettings /></ProtectedRoute>} />
       <Route path="/settings/help" element={<ProtectedRoute><HelpPage /></ProtectedRoute>} />
-      <Route path="/amount-available" element={<ProtectedRoute><div>Amount Available Page</div></ProtectedRoute>} />
+      <Route path="/amount-available" element={<Navigate to="/sales-management" replace />} />
       {/* <Route path="/register-creator" element={<ProtectedRoute><RegisterCreatorPage /></ProtectedRoute>} /> */}
       <Route path="/register-creator" element={<ProtectedRoute><RegisterCreatorPage /></ProtectedRoute>} />
-      <Route path="/referral-program" element={<ProtectedRoute><div>Referral Program Page</div></ProtectedRoute>} />
+      <Route path="/referral-program" element={<Navigate to="/home" replace />} />
       <Route path="/switch-account" element={<ProtectedRoute><SwitchAccountPage /></ProtectedRoute>} />
       <Route path="/creator-phone-verification" element={<ProtectedRoute><CreatorPhoneVerificationPage /></ProtectedRoute>} />
       <Route path="/document-submission" element={<ProtectedRoute><DocumentSubmissionPage /></ProtectedRoute>} />
@@ -196,7 +228,7 @@ const AppRoutes = () => {
       <Route path="/edit-profile" element={<ProtectedRoute><EditProfilePage /></ProtectedRoute>} />
       <Route path="/image/:id" element={<ProtectedRoute><ImagePage /></ProtectedRoute>} />
       <Route path="/lp" element={<LandingPage />} />
-      <Route path="/logout" element={<ProtectedRoute><div>Logout Handler</div></ProtectedRoute>} />
+      <Route path="/logout" element={<LogoutHandler />} />
 
       {/* Admin login route */}
       <Route path="/admin/login" element={<AdminLogin />} />

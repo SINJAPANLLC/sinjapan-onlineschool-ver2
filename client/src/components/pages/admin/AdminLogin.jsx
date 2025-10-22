@@ -18,7 +18,7 @@ const AdminLogin = () => {
 
     try {
       const response = await fetch('/api/admin/login', {
-        method: 'COURSE',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
