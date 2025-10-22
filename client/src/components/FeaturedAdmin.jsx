@@ -345,7 +345,7 @@ const FeaturedAdminPage = () => {
                                     <motion.div 
                                         whileHover={{ scale: 1.1, rotate: 5 }}
                                         className="absolute top-2 left-2 w-9 h-9 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 rounded-full flex items-center justify-center"
-                                        style={{ boxShadow: '0 4px 12px rgba(236, 72, 153, 0.4)' }}
+                                        style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)' }}
                                         data-testid={`rank-badge-featured-${index + 1}`}
                                     >
                                         <span className="text-white font-black text-sm drop-shadow-md">{index + 1}</span>
@@ -471,7 +471,7 @@ const FeaturedAdminPage = () => {
                                     <motion.div 
                                         whileHover={{ scale: 1.15, rotate: 5 }}
                                         className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 text-white flex items-center justify-center flex-shrink-0"
-                                        style={{ boxShadow: '0 4px 12px rgba(236, 72, 153, 0.4)' }}
+                                        style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)' }}
                                         data-testid={`rank-badge-user-${index + 1}`}
                                     >
                                         <span className="text-sm font-black drop-shadow-md">{index + 1}</span>

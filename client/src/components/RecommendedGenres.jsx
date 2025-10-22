@@ -141,7 +141,7 @@ const RecommendedGenres = ({ likedItems, toggleLike }) => {
                 data-testid="button-see-more-genres"
                 style={{
                     background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
-                    boxShadow: '0 4px 15px rgba(236, 72, 153, 0.3)'
+                    boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)'
                 }}
             >
                 <span className="relative z-10 text-white font-semibold flex items-center gap-2">

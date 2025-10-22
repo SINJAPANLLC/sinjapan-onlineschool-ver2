@@ -117,7 +117,7 @@ const AdminLogin = () => {
             transition={{ delay: 0.3, duration: 0.6 }}
             className="text-center text-sm text-gray-600 font-medium"
           >
-            OnlyU管理システムにアクセス
+            SIN JAPAN SCHOOL管理システムにアクセス
           </motion.p>
         </motion.div>
 

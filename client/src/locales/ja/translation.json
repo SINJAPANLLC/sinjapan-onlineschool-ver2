@@ -61,7 +61,7 @@
             "notices": "お知らせ"
         },
         "about": {
-            "title": "Only-Uについて",
+            "title": "SIN JAPAN SCHOOLについて",
             "terms": "利用規約",
             "privacy": "プライバシーポリシー",
             "legal": "特定商取引法に基づく表記",
@@ -483,11 +483,11 @@
         "sentInfo": "確認リンクを含むメールを入力されたメールアドレスに送信しました。メールをご確認ください。",
         "cooperation": "不正・悪意のあるアカウント防止へのご協力に感謝します。",
         "notReceived": "確認メールが届かない場合は、入力したメールアドレスを再度ご確認のうえ（{link}）、確認メールを再送してください。",
-        "spamSettings": "メールソフトやプロバイダの迷惑メール設定が only-u ドメインからの受信を許可していることを確認してください。",
-        "fromAddress": "確認メールは <strong>noreply@only-u.jp</strong> から送信されます。",
+        "spamSettings": "メールソフトやプロバイダの迷惑メール設定が sin-japan-school ドメインからの受信を許可していることを確認してください。",
+        "fromAddress": "確認メールは <strong>noreply@sin-japan-school.jp</strong> から送信されます。",
         "moreInfo": "その他の問題についての情報は {link} をご確認ください。",
         "backToCreation": "アカウント作成に戻る",
-        "brand": "only-u"
+        "brand": "sin-japan-school"
     },
     "navigation": {
         "home": "ホーム",
@@ -641,7 +641,7 @@
     },
     "homePage": {
         "gender": "性別",
-        "welcomeMessage": "Only-Uへようこそ",
+        "welcomeMessage": "SIN JAPAN SCHOOLへようこそ",
         "introText": "お気に入りのクリエイターによる限定コンテンツをご覧ください。登録してフォローし、パーソナライズされた体験をお楽しみください。",
         "getStarted": "始める",
         "learnMore": "詳細はこちら"
@@ -698,7 +698,7 @@
         "sentInfo": "ご入力いただいたメールアドレスに確認リンクを記載したメールを送信しました。ご確認ください。",
         "cooperation": "不正なアカウントや悪質なアカウントの防止にご協力いただきありがとうございます。",
         "notReceived": "確認メールが届かない場合は、ご入力いただいたメールアドレス（{link}を参照）をご確認の上、確認メールを再送信してください。",
-        "spamSettings": "お使いのメールソフトまたはメールプロバイダーのスパム設定で、Only-Uドメインからの受信が許可されていることをご確認ください。"
+        "spamSettings": "お使いのメールソフトまたはメールプロバイダーのスパム設定で、SIN JAPAN SCHOOLドメインからの受信が許可されていることをご確認ください。"
     },
     "notificationPage": {
         "title": "通知",

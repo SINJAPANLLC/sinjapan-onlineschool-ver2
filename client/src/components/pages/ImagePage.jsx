@@ -43,7 +43,7 @@ const ImagePage = () => {
     const imageData = {
         id: id,
         title: '特別な写真 - ミルク',
-        description: '学生の皆様への特別な写真です。\n\n#OnlyU #ミルク #特別写真',
+        description: '学生の皆様への特別な写真です。\n\n#SIN JAPAN SCHOOL #ミルク #特別写真',
         creator: {
             name: 'ミルク',
             username: '@milk_av',

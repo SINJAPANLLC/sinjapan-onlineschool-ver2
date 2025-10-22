@@ -130,7 +130,7 @@ const CreatorPage = () => {
                                     <motion.div 
                                         whileHover={{ scale: 1.15, rotate: 5 }}
                                         className={`w-11 h-11 rounded-full ${getRankBadgeColor(index + 1)} flex items-center justify-center flex-shrink-0`}
-                                        style={{ boxShadow: '0 4px 12px rgba(236, 72, 153, 0.4)' }}
+                                        style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)' }}
                                     >
                                         <span className="text-sm font-black drop-shadow-md">{index + 1}</span>
                                     </motion.div>
@@ -200,7 +200,7 @@ const CreatorPage = () => {
                         className="relative w-full overflow-hidden rounded-full py-4 font-semibold transition-all group"
                         style={{
                             background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
-                            boxShadow: '0 4px 15px rgba(236, 72, 153, 0.3)'
+                            boxShadow: '0 4px 15px rgba(59, 130, 246, 0.3)'
                         }}
                         data-testid="button-see-more-creators"
                     >

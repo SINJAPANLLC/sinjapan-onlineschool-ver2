@@ -245,7 +245,7 @@ const Ranking = () => {
                                 <motion.div 
                                     whileHover={{ scale: 1.1, rotate: 5 }}
                                     className="absolute top-2 left-2 w-9 h-9 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg"
-                                    style={{ boxShadow: '0 4px 12px rgba(236, 72, 153, 0.4)' }}
+                                    style={{ boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)' }}
                                 >
                                     <span className="text-white font-black text-sm drop-shadow-md">{index + 1}</span>
                                 </motion.div>

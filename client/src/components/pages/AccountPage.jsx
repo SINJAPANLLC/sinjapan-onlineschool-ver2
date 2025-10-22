@@ -115,11 +115,13 @@ const AccountPage = () => {
       ]
     },
     {
-      title: 'サポート・法的情報',
+      title: 'SIN JAPAN SCHOOLについて',
       items: [
-        { label: 'ヘルプセンター', path: '/help', icon: HelpCircle },
         { label: '利用規約', path: '/terms', icon: FileText },
-        { label: 'プライバシーポリシー', path: '/privacy', icon: Shield }
+        { label: 'プライバシーポリシー', path: '/privacy', icon: Shield },
+        { label: '特定商取引法に基づく表記', path: '/commercial', icon: FileText },
+        { label: '掲載ガイドライン', path: '/guidelines', icon: FileText },
+        { label: 'ヘルプ', path: '/settings/help', icon: HelpCircle }
       ]
     }
   ];

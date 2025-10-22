@@ -160,7 +160,7 @@ const AdminLoginPage = () => {
                         transition={{ delay: 0.3 }}
                         className="text-gray-600"
                     >
-                        Only-U 管理パネル
+                        SIN JAPAN SCHOOL 管理パネル
                     </motion.p>
                 </div>
 

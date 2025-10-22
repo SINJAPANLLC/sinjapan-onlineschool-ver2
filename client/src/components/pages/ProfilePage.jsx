@@ -348,7 +348,7 @@ const ProfilePage = () => {
 
         const shareData = {
             title: `${profileData.name}のプロフィール`,
-            text: `${profileData.name}のOnlyUプロフィールをチェック！`,
+            text: `${profileData.name}のSIN JAPAN SCHOOLプロフィールをチェック！`,
             url: window.location.href
         };
 
@@ -618,7 +618,7 @@ const ProfilePage = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    className="absolute inset-0 bg-gradient-to-b from-blue-400/60 via-blue-500/70 to-blue-600/80" 
+                    className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/10 to-blue-600/30" 
                 />
                 {/* Floating particles effect */}
                 <motion.div
@@ -679,9 +679,9 @@ const ProfilePage = () => {
                             <motion.div
                                 animate={{ 
                                     boxShadow: [
-                                        "0 0 20px rgba(236, 72, 153, 0.3)",
-                                        "0 0 40px rgba(236, 72, 153, 0.5)",
-                                        "0 0 20px rgba(236, 72, 153, 0.3)"
+                                        "0 0 20px rgba(59, 130, 246, 0.3)",
+                                        "0 0 40px rgba(59, 130, 246, 0.5)",
+                                        "0 0 20px rgba(59, 130, 246, 0.3)"
                                     ]
                                 }}
                                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -728,7 +728,7 @@ const ProfilePage = () => {
                             transition={{ delay: 0.2, type: "spring" }}
                             whileHover={{ 
                                 scale: 1.08,
-                                boxShadow: "0 10px 30px rgba(236, 72, 153, 0.4)"
+                                boxShadow: "0 10px 30px rgba(59, 130, 246, 0.4)"
                             }} 
                             whileTap={{ scale: 0.95 }}
                             onClick={handleEditProfile}

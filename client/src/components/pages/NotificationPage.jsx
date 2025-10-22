@@ -52,7 +52,7 @@ const NotificationPage = () => {
                     "ご不明な点がございましたら、サポートまでお問い合わせください。",
                     "今後ともサービスをよろしくお願いいたします。"
                 ],
-                footer: "OnlyU運営チーム"
+                footer: "SIN JAPAN SCHOOL運営チーム"
             }
         },
         {
@@ -90,7 +90,7 @@ const NotificationPage = () => {
                     "これらの機能により、より快適にサービスをご利用いただけます。",
                     "アプリストアから最新版へのアップデートをお願いいたします。"
                 ],
-                footer: "OnlyU開発チーム"
+                footer: "SIN JAPAN SCHOOL開発チーム"
             }
         },
         {
@@ -129,7 +129,7 @@ const NotificationPage = () => {
                     "",
                     "ご不便をおかけいたしますが、ご理解のほどよろしくお願いいたします。"
                 ],
-                footer: "OnlyUシステム管理チーム"
+                footer: "SIN JAPAN SCHOOLシステム管理チーム"
             }
         }
     ];

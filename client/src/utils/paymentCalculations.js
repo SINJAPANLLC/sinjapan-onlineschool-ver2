@@ -1,6 +1,6 @@
 /**
  * 決済計算ユーティリティ
- * 合同会社SIN JAPAN KANAGAWA - Only-U Fans Platform
+ * 合同会社SIN JAPAN KANAGAWA - SIN JAPAN SCHOOL Fans Platform
  */
 
 // 定数
