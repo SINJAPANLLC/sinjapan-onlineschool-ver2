@@ -13,9 +13,13 @@ const SquarePaymentForm = ({ amount, planData, onSuccess, onCancel }) => {
       // Load Square Web Payment SDK
       if (!window.Square) {
         const script = document.createElement('script');
-        script.src = 'https://sandbox.web.squarecdn.com/v1/square.js';
+        // 本番環境用のSquare SDKを使用
+        script.src = 'https://web.squarecdn.com/v1/square.js';
         script.async = true;
         script.onload = initializeSquare;
+        script.onerror = () => {
+          setErrorMessage('Square SDKの読み込みに失敗しました');
+        };
         document.body.appendChild(script);
       } else {
         initializeSquare();
@@ -31,8 +35,12 @@ const SquarePaymentForm = ({ amount, planData, onSuccess, onCancel }) => {
           return;
         }
 
-        // SQUARE_LOCATION_ID is optional for sandbox environment
-        const locationId = import.meta.env.VITE_SQUARE_LOCATION_ID || undefined;
+        const locationId = import.meta.env.VITE_SQUARE_LOCATION_ID;
+        
+        if (!locationId) {
+          console.warn('VITE_SQUARE_LOCATION_IDが設定されていません');
+        }
+
         const payments = window.Square.payments(applicationId, locationId);
         const cardInstance = await payments.card();
         await cardInstance.attach('#card-container');
