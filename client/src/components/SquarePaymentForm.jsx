@@ -13,8 +13,8 @@ const SquarePaymentForm = ({ amount, planData, onSuccess, onCancel }) => {
       // Load Square Web Payment SDK
       if (!window.Square) {
         const script = document.createElement('script');
-        // 本番環境用のSquare SDKを使用
-        script.src = 'https://web.squarecdn.com/v1/square.js';
+        // サンドボックス環境用のSquare SDKを使用
+        script.src = 'https://sandbox.web.squarecdn.com/v1/square.js';
         script.async = true;
         script.onload = initializeSquare;
         script.onerror = () => {
@@ -35,11 +35,8 @@ const SquarePaymentForm = ({ amount, planData, onSuccess, onCancel }) => {
           return;
         }
 
-        const locationId = import.meta.env.VITE_SQUARE_LOCATION_ID;
-        
-        if (!locationId) {
-          console.warn('VITE_SQUARE_LOCATION_IDが設定されていません');
-        }
+        // サンドボックス環境ではlocationIdはオプショナル
+        const locationId = import.meta.env.VITE_SQUARE_LOCATION_ID || undefined;
 
         const payments = window.Square.payments(applicationId, locationId);
         const cardInstance = await payments.card();
