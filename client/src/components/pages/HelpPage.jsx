@@ -41,7 +41,7 @@ const HelpPage = () => {
     { id: 'instructor', name: '講師', icon: User, color: 'from-orange-500 to-orange-600' },
     { id: 'account', name: 'アカウント', icon: User, color: 'from-indigo-500 to-indigo-600' },
     { id: 'billing', name: '料金・支払い', icon: CreditCard, color: 'from-red-500 to-red-600' },
-    { id: 'troubleshooting', name: 'トラブル', icon: AlertTriangle, color: 'from-pink-500 to-pink-600' }
+    { id: 'troubleshooting', name: 'トラブル', icon: AlertTriangle, color: 'from-blue-500 to-blue-600' }
   ];
 
   const helpArticles = [

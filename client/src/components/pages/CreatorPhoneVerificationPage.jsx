@@ -259,7 +259,7 @@ const CreatorPhoneVerificationPage = () => {
                                 placeholder="電話番号 (例: 090-1234-5678)"
                                 value={phoneNumber}
                                 onChange={handlePhoneNumberChange}
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent text-lg"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
                                 disabled={isLoading}
                             />
                         </div>
@@ -269,7 +269,7 @@ const CreatorPhoneVerificationPage = () => {
                         <button
                             onClick={handleSendCode}
                             disabled={isLoading || phoneNumber.replace(/\D/g, '').length < 10}
-                            className="w-full bg-pink-500 text-white py-3 rounded-xl font-semibold text-lg hover:bg-pink-600 disabled:bg-gray-300 transition-colors flex items-center justify-center space-x-2"
+                            className="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold text-lg hover:bg-blue-600 disabled:bg-gray-300 transition-colors flex items-center justify-center space-x-2"
                         >
                             {isLoading ? (
                                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -297,7 +297,7 @@ const CreatorPhoneVerificationPage = () => {
                                 value={verificationCode}
                                 onChange={(e) => { setVerificationCode(e.target.value); setError(''); }}
                                 maxLength={6}
-                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent text-lg tracking-widest"
+                                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg tracking-widest"
                                 disabled={isLoading}
                             />
                         </div>
@@ -308,7 +308,7 @@ const CreatorPhoneVerificationPage = () => {
                             <button
                                 onClick={handleResendCode}
                                 disabled={isLoading || countdown > 0}
-                                className={`text-sm font-medium ${countdown > 0 ? 'text-gray-400' : 'text-pink-600 hover:underline'} flex items-center space-x-1`}
+                                className={`text-sm font-medium ${countdown > 0 ? 'text-gray-400' : 'text-blue-600 hover:underline'} flex items-center space-x-1`}
                             >
                                 <RotateCcw size={16} />
                                 <span>{countdown > 0 ? `再送信 (${Math.floor(countdown / 60)}:${('0' + (countdown % 60)).slice(-2)})` : 'コードを再送信'}</span>
@@ -322,7 +322,7 @@ const CreatorPhoneVerificationPage = () => {
                         <button
                             onClick={handleVerifyCode}
                             disabled={isLoading || verificationCode.length !== 6}
-                            className="w-full bg-pink-500 text-white py-3 rounded-xl font-semibold text-lg hover:bg-pink-600 disabled:bg-gray-300 transition-colors flex items-center justify-center space-x-2"
+                            className="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold text-lg hover:bg-blue-600 disabled:bg-gray-300 transition-colors flex items-center justify-center space-x-2"
                         >
                             {isLoading ? (
                                 <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -346,7 +346,7 @@ const CreatorPhoneVerificationPage = () => {
                         <button
                             onClick={handleComplete}
                             disabled={isLoading}
-                            className="w-full bg-pink-500 text-white py-3 rounded-xl font-semibold text-lg hover:bg-pink-600 disabled:bg-gray-300 transition-colors"
+                            className="w-full bg-blue-500 text-white py-3 rounded-xl font-semibold text-lg hover:bg-blue-600 disabled:bg-gray-300 transition-colors"
                         >
                             {isLoading ? '処理中...' : '書類提出へ進む'}
                         </button>
@@ -379,7 +379,7 @@ const CreatorPhoneVerificationPage = () => {
 
                 <div className="flex-1 flex items-center">
                     <div className={`flex items-center justify-center w-8 h-8 rounded-full text-white font-bold ${
-                        step >= 2 ? 'bg-pink-500' : 'bg-gray-400'
+                        step >= 2 ? 'bg-blue-500' : 'bg-gray-400'
                     }`}>
                         {step > 2 ? <CheckCircle size={16} /> : '2'}
                     </div>

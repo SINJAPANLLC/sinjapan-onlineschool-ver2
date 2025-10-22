@@ -446,7 +446,7 @@ const VideoPage = () => {
                 <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    className="w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full"
+                    className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"
                 />
             </div>
         );
@@ -598,7 +598,7 @@ const VideoPage = () => {
                                 transition={{ duration: 2, repeat: Infinity }}
                             />
                             <motion.div 
-                                className="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center shadow-lg"
+                                className="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg"
                                 animate={{ scale: [1, 1.2, 1] }}
                                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                             >
@@ -630,7 +630,7 @@ const VideoPage = () => {
                             >
                                 <Heart
                                     size={32}
-                                    className={`${localLikedPosts.has(videoData.id) ? 'text-pink-500 fill-pink-500' : 'text-white'}`}
+                                    className={`${localLikedPosts.has(videoData.id) ? 'text-blue-500 fill-blue-500' : 'text-white'}`}
                                     strokeWidth={1.5}
                                 />
                             </motion.div>
@@ -669,7 +669,7 @@ const VideoPage = () => {
                             >
                                 <Bookmark
                                     size={32}
-                                    className={`${localSavedPosts.has(videoData.id) ? 'text-pink-500 fill-pink-500' : 'text-white'}`}
+                                    className={`${localSavedPosts.has(videoData.id) ? 'text-blue-500 fill-blue-500' : 'text-white'}`}
                                     strokeWidth={1.5}
                                 />
                             </motion.div>
@@ -779,7 +779,7 @@ const VideoPage = () => {
                                         navigate(`/profile/${videoData.userId}`);
                                     }
                                 }}
-                                className="bg-gradient-to-r from-pink-500 to-pink-600 text-white py-2.5 px-4 rounded-lg flex items-center shadow-lg"
+                                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-2.5 px-4 rounded-lg flex items-center shadow-lg"
                                 data-testid="button-watch-main-video"
                             >
                                 <Film size={16} className="mr-1.5" strokeWidth={2.5} />
@@ -925,13 +925,13 @@ const VideoPage = () => {
                                                     }
                                                 }}
                                                 placeholder="コメントを入力..."
-                                                className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-pink-500"
+                                                className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
                                                 data-testid="input-comment"
                                             />
                                             <button
                                                 onClick={handleSendComment}
                                                 disabled={!newComment.trim()}
-                                                className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-2 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                                                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                                                 data-testid="button-send-comment"
                                             >
                                                 送信

@@ -79,7 +79,7 @@ const PaymentForm = ({ amount, planId, planName, onSuccess, onCancel }) => {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-pink-50 border border-pink-200 text-pink-800 px-4 py-3 rounded-lg flex items-start space-x-2"
+          className="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded-lg flex items-start space-x-2"
           data-testid="text-error"
         >
           <XCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -104,7 +104,7 @@ const PaymentForm = ({ amount, planId, planName, onSuccess, onCancel }) => {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           disabled={!stripe || isProcessing}
-          className="flex-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white py-4 rounded-xl font-bold hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-xl font-bold hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           data-testid="button-confirm-payment"
         >
           {isProcessing ? '処理中...' : `¥${amount.toLocaleString()}を支払う`}
@@ -258,8 +258,8 @@ const HighQualityPlanPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
         </motion.button>
@@ -273,18 +273,18 @@ const HighQualityPlanPage = () => {
 
       <div className="p-6 space-y-6">
         <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center">
-          <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-20 h-20 bg-gradient-to-br from-pink-100 to-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-pink-200 shadow-xl">
-            <Crown className="w-10 h-10 text-pink-600" />
+          <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-blue-200 shadow-xl">
+            <Crown className="w-10 h-10 text-blue-600" />
           </motion.div>
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-2">高画質プラン</h2>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent mb-2">高画質プラン</h2>
           <p className="text-gray-600 font-medium">最高品質の動画を広告なしでお楽しみください</p>
         </motion.div>
 
         {plans.map((plan, index) => (
-          <motion.div key={plan.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + index * 0.1 }} className="bg-white border-2 border-pink-100 rounded-2xl p-6 shadow-xl">
+          <motion.div key={plan.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + index * 0.1 }} className="bg-white border-2 border-blue-100 rounded-2xl p-6 shadow-xl">
             {plan.popular && (
               <div className="mb-4">
-                <span className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-4 py-2 rounded-full text-sm font-bold inline-flex items-center space-x-2">
+                <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-bold inline-flex items-center space-x-2">
                   <Star className="w-4 h-4" />
                   <span>人気プラン</span>
                 </span>
@@ -292,20 +292,20 @@ const HighQualityPlanPage = () => {
             )}
             <h3 className="text-2xl font-bold text-gray-900 mb-2" data-testid="text-plan-name">{plan.name}</h3>
             <div className="flex items-baseline space-x-2 mb-6">
-              <span className="text-4xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent" data-testid="text-plan-price">{formatCurrency(plan.price)}</span>
+              <span className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid="text-plan-price">{formatCurrency(plan.price)}</span>
               <span className="text-gray-600 font-medium">/月</span>
             </div>
             <div className="space-y-3 mb-6">
               {plan.features.map((feature, idx) => (
                 <motion.div key={idx} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + idx * 0.05 }} className="flex items-center space-x-3">
-                  <div className="w-6 h-6 bg-gradient-to-br from-pink-100 to-pink-100 rounded-full flex items-center justify-center border border-pink-200">
-                    <Check className="w-4 h-4 text-pink-600" />
+                  <div className="w-6 h-6 bg-gradient-to-br from-blue-100 to-blue-100 rounded-full flex items-center justify-center border border-blue-200">
+                    <Check className="w-4 h-4 text-blue-600" />
                   </div>
                   <span className="text-gray-700 font-medium" data-testid={`text-feature-${idx}`}>{feature}</span>
                 </motion.div>
               ))}
             </div>
-            <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => setShowPaymentDetails(true)} className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg flex items-center justify-center space-x-3" data-testid="button-subscribe">
+            <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => setShowPaymentDetails(true)} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg flex items-center justify-center space-x-3" data-testid="button-subscribe">
               <CreditCard className="w-6 h-6" />
               <span>今すぐ登録する</span>
             </motion.button>
@@ -323,14 +323,14 @@ const HighQualityPlanPage = () => {
                 <div className="flex justify-between"><span className="text-gray-600">プラン料金</span><span className="font-bold">{formatCurrency(creatorPrice)}</span></div>
                 <div className="flex justify-between"><span className="text-gray-600">消費税（10%）</span><span className="font-bold">{formatCurrency(consumptionTax)}</span></div>
                 <div className="flex justify-between"><span className="text-gray-600">購入手数料（10%）</span><span className="font-bold">{formatCurrency(purchaseFee)}</span></div>
-                <div className="border-t-2 border-pink-100 pt-3 flex justify-between"><span className="text-lg font-bold">お支払い合計</span><span className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent" data-testid="text-total-amount">{formatCurrency(totalAmount)}</span></div>
+                <div className="border-t-2 border-blue-100 pt-3 flex justify-between"><span className="text-lg font-bold">お支払い合計</span><span className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid="text-total-amount">{formatCurrency(totalAmount)}</span></div>
               </div>
               <motion.button 
                 whileHover={{ scale: 1.02 }} 
                 whileTap={{ scale: 0.98 }} 
                 onClick={handleProceedToPayment}
                 disabled={isLoadingPayment}
-                className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all disabled:opacity-50"
                 data-testid="button-proceed-payment"
               >
                 {isLoadingPayment ? '準備中...' : '支払いへ進む'}
@@ -383,17 +383,17 @@ const HighQualityPlanPage = () => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring" }}
-                className="w-20 h-20 bg-gradient-to-br from-pink-100 to-pink-200 rounded-full flex items-center justify-center mx-auto mb-4"
+                className="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-full flex items-center justify-center mx-auto mb-4"
               >
-                <CheckCircle className="w-12 h-12 text-pink-600" />
+                <CheckCircle className="w-12 h-12 text-blue-600" />
               </motion.div>
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-2">
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent mb-2">
                 決済完了！
               </h3>
               <p className="text-gray-600 mb-4">
                 高画質プランへのご登録ありがとうございます
               </p>
-              <div className="bg-gradient-to-r from-pink-50 to-pink-100 rounded-xl p-4">
+              <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl p-4">
                 <p className="text-sm text-gray-700">
                   4K画質の動画をお楽しみください
                 </p>

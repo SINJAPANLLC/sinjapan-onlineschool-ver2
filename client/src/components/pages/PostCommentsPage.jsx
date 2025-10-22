@@ -172,7 +172,7 @@ const PostCommentsPage = () => {
           >
             <div className="text-center">
               <p className="text-sm text-gray-600">未読コメント</p>
-              <p className="text-2xl font-bold text-pink-600">{totalUnreadComments}</p>
+              <p className="text-2xl font-bold text-blue-600">{totalUnreadComments}</p>
             </div>
           </motion.div>
         </div>
@@ -187,7 +187,7 @@ const PostCommentsPage = () => {
               placeholder="コメントを検索..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
 
@@ -197,7 +197,7 @@ const PostCommentsPage = () => {
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               {filterOptions.map(option => (
                 <option key={option.id} value={option.id}>{option.name}</option>
@@ -215,7 +215,7 @@ const PostCommentsPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className={`bg-white rounded-xl p-4 shadow-sm border-l-4 ${
-                comment.isRead ? 'border-gray-200' : 'border-pink-500'
+                comment.isRead ? 'border-gray-200' : 'border-blue-500'
               }`}
             >
               <div className="flex space-x-3">
@@ -259,7 +259,7 @@ const PostCommentsPage = () => {
                     <button
                       onClick={() => handleLike(comment.id)}
                       className={`flex items-center space-x-1 text-sm transition-colors ${
-                        comment.isLiked ? 'text-pink-600' : 'text-gray-500 hover:text-pink-600'
+                        comment.isLiked ? 'text-blue-600' : 'text-gray-500 hover:text-blue-600'
                       }`}
                     >
                       <Heart className={`w-4 h-4 ${comment.isLiked ? 'fill-current' : ''}`} />

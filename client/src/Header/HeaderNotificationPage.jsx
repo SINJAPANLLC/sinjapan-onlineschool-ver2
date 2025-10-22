@@ -232,15 +232,15 @@ const NotificationPage = () => {
                 <div className="flex items-center justify-between p-4 bg-white/95 backdrop-blur-md sticky top-0 z-10 border-b border-gray-200 shadow-sm">
                     <motion.button 
                         onClick={() => navigate(-1)} 
-                        className="p-2.5 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all group"
+                        className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all group"
                         whileHover={{ scale: 1.1, rotate: -10 }}
                         whileTap={{ scale: 0.9 }}
                     >
-                        <ArrowLeft size={20} className="text-gray-600 group-hover:text-pink-500 transition-colors" strokeWidth={2.5} />
+                        <ArrowLeft size={20} className="text-gray-600 group-hover:text-blue-500 transition-colors" strokeWidth={2.5} />
                     </motion.button>
                     <div className="flex items-center gap-2">
                         <motion.h1 
-                            className="text-base font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent"
+                            className="text-base font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent"
                             animate={{ opacity: [0.8, 1, 0.8] }}
                             transition={{ duration: 3, repeat: Infinity }}
                         >
@@ -258,12 +258,12 @@ const NotificationPage = () => {
                     </div>
                     <motion.button 
                         onClick={deleteAllNotifications}
-                        className="p-2.5 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all group"
+                        className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all group"
                         title="すべて削除"
                         whileHover={{ scale: 1.1, rotate: 10 }}
                         whileTap={{ scale: 0.9 }}
                     >
-                        <Trash2 size={20} className="text-gray-600 group-hover:text-pink-500 transition-colors" strokeWidth={2.5} />
+                        <Trash2 size={20} className="text-gray-600 group-hover:text-blue-500 transition-colors" strokeWidth={2.5} />
                     </motion.button>
                 </div>
 
@@ -284,7 +284,7 @@ const NotificationPage = () => {
                                 {activeTab === tab.key && (
                                     <motion.div
                                         layoutId="activeTab"
-                                        className="absolute inset-0 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full"
+                                        className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full"
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
@@ -310,7 +310,7 @@ const NotificationPage = () => {
                         <motion.button
                             onClick={markAllAsRead}
                             disabled={getUnreadCount() === 0}
-                            className="text-sm font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent disabled:bg-none disabled:text-gray-400 disabled:cursor-not-allowed"
+                            className="text-sm font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent disabled:bg-none disabled:text-gray-400 disabled:cursor-not-allowed"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
@@ -364,7 +364,7 @@ const NotificationPage = () => {
                                         layout
                                         onClick={() => handleNotificationClick(notification)}
                                         className={`flex items-start py-4 px-3 border-b border-gray-100 last:border-b-0 cursor-pointer rounded-lg transition-all duration-200 ${
-                                            notification.unread ? 'bg-gradient-to-r from-pink-50/50 to-blue-50/50' : 'hover:bg-gray-50'
+                                            notification.unread ? 'bg-gradient-to-r from-blue-50/50 to-blue-50/50' : 'hover:bg-gray-50'
                                         }`}
                                         whileHover={{ scale: 1.01, x: 5 }}
                                         whileTap={{ scale: 0.99 }}
@@ -400,7 +400,7 @@ const NotificationPage = () => {
                                             <div className="flex items-start justify-between">
                                                 <div className="flex-1">
                                                     <p className={`text-sm leading-relaxed pr-2 font-bold ${
-                                                        notification.unread ? 'bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent' : 'text-gray-700'
+                                                        notification.unread ? 'bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent' : 'text-gray-700'
                                                     }`}>
                                                         {notification.title}
                                                     </p>

@@ -200,7 +200,7 @@ const KPIDashboard = () => {
     switch (category) {
       case 'revenue': return <DollarSign className="w-5 h-5 text-green-500" />;
       case 'users': return <Users className="w-5 h-5 text-blue-500" />;
-      case 'engagement': return <Heart className="w-5 h-5 text-pink-500" />;
+      case 'engagement': return <Heart className="w-5 h-5 text-blue-500" />;
       case 'conversion': return <Target className="w-5 h-5 text-purple-500" />;
       default: return <BarChart3 className="w-5 h-5 text-gray-500" />;
     }
@@ -243,7 +243,7 @@ const KPIDashboard = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
+              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
               data-testid="button-new-kpi"
             >
               <Plus className="w-4 h-4" />
@@ -295,14 +295,14 @@ const KPIDashboard = () => {
               placeholder="KPIを検索..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+              className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               data-testid="input-search"
             />
           </div>
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+            className="px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             data-testid="select-category"
           >
             {categoryOptions.map(option => (
@@ -377,7 +377,7 @@ const KPIDashboard = () => {
                     <p className="text-sm text-gray-600 mb-1">目標値</p>
                     <p className="text-2xl font-bold text-gray-900">{kpi.targetValue.toLocaleString()} {kpi.unit}</p>
                   </div>
-                  <div className="p-4 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl">
+                  <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
                     <p className="text-sm text-gray-600 mb-1">達成率</p>
                     <div className="flex items-center space-x-2">
                       {getTrendIcon(kpi.trend)}

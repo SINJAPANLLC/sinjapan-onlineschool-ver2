@@ -251,7 +251,7 @@ const UserContentPage = () => {
             transition={{ duration: 0.5 }}
         >
             <motion.div 
-                className="w-20 h-20 bg-gradient-to-br from-pink-400 to-pink-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg"
+                className="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg"
                 animate={{ 
                     rotate: [0, 5, -5, 0],
                     scale: [1, 1.05, 1]
@@ -261,7 +261,7 @@ const UserContentPage = () => {
                 <Grid3x3 size={32} className="text-white" strokeWidth={2.5} />
             </motion.div>
             <motion.p 
-                className="font-bold text-lg bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent"
+                className="font-bold text-lg bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent"
                 animate={{ opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 2, repeat: Infinity }}
             >
@@ -272,7 +272,7 @@ const UserContentPage = () => {
 
     const PostCard = ({ post }) => (
         <motion.div 
-            className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-pink-100"
+            className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-blue-100"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{ scale: 1.03, y: -5 }}
@@ -291,7 +291,7 @@ const UserContentPage = () => {
                 >
                     {/* Yellow placeholder as shown in your images */}
                     <motion.div 
-                        className="absolute bottom-2 right-2 text-white text-xs font-bold bg-gradient-to-r from-pink-500 to-pink-600 px-2 py-1 rounded-full shadow-md"
+                        className="absolute bottom-2 right-2 text-white text-xs font-bold bg-gradient-to-r from-blue-500 to-blue-600 px-2 py-1 rounded-full shadow-md"
                         animate={{ scale: [1, 1.1, 1] }}
                         transition={{ duration: 2, repeat: Infinity }}
                     >
@@ -299,7 +299,7 @@ const UserContentPage = () => {
                     </motion.div>
                     {post.type === 'video' && (
                         <motion.div 
-                            className="absolute top-2 left-2 bg-gradient-to-br from-pink-400 to-pink-600 p-1.5 rounded-full shadow-md"
+                            className="absolute top-2 left-2 bg-gradient-to-br from-blue-400 to-blue-600 p-1.5 rounded-full shadow-md"
                             animate={{ 
                                 rotate: [0, 5, -5, 0],
                                 scale: [1, 1.05, 1]
@@ -313,7 +313,7 @@ const UserContentPage = () => {
             </div>
 
             {/* Content */}
-            <div className="p-3 bg-gradient-to-b from-white to-pink-50/30">
+            <div className="p-3 bg-gradient-to-b from-white to-blue-50/30">
                 <h3 className="text-sm font-bold mb-2 line-clamp-2 text-gray-800">
                     {post.title}
                 </h3>
@@ -340,14 +340,14 @@ const UserContentPage = () => {
                 <div className="flex items-center justify-between text-xs font-medium text-gray-600">
                     <div className="flex items-center space-x-3">
                         <motion.div 
-                            className="flex items-center space-x-1 cursor-pointer hover:bg-pink-50 p-1.5 rounded-full transition-colors"
+                            className="flex items-center space-x-1 cursor-pointer hover:bg-blue-50 p-1.5 rounded-full transition-colors"
                             onClick={(e) => handleLikeClick(post.id, e)}
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                         >
                             <Heart 
                                 size={14} 
-                                className={`${localLikedPosts.has(post.id) ? 'text-red-500 fill-current' : 'text-pink-500'}`}
+                                className={`${localLikedPosts.has(post.id) ? 'text-red-500 fill-current' : 'text-blue-500'}`}
                                 strokeWidth={2.5}
                             />
                             <span>{post.likes}</span>
@@ -360,7 +360,7 @@ const UserContentPage = () => {
                         >
                             <Bookmark 
                                 size={14} 
-                                className={`${localSavedPosts.has(post.id) ? 'text-blue-500 fill-current' : 'text-pink-500'}`}
+                                className={`${localSavedPosts.has(post.id) ? 'text-blue-500 fill-current' : 'text-blue-500'}`}
                                 strokeWidth={2.5}
                             />
                             <span>{post.bookmarks}</span>
@@ -379,14 +379,14 @@ const UserContentPage = () => {
                 <div className="flex items-center justify-between p-4 bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-10 shadow-sm">
                     <motion.button 
                         onClick={() => navigate(-1)} 
-                        className="p-2 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all"
+                        className="p-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all"
                         whileHover={{ scale: 1.1, rotate: -10 }}
                         whileTap={{ scale: 0.9 }}
                     >
-                        <ArrowLeft size={20} className="text-pink-600" strokeWidth={2.5} />
+                        <ArrowLeft size={20} className="text-blue-600" strokeWidth={2.5} />
                     </motion.button>
                     <motion.h1 
-                        className="text-base font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent"
+                        className="text-base font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent"
                         animate={{ opacity: [0.8, 1, 0.8] }}
                         transition={{ duration: 3, repeat: Infinity }}
                     >
@@ -410,7 +410,7 @@ const UserContentPage = () => {
                             data-testid="card-purchased"
                         >
                             <motion.div 
-                                className="w-14 h-14 bg-gradient-to-br from-pink-300 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md"
+                                className="w-14 h-14 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md"
                                 animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
                                 transition={{ duration: 3, repeat: Infinity }}
                             >
@@ -418,7 +418,7 @@ const UserContentPage = () => {
                             </motion.div>
                             <div className="text-xs font-bold text-gray-700">購入済み</div>
                             <motion.div 
-                                className="text-lg font-bold text-pink-600"
+                                className="text-lg font-bold text-blue-600"
                                 animate={{ scale: [1, 1.05, 1] }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             >
@@ -438,7 +438,7 @@ const UserContentPage = () => {
                             data-testid="card-saved"
                         >
                             <motion.div 
-                                className="w-14 h-14 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md"
+                                className="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md"
                                 animate={{ rotate: [0, -5, 5, 0], scale: [1, 1.05, 1] }}
                                 transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
                             >
@@ -446,7 +446,7 @@ const UserContentPage = () => {
                             </motion.div>
                             <div className="text-xs font-bold text-gray-700">保存済み</div>
                             <motion.div 
-                                className="text-lg font-bold text-pink-600"
+                                className="text-lg font-bold text-blue-600"
                                 animate={{ scale: [1, 1.05, 1] }}
                                 transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
                             >
@@ -466,7 +466,7 @@ const UserContentPage = () => {
                             data-testid="card-liked"
                         >
                             <motion.div 
-                                className="w-14 h-14 bg-gradient-to-br from-pink-500 to-pink-700 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md"
+                                className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md"
                                 animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
                                 transition={{ duration: 3, repeat: Infinity, delay: 1 }}
                             >
@@ -474,7 +474,7 @@ const UserContentPage = () => {
                             </motion.div>
                             <div className="text-xs font-bold text-gray-700">いいね</div>
                             <motion.div 
-                                className="text-lg font-bold text-pink-600"
+                                className="text-lg font-bold text-blue-600"
                                 animate={{ scale: [1, 1.05, 1] }}
                                 transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
                             >
@@ -494,7 +494,7 @@ const UserContentPage = () => {
                             data-testid="card-viewing-history"
                         >
                             <motion.div 
-                                className="w-14 h-14 bg-gradient-to-br from-pink-600 to-pink-800 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md"
+                                className="w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-800 rounded-full flex items-center justify-center mx-auto mb-2 shadow-md"
                                 animate={{ rotate: [0, -5, 5, 0], scale: [1, 1.05, 1] }}
                                 transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
                             >
@@ -502,7 +502,7 @@ const UserContentPage = () => {
                             </motion.div>
                             <div className="text-xs font-bold text-gray-700">視聴履歴</div>
                             <motion.div 
-                                className="text-lg font-bold text-pink-600"
+                                className="text-lg font-bold text-blue-600"
                                 animate={{ scale: [1, 1.05, 1] }}
                                 transition={{ duration: 2, repeat: Infinity, delay: 0.9 }}
                             >
@@ -534,7 +534,7 @@ const UserContentPage = () => {
                                 {activeTab === tab.key && (
                                     <motion.div
                                         layoutId="activeTabBg"
-                                        className="absolute inset-0 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full"
+                                        className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full"
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
@@ -551,7 +551,7 @@ const UserContentPage = () => {
                             <button
                                 onClick={() => setFilter('video')}
                                 className={`p-2 rounded border ${filter === 'video'
-                                    ? 'border-pink-600 text-pink-600 bg-pink-50'
+                                    ? 'border-blue-600 text-blue-600 bg-blue-50'
                                     : 'border-gray-300 text-gray-600'
                                     }`}
                             >
@@ -560,7 +560,7 @@ const UserContentPage = () => {
                             <button
                                 onClick={() => setFilter('image')}
                                 className={`p-2 rounded border ${filter === 'image'
-                                    ? 'border-pink-600 text-pink-600 bg-pink-50'
+                                    ? 'border-blue-600 text-blue-600 bg-blue-50'
                                     : 'border-gray-300 text-gray-600'
                                     }`}
                             >

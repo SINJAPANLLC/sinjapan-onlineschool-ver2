@@ -45,7 +45,7 @@ const Header = () => {
                         >
                             {/* グロウエフェクト */}
                             <motion.div
-                                className="absolute inset-0 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full blur-xl opacity-0"
+                                className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full blur-xl opacity-0"
                                 animate={{
                                     opacity: [0, 0.3, 0],
                                     scale: [0.8, 1.2, 0.8]
@@ -76,11 +76,11 @@ const Header = () => {
                         <motion.button
                             whileHover={{ scale: 1.1, rotate: 15 }}
                             whileTap={{ scale: 0.95 }}
-                            className="p-2.5 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all relative group"
+                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all relative group"
                             onClick={() => navigate('/settings/notifications')}
                             data-testid="button-notifications"
                         >
-                            <Bell className="w-5 h-5 text-gray-600 group-hover:text-pink-500 transition-colors" strokeWidth={2.5} />
+                            <Bell className="w-5 h-5 text-gray-600 group-hover:text-blue-500 transition-colors" strokeWidth={2.5} />
                             {notificationCount > 0 && (
                                 <motion.div 
                                     animate={{ scale: [1, 1.2, 1] }}
@@ -93,11 +93,11 @@ const Header = () => {
                         <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
-                            className="p-2.5 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all group"
+                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all group"
                             onClick={() => navigate('/search')}
                             data-testid="button-search"
                         >
-                            <Search className="w-5 h-5 text-gray-600 group-hover:text-pink-500 transition-colors" strokeWidth={2.5} />
+                            <Search className="w-5 h-5 text-gray-600 group-hover:text-blue-500 transition-colors" strokeWidth={2.5} />
                         </motion.button>
                     </div>
                 </div>

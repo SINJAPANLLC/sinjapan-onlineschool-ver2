@@ -379,7 +379,7 @@ export default function KYCManagement() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
+              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
               data-testid="button-export"
             >
               <Download className="w-4 h-4" />
@@ -432,7 +432,7 @@ export default function KYCManagement() {
                 placeholder="申請者を検索..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 data-testid="input-search"
               />
             </div>
@@ -442,7 +442,7 @@ export default function KYCManagement() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               data-testid="select-status"
             >
               {statusOptions.map(status => (
@@ -490,13 +490,13 @@ export default function KYCManagement() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
-                  className="hover:bg-pink-50 transition-colors"
+                  className="hover:bg-blue-50 transition-colors"
                   data-testid={`row-application-${app.id}`}
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-10 w-10">
-                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-semibold ring-2 ring-pink-100">
+                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold ring-2 ring-blue-100">
                           {app.userName.charAt(0)}
                         </div>
                       </div>
@@ -703,18 +703,18 @@ export default function KYCManagement() {
                           href={`/api/proxy/.private/${selectedApplication.documents.selfieWithID.split('/').pop()}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center justify-between p-3 bg-white border border-pink-200 rounded-lg hover:bg-pink-50 hover:border-pink-300 transition-all group"
+                          className="flex items-center justify-between p-3 bg-white border border-blue-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-all group"
                         >
                           <div className="flex items-center space-x-3">
-                            <div className="p-2 bg-pink-100 rounded-lg group-hover:bg-pink-200 transition-colors">
-                              <User className="w-4 h-4 text-pink-600" />
+                            <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
+                              <User className="w-4 h-4 text-blue-600" />
                             </div>
                             <div>
                               <div className="text-sm font-medium text-gray-900">身分証を持ったセルフィー</div>
                               <div className="text-xs text-gray-500">本人確認写真</div>
                             </div>
                           </div>
-                          <Download className="w-4 h-4 text-gray-400 group-hover:text-pink-600 transition-colors" />
+                          <Download className="w-4 h-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
                         </a>
                       )}
                       {selectedApplication.documents.addressProof && (

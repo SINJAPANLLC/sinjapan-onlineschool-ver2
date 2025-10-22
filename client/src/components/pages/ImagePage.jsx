@@ -304,7 +304,7 @@ const ImagePage = () => {
                         </div>
                         <p className="text-sm text-gray-500">{imageData.creator.username}</p>
                     </div>
-                    <button className="bg-pink-500 text-white px-4 py-2 rounded-full text-sm font-medium">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm font-medium">
                         フォロー
                     </button>
                 </div>
@@ -314,7 +314,7 @@ const ImagePage = () => {
                     <p className="text-gray-800 whitespace-pre-line">{imageData.description}</p>
                     <div className="flex flex-wrap gap-2 mt-2">
                         {imageData.tags.map((tag, index) => (
-                            <span key={index} className="bg-pink-100 text-pink-700 px-2 py-1 rounded-full text-xs">
+                            <span key={index} className="bg-blue-100 text-blue-700 px-2 py-1 rounded-full text-xs">
                                 #{tag}
                             </span>
                         ))}
@@ -407,9 +407,9 @@ const ImagePage = () => {
                                 <input
                                     type="text"
                                     placeholder="コメントを追加..."
-                                    className="flex-1 p-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                                    className="flex-1 p-2 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 />
-                                <button className="bg-pink-500 text-white px-4 py-2 rounded-r-lg hover:bg-pink-600 transition-colors">
+                                <button className="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 transition-colors">
                                     送信
                                 </button>
                             </div>
@@ -434,7 +434,7 @@ const ImagePage = () => {
                             </button>
                             <button
                                 onClick={() => setShowShareModal(false)}
-                                className="w-full p-3 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors"
+                                className="w-full p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                             >
                                 キャンセル
                             </button>

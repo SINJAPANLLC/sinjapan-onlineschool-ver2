@@ -61,8 +61,8 @@ const PaymentMethodsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
         </motion.button>
@@ -89,7 +89,7 @@ const PaymentMethodsPage = () => {
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-gray-900">登録済みの支払い方法</h2>
           {paymentMethods.map((method, index) => (
-            <motion.div key={method.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white rounded-2xl p-5 shadow-lg border-2 border-pink-100">
+            <motion.div key={method.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white rounded-2xl p-5 shadow-lg border-2 border-blue-100">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <motion.div animate={{ scale: [1, 1.1, 1] }} transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }} className="w-14 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
@@ -121,17 +121,17 @@ const PaymentMethodsPage = () => {
           ))}
         </div>
 
-        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => setShowAddModal(true)} className="w-full bg-white border-2 border-dashed border-pink-300 rounded-2xl p-6 flex items-center justify-center space-x-3 hover:border-pink-500 hover:bg-pink-50 transition-all shadow-md" data-testid="button-add">
-          <Plus className="w-6 h-6 text-pink-500" />
-          <span className="font-bold text-pink-700">新しい支払い方法を追加</span>
+        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => setShowAddModal(true)} className="w-full bg-white border-2 border-dashed border-blue-300 rounded-2xl p-6 flex items-center justify-center space-x-3 hover:border-blue-500 hover:bg-blue-50 transition-all shadow-md" data-testid="button-add">
+          <Plus className="w-6 h-6 text-blue-500" />
+          <span className="font-bold text-blue-700">新しい支払い方法を追加</span>
         </motion.button>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-200 rounded-2xl p-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6">
           <div className="flex items-start space-x-4">
-            <Sparkles className="w-6 h-6 text-pink-600 mt-1" />
+            <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
             <div>
-              <h4 className="font-bold text-pink-900 mb-2 text-lg">お支払いについて</h4>
-              <ul className="text-base text-pink-800 space-y-2">
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">お支払いについて</h4>
+              <ul className="text-base text-blue-800 space-y-2">
                 <li className="flex items-center"><Lock className="w-4 h-4 mr-2" />すべての決済は暗号化されています</li>
                 <li className="flex items-center"><Check className="w-4 h-4 mr-2" />カード情報は安全に保管されます</li>
                 <li className="flex items-center"><Check className="w-4 h-4 mr-2" />いつでも支払い方法を変更できます</li>

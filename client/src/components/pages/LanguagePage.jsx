@@ -23,12 +23,12 @@ const LanguageSettings = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg"
+                className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg"
             >
                 <motion.button 
                     whileHover={{ scale: 1.1 }}
@@ -62,10 +62,10 @@ const LanguageSettings = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     whileHover={{ scale: 1.01, y: -2 }}
-                    className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100"
+                    className="bg-white rounded-2xl p-6 shadow-xl border-2 border-blue-100"
                 >
-                    <h2 className="text-xl font-bold mb-6 flex items-center bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
-                        <Globe className="w-6 h-6 mr-3 text-pink-500" />
+                    <h2 className="text-xl font-bold mb-6 flex items-center bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
+                        <Globe className="w-6 h-6 mr-3 text-blue-500" />
                         表示言語の選択
                     </h2>
                     
@@ -76,9 +76,9 @@ const LanguageSettings = () => {
                             </label>
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="flex items-center space-x-3 p-4 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl border-2 border-pink-200"
+                                className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border-2 border-blue-200"
                             >
-                                <CheckCircle className="w-6 h-6 text-pink-500" />
+                                <CheckCircle className="w-6 h-6 text-blue-500" />
                                 <span className="font-bold text-gray-900 text-lg">
                                     {languageOptions[i18n.language]}
                                 </span>
@@ -92,7 +92,7 @@ const LanguageSettings = () => {
                             <select
                                 value={i18n.language}
                                 onChange={handleLanguageChange}
-                                className="w-full px-5 py-4 border-2 border-pink-200 rounded-2xl focus:ring-2 focus:ring-pink-500 focus:border-transparent text-lg font-semibold shadow-sm"
+                                className="w-full px-5 py-4 border-2 border-blue-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-semibold shadow-sm"
                                 data-testid="select-language"
                             >
                                 {Object.entries(languageOptions).map(([code, name]) => (
@@ -110,9 +110,9 @@ const LanguageSettings = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100"
+                    className="bg-white rounded-2xl p-6 shadow-xl border-2 border-blue-100"
                 >
-                    <h3 className="text-xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                    <h3 className="text-xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                         対応言語について
                     </h3>
                     
@@ -124,7 +124,7 @@ const LanguageSettings = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.1 + index * 0.05 }}
                                 whileHover={{ scale: 1.05, x: 5 }}
-                                className="flex items-center space-x-3 p-4 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl border border-pink-100 cursor-pointer"
+                                className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-100 cursor-pointer"
                             >
                                 <motion.div
                                     animate={{ 
@@ -136,13 +136,13 @@ const LanguageSettings = () => {
                                         ease: "linear",
                                         delay: index * 0.5
                                     }}
-                                    className="w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center shadow-md"
+                                    className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md"
                                 >
                                     <Globe className="w-5 h-5 text-white" />
                                 </motion.div>
                                 <div>
                                     <div className="font-bold text-gray-900">{name}</div>
-                                    <div className="text-sm text-pink-500 font-medium">コード: {code.toUpperCase()}</div>
+                                    <div className="text-sm text-blue-500 font-medium">コード: {code.toUpperCase()}</div>
                                 </div>
                             </motion.div>
                         ))}
@@ -154,7 +154,7 @@ const LanguageSettings = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-200 rounded-2xl p-6 relative overflow-hidden"
+                    className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden"
                 >
                     <motion.div
                         animate={{ 
@@ -178,24 +178,24 @@ const LanguageSettings = () => {
                                 ease: "easeInOut"
                             }}
                         >
-                            <Sparkles className="w-6 h-6 text-pink-600 mt-1" />
+                            <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
                         </motion.div>
                         <div>
-                            <h4 className="font-bold text-pink-900 mb-2 text-lg">言語設定について</h4>
-                            <p className="text-base text-pink-800 mb-3 leading-relaxed">
+                            <h4 className="font-bold text-blue-900 mb-2 text-lg">言語設定について</h4>
+                            <p className="text-base text-blue-800 mb-3 leading-relaxed">
                                 選択した言語でアプリ全体の表示が変更されます。
                             </p>
-                            <ul className="text-base text-pink-800 space-y-2">
+                            <ul className="text-base text-blue-800 space-y-2">
                                 <li className="flex items-center">
-                                    <CheckCircle className="w-4 h-4 mr-2 text-pink-600" />
+                                    <CheckCircle className="w-4 h-4 mr-2 text-blue-600" />
                                     メニューやボタンのテキスト
                                 </li>
                                 <li className="flex items-center">
-                                    <CheckCircle className="w-4 h-4 mr-2 text-pink-600" />
+                                    <CheckCircle className="w-4 h-4 mr-2 text-blue-600" />
                                     通知やメッセージの言語
                                 </li>
                                 <li className="flex items-center">
-                                    <CheckCircle className="w-4 h-4 mr-2 text-pink-600" />
+                                    <CheckCircle className="w-4 h-4 mr-2 text-blue-600" />
                                     ヘルプやサポート情報
                                 </li>
                             </ul>

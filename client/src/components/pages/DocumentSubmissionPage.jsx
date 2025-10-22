@@ -308,13 +308,13 @@ const DocumentSubmissionPage = () => {
     if (!formData) {
         return (
             <div className="min-h-screen bg-white flex items-center justify-center">
-                <Loader2 className="w-8 h-8 text-pink-500 animate-spin" />
+                <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white p-4 pb-20">
+        <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4 pb-20">
             <div className="max-w-3xl mx-auto">
                 {/* Progress bar */}
                 <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
@@ -339,7 +339,7 @@ const DocumentSubmissionPage = () => {
                                     {completed ? <CheckCircle className="w-5 h-5" /> : step}
                                 </motion.div>
                                 <span className={`text-xs sm:text-sm text-center ${
-                                    active ? 'font-semibold text-pink-600' : completed ? 'text-green-600' : 'text-gray-500'
+                                    active ? 'font-semibold text-blue-600' : completed ? 'text-green-600' : 'text-gray-500'
                                 }`}>
                                     {label}
                                 </span>
@@ -372,7 +372,7 @@ const DocumentSubmissionPage = () => {
                     <div className="mb-8">
                         <div className="flex items-center justify-between mb-3">
                             <h3 className="font-semibold text-gray-900 flex items-center">
-                                <FileText className="w-5 h-5 mr-2 text-pink-600" />
+                                <FileText className="w-5 h-5 mr-2 text-blue-600" />
                                 {documentTypes.identityDocument.label}
                                 <span className="text-red-500 ml-1">*</span>
                             </h3>
@@ -389,7 +389,7 @@ const DocumentSubmissionPage = () => {
                                     onChange={(e) => handleFileChange(e, 'identityDocument')}
                                     className="hidden"
                                 />
-                                <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-pink-500 hover:bg-pink-50 transition-all">
+                                <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
                                     <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
                                     <p className="text-gray-700 font-medium mb-1">
                                         クリックしてファイルを選択
@@ -449,7 +449,7 @@ const DocumentSubmissionPage = () => {
                     <div className="mb-8">
                         <div className="flex items-center justify-between mb-3">
                             <h3 className="font-semibold text-gray-900 flex items-center">
-                                <Camera className="w-5 h-5 mr-2 text-pink-600" />
+                                <Camera className="w-5 h-5 mr-2 text-blue-600" />
                                 {documentTypes.selfieWithID.label}
                                 <span className="text-red-500 ml-1">*</span>
                             </h3>
@@ -464,9 +464,9 @@ const DocumentSubmissionPage = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <button
                                             onClick={startCamera}
-                                            className="border-2 border-dashed border-pink-300 rounded-xl p-6 text-center hover:border-pink-500 hover:bg-pink-50 transition-all"
+                                            className="border-2 border-dashed border-blue-300 rounded-xl p-6 text-center hover:border-blue-500 hover:bg-blue-50 transition-all"
                                         >
-                                            <Camera className="w-12 h-12 mx-auto mb-3 text-pink-500" />
+                                            <Camera className="w-12 h-12 mx-auto mb-3 text-blue-500" />
                                             <p className="text-gray-700 font-medium mb-1">
                                                 カメラで撮影
                                             </p>
@@ -481,7 +481,7 @@ const DocumentSubmissionPage = () => {
                                                 onChange={(e) => handleFileChange(e, 'selfieWithID')}
                                                 className="hidden"
                                             />
-                                            <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-pink-500 hover:bg-pink-50 transition-all h-full flex flex-col justify-center">
+                                            <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-blue-500 hover:bg-blue-50 transition-all h-full flex flex-col justify-center">
                                                 <Upload className="w-12 h-12 mx-auto mb-3 text-gray-400" />
                                                 <p className="text-gray-700 font-medium mb-1">
                                                     ファイルから選択
@@ -493,7 +493,7 @@ const DocumentSubmissionPage = () => {
                                         </label>
                                     </div>
                                 ) : (
-                                    <div className="border-2 border-pink-300 rounded-xl p-4 bg-gray-900">
+                                    <div className="border-2 border-blue-300 rounded-xl p-4 bg-gray-900">
                                         <video
                                             ref={videoRef}
                                             autoPlay
@@ -504,7 +504,7 @@ const DocumentSubmissionPage = () => {
                                         <div className="flex gap-3 mt-4">
                                             <button
                                                 onClick={capturePhoto}
-                                                className="flex-1 py-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-xl font-semibold hover:from-pink-600 hover:to-pink-700 transition-all shadow-lg"
+                                                className="flex-1 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg"
                                             >
                                                 <Camera className="w-5 h-5 inline mr-2" />
                                                 撮影する
@@ -569,7 +569,7 @@ const DocumentSubmissionPage = () => {
                     <div className="mb-8">
                         <div className="flex items-center justify-between mb-3">
                             <h3 className="font-semibold text-gray-900 flex items-center">
-                                <FileText className="w-5 h-5 mr-2 text-pink-600" />
+                                <FileText className="w-5 h-5 mr-2 text-blue-600" />
                                 {documentTypes.addressProof.label}
                                 <span className="text-gray-400 ml-2 text-sm">(任意)</span>
                             </h3>
@@ -586,7 +586,7 @@ const DocumentSubmissionPage = () => {
                                     onChange={(e) => handleFileChange(e, 'addressProof')}
                                     className="hidden"
                                 />
-                                <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-pink-500 hover:bg-pink-50 transition-all">
+                                <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
                                     <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
                                     <p className="text-gray-700 font-medium mb-1">
                                         クリックしてファイルを選択
@@ -662,7 +662,7 @@ const DocumentSubmissionPage = () => {
                             type="button"
                             onClick={handleSubmit}
                             disabled={isSubmitting || !documents.identityDocument || !documents.selfieWithID}
-                            className="flex-1 py-4 px-6 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-xl font-semibold hover:from-pink-600 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                            className="flex-1 py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                         >
                             {isSubmitting ? (
                                 <>

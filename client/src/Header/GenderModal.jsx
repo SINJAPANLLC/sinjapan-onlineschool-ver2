@@ -10,9 +10,9 @@ const GenderSelectionModal = ({ isOpen, onClose, selectedGender, onGenderSelect,
             label: t('gender.general.label'),
             icon: '👥',
             description: t('gender.general.description'),
-            bgColor: 'bg-pink-100',
-            textColor: 'text-pink-600',
-            borderColor: 'border-pink-300'
+            bgColor: 'bg-blue-100',
+            textColor: 'text-blue-600',
+            borderColor: 'border-blue-300'
         },
         {
             id: 'gay',
@@ -82,7 +82,7 @@ const GenderSelectionModal = ({ isOpen, onClose, selectedGender, onGenderSelect,
                                         </div>
                                     </div>
                                     {selectedGender === option.label && (
-                                        <div className="w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center">
+                                        <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
                                             <div className="w-2 h-2 bg-white rounded-full"></div>
                                         </div>
                                     )}
@@ -95,14 +95,14 @@ const GenderSelectionModal = ({ isOpen, onClose, selectedGender, onGenderSelect,
                     <div className="mt-8 space-y-3">
                         <button
                             onClick={handleShowClick}
-                            className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white py-4 rounded-2xl font-bold text-lg hover:shadow-lg transform transition-all hover:scale-105 active:scale-95"
+                            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-2xl font-bold text-lg hover:shadow-lg transform transition-all hover:scale-105 active:scale-95"
                         >
                             {t('gender.show')}
                         </button>
 
                         <button
                             onClick={onClose}
-                            className="w-full text-pink-500 py-3 font-medium hover:bg-pink-50 rounded-xl transition-colors"
+                            className="w-full text-blue-500 py-3 font-medium hover:bg-blue-50 rounded-xl transition-colors"
                         >
                             {t('gender.cancel')}
                         </button>

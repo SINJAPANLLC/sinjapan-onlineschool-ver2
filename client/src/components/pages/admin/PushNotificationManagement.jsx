@@ -277,7 +277,7 @@ export default function PushNotificationManagement() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setCreateModalOpen(true)}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
+              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
               data-testid="button-create-notification"
             >
               <Plus className="w-4 h-4" />
@@ -346,13 +346,13 @@ export default function PushNotificationManagement() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
-                  className="hover:bg-pink-50 transition-colors"
+                  className="hover:bg-blue-50 transition-colors"
                   data-testid={`row-notification-${notification.id}`}
                 >
                   <td className="px-6 py-4">
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-10 w-10">
-                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white ring-2 ring-pink-100">
+                        <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white ring-2 ring-blue-100">
                           <Bell className="w-5 h-5" />
                         </div>
                       </div>
@@ -459,7 +459,7 @@ export default function PushNotificationManagement() {
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     placeholder="通知のタイトルを入力"
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     required
                     data-testid="input-title"
                   />
@@ -474,7 +474,7 @@ export default function PushNotificationManagement() {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="通知のメッセージを入力"
                     rows={4}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     required
                     data-testid="input-message"
                   />
@@ -487,7 +487,7 @@ export default function PushNotificationManagement() {
                   <select
                     value={formData.recipientType}
                     onChange={(e) => setFormData({ ...formData, recipientType: e.target.value })}
-                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     data-testid="select-recipient-type"
                   >
                     <option value="all">全ユーザー</option>
@@ -513,7 +513,7 @@ export default function PushNotificationManagement() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     disabled={isProcessing}
-                    className="px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all disabled:opacity-50"
+                    className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all disabled:opacity-50"
                     data-testid="button-submit-create"
                   >
                     {isProcessing ? '作成中...' : '作成する'}

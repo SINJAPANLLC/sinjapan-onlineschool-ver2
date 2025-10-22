@@ -209,7 +209,7 @@ const FeaturedCreators = () => {
                     data-testid="button-slider-prev"
                     whileHover={{ scale: 1.1, x: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/30 backdrop-blur-md rounded-full p-3 z-30 hover:bg-pink-500/80 transition-all shadow-lg"
+                    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/30 backdrop-blur-md rounded-full p-3 z-30 hover:bg-blue-500/80 transition-all shadow-lg"
                     style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' }}
                     aria-label="Previous slide"
                 >
@@ -220,7 +220,7 @@ const FeaturedCreators = () => {
                     data-testid="button-slider-next"
                     whileHover={{ scale: 1.1, x: 2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/30 backdrop-blur-md rounded-full p-3 z-30 hover:bg-pink-500/80 transition-all shadow-lg"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/30 backdrop-blur-md rounded-full p-3 z-30 hover:bg-blue-500/80 transition-all shadow-lg"
                     style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)' }}
                     aria-label="Next slide"
                 >

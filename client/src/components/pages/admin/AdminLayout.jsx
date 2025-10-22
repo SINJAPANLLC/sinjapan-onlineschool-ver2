@@ -81,7 +81,7 @@ export default function AdminLayout() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 items-center justify-center">
+      <div className="flex h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 items-center justify-center">
         <motion.div 
           className="text-center"
           initial={{ opacity: 0, scale: 0.9 }}
@@ -89,8 +89,8 @@ export default function AdminLayout() {
           transition={{ duration: 0.3 }}
         >
           <div className="relative w-16 h-16 mx-auto mb-4">
-            <div className="absolute inset-0 rounded-full border-4 border-pink-200"></div>
-            <div className="absolute inset-0 rounded-full border-4 border-pink-500 border-t-transparent animate-spin"></div>
+            <div className="absolute inset-0 rounded-full border-4 border-blue-200"></div>
+            <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin"></div>
           </div>
           <p className="text-gray-700 font-medium">認証中...</p>
         </motion.div>
@@ -103,7 +103,7 @@ export default function AdminLayout() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-pink-50">
+    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-blue-50">
       {/* Sidebar */}
       <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} onLogout={handleLogout} />
 

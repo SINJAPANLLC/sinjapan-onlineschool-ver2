@@ -65,7 +65,7 @@ const AdminLoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4 relative overflow-hidden">
             {/* Decorative background elements */}
             <motion.div
                 animate={{ 
@@ -77,7 +77,7 @@ const AdminLoginPage = () => {
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
-                className="absolute top-0 right-0 w-96 h-96 bg-pink-300/30 rounded-full blur-3xl"
+                className="absolute top-0 right-0 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl"
             />
             <motion.div
                 animate={{ 
@@ -104,7 +104,7 @@ const AdminLoginPage = () => {
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
-                className="absolute top-20 right-20 text-pink-400/40"
+                className="absolute top-20 right-20 text-blue-400/40"
             >
                 <Sparkles className="w-10 h-10" />
             </motion.div>
@@ -119,7 +119,7 @@ const AdminLoginPage = () => {
                     ease: "easeInOut",
                     delay: 1
                 }}
-                className="absolute bottom-32 left-10 text-pink-300/40"
+                className="absolute bottom-32 left-10 text-blue-300/40"
             >
                 <Crown className="w-8 h-8" />
             </motion.div>
@@ -142,7 +142,7 @@ const AdminLoginPage = () => {
                             repeat: Infinity,
                             ease: "easeInOut"
                         }}
-                        className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full mb-4 shadow-2xl"
+                        className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full mb-4 shadow-2xl"
                     >
                         <Shield className="w-10 h-10 text-white" />
                     </motion.div>
@@ -150,7 +150,7 @@ const AdminLoginPage = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.2 }}
-                        className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-2"
+                        className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent mb-2"
                     >
                         管理画面ログイン
                     </motion.h1>
@@ -169,7 +169,7 @@ const AdminLoginPage = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
-                    className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border-2 border-pink-100"
+                    className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border-2 border-blue-100"
                 >
                     <form onSubmit={handleSubmit} className="space-y-6">
                         {/* ID入力 */}
@@ -185,13 +185,13 @@ const AdminLoginPage = () => {
                                     name="id"
                                     value={formData.id}
                                     onChange={handleInputChange}
-                                    className="w-full px-4 py-3.5 pl-12 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 bg-white"
+                                    className="w-full px-4 py-3.5 pl-12 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
                                     placeholder="info@sinjapan.jp"
                                     required
                                     data-testid="input-admin-id"
                                 />
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <Lock className="w-5 h-5 text-pink-400" />
+                                    <Lock className="w-5 h-5 text-blue-400" />
                                 </div>
                             </div>
                         </div>
@@ -209,13 +209,13 @@ const AdminLoginPage = () => {
                                     name="password"
                                     value={formData.password}
                                     onChange={handleInputChange}
-                                    className="w-full px-4 py-3.5 pl-12 pr-12 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 bg-white"
+                                    className="w-full px-4 py-3.5 pl-12 pr-12 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
                                     placeholder="パスワードを入力"
                                     required
                                     data-testid="input-admin-password"
                                 />
                                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                                    <Lock className="w-5 h-5 text-pink-400" />
+                                    <Lock className="w-5 h-5 text-blue-400" />
                                 </div>
                                 <motion.button
                                     whileHover={{ scale: 1.1 }}
@@ -226,9 +226,9 @@ const AdminLoginPage = () => {
                                     data-testid="button-toggle-password"
                                 >
                                     {showPassword ? (
-                                        <EyeOff className="w-5 h-5 text-gray-400 hover:text-pink-500 transition-colors" />
+                                        <EyeOff className="w-5 h-5 text-gray-400 hover:text-blue-500 transition-colors" />
                                     ) : (
-                                        <Eye className="w-5 h-5 text-gray-400 hover:text-pink-500 transition-colors" />
+                                        <Eye className="w-5 h-5 text-gray-400 hover:text-blue-500 transition-colors" />
                                     )}
                                 </motion.button>
                             </div>
@@ -251,7 +251,7 @@ const AdminLoginPage = () => {
                             whileTap={{ scale: 0.98 }}
                             type="submit"
                             disabled={isLoading}
-                            className="w-full bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 disabled:from-pink-300 disabled:to-pink-400 text-white font-bold py-3.5 px-4 rounded-xl transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl"
+                            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-blue-300 disabled:to-blue-400 text-white font-bold py-3.5 px-4 rounded-xl transition-all duration-200 flex items-center justify-center shadow-lg hover:shadow-xl"
                             data-testid="button-admin-login"
                         >
                             {isLoading ? (

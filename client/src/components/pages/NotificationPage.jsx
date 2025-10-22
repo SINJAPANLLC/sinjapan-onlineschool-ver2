@@ -154,7 +154,7 @@ const NotificationPage = () => {
             <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-gray-200 p-4 flex items-center z-10 shadow-sm">
                 <motion.button 
                     onClick={() => navigate(-1)} 
-                    className="text-pink-600 mr-4 p-2 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all"
+                    className="text-blue-600 mr-4 p-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all"
                     whileHover={{ scale: 1.1, rotate: -10 }}
                     whileTap={{ scale: 0.9 }}
                 >
@@ -168,10 +168,10 @@ const NotificationPage = () => {
                         }}
                         transition={{ duration: 3, repeat: Infinity }}
                     >
-                        <Bell className="w-6 h-6 text-pink-500 mr-2" strokeWidth={2.5} />
+                        <Bell className="w-6 h-6 text-blue-500 mr-2" strokeWidth={2.5} />
                     </motion.div>
                     <motion.h1 
-                        className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent"
+                        className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent"
                         animate={{ opacity: [0.8, 1, 0.8] }}
                         transition={{ duration: 3, repeat: Infinity }}
                     >
@@ -179,7 +179,7 @@ const NotificationPage = () => {
                     </motion.h1>
                 </div>
                 <motion.div 
-                    className="text-sm font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent"
+                    className="text-sm font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent"
                     animate={{ scale: [1, 1.05, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                 >
@@ -191,7 +191,7 @@ const NotificationPage = () => {
                 {/* お知らせ一覧 */}
                 <div className="mb-6">
                     <motion.h2 
-                        className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-4"
+                        className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent mb-4"
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                     >
@@ -204,8 +204,8 @@ const NotificationPage = () => {
                                 onClick={() => setCurrentPage(index)}
                                 className={`p-4 border-2 rounded-xl cursor-pointer transition-all shadow-sm ${
                                     currentPage === index 
-                                        ? 'border-pink-500 bg-gradient-to-r from-pink-50 to-rose-50' 
-                                        : 'border-gray-200 hover:border-pink-300'
+                                        ? 'border-blue-500 bg-gradient-to-r from-blue-50 to-rose-50' 
+                                        : 'border-gray-200 hover:border-blue-300'
                                 }`}
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
@@ -218,7 +218,7 @@ const NotificationPage = () => {
                                         <motion.div 
                                             className={`w-11 h-11 rounded-full flex items-center justify-center shadow-md ${
                                                 currentPage === index 
-                                                    ? 'bg-gradient-to-br from-pink-400 to-pink-600' 
+                                                    ? 'bg-gradient-to-br from-blue-400 to-blue-600' 
                                                     : 'bg-gray-100'
                                             }`}
                                             animate={currentPage === index ? {
@@ -235,7 +235,7 @@ const NotificationPage = () => {
                                         <div>
                                             <h3 className={`font-bold ${
                                                 currentPage === index 
-                                                    ? 'bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent' 
+                                                    ? 'bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent' 
                                                     : 'text-gray-900'
                                             }`}>
                                                 {page.title}
@@ -249,7 +249,7 @@ const NotificationPage = () => {
                                         animate={{ x: [0, 5, 0] }}
                                         transition={{ duration: 1.5, repeat: Infinity }}
                                     >
-                                        <ChevronRight className="w-5 h-5 text-pink-400" strokeWidth={2.5} />
+                                        <ChevronRight className="w-5 h-5 text-blue-400" strokeWidth={2.5} />
                                     </motion.div>
                                 </div>
                             </motion.div>
@@ -265,11 +265,11 @@ const NotificationPage = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="bg-white border-2 border-pink-200 rounded-xl p-6 shadow-lg"
+                        className="bg-white border-2 border-blue-200 rounded-xl p-6 shadow-lg"
                     >
                         <div className="mb-6">
                             <motion.h2 
-                                className="text-xl font-bold bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent mb-3"
+                                className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent mb-3"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 0.2 }}
@@ -280,14 +280,14 @@ const NotificationPage = () => {
                                 {currentNotification.notices.map((notice, idx) => (
                                     <motion.div 
                                         key={notice.id} 
-                                        className="flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-br from-pink-50 to-rose-50 border border-pink-200 rounded-full shadow-sm"
+                                        className="flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-br from-blue-50 to-rose-50 border border-blue-200 rounded-full shadow-sm"
                                         initial={{ scale: 0 }}
                                         animate={{ scale: 1 }}
                                         transition={{ delay: 0.3 + idx * 0.1 }}
                                         whileHover={{ scale: 1.05 }}
                                     >
-                                        {React.createElement(notice.icon, { className: "w-4 h-4 text-pink-600", strokeWidth: 2.5 })}
-                                        <span className="text-sm font-medium text-pink-700">{notice.title}</span>
+                                        {React.createElement(notice.icon, { className: "w-4 h-4 text-blue-600", strokeWidth: 2.5 })}
+                                        <span className="text-sm font-medium text-blue-700">{notice.title}</span>
                                     </motion.div>
                                 ))}
                             </div>
@@ -309,7 +309,7 @@ const NotificationPage = () => {
                                         key={index} 
                                         className={`text-gray-700 ${
                                             line.startsWith('【') || line.startsWith('・') 
-                                                ? 'font-bold text-pink-700' 
+                                                ? 'font-bold text-blue-700' 
                                                 : line === '' 
                                                     ? 'h-4' 
                                                     : 'font-medium'
@@ -324,12 +324,12 @@ const NotificationPage = () => {
                             </div>
 
                             <motion.div 
-                                className="mt-6 pt-4 border-t-2 border-pink-200"
+                                className="mt-6 pt-4 border-t-2 border-blue-200"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ delay: 1 }}
                             >
-                                <p className="text-sm font-bold bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent text-right">
+                                <p className="text-sm font-bold bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent text-right">
                                     {currentNotification.content.footer}
                                 </p>
                             </motion.div>
@@ -342,7 +342,7 @@ const NotificationPage = () => {
                     <motion.button
                         onClick={prevPage}
                         disabled={currentPage === 0}
-                        className="px-5 py-2.5 bg-gradient-to-br from-pink-400 to-pink-600 text-white font-bold rounded-lg shadow-md hover:shadow-lg disabled:from-gray-200 disabled:to-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed transition-all"
+                        className="px-5 py-2.5 bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold rounded-lg shadow-md hover:shadow-lg disabled:from-gray-200 disabled:to-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed transition-all"
                         whileHover={currentPage !== 0 ? { scale: 1.05 } : {}}
                         whileTap={currentPage !== 0 ? { scale: 0.95 } : {}}
                     >
@@ -356,7 +356,7 @@ const NotificationPage = () => {
                                 onClick={() => setCurrentPage(index)}
                                 className={`rounded-full transition-all ${
                                     currentPage === index 
-                                        ? 'w-8 h-3 bg-gradient-to-r from-pink-400 to-pink-600 shadow-md' 
+                                        ? 'w-8 h-3 bg-gradient-to-r from-blue-400 to-blue-600 shadow-md' 
                                         : 'w-3 h-3 bg-gray-300'
                                 }`}
                                 whileHover={{ scale: 1.2 }}
@@ -372,7 +372,7 @@ const NotificationPage = () => {
                     <motion.button
                         onClick={nextPage}
                         disabled={currentPage === notificationPages.length - 1}
-                        className="px-5 py-2.5 bg-gradient-to-br from-pink-400 to-pink-600 text-white font-bold rounded-lg shadow-md hover:shadow-lg disabled:from-gray-200 disabled:to-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed transition-all"
+                        className="px-5 py-2.5 bg-gradient-to-br from-blue-400 to-blue-600 text-white font-bold rounded-lg shadow-md hover:shadow-lg disabled:from-gray-200 disabled:to-gray-300 disabled:text-gray-400 disabled:cursor-not-allowed transition-all"
                         whileHover={currentPage !== notificationPages.length - 1 ? { scale: 1.05 } : {}}
                         whileTap={currentPage !== notificationPages.length - 1 ? { scale: 0.95 } : {}}
                     >

@@ -916,7 +916,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                     
                     {item.isNew && (
                         <motion.div 
-                            className="absolute top-3 right-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg"
+                            className="absolute top-3 right-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg"
                             animate={{ scale: [1, 1.1, 1] }}
                             transition={{ duration: 2, repeat: Infinity }}
                             data-testid={`new-badge-${item.id}`}
@@ -926,7 +926,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                     )}
                     {showRanking && (
                         <motion.div 
-                            className="absolute top-3 left-3 bg-gradient-to-br from-pink-500 to-pink-600 text-white text-xs px-2.5 py-1.5 rounded-lg font-bold shadow-lg"
+                            className="absolute top-3 left-3 bg-gradient-to-br from-blue-500 to-blue-600 text-white text-xs px-2.5 py-1.5 rounded-lg font-bold shadow-lg"
                             whileHover={{ scale: 1.1 }}
                             data-testid={`rank-badge-${rank}`}
                         >
@@ -969,7 +969,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                         transition={{ delay: 0.3 }}
                     >
                         <motion.button 
-                            className="flex items-center gap-1.5 hover:bg-pink-50 p-1.5 rounded-lg transition-colors"
+                            className="flex items-center gap-1.5 hover:bg-blue-50 p-1.5 rounded-lg transition-colors"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={(e) => {
@@ -981,14 +981,14 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                             <Heart 
                                 className={`w-4 h-4 transition-all ${
                                     isLiked 
-                                        ? 'text-pink-500 fill-pink-500' 
-                                        : 'text-gray-400 hover:text-pink-500'
+                                        ? 'text-blue-500 fill-blue-500' 
+                                        : 'text-gray-400 hover:text-blue-500'
                                 }`}
                             />
                             <span 
                                 className={`font-bold ${
                                     isLiked 
-                                        ? 'bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent' 
+                                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent' 
                                         : 'text-gray-600'
                                 }`}
                                 data-testid={`count-likes-${item.id}`}
@@ -997,7 +997,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                             </span>
                         </motion.button>
                         <motion.button 
-                            className="flex items-center gap-1.5 hover:bg-pink-50 p-1.5 rounded-lg transition-colors"
+                            className="flex items-center gap-1.5 hover:bg-blue-50 p-1.5 rounded-lg transition-colors"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={(e) => {
@@ -1009,14 +1009,14 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                             <Bookmark 
                                 className={`w-4 h-4 transition-all ${
                                     isBookmarked 
-                                        ? 'text-pink-500 fill-pink-500' 
-                                        : 'text-gray-400 hover:text-pink-500'
+                                        ? 'text-blue-500 fill-blue-500' 
+                                        : 'text-gray-400 hover:text-blue-500'
                                 }`}
                             />
                             <span 
                                 className={`font-bold ${
                                     isBookmarked 
-                                        ? 'bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent' 
+                                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent' 
                                         : 'text-gray-600'
                                 }`}
                                 data-testid={`count-bookmarks-${item.id}`}
@@ -1057,7 +1057,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                     
                     {item.isNew && (
                         <motion.div 
-                            className="absolute top-3 right-3 bg-gradient-to-r from-pink-500 to-pink-600 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg"
+                            className="absolute top-3 right-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs px-3 py-1.5 rounded-full font-bold shadow-lg"
                             animate={{ scale: [1, 1.1, 1] }}
                             transition={{ duration: 2, repeat: Infinity }}
                             data-testid={`new-badge-${item.id}`}
@@ -1066,7 +1066,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                         </motion.div>
                     )}
                     <motion.div 
-                        className="absolute top-3 left-3 bg-gradient-to-br from-pink-500 to-pink-600 text-white text-xs px-2.5 py-1.5 rounded-lg font-bold shadow-lg"
+                        className="absolute top-3 left-3 bg-gradient-to-br from-blue-500 to-blue-600 text-white text-xs px-2.5 py-1.5 rounded-lg font-bold shadow-lg"
                         whileHover={{ scale: 1.1, rotate: 5 }}
                         data-testid={`rank-badge-${rank}`}
                     >
@@ -1108,7 +1108,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                         transition={{ delay: 0.3 }}
                     >
                         <motion.button 
-                            className="flex items-center gap-1.5 hover:bg-pink-50 p-1.5 rounded-lg transition-colors"
+                            className="flex items-center gap-1.5 hover:bg-blue-50 p-1.5 rounded-lg transition-colors"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={(e) => {
@@ -1120,14 +1120,14 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                             <Heart 
                                 className={`w-4 h-4 transition-all ${
                                     isLiked 
-                                        ? 'text-pink-500 fill-pink-500' 
-                                        : 'text-gray-400 hover:text-pink-500'
+                                        ? 'text-blue-500 fill-blue-500' 
+                                        : 'text-gray-400 hover:text-blue-500'
                                 }`}
                             />
                             <span 
                                 className={`font-bold ${
                                     isLiked 
-                                        ? 'bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent' 
+                                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent' 
                                         : 'text-gray-600'
                                 }`}
                                 data-testid={`count-likes-${item.id}`}
@@ -1136,7 +1136,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                             </span>
                         </motion.button>
                         <motion.button 
-                            className="flex items-center gap-1.5 hover:bg-pink-50 p-1.5 rounded-lg transition-colors"
+                            className="flex items-center gap-1.5 hover:bg-blue-50 p-1.5 rounded-lg transition-colors"
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={(e) => {
@@ -1148,14 +1148,14 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                             <Bookmark 
                                 className={`w-4 h-4 transition-all ${
                                     isBookmarked 
-                                        ? 'text-pink-500 fill-pink-500' 
-                                        : 'text-gray-400 hover:text-pink-500'
+                                        ? 'text-blue-500 fill-blue-500' 
+                                        : 'text-gray-400 hover:text-blue-500'
                                 }`}
                             />
                             <span 
                                 className={`font-bold ${
                                     isBookmarked 
-                                        ? 'bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent' 
+                                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent' 
                                         : 'text-gray-600'
                                 }`}
                                 data-testid={`count-bookmarks-${item.id}`}
@@ -1182,9 +1182,9 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                         animate={{ rotate: [0, 10, -10, 0] }}
                         transition={{ duration: 3, repeat: Infinity }}
                     >
-                        <Crown className="w-6 h-6 text-pink-500 fill-pink-500" />
+                        <Crown className="w-6 h-6 text-blue-500 fill-blue-500" />
                     </motion.div>
-                    <h2 className="text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">{title}</h2>
+                    <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">{title}</h2>
                 </div>
             </motion.div>
 
@@ -1274,9 +1274,9 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                                         animate={{ rotate: [0, 10, -10, 0] }}
                                         transition={{ duration: 3, repeat: Infinity }}
                                     >
-                                        <Crown className="w-6 h-6 text-pink-500 fill-pink-500" />
+                                        <Crown className="w-6 h-6 text-blue-500 fill-blue-500" />
                                     </motion.div>
-                                    <h2 className="text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">{t('rankingPage.overallRanking')}</h2>
+                                    <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">{t('rankingPage.overallRanking')}</h2>
                                 </div>
                                 <div className="text-xs text-gray-500 hidden sm:block">
                                     👉 スワイプ
@@ -1382,7 +1382,7 @@ const RankingPosts = ({ activeTimeFilter = 'Daily' }) => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleGenreList}
-                                className="bg-pink-500 text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full text-sm sm:text-base font-semibold hover:bg-pink-600 transition-colors"
+                                className="bg-blue-500 text-white px-6 py-2.5 sm:px-8 sm:py-3 rounded-full text-sm sm:text-base font-semibold hover:bg-blue-600 transition-colors"
                             >
                                 {t('postPage.allgenres')}
                             </motion.button>

@@ -110,21 +110,21 @@ const FollowListPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
-          <Users className="w-12 h-12 text-pink-500" />
+          <Users className="w-12 h-12 text-blue-500" />
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg"
+        className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg"
       >
         <motion.button 
           whileHover={{ scale: 1.1 }}
@@ -157,16 +157,16 @@ const FollowListPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl p-4 shadow-xl border-2 border-pink-100"
+          className="bg-white rounded-2xl p-4 shadow-xl border-2 border-blue-100"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-pink-400 w-5 h-5" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 w-5 h-5" />
             <input
               type="text"
               placeholder="ユーザーを検索..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold"
+              className="w-full pl-12 pr-4 py-3 border-2 border-blue-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold"
               data-testid="input-search"
             />
           </div>
@@ -198,7 +198,7 @@ const FollowListPage = () => {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ delay: index * 0.05 }}
                   whileHover={{ scale: 1.02, y: -2 }}
-                  className="bg-white border-2 border-pink-100 rounded-2xl p-5 shadow-lg"
+                  className="bg-white border-2 border-blue-100 rounded-2xl p-5 shadow-lg"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-4">
@@ -217,7 +217,7 @@ const FollowListPage = () => {
                         <img
                           src={user.photoURL || user.avatar || 'https://via.placeholder.com/100'}
                           alt={user.displayName || user.name || 'User'}
-                          className="w-16 h-16 rounded-full object-cover border-2 border-pink-200 shadow-md"
+                          className="w-16 h-16 rounded-full object-cover border-2 border-blue-200 shadow-md"
                         />
                         {user.isVerified && (
                           <motion.div
@@ -229,7 +229,7 @@ const FollowListPage = () => {
                               repeat: Infinity,
                               ease: "easeInOut"
                             }}
-                            className="absolute -bottom-1 -right-1 w-6 h-6 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center shadow-lg border-2 border-white"
+                            className="absolute -bottom-1 -right-1 w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg border-2 border-white"
                           >
                             <CheckCircle className="w-4 h-4 text-white" />
                           </motion.div>
@@ -244,7 +244,7 @@ const FollowListPage = () => {
                         </div>
                         <p className="text-sm text-gray-500 font-medium">{user.username || '@user'}</p>
                         <div className="flex items-center space-x-2 mt-1">
-                          <span className="text-sm font-semibold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                          <span className="text-sm font-semibold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                             {(user.followers?.length || 0).toLocaleString()}フォロワー
                           </span>
                         </div>
@@ -276,7 +276,7 @@ const FollowListPage = () => {
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 0.1 + tagIndex * 0.05 }}
                           whileHover={{ scale: 1.1 }}
-                          className="px-3 py-1 bg-gradient-to-r from-pink-100 to-purple-100 text-pink-700 text-xs font-bold rounded-full border border-pink-200"
+                          className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs font-bold rounded-full border border-blue-200"
                         >
                           #{tag}
                         </motion.span>
@@ -290,7 +290,7 @@ const FollowListPage = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-16 bg-white rounded-2xl border-2 border-pink-100 shadow-lg"
+              className="text-center py-16 bg-white rounded-2xl border-2 border-blue-100 shadow-lg"
             >
               <motion.div
                 animate={{ 
@@ -303,7 +303,7 @@ const FollowListPage = () => {
                   ease: "easeInOut"
                 }}
               >
-                <Users className="w-20 h-20 text-pink-300 mx-auto mb-6" />
+                <Users className="w-20 h-20 text-blue-300 mx-auto mb-6" />
               </motion.div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">フォロー中のユーザーがいません</h3>
               <p className="text-gray-500">興味のあるユーザーをフォローしてみましょう</p>

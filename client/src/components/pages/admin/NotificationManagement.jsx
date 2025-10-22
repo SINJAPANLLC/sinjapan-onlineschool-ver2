@@ -191,7 +191,7 @@ const NotificationManagement = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
+              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
               data-testid="button-create-notification"
             >
               <Plus className="w-4 h-4" />
@@ -237,14 +237,14 @@ const NotificationManagement = () => {
               placeholder="通知を検索..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+              className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               data-testid="input-search"
             />
           </div>
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+            className="px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             data-testid="select-status"
           >
             {notificationStatuses.map(status => (
@@ -269,7 +269,7 @@ const NotificationManagement = () => {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
-                      <Bell className="w-5 h-5 text-pink-500" />
+                      <Bell className="w-5 h-5 text-blue-500" />
                       <h3 className="text-lg font-semibold text-gray-900">{notification.title}</h3>
                       <span className={`px-3 py-1 text-xs font-medium rounded-full ${getStatusColor(notification.status)}`}>
                         {notification.status === 'sent' ? '送信済み' : notification.status === 'pending' ? '送信待ち' : '送信失敗'}
@@ -323,7 +323,7 @@ const NotificationManagement = () => {
                     <p className="text-sm text-gray-600 mb-1">対象</p>
                     <p className="text-lg font-semibold text-gray-900">{notification.target === 'all' ? '全ユーザー' : '特定ユーザー'}</p>
                   </div>
-                  <div className="p-4 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl">
+                  <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
                     <p className="text-sm text-gray-600 mb-1">受信者数</p>
                     <p className="text-lg font-semibold text-gray-900">{notification.recipients.toLocaleString()}人</p>
                   </div>

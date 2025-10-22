@@ -147,15 +147,15 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSubcategoryClick(subcategory.name)}
-            className="relative flex items-center justify-between p-4 bg-gradient-to-br from-white to-pink-50/30 border border-pink-100 rounded-xl shadow-md cursor-pointer hover:shadow-xl transition-all duration-200 overflow-hidden group"
+            className="relative flex items-center justify-between p-4 bg-gradient-to-br from-white to-blue-50/30 border border-blue-100 rounded-xl shadow-md cursor-pointer hover:shadow-xl transition-all duration-200 overflow-hidden group"
         >
             {/* グロウエフェクト */}
             <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-pink-400/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity"
             />
             
             <div className="flex-1 relative z-10">
-                <h3 className="text-base font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-1">
+                <h3 className="text-base font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent mb-1">
                     {subcategory.name}
                 </h3>
                 <p className="text-xs text-gray-600 font-medium">
@@ -166,7 +166,7 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
                 whileHover={{ x: 3 }}
                 className="relative z-10"
             >
-                <ChevronRight className="w-5 h-5 text-pink-400 flex-shrink-0" strokeWidth={2.5} />
+                <ChevronRight className="w-5 h-5 text-blue-400 flex-shrink-0" strokeWidth={2.5} />
             </motion.div>
         </motion.div>
     );
@@ -181,20 +181,20 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
                             whileHover={{ scale: 1.1, rotate: -10 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={onBack}
-                            className="p-2.5 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all group"
+                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all group"
                         >
-                            <ArrowLeft className="w-5 h-5 text-gray-600 group-hover:text-pink-500 transition-colors" strokeWidth={2.5} />
+                            <ArrowLeft className="w-5 h-5 text-gray-600 group-hover:text-blue-500 transition-colors" strokeWidth={2.5} />
                         </motion.button>
                         <div className="flex items-center space-x-2">
                             <motion.div
                                 animate={{ rotate: [0, 10, 0, -10, 0] }}
                                 transition={{ duration: 3, repeat: Infinity }}
-                                className="bg-gradient-to-br from-pink-400 to-pink-600 p-2 rounded-full"
+                                className="bg-gradient-to-br from-blue-400 to-blue-600 p-2 rounded-full"
                             >
                                 <currentGenre.icon className="w-5 h-5 text-white" strokeWidth={2.5} />
                             </motion.div>
                             <motion.h1 
-                                className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent"
+                                className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent"
                                 animate={{ opacity: [0.8, 1, 0.8] }}
                                 transition={{ duration: 3, repeat: Infinity }}
                             >
@@ -226,7 +226,7 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
                     <motion.button
                         whileHover={{ scale: 1.05, y: -2 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative bg-gradient-to-br from-pink-400 to-pink-600 text-white px-8 py-3.5 rounded-full font-bold shadow-xl overflow-hidden group"
+                        className="relative bg-gradient-to-br from-blue-400 to-blue-600 text-white px-8 py-3.5 rounded-full font-bold shadow-xl overflow-hidden group"
                     >
                         <motion.div
                             className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
@@ -261,7 +261,7 @@ const GenreNavigationSystem = () => {
             title: 'ビジュアル',
             description: 'ロリ顔、地味顔、ギャルなど出演者の属性に応じたジャンル',
             icon: User,
-            color: 'text-pink-500'
+            color: 'text-blue-500'
         },
         {
             id: 'play',

@@ -7,14 +7,14 @@ import { useUserInteractions } from '../../hooks/useUserInteractions';
 import { useUserStats } from '../../context/UserStatsContext';
 
 export const genreData = [
-    { name: '運営Pik UP', count: '410,177 posts', color: 'from-pink-500 to-purple-600' },
+    { name: '運営Pik UP', count: '410,177 posts', color: 'from-blue-500 to-purple-600' },
     { name: 'ハメ撮り', count: '147,577 posts', color: 'from-purple-500 to-indigo-600' },
-    { name: 'オナニー', count: '104,474 posts', color: 'from-red-500 to-pink-600' },
+    { name: 'オナニー', count: '104,474 posts', color: 'from-red-500 to-blue-600' },
     { name: 'フェラチオ', count: '96,852 posts', color: 'from-orange-500 to-red-600' },
     { name: '複数プレイ', count: '83,925 posts', color: 'from-green-500 to-teal-600' },
     { name: '人妻', count: '72,199 posts', color: 'from-blue-500 to-purple-600' },
-    { name: '潮吹き', count: '65,989 posts', color: 'from-pink-500 to-red-600' },
-    { name: 'アブノーマル', count: '60,114 posts', color: 'from-purple-500 to-pink-600' }
+    { name: '潮吹き', count: '65,989 posts', color: 'from-blue-500 to-red-600' },
+    { name: 'アブノーマル', count: '60,114 posts', color: 'from-purple-500 to-blue-600' }
 ];
 
 const GenrePage = () => {
@@ -193,14 +193,14 @@ const GenrePage = () => {
                 <div className="flex items-center justify-between p-4 bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-10 shadow-sm">
                     <motion.button 
                         onClick={() => navigate(-1)} 
-                        className="p-2 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all"
+                        className="p-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all"
                         whileHover={{ scale: 1.1, rotate: -10 }}
                         whileTap={{ scale: 0.9 }}
                     >
-                        <ArrowLeft size={20} className="text-pink-600" strokeWidth={2.5} />
+                        <ArrowLeft size={20} className="text-blue-600" strokeWidth={2.5} />
                     </motion.button>
                     <div className="flex-1 mx-3">
-                        <div className="relative flex items-center bg-gradient-to-r from-gray-50 to-pink-50 border-2 border-pink-200 rounded-full px-4 py-2.5 shadow-sm">
+                        <div className="relative flex items-center bg-gradient-to-r from-gray-50 to-blue-50 border-2 border-blue-200 rounded-full px-4 py-2.5 shadow-sm">
                             <motion.div
                                 animate={{ 
                                     rotate: [0, 10, -10, 0],
@@ -208,7 +208,7 @@ const GenrePage = () => {
                                 }}
                                 transition={{ duration: 3, repeat: Infinity }}
                             >
-                                <Search size={18} className="text-pink-500 mr-2" strokeWidth={2.5} />
+                                <Search size={18} className="text-blue-500 mr-2" strokeWidth={2.5} />
                             </motion.div>
                             <input
                                 type="text"
@@ -224,7 +224,7 @@ const GenrePage = () => {
                 {/* Content Section */}
                 <div className="bg-white px-4 py-4">
                     <motion.h2 
-                        className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-4"
+                        className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent mb-4"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: [0.8, 1, 0.8], x: 0 }}
                         transition={{ opacity: { duration: 2, repeat: Infinity }, x: { duration: 0.5 } }}
@@ -249,10 +249,10 @@ const GenrePage = () => {
                                 }}
                                 transition={{ duration: 3, repeat: Infinity }}
                             >
-                                <Sparkles className="mx-auto text-pink-400" size={64} strokeWidth={2} />
+                                <Sparkles className="mx-auto text-blue-400" size={64} strokeWidth={2} />
                             </motion.div>
                             <motion.p 
-                                className="font-bold text-lg bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent"
+                                className="font-bold text-lg bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent"
                                 animate={{ opacity: [0.7, 1, 0.7] }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             >
@@ -279,7 +279,7 @@ const GenrePage = () => {
                                            {/* NEWバッジ（右上） */}
                                            {index < 2 && (
                                                <motion.div 
-                                                   className="absolute top-2 right-2 bg-gradient-to-r from-pink-500 to-pink-600 px-3 py-1 rounded-full text-white text-xs font-bold shadow-lg z-10"
+                                                   className="absolute top-2 right-2 bg-gradient-to-r from-blue-500 to-blue-600 px-3 py-1 rounded-full text-white text-xs font-bold shadow-lg z-10"
                                                    initial={{ scale: 0 }}
                                                    animate={{ scale: 1 }}
                                                    transition={{ delay: index * 0.1 + 0.3 }}
@@ -352,7 +352,7 @@ const GenrePage = () => {
                                                >
                                                    <Heart 
                                                        size={16} 
-                                                       className={`${localLikedPosts.has(post.id) ? 'text-pink-500 fill-current' : 'text-gray-400'}`}
+                                                       className={`${localLikedPosts.has(post.id) ? 'text-blue-500 fill-current' : 'text-gray-400'}`}
                                                        strokeWidth={2}
                                                    />
                                                    <span className="text-gray-600">{post.likes}</span>
@@ -365,7 +365,7 @@ const GenrePage = () => {
                                                >
                                                    <Bookmark 
                                                        size={16} 
-                                                       className={`${localSavedPosts.has(post.id) ? 'text-pink-500 fill-current' : 'text-gray-400'}`}
+                                                       className={`${localSavedPosts.has(post.id) ? 'text-blue-500 fill-current' : 'text-gray-400'}`}
                                                        strokeWidth={2}
                                                    />
                                                    <span className="text-gray-600">{post.bookmarks}</span>

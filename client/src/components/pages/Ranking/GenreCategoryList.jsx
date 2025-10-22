@@ -184,10 +184,10 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleSubcategoryClick(subcategory.name)}
-            className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-md transition-all duration-200 hover:border-pink-200"
+            className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg shadow-sm cursor-pointer hover:shadow-md transition-all duration-200 hover:border-blue-200"
         >
             <div className="flex-1">
-                <h3 className="text-base font-medium text-pink-600 mb-1">
+                <h3 className="text-base font-medium text-blue-600 mb-1">
                     {subcategory.name}
                 </h3>
                 <p className="text-sm text-gray-600">
@@ -213,7 +213,7 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
                             <ArrowLeft className="w-5 h-5 text-gray-600" />
                         </motion.button>
                         <div className="flex items-center space-x-2">
-                            <currentGenre.icon className="w-5 h-5 text-pink-500" />
+                            <currentGenre.icon className="w-5 h-5 text-blue-500" />
                             <h1 className="text-lg font-semibold text-gray-800">
                                 {currentGenre.title}
                             </h1>
@@ -244,7 +244,7 @@ const GenreSubcategoryPage = ({ selectedGenre, onBack, onSubcategorySelect }) =>
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-pink-500 text-white px-8 py-3 rounded-full font-medium hover:bg-pink-600 transition-colors shadow-lg"
+                        className="bg-blue-500 text-white px-8 py-3 rounded-full font-medium hover:bg-blue-600 transition-colors shadow-lg"
                     >
                         さらにカテゴリを読み込む
                     </motion.button>
@@ -270,7 +270,7 @@ const GenreNavigationSystem = () => {
             title: 'ビジュアル',
             description: 'ロリ顔、地味顔、ギャルなど出演者の属性に応じたジャンル',
             icon: User,
-            color: 'text-pink-500'
+            color: 'text-blue-500'
         },
         {
             id: 'play',
@@ -356,12 +356,12 @@ const GenreNavigationSystem = () => {
                             whileHover={{ scale: 1.1, rotate: -10 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => window.history.back()}
-                            className="p-2.5 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all group"
+                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all group"
                         >
-                            <ArrowLeft className="w-5 h-5 text-gray-600 group-hover:text-pink-500 transition-colors" strokeWidth={2.5} />
+                            <ArrowLeft className="w-5 h-5 text-gray-600 group-hover:text-blue-500 transition-colors" strokeWidth={2.5} />
                         </motion.button>
                         <motion.h1 
-                            className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent"
+                            className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent"
                             animate={{ opacity: [0.8, 1, 0.8] }}
                             transition={{ duration: 3, repeat: Infinity }}
                         >
@@ -396,7 +396,7 @@ const GenreNavigationSystem = () => {
                             >
                                 {/* アニメーション付きグラデーション背景 */}
                                 <motion.div
-                                    className="absolute inset-0 bg-gradient-to-br from-pink-400 via-pink-500 to-pink-600"
+                                    className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600"
                                     animate={{
                                         scale: [1, 1.05, 1],
                                         rotate: [0, 2, 0]

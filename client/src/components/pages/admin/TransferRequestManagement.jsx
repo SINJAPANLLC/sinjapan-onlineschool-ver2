@@ -324,7 +324,7 @@ export default function TransferRequestManagement() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="ユーザー名で検索..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               data-testid="input-search"
             />
           </div>
@@ -332,7 +332,7 @@ export default function TransferRequestManagement() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             data-testid="select-status-filter"
           >
             <option value="all">すべて</option>
@@ -353,10 +353,10 @@ export default function TransferRequestManagement() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2, delay: index * 0.05 }}
-                className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-pink-50 transition-colors group"
+                className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-blue-50 transition-colors group"
                 data-testid={`request-item-${request.id}`}
               >
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center text-white shadow-md">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-md">
                   <User className="w-6 h-6" />
                 </div>
 
@@ -380,7 +380,7 @@ export default function TransferRequestManagement() {
                       手数料: <span className="font-semibold text-gray-900">¥{(request.processingFee || 0).toLocaleString()}</span>
                     </span>
                     <span className="text-gray-600">
-                      振込額: <span className="font-semibold text-pink-600">¥{(request.netAmount || 0).toLocaleString()}</span>
+                      振込額: <span className="font-semibold text-blue-600">¥{(request.netAmount || 0).toLocaleString()}</span>
                     </span>
                   </div>
                 </div>
@@ -505,7 +505,7 @@ export default function TransferRequestManagement() {
                     </div>
                     <div className="flex justify-between pt-2 border-t border-gray-300">
                       <span className="text-gray-900 font-semibold">振込額:</span>
-                      <span className="font-bold text-pink-600 text-lg">¥{(selectedRequest.netAmount || 0).toLocaleString()}</span>
+                      <span className="font-bold text-blue-600 text-lg">¥{(selectedRequest.netAmount || 0).toLocaleString()}</span>
                     </div>
                   </div>
                 </div>

@@ -73,8 +73,8 @@ const PurchaseHistoryPage = () => {
   const totalSpent = purchases.filter(p => p.status === 'completed').reduce((sum, p) => sum + p.amount, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
         </motion.button>
@@ -87,30 +87,30 @@ const PurchaseHistoryPage = () => {
       </motion.div>
 
       <div className="p-6 space-y-6">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-6 border-2 border-pink-200 shadow-xl relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-6 border-2 border-blue-200 shadow-xl relative overflow-hidden">
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
-          <h2 className="text-xl font-bold text-pink-900 mb-4 relative z-10">購入統計</h2>
+          <h2 className="text-xl font-bold text-blue-900 mb-4 relative z-10">購入統計</h2>
           <div className="flex items-center justify-between relative z-10">
             <div>
-              <p className="text-3xl font-bold text-pink-900" data-testid="text-total-spent">{formatCurrency(totalSpent)}</p>
-              <p className="text-pink-700 font-medium">総購入額</p>
+              <p className="text-3xl font-bold text-blue-900" data-testid="text-total-spent">{formatCurrency(totalSpent)}</p>
+              <p className="text-blue-700 font-medium">総購入額</p>
             </div>
             <div className="text-right">
-              <p className="text-3xl font-bold text-pink-900" data-testid="text-purchase-count">{purchases.filter(p => p.status === 'completed').length}</p>
-              <p className="text-pink-700 font-medium">購入回数</p>
+              <p className="text-3xl font-bold text-blue-900" data-testid="text-purchase-count">{purchases.filter(p => p.status === 'completed').length}</p>
+              <p className="text-blue-700 font-medium">購入回数</p>
             </div>
           </div>
         </motion.div>
 
         <div className="space-y-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl p-4 shadow-lg border-2 border-pink-100">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl p-4 shadow-lg border-2 border-blue-100">
             <div className="relative mb-4">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-pink-400 w-5 h-5" />
-              <input type="text" placeholder="購入を検索..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-12 pr-4 py-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold" data-testid="input-search" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 w-5 h-5" />
+              <input type="text" placeholder="購入を検索..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-12 pr-4 py-3 border-2 border-blue-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold" data-testid="input-search" />
             </div>
             <div className="flex space-x-2">
               {[{ id: 'all', label: 'すべて' }, { id: 'subscription', label: 'サブスク' }, { id: 'one-time', label: '単品' }].map((option) => (
-                <motion.button key={option.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setFilter(option.id)} className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all ${filter === option.id ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-md' : 'bg-gray-100 text-gray-600'}`} data-testid={`button-filter-${option.id}`}>
+                <motion.button key={option.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setFilter(option.id)} className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all ${filter === option.id ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md' : 'bg-gray-100 text-gray-600'}`} data-testid={`button-filter-${option.id}`}>
                   {option.label}
                 </motion.button>
               ))}
@@ -118,7 +118,7 @@ const PurchaseHistoryPage = () => {
           </motion.div>
 
           {filteredPurchases.map((purchase, index) => (
-            <motion.div key={purchase.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white border-2 border-pink-100 rounded-2xl p-5 shadow-lg">
+            <motion.div key={purchase.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white border-2 border-blue-100 rounded-2xl p-5 shadow-lg">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-2">
@@ -132,14 +132,14 @@ const PurchaseHistoryPage = () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent" data-testid={`text-amount-${purchase.id}`}>{formatCurrency(purchase.amount)}</p>
+                  <p className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid={`text-amount-${purchase.id}`}>{formatCurrency(purchase.amount)}</p>
                   {purchase.nextBilling && (
                     <p className="text-xs text-gray-500 mt-1">次回: {formatDate(purchase.nextBilling)}</p>
                   )}
                 </div>
               </div>
               <div className="flex space-x-2">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex-1 bg-gradient-to-r from-pink-100 to-purple-100 text-pink-700 py-2 rounded-xl font-bold text-sm hover:shadow-md transition-all flex items-center justify-center space-x-1" data-testid={`button-view-${purchase.id}`}>
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 py-2 rounded-xl font-bold text-sm hover:shadow-md transition-all flex items-center justify-center space-x-1" data-testid={`button-view-${purchase.id}`}>
                   <Eye className="w-4 h-4" />
                   <span>詳細</span>
                 </motion.button>
@@ -152,12 +152,12 @@ const PurchaseHistoryPage = () => {
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-200 rounded-2xl p-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6">
           <div className="flex items-start space-x-4">
-            <Sparkles className="w-6 h-6 text-pink-600 mt-1" />
+            <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
             <div>
-              <h4 className="font-bold text-pink-900 mb-2 text-lg">購入履歴について</h4>
-              <ul className="text-base text-pink-800 space-y-2">
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">購入履歴について</h4>
+              <ul className="text-base text-blue-800 space-y-2">
                 <li className="flex items-center"><CheckCircle className="w-4 h-4 mr-2" />すべての取引は安全に記録されています</li>
                 <li className="flex items-center"><CheckCircle className="w-4 h-4 mr-2" />領収書はいつでもダウンロード可能です</li>
                 <li className="flex items-center"><CheckCircle className="w-4 h-4 mr-2" />過去の購入を検索できます</li>

@@ -116,11 +116,11 @@ const SwitchAccountPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg"
+        className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg"
       >
         <motion.button 
           whileHover={{ scale: 1.1 }}
@@ -152,14 +152,14 @@ const SwitchAccountPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl p-4 shadow-xl border-2 border-pink-100"
+          className="bg-white rounded-2xl p-4 shadow-xl border-2 border-blue-100"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-pink-400 w-5 h-5" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 w-5 h-5" />
             <input
               type="text"
               placeholder="アカウントを検索..."
-              className="w-full pl-12 pr-4 py-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold"
+              className="w-full pl-12 pr-4 py-3 border-2 border-blue-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               data-testid="input-search"
@@ -171,17 +171,17 @@ const SwitchAccountPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl p-4 shadow-xl border-2 border-pink-100"
+          className="bg-white rounded-2xl p-4 shadow-xl border-2 border-blue-100"
         >
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleAddAccount}
-            className="w-full flex items-center justify-center space-x-3 p-5 border-2 border-dashed border-pink-300 rounded-xl bg-gradient-to-r from-pink-50 to-purple-50 hover:from-pink-100 hover:to-purple-100 transition-all"
+            className="w-full flex items-center justify-center space-x-3 p-5 border-2 border-dashed border-blue-300 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 transition-all"
             data-testid="button-add-account"
           >
-            <Plus className="w-6 h-6 text-pink-600" />
-            <span className="font-bold text-pink-700">新しいアカウントを追加</span>
+            <Plus className="w-6 h-6 text-blue-600" />
+            <span className="font-bold text-blue-700">新しいアカウントを追加</span>
           </motion.button>
         </motion.div>
 
@@ -199,7 +199,7 @@ const SwitchAccountPage = () => {
                     exit={{ opacity: 0, x: -20 }}
                     transition={{ delay: index * 0.05 }}
                     whileHover={{ scale: 1.01, y: -2 }}
-                    className="bg-white border-2 border-pink-100 rounded-2xl p-5 shadow-lg"
+                    className="bg-white border-2 border-blue-100 rounded-2xl p-5 shadow-lg"
                   >
                     <div className="flex items-center space-x-4">
                       <motion.div
@@ -217,7 +217,7 @@ const SwitchAccountPage = () => {
                         <img 
                           src={account.avatar} 
                           alt={account.name} 
-                          className="w-20 h-20 rounded-full object-cover border-2 border-pink-200 shadow-md"
+                          className="w-20 h-20 rounded-full object-cover border-2 border-blue-200 shadow-md"
                         />
                         <motion.div
                           animate={{ 
@@ -247,7 +247,7 @@ const SwitchAccountPage = () => {
                             <motion.div
                               initial={{ scale: 0 }}
                               animate={{ scale: 1 }}
-                              className="flex items-center space-x-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md"
+                              className="flex items-center space-x-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold shadow-md"
                             >
                               <CheckCircle className="w-3 h-3" />
                               <span>現在</span>
@@ -256,8 +256,8 @@ const SwitchAccountPage = () => {
                         </div>
                         
                         <div className="flex items-center space-x-2 mb-2">
-                          <AccountTypeIcon className="w-4 h-4 text-pink-500" />
-                          <span className="text-sm font-semibold text-pink-600">
+                          <AccountTypeIcon className="w-4 h-4 text-blue-500" />
+                          <span className="text-sm font-semibold text-blue-600">
                             {account.accountType === 'creator' ? 'クリエイター' : 'ファン'}
                           </span>
                           {account.followers > 0 && (
@@ -285,7 +285,7 @@ const SwitchAccountPage = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => handleSwitchAccount(account.id)}
-                            className="px-5 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-xl text-sm font-bold hover:shadow-lg transition-all"
+                            className="px-5 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl text-sm font-bold hover:shadow-lg transition-all"
                             data-testid={`button-switch-${account.id}`}
                           >
                             切り替え
@@ -311,7 +311,7 @@ const SwitchAccountPage = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-16 bg-white rounded-2xl border-2 border-pink-100 shadow-lg"
+              className="text-center py-16 bg-white rounded-2xl border-2 border-blue-100 shadow-lg"
             >
               <motion.div
                 animate={{ 
@@ -324,7 +324,7 @@ const SwitchAccountPage = () => {
                   ease: "easeInOut"
                 }}
               >
-                <Users className="w-20 h-20 text-pink-300 mx-auto mb-6" />
+                <Users className="w-20 h-20 text-blue-300 mx-auto mb-6" />
               </motion.div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">アカウントが見つかりませんでした</h3>
               <p className="text-gray-500">検索キーワードを変更してお試しください。</p>
@@ -336,7 +336,7 @@ const SwitchAccountPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-200 rounded-2xl p-6 relative overflow-hidden"
+          className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden"
         >
           <motion.div
             animate={{ 
@@ -360,25 +360,25 @@ const SwitchAccountPage = () => {
                 ease: "easeInOut"
               }}
             >
-              <Sparkles className="w-6 h-6 text-pink-600 mt-1" />
+              <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
             </motion.div>
             <div>
-              <h4 className="font-bold text-pink-900 mb-2 text-lg">アカウント切り替えについて</h4>
-              <ul className="text-base text-pink-800 space-y-2">
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">アカウント切り替えについて</h4>
+              <ul className="text-base text-blue-800 space-y-2">
                 <li className="flex items-center">
-                  <CheckCircle className="w-4 h-4 mr-2 text-pink-600" />
+                  <CheckCircle className="w-4 h-4 mr-2 text-blue-600" />
                   複数のアカウントを管理できます
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="w-4 h-4 mr-2 text-pink-600" />
+                  <CheckCircle className="w-4 h-4 mr-2 text-blue-600" />
                   アカウントを切り替えると、そのアカウントの設定が適用されます
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="w-4 h-4 mr-2 text-pink-600" />
+                  <CheckCircle className="w-4 h-4 mr-2 text-blue-600" />
                   各アカウントのデータは独立して保存されます
                 </li>
                 <li className="flex items-center">
-                  <CheckCircle className="w-4 h-4 mr-2 text-pink-600" />
+                  <CheckCircle className="w-4 h-4 mr-2 text-blue-600" />
                   不要なアカウントは削除できます
                 </li>
               </ul>

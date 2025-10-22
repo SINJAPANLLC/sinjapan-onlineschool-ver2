@@ -214,7 +214,7 @@ export default function Users() {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
+                            className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
                             data-testid="button-export"
                         >
                             <Download className="w-4 h-4" />
@@ -263,7 +263,7 @@ export default function Users() {
                                 placeholder="ユーザーを検索..."
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                                 data-testid="input-search"
                             />
                         </div>
@@ -273,7 +273,7 @@ export default function Users() {
                         <select
                             value={filterStatus}
                             onChange={(e) => setFilterStatus(e.target.value)}
-                            className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                            className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             data-testid="select-status"
                         >
                             {statusOptions.map(status => (
@@ -322,7 +322,7 @@ export default function Users() {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.2, delay: index * 0.05 }}
-                                    className="hover:bg-pink-50 transition-colors"
+                                    className="hover:bg-blue-50 transition-colors"
                                     data-testid={`row-user-${user.id}`}
                                 >
                                     <td className="px-6 py-4 whitespace-nowrap">
@@ -331,13 +331,13 @@ export default function Users() {
                                                 <img
                                                     src={user.photoURL}
                                                     alt={user.name}
-                                                    className="w-10 h-10 rounded-full object-cover ring-2 ring-pink-100"
+                                                    className="w-10 h-10 rounded-full object-cover ring-2 ring-blue-100"
                                                     onError={(e) => {
                                                         e.target.src = '/logo-school.jpg';
                                                     }}
                                                 />
                                             ) : (
-                                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center ring-2 ring-pink-100">
+                                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center ring-2 ring-blue-100">
                                                     <span className="text-white font-semibold">
                                                         {user.name.charAt(0).toUpperCase()}
                                                     </span>

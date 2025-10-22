@@ -283,7 +283,7 @@ export default function FeaturedPickupManagement() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowAddModal(true)}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
+              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
               data-testid="button-add-pickup"
             >
               <Plus className="w-4 h-4" />
@@ -329,7 +329,7 @@ export default function FeaturedPickupManagement() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2, delay: index * 0.05 }}
-                className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-pink-50 transition-colors group"
+                className="flex items-center gap-4 p-4 bg-gray-50 rounded-xl hover:bg-blue-50 transition-colors group"
                 data-testid={`pickup-item-${pick.id}`}
               >
                 <div className="flex-shrink-0">
@@ -341,11 +341,11 @@ export default function FeaturedPickupManagement() {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-pink-100 to-purple-100 flex items-center justify-center">
-                        <Star className="w-8 h-8 text-pink-400" />
+                      <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                        <Star className="w-8 h-8 text-blue-400" />
                       </div>
                     )}
-                    <div className="absolute top-1 left-1 bg-gradient-to-br from-pink-500 to-pink-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-lg">
+                    <div className="absolute top-1 left-1 bg-gradient-to-br from-blue-500 to-blue-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-lg">
                       {pick.position}
                     </div>
                   </div>
@@ -436,14 +436,14 @@ export default function FeaturedPickupManagement() {
                       onChange={(e) => setSearchTerm(e.target.value)}
                       onKeyPress={(e) => e.key === 'Enter' && handleSearchPosts()}
                       placeholder="投稿タイトルやクリエイター名で検索..."
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       data-testid="input-search-posts"
                     />
                   </div>
                   <button
                     onClick={handleSearchPosts}
                     disabled={loadingPosts}
-                    className="px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-colors disabled:opacity-50"
+                    className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-colors disabled:opacity-50"
                     data-testid="button-search"
                   >
                     検索
@@ -453,7 +453,7 @@ export default function FeaturedPickupManagement() {
                 <div className="max-h-96 overflow-y-auto">
                   {loadingPosts ? (
                     <div className="text-center py-8">
-                      <div className="inline-block w-8 h-8 border-4 border-pink-200 border-t-pink-500 rounded-full animate-spin" />
+                      <div className="inline-block w-8 h-8 border-4 border-blue-200 border-t-blue-500 rounded-full animate-spin" />
                     </div>
                   ) : posts.length > 0 ? (
                     <div className="space-y-2">
@@ -463,7 +463,7 @@ export default function FeaturedPickupManagement() {
                           onClick={() => setSelectedPost(post)}
                           className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-colors ${
                             selectedPost?.id === post.id
-                              ? 'bg-pink-100 border-2 border-pink-500'
+                              ? 'bg-blue-100 border-2 border-blue-500'
                               : 'bg-gray-50 hover:bg-gray-100 border-2 border-transparent'
                           }`}
                           data-testid={`post-option-${post.id}`}
@@ -525,7 +525,7 @@ export default function FeaturedPickupManagement() {
                 <button
                   onClick={handleAddPost}
                   disabled={!selectedPost || isAdding}
-                  className="px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   data-testid="button-confirm-add"
                 >
                   {isAdding ? '追加中...' : '追加'}

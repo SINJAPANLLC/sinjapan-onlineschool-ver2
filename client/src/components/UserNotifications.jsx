@@ -75,20 +75,20 @@ const UserNotifications = () => {
     const getPriorityGradient = (priority) => {
         switch (priority) {
             case 'urgent':
-                return 'from-pink-600 to-pink-500';
+                return 'from-blue-600 to-blue-500';
             case 'high':
-                return 'from-pink-500 to-pink-400';
+                return 'from-blue-500 to-blue-400';
             case 'medium':
-                return 'from-pink-400 to-pink-300';
+                return 'from-blue-400 to-blue-300';
             default:
-                return 'from-pink-300 to-pink-200';
+                return 'from-blue-300 to-blue-200';
         }
     };
 
     if (isLoading) {
         return (
             <div className="mb-6 animate-pulse" data-testid="notifications-loading">
-                <div className="h-20 bg-gradient-to-r from-pink-200 to-pink-100 rounded-xl"></div>
+                <div className="h-20 bg-gradient-to-r from-blue-200 to-blue-100 rounded-xl"></div>
             </div>
         );
     }

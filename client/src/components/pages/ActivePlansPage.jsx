@@ -45,8 +45,8 @@ const ActivePlansPage = () => {
   const totalSubscribers = activePlans.reduce((sum, plan) => sum + plan.subscribers, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center justify-between z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center justify-between z-10 shadow-lg">
         <div className="flex items-center">
           <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
             <ArrowLeft size={24} />
@@ -58,7 +58,7 @@ const ActivePlansPage = () => {
             <h1 className="text-2xl font-bold text-white">運営中のプラン</h1>
           </div>
         </div>
-        <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/create-plan')} className="bg-white text-pink-600 px-4 py-2 rounded-xl font-bold flex items-center space-x-1 shadow-lg hover:shadow-xl transition-all" data-testid="button-create">
+        <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/create-plan')} className="bg-white text-blue-600 px-4 py-2 rounded-xl font-bold flex items-center space-x-1 shadow-lg hover:shadow-xl transition-all" data-testid="button-create">
           <Plus className="w-4 h-4" />
           <span>新規作成</span>
         </motion.button>
@@ -66,13 +66,13 @@ const ActivePlansPage = () => {
 
       <div className="p-6 space-y-6">
         <div className="grid grid-cols-2 gap-4">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-5 shadow-xl border-2 border-pink-200 relative overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-5 shadow-xl border-2 border-blue-200 relative overflow-hidden">
             <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
             <div className="relative z-10">
-              <p className="text-sm text-pink-700 font-semibold mb-1">総売上</p>
-              <p className="text-3xl font-bold text-pink-900" data-testid="text-total-revenue">{formatCurrency(totalRevenue)}</p>
+              <p className="text-sm text-blue-700 font-semibold mb-1">総売上</p>
+              <p className="text-3xl font-bold text-blue-900" data-testid="text-total-revenue">{formatCurrency(totalRevenue)}</p>
             </div>
-            <DollarSign className="absolute bottom-2 right-2 w-10 h-10 text-pink-300 opacity-50" />
+            <DollarSign className="absolute bottom-2 right-2 w-10 h-10 text-blue-300 opacity-50" />
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-5 shadow-xl border-2 border-blue-200 relative overflow-hidden">
@@ -85,7 +85,7 @@ const ActivePlansPage = () => {
           </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-white rounded-2xl p-5 shadow-xl border-2 border-pink-100">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-white rounded-2xl p-5 shadow-xl border-2 border-blue-100">
           <div className="flex items-center justify-between">
             <h3 className="text-xl font-bold text-gray-900">プラン一覧</h3>
             <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setShowInactive(!showInactive)} className="flex items-center space-x-2 text-sm text-gray-600 hover:text-gray-800 font-semibold" data-testid="button-toggle-inactive">
@@ -98,7 +98,7 @@ const ActivePlansPage = () => {
         <div className="space-y-4">
           <h3 className="text-lg font-bold text-gray-900">アクティブプラン</h3>
           {activePlans.map((plan, index) => (
-            <motion.div key={plan.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + index * 0.1 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100">
+            <motion.div key={plan.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + index * 0.1 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white rounded-2xl p-6 shadow-xl border-2 border-blue-100">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <div className="flex items-center space-x-3 mb-2">
@@ -114,11 +114,11 @@ const ActivePlansPage = () => {
                     <div><p className="text-sm text-gray-500 font-medium">最終更新</p><p className="text-sm text-gray-600">{plan.lastUpdated}</p></div>
                   </div>
                   
-                  <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-3 border border-pink-100">
-                    <p className="text-xs font-bold text-pink-700 mb-2">プラン特典</p>
+                  <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-3 border border-blue-100">
+                    <p className="text-xs font-bold text-blue-700 mb-2">プラン特典</p>
                     <div className="flex flex-wrap gap-2">
                       {plan.features.map((feature, idx) => (
-                        <span key={idx} className="bg-white px-3 py-1 rounded-full text-xs font-medium text-gray-700 border border-pink-100" data-testid={`text-feature-${plan.id}-${idx}`}>{feature}</span>
+                        <span key={idx} className="bg-white px-3 py-1 rounded-full text-xs font-medium text-gray-700 border border-blue-100" data-testid={`text-feature-${plan.id}-${idx}`}>{feature}</span>
                       ))}
                     </div>
                   </div>

@@ -136,7 +136,7 @@ const EnhancedProfilePage = () => {
 
             {/* Pin Badge */}
             {post.isPinned && (
-                <div className="absolute top-1 sm:top-2 left-1 sm:left-2 bg-pink-600 text-white text-xs px-1 sm:px-2 py-0.5 sm:py-1 rounded flex items-center space-x-1">
+                <div className="absolute top-1 sm:top-2 left-1 sm:left-2 bg-blue-600 text-white text-xs px-1 sm:px-2 py-0.5 sm:py-1 rounded flex items-center space-x-1">
                     <Pin size={8} className="sm:w-3 sm:h-3" />
                     <span className="hidden sm:inline">PIN</span>
                 </div>
@@ -296,8 +296,8 @@ return (
                             <p className="text-gray-200 text-sm sm:text-base">{profile.username}</p>
                         </div>
                         <div className="flex items-center space-x-2 ml-2 flex-shrink-0">
-                            <X size={16} className="sm:w-5 sm:h-5 text-pink-600" />
-                            <Link2 size={16} className="sm:w-5 sm:h-5 text-pink-600" />
+                            <X size={16} className="sm:w-5 sm:h-5 text-blue-600" />
+                            <Link2 size={16} className="sm:w-5 sm:h-5 text-blue-600" />
                         </div>
                     </div>
                 </div>
@@ -343,13 +343,13 @@ return (
             </div>
 
             {/* Subscription Plan */}
-            <div className="bg-pink-50 border border-pink-300 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
+            <div className="bg-blue-50 border border-blue-300 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
                     <div className="flex-1">
-                        <span className="bg-pink-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">
+                        <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded mb-2 inline-block">
                             {profile.subscriptionPlan.label}
                         </span>
-                        <h3 className="font-bold text-pink-600 text-base sm:text-lg mb-1">
+                        <h3 className="font-bold text-blue-600 text-base sm:text-lg mb-1">
                             {profile.subscriptionPlan.name}
                         </h3>
                         <div className="flex flex-wrap items-baseline gap-1 mb-2">
@@ -359,7 +359,7 @@ return (
                         </div>
                         <p className="text-xs text-gray-600 line-clamp-2">{profile.subscriptionPlan.description}</p>
                     </div>
-                    <button className="bg-pink-600 text-white px-4 sm:px-6 py-2 rounded-full font-semibold hover:bg-pink-700 text-sm sm:text-base w-full sm:w-auto">
+                    <button className="bg-blue-600 text-white px-4 sm:px-6 py-2 rounded-full font-semibold hover:bg-blue-700 text-sm sm:text-base w-full sm:w-auto">
                         Subscribe
                     </button>
                 </div>
@@ -370,7 +370,7 @@ return (
                 <button
                     onClick={() => setActiveTab('Post')}
                     className={`pb-2 border-b-2 font-semibold whitespace-nowrap text-sm sm:text-base ${activeTab === 'Post'
-                        ? 'text-pink-600 border-pink-600'
+                        ? 'text-blue-600 border-blue-600'
                         : 'text-gray-400 border-transparent'
                         }`}
                 >
@@ -379,7 +379,7 @@ return (
                 <button
                     onClick={() => setActiveTab('Single post sales')}
                     className={`pb-2 border-b-2 font-semibold whitespace-nowrap text-sm sm:text-base ${activeTab === 'Single post sales'
-                        ? 'text-pink-600 border-pink-600'
+                        ? 'text-blue-600 border-blue-600'
                         : 'text-gray-400 border-transparent'
                         }`}
                 >
@@ -409,7 +409,7 @@ return (
                                     key={filter}
                                     onClick={() => setSelectedFilter(filter)}
                                     className={`px-2 sm:px-3 py-1 text-xs rounded border flex items-center space-x-1 ${selectedFilter === filter
-                                        ? 'bg-pink-600 text-white border-pink-600'
+                                        ? 'bg-blue-600 text-white border-blue-600'
                                         : 'bg-white text-gray-600 border-gray-300'
                                         }`}
                                 >
@@ -438,14 +438,14 @@ return (
                     <div className="flex items-center space-x-2 self-end sm:self-auto">
                         <button
                             onClick={() => setViewMode('grid')}
-                            className={`p-2 rounded ${viewMode === 'grid' ? 'bg-pink-600 text-white' : 'bg-gray-100 text-gray-600'
+                            className={`p-2 rounded ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'
                                 }`}
                         >
                             <Grid3X3 size={14} className="sm:w-4 sm:h-4" />
                         </button>
                         <button
                             onClick={() => setViewMode('list')}
-                            className={`p-2 rounded ${viewMode === 'list' ? 'bg-pink-600 text-white' : 'bg-gray-100 text-gray-600'
+                            className={`p-2 rounded ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600'
                                 }`}
                         >
                             <List size={14} className="sm:w-4 sm:h-4" />
@@ -492,12 +492,12 @@ return (
 
         {/* Bottom Action Buttons */}
         <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 sm:p-4 flex space-x-2 sm:space-x-3">
-            <button className="flex-1 bg-pink-600 text-white py-2 sm:py-3 rounded-full font-semibold flex items-center justify-center space-x-1 sm:space-x-2 hover:bg-pink-700 text-xs sm:text-sm">
+            <button className="flex-1 bg-blue-600 text-white py-2 sm:py-3 rounded-full font-semibold flex items-center justify-center space-x-1 sm:space-x-2 hover:bg-blue-700 text-xs sm:text-sm">
                 <Heart size={14} className="sm:w-5 sm:h-5" />
                 <span className="hidden sm:inline">Send a tip</span>
                 <span className="sm:hidden">Tip</span>
             </button>
-            <button className="flex-1 border border-pink-600 text-pink-600 py-2 sm:py-3 rounded-full font-semibold flex items-center justify-center space-x-1 sm:space-x-2 hover:bg-pink-50 text-xs sm:text-sm">
+            <button className="flex-1 border border-blue-600 text-blue-600 py-2 sm:py-3 rounded-full font-semibold flex items-center justify-center space-x-1 sm:space-x-2 hover:bg-blue-50 text-xs sm:text-sm">
                 <User size={14} className="sm:w-5 sm:h-5" />
                 <span className="hidden sm:inline">+ フォロー</span>
                 <span className="sm:hidden">フォロー</span>

@@ -62,7 +62,7 @@ const CouponListPage = () => {
     switch (category) {
       case '新規会員': return 'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300';
       case 'プラン': return 'bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 border-purple-300';
-      case '特別': return 'bg-gradient-to-r from-pink-100 to-pink-200 text-pink-800 border-pink-300';
+      case '特別': return 'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300';
       case '一般': return 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 border-gray-300';
       default: return 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 border-gray-300';
     }
@@ -78,8 +78,8 @@ const CouponListPage = () => {
   const expiredCoupons = coupons.filter(coupon => coupon.status === 'expired');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
         </motion.button>
@@ -92,16 +92,16 @@ const CouponListPage = () => {
       </motion.div>
 
       <div className="p-6 space-y-6">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-6 border-2 border-pink-200 shadow-xl relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-6 border-2 border-blue-200 shadow-xl relative overflow-hidden">
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
           <div className="flex items-center justify-between relative z-10">
             <div>
-              <h2 className="text-xl font-bold text-pink-900">利用可能なクーポン</h2>
-              <p className="text-pink-700 font-medium" data-testid="text-active-coupon-count">{activeCoupons.length}件</p>
+              <h2 className="text-xl font-bold text-blue-900">利用可能なクーポン</h2>
+              <p className="text-blue-700 font-medium" data-testid="text-active-coupon-count">{activeCoupons.length}件</p>
             </div>
             <div className="text-right">
-              <p className="text-3xl font-bold text-pink-900" data-testid="text-total-discount">{activeCoupons.reduce((sum, c) => sum + (c.type === 'percentage' ? c.maxDiscount : c.discount), 0).toLocaleString()}</p>
-              <p className="text-pink-700 font-medium">円分の割引</p>
+              <p className="text-3xl font-bold text-blue-900" data-testid="text-total-discount">{activeCoupons.reduce((sum, c) => sum + (c.type === 'percentage' ? c.maxDiscount : c.discount), 0).toLocaleString()}</p>
+              <p className="text-blue-700 font-medium">円分の割引</p>
             </div>
           </div>
         </motion.div>
@@ -109,8 +109,8 @@ const CouponListPage = () => {
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-gray-900">有効なクーポン</h2>
           {activeCoupons.map((coupon, index) => (
-            <motion.div key={coupon.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white border-2 border-pink-100 rounded-2xl p-5 shadow-lg relative overflow-hidden">
-              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 15, repeat: Infinity, ease: "linear", delay: index * 2 }} className="absolute top-4 right-4 w-16 h-16 bg-pink-100 rounded-full blur-xl opacity-50" />
+            <motion.div key={coupon.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white border-2 border-blue-100 rounded-2xl p-5 shadow-lg relative overflow-hidden">
+              <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 15, repeat: Infinity, ease: "linear", delay: index * 2 }} className="absolute top-4 right-4 w-16 h-16 bg-blue-100 rounded-full blur-xl opacity-50" />
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-3">
                   <div className="flex-1">
@@ -124,21 +124,21 @@ const CouponListPage = () => {
                       <span className="flex items-center"><Clock className="w-4 h-4 mr-1" />残り{getDaysUntilExpiry(coupon.validUntil)}日</span>
                     </div>
                   </div>
-                  <div className="text-center bg-gradient-to-br from-pink-100 to-purple-100 rounded-xl p-3 border-2 border-pink-200">
-                    <div className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent" data-testid={`text-discount-${coupon.id}`}>
+                  <div className="text-center bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl p-3 border-2 border-blue-200">
+                    <div className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid={`text-discount-${coupon.id}`}>
                       {coupon.type === 'percentage' ? `${coupon.discount}%` : `¥${coupon.discount.toLocaleString()}`}
                     </div>
-                    <div className="text-xs text-pink-700 font-bold">OFF</div>
+                    <div className="text-xs text-blue-700 font-bold">OFF</div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-3 border border-pink-100 mb-3">
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-3 border border-blue-100 mb-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <Tag className="w-4 h-4 text-pink-500" />
-                      <code className="font-bold text-pink-700 text-lg" data-testid={`text-code-${coupon.id}`}>{coupon.code}</code>
+                      <Tag className="w-4 h-4 text-blue-500" />
+                      <code className="font-bold text-blue-700 text-lg" data-testid={`text-code-${coupon.id}`}>{coupon.code}</code>
                     </div>
-                    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => handleCopyCode(coupon.code)} className="px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:shadow-lg transition-all flex items-center space-x-2 font-bold text-sm" data-testid={`button-copy-${coupon.id}`}>
+                    <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => handleCopyCode(coupon.code)} className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all flex items-center space-x-2 font-bold text-sm" data-testid={`button-copy-${coupon.id}`}>
                       {copiedCoupon === coupon.code ? (<><Check className="w-4 h-4" /><span>コピー済み</span></>) : (<><Copy className="w-4 h-4" /><span>コピー</span></>)}
                     </motion.button>
                   </div>
@@ -170,12 +170,12 @@ const CouponListPage = () => {
           </div>
         )}
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-200 rounded-2xl p-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6">
           <div className="flex items-start space-x-4">
-            <Sparkles className="w-6 h-6 text-pink-600 mt-1" />
+            <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
             <div>
-              <h4 className="font-bold text-pink-900 mb-2 text-lg">クーポンの使い方</h4>
-              <ul className="text-base text-pink-800 space-y-2">
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">クーポンの使い方</h4>
+              <ul className="text-base text-blue-800 space-y-2">
                 <li className="flex items-center"><Check className="w-4 h-4 mr-2" />クーポンコードをコピーして使用</li>
                 <li className="flex items-center"><Check className="w-4 h-4 mr-2" />有効期限内にご利用ください</li>
                 <li className="flex items-center"><Check className="w-4 h-4 mr-2" />最低購入金額に注意してください</li>

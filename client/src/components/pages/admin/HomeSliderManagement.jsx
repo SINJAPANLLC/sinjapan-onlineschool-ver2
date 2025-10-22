@@ -303,7 +303,7 @@ export default function HomeSliderManagement() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setShowAddModal(true)}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
+              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
               data-testid="button-add-slider"
             >
               <Plus className="w-4 h-4" />
@@ -354,7 +354,7 @@ export default function HomeSliderManagement() {
                     alt={slider.title || 'Slider'}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-2 left-2 bg-gradient-to-br from-pink-500 to-pink-600 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg">
+                  <div className="absolute top-2 left-2 bg-gradient-to-br from-blue-500 to-blue-600 text-white text-xs font-bold px-2 py-1 rounded-lg shadow-lg">
                     #{slider.position}
                   </div>
                   {!slider.isActive && (
@@ -471,7 +471,7 @@ export default function HomeSliderManagement() {
                   />
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="w-full p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-pink-500 transition-colors"
+                    className="w-full p-4 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 transition-colors"
                     data-testid="button-select-image"
                   >
                     {formData.imagePreview ? (
@@ -500,7 +500,7 @@ export default function HomeSliderManagement() {
                     value={formData.title}
                     onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
                     placeholder="スライダーのタイトル"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="input-slider-title"
                   />
                 </div>
@@ -514,7 +514,7 @@ export default function HomeSliderManagement() {
                     value={formData.link}
                     onChange={(e) => setFormData(prev => ({ ...prev, link: e.target.value }))}
                     placeholder="https://example.com"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     data-testid="input-slider-link"
                   />
                 </div>
@@ -531,7 +531,7 @@ export default function HomeSliderManagement() {
                 <button
                   onClick={handleAddSlider}
                   disabled={!formData.imageFile || isUploading}
-                  className="px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   data-testid="button-confirm-add"
                 >
                   {isUploading ? 'アップロード中...' : '追加'}

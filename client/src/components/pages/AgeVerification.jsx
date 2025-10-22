@@ -38,20 +38,20 @@ const AgeVerification = ({ onVerify }) => {
                         <img src="/logo.webp" alt="Logo" className="w-100 h-16" />
                     </div>
 
-                    <p className="text-sm text-pink-600" dangerouslySetInnerHTML={{ __html: t('ageVerification.warning') }}>
+                    <p className="text-sm text-blue-600" dangerouslySetInnerHTML={{ __html: t('ageVerification.warning') }}>
                     </p>
                     <p className="font-semibold mt-2">{t('ageVerification.question')}</p>
 
                     <button
                         onClick={handleYes}
-                        className="mt-4 bg-pink-600 text-white font-bold py-2 rounded-full w-full"
+                        className="mt-4 bg-blue-600 text-white font-bold py-2 rounded-full w-full"
                     >
                         {t('ageVerification.yes')}
                     </button>
 
                     <button
                         onClick={handleCancel}
-                        className="mt-2 text-pink-600 underline text-sm"
+                        className="mt-2 text-blue-600 underline text-sm"
                     >
                         {t('ageVerification.cancel')}
                     </button>
@@ -72,7 +72,7 @@ const AgeVerification = ({ onVerify }) => {
                         </p>
                         <button
                             onClick={handleCloseModal}
-                            className="bg-pink-600 text-white py-2 rounded-full w-full font-semibold"
+                            className="bg-blue-600 text-white py-2 rounded-full w-full font-semibold"
                         >
                             {t('ageVerification.close')}
                         </button>

@@ -106,7 +106,7 @@ const PaymentForm = ({ plan, onSuccess, onCancel }) => {
                 <button
                     type="submit"
                     disabled={!stripe || isProcessing}
-                    className="flex-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white py-4 rounded-xl font-bold shadow-lg disabled:opacity-50"
+                    className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-xl font-bold shadow-lg disabled:opacity-50"
                 >
                     {isProcessing ? '処理中...' : `¥${plan.total.toLocaleString()}を支払う`}
                 </button>
@@ -565,20 +565,20 @@ const ProfilePage = () => {
 
     if (loading || !profileData) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 flex items-center justify-center">
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center">
                 <motion.div
                     animate={{ rotate: 360 }}
                     transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    className="w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full"
+                    className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"
                 />
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 pb-20">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 pb-20">
             {/* Header */}
-            <div className="flex items-center justify-between p-4 bg-gradient-to-r from-pink-500 to-pink-600 text-white sticky top-0 z-20 shadow-lg">
+            <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white sticky top-0 z-20 shadow-lg">
                 <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
                     <ArrowLeft size={20} />
                 </motion.button>
@@ -589,7 +589,7 @@ const ProfilePage = () => {
 
             {/* Cover Image - Animated */}
             <motion.div 
-                className="h-56 bg-gradient-to-br from-pink-400 via-pink-500 to-pink-600 relative overflow-hidden"
+                className="h-56 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 relative overflow-hidden"
                 initial={{ scaleY: 0, transformOrigin: "top" }}
                 animate={{ scaleY: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
@@ -618,7 +618,7 @@ const ProfilePage = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    className="absolute inset-0 bg-gradient-to-b from-transparent via-pink-500/10 to-pink-600/30" 
+                    className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/10 to-blue-600/30" 
                 />
                 {/* Floating particles effect */}
                 <motion.div
@@ -710,7 +710,7 @@ const ProfilePage = () => {
                                             scale: { duration: 2, repeat: Infinity, ease: "easeInOut" },
                                             rotate: { duration: 20, repeat: Infinity, ease: "linear" }
                                         }}
-                                        className="w-8 h-8 bg-gradient-to-br from-pink-400 to-pink-600 text-white rounded-full flex items-center justify-center shadow-lg"
+                                        className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-full flex items-center justify-center shadow-lg"
                                         data-testid="verified-badge"
                                     >
                                         <CheckCircle size={20} />
@@ -732,7 +732,7 @@ const ProfilePage = () => {
                             }} 
                             whileTap={{ scale: 0.95 }}
                             onClick={handleEditProfile}
-                            className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-2 rounded-full font-bold shadow-lg mt-16 relative overflow-hidden group"
+                            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg mt-16 relative overflow-hidden group"
                             data-testid="button-edit-profile"
                         >
                             <motion.div
@@ -763,8 +763,8 @@ const ProfilePage = () => {
                                 onClick={handleFollow}
                                 className={`px-6 py-2 rounded-full font-bold shadow-lg ${
                                     isFollowing 
-                                        ? 'bg-white text-pink-600 border-2 border-pink-600' 
-                                        : 'bg-gradient-to-r from-pink-500 to-pink-600 text-white'
+                                        ? 'bg-white text-blue-600 border-2 border-blue-600' 
+                                        : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
                                 }`}
                                 data-testid="button-follow"
                             >
@@ -775,7 +775,7 @@ const ProfilePage = () => {
                                 whileHover={{ scale: 1.05 }} 
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleMessage}
-                                className="bg-white text-pink-600 border-2 border-pink-600 px-6 py-2 rounded-full font-bold shadow-lg"
+                                className="bg-white text-blue-600 border-2 border-blue-600 px-6 py-2 rounded-full font-bold shadow-lg"
                                 data-testid="button-message"
                             >
                                 <MessageCircle className="w-4 h-4 inline mr-2" />
@@ -798,7 +798,7 @@ const ProfilePage = () => {
                             rotate: [0, 180, 360]
                         }} 
                         transition={{ duration: 20, repeat: Infinity, ease: "linear" }} 
-                        className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-pink-300/20 to-pink-500/20 rounded-full blur-3xl" 
+                        className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-300/20 to-blue-500/20 rounded-full blur-3xl" 
                     />
                     <motion.div 
                         animate={{ 
@@ -806,14 +806,14 @@ const ProfilePage = () => {
                             rotate: [360, 180, 0]
                         }} 
                         transition={{ duration: 15, repeat: Infinity, ease: "linear" }} 
-                        className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-pink-600/20 rounded-full blur-3xl" 
+                        className="absolute -bottom-10 -left-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-blue-600/20 rounded-full blur-3xl" 
                     />
                     <div className="relative z-10">
-                        <h1 className="text-4xl font-black bg-gradient-to-r from-pink-500 via-pink-600 to-purple-600 bg-clip-text text-transparent flex items-center mb-2" data-testid="text-profile-name">
+                        <h1 className="text-4xl font-black bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 bg-clip-text text-transparent flex items-center mb-2" data-testid="text-profile-name">
                             {profileData.name} 
                             {profileData.emoji && <span className="ml-2 text-3xl">{profileData.emoji}</span>}
                         </h1>
-                        <p className="text-pink-500 text-sm font-semibold tracking-wide" data-testid="text-profile-username">{profileData.username}</p>
+                        <p className="text-blue-500 text-sm font-semibold tracking-wide" data-testid="text-profile-username">{profileData.username}</p>
                     </div>
                 </motion.div>
 
@@ -829,10 +829,10 @@ const ProfilePage = () => {
                         whileTap={{ scale: 0.95 }}
                         className="bg-white/70 backdrop-blur-md rounded-2xl p-4 text-center shadow-xl border border-white/60 relative overflow-hidden group"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-pink-400/10 to-pink-600/10 group-hover:from-pink-400/20 group-hover:to-pink-600/20 transition-all duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-400/10 to-blue-600/10 group-hover:from-blue-400/20 group-hover:to-blue-600/20 transition-all duration-300" />
                         <div className="relative z-10">
-                            <div className="font-black text-2xl bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent" data-testid="text-posts-count">{profileData.stats.posts}</div>
-                            <div className="text-xs text-pink-700 font-semibold mt-1">投稿</div>
+                            <div className="font-black text-2xl bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid="text-posts-count">{profileData.stats.posts}</div>
+                            <div className="text-xs text-blue-700 font-semibold mt-1">投稿</div>
                         </div>
                     </motion.div>
                     <motion.div 
@@ -840,10 +840,10 @@ const ProfilePage = () => {
                         whileTap={{ scale: 0.95 }}
                         className="bg-white/70 backdrop-blur-md rounded-2xl p-4 text-center shadow-xl border border-white/60 relative overflow-hidden group"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-pink-700/10 group-hover:from-pink-500/20 group-hover:to-pink-700/20 transition-all duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-700/10 group-hover:from-blue-500/20 group-hover:to-blue-700/20 transition-all duration-300" />
                         <div className="relative z-10">
-                            <div className="font-black text-2xl bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent" data-testid="text-likes-count">{profileData.stats.likes}</div>
-                            <div className="text-xs text-pink-700 font-semibold mt-1">いいね</div>
+                            <div className="font-black text-2xl bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text text-transparent" data-testid="text-likes-count">{profileData.stats.likes}</div>
+                            <div className="text-xs text-blue-700 font-semibold mt-1">いいね</div>
                         </div>
                     </motion.div>
                     <motion.div 
@@ -851,10 +851,10 @@ const ProfilePage = () => {
                         whileTap={{ scale: 0.95 }}
                         className="bg-white/70 backdrop-blur-md rounded-2xl p-4 text-center shadow-xl border border-white/60 relative overflow-hidden group"
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-pink-600/10 to-purple-600/10 group-hover:from-pink-600/20 group-hover:to-purple-600/20 transition-all duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 group-hover:from-blue-600/20 group-hover:to-purple-600/20 transition-all duration-300" />
                         <div className="relative z-10">
-                            <div className="font-black text-2xl bg-gradient-to-r from-pink-700 to-purple-600 bg-clip-text text-transparent" data-testid="text-followers-count">{profileData.stats.followers}</div>
-                            <div className="text-xs text-pink-800 font-semibold mt-1">フォロワー</div>
+                            <div className="font-black text-2xl bg-gradient-to-r from-blue-700 to-purple-600 bg-clip-text text-transparent" data-testid="text-followers-count">{profileData.stats.followers}</div>
+                            <div className="text-xs text-blue-800 font-semibold mt-1">フォロワー</div>
                         </div>
                     </motion.div>
                     <motion.div 
@@ -872,40 +872,40 @@ const ProfilePage = () => {
 
                 {/* Bio - Elegant Card */}
                 {profileData.bio && (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mb-6 bg-gradient-to-br from-pink-50 via-pink-100 to-pink-50 rounded-2xl p-5 shadow-lg border-2 border-pink-100 relative overflow-hidden">
-                        <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 25, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-pink-200/30 rounded-full blur-2xl" />
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mb-6 bg-gradient-to-br from-blue-50 via-blue-100 to-blue-50 rounded-2xl p-5 shadow-lg border-2 border-blue-100 relative overflow-hidden">
+                        <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 25, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-blue-200/30 rounded-full blur-2xl" />
                         <div className="relative z-10">
                             <div className="flex items-center mb-2">
-                                <Sparkles className="w-4 h-4 text-pink-500 mr-2" />
-                                <span className="text-xs font-bold text-pink-700">プロフィール</span>
+                                <Sparkles className="w-4 h-4 text-blue-500 mr-2" />
+                                <span className="text-xs font-bold text-blue-700">プロフィール</span>
                             </div>
-                            <p className="text-pink-900 text-sm font-medium whitespace-pre-line leading-relaxed" data-testid="text-bio">{profileData.bio}</p>
+                            <p className="text-blue-900 text-sm font-medium whitespace-pre-line leading-relaxed" data-testid="text-bio">{profileData.bio}</p>
                         </div>
                     </motion.div>
                 )}
 
                 {/* Genre Rankings */}
                 {profileData.genreRankings && profileData.genreRankings.length > 0 && showRankings && (
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="bg-gradient-to-br from-pink-100 to-pink-200 rounded-2xl p-5 mb-4 shadow-xl border-2 border-pink-200 relative overflow-hidden">
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl p-5 mb-4 shadow-xl border-2 border-blue-200 relative overflow-hidden">
                         <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
                         <div className="relative z-10">
-                            <h3 className="font-bold text-pink-900 mb-3 text-lg flex items-center">
+                            <h3 className="font-bold text-blue-900 mb-3 text-lg flex items-center">
                                 <Sparkles className="w-5 h-5 mr-2" />
                                 ジャンル別ランキング(日間)
                             </h3>
                             <div className="space-y-2">
                                 {profileData.genreRankings.map((item, index) => (
-                                    <motion.div key={index} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.7 + index * 0.05 }} className="flex justify-between items-center bg-gradient-to-r from-pink-50/80 to-pink-100/80 rounded-lg p-2">
-                                        <span className="text-pink-900 font-medium" data-testid={`text-genre-${index}`}>{item.genre}</span>
-                                        <span className="font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent" data-testid={`text-rank-${index}`}>{item.rank}位</span>
+                                    <motion.div key={index} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.7 + index * 0.05 }} className="flex justify-between items-center bg-gradient-to-r from-blue-50/80 to-blue-100/80 rounded-lg p-2">
+                                        <span className="text-blue-900 font-medium" data-testid={`text-genre-${index}`}>{item.genre}</span>
+                                        <span className="font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid={`text-rank-${index}`}>{item.rank}位</span>
                                     </motion.div>
                                 ))}
                             </div>
                             
                             {isOwnProfile && (
-                                <div className="flex items-center justify-between mt-4 pt-3 border-t border-pink-200">
-                                    <span className="text-sm text-pink-800 font-medium">ジャンル別ランキング(日間)を他ユーザーに表示する</span>
-                                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => setShowRankings(!showRankings)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showRankings ? 'bg-gradient-to-r from-pink-500 to-pink-600' : 'bg-gradient-to-r from-pink-200 to-pink-300'}`} data-testid="button-toggle-rankings">
+                                <div className="flex items-center justify-between mt-4 pt-3 border-t border-blue-200">
+                                    <span className="text-sm text-blue-800 font-medium">ジャンル別ランキング(日間)を他ユーザーに表示する</span>
+                                    <motion.button whileTap={{ scale: 0.95 }} onClick={() => setShowRankings(!showRankings)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${showRankings ? 'bg-gradient-to-r from-blue-500 to-blue-600' : 'bg-gradient-to-r from-blue-200 to-blue-300'}`} data-testid="button-toggle-rankings">
                                         <motion.span animate={{ x: showRankings ? 20 : 4 }} transition={{ type: "spring", stiffness: 500, damping: 30 }} className="inline-block h-4 w-4 rounded-full bg-white shadow-md" />
                                     </motion.button>
                                 </div>
@@ -923,10 +923,10 @@ const ProfilePage = () => {
                             transition={{ delay: 0.75 }} 
                             className="flex items-center mb-4"
                         >
-                            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full shadow-lg mr-3">
+                            <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full shadow-lg mr-3">
                                 <Star className="w-5 h-5 text-white" />
                             </div>
-                            <h3 className="font-black text-2xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">サブスクリプションプラン</h3>
+                            <h3 className="font-black text-2xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">サブスクリプションプラン</h3>
                         </motion.div>
 
                         {displayedPlans.map((plan, index) => (
@@ -939,7 +939,7 @@ const ProfilePage = () => {
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => handlePlanConfirm(plan.id)}
                                 className={`bg-white/90 backdrop-blur-lg rounded-3xl p-6 shadow-2xl border-2 ${
-                                    plan.isRecommended ? 'border-pink-400' : 'border-white/50'
+                                    plan.isRecommended ? 'border-blue-400' : 'border-white/50'
                                 } cursor-pointer relative overflow-hidden group`}
                                 data-testid={`subscription-plan-${plan.id}`}
                             >
@@ -949,13 +949,13 @@ const ProfilePage = () => {
                                         rotate: [0, 90, 180, 270, 360]
                                     }} 
                                     transition={{ duration: 25, repeat: Infinity, ease: "linear" }} 
-                                    className="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-pink-300/20 to-purple-400/20 rounded-full blur-2xl" 
+                                    className="absolute -top-16 -right-16 w-32 h-32 bg-gradient-to-br from-blue-300/20 to-purple-400/20 rounded-full blur-2xl" 
                                 />
                                 {plan.isRecommended && (
                                     <motion.div 
                                         initial={{ scale: 0, rotate: -45 }}
                                         animate={{ scale: 1, rotate: 0 }}
-                                        className="absolute top-4 right-4 bg-gradient-to-r from-pink-500 via-pink-600 to-purple-600 text-white text-xs px-4 py-2 rounded-full font-bold shadow-lg flex items-center"
+                                        className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 text-white text-xs px-4 py-2 rounded-full font-bold shadow-lg flex items-center"
                                     >
                                         <Sparkles className="w-3 h-3 mr-1" />
                                         おすすめ
@@ -964,31 +964,31 @@ const ProfilePage = () => {
                                 <div className="relative z-10">
                                     <div className="flex items-start justify-between mb-3">
                                         <div>
-                                            <h4 className="font-black text-xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent flex items-center mb-2">
+                                            <h4 className="font-black text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent flex items-center mb-2">
                                                 {plan.emoji && <span className="mr-2 text-2xl">{plan.emoji}</span>}
                                                 {plan.title}
                                             </h4>
-                                            <div className="flex items-center text-sm text-pink-600 font-semibold bg-pink-50 px-3 py-1 rounded-full inline-flex">
+                                            <div className="flex items-center text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full inline-flex">
                                                 <Video className="w-3 h-3 mr-1" />
                                                 {plan.posts}投稿
                                             </div>
                                         </div>
                                         <div className="flex flex-col items-end gap-2">
                                             <div className="text-right">
-                                                <div className="font-black text-3xl bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">{calculateTotalPrice(plan.price)}</div>
-                                                <div className="text-xs text-pink-500 font-medium mt-1">税・手数料込</div>
+                                                <div className="font-black text-3xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">{calculateTotalPrice(plan.price)}</div>
+                                                <div className="text-xs text-blue-500 font-medium mt-1">税・手数料込</div>
                                             </div>
                                             <motion.button
                                                 whileHover={{ scale: 1.05 }}
                                                 whileTap={{ scale: 0.95 }}
-                                                className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-2 rounded-full font-bold shadow-lg text-sm"
+                                                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg text-sm"
                                                 data-testid={`button-subscribe-${plan.id}`}
                                             >
                                                 加入する
                                             </motion.button>
                                         </div>
                                     </div>
-                                    <p className="text-sm text-pink-900 leading-relaxed mt-3">{plan.description}</p>
+                                    <p className="text-sm text-blue-900 leading-relaxed mt-3">{plan.description}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -998,7 +998,7 @@ const ProfilePage = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => setShowAllPlans(true)}
-                                className="w-full bg-white text-pink-600 border-2 border-pink-300 py-3 rounded-xl font-bold shadow-md hover:bg-pink-50 transition-colors"
+                                className="w-full bg-white text-blue-600 border-2 border-blue-300 py-3 rounded-xl font-bold shadow-md hover:bg-blue-50 transition-colors"
                                 data-testid="button-show-all-plans"
                             >
                                 すべてのプランを見る
@@ -1010,7 +1010,7 @@ const ProfilePage = () => {
                 {/* Posts Section */}
                 <div className="mt-6">
                     <div className="flex items-center justify-between mb-4">
-                        <h3 className="font-bold text-pink-900 text-lg flex items-center">
+                        <h3 className="font-bold text-blue-900 text-lg flex items-center">
                             <Video className="w-5 h-5 mr-2" />
                             投稿
                         </h3>
@@ -1021,8 +1021,8 @@ const ProfilePage = () => {
                                 onClick={() => handleFilterChange('all')}
                                 className={`px-4 py-2 rounded-full text-sm font-bold ${
                                     selectedFilter === 'all'
-                                        ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white'
-                                        : 'bg-white text-pink-600 border border-pink-300'
+                                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+                                        : 'bg-white text-blue-600 border border-blue-300'
                                 }`}
                                 data-testid="button-filter-all"
                             >
@@ -1034,8 +1034,8 @@ const ProfilePage = () => {
                                 onClick={() => handleFilterChange('video')}
                                 className={`px-4 py-2 rounded-full text-sm font-bold ${
                                     selectedFilter === 'video'
-                                        ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white'
-                                        : 'bg-white text-pink-600 border border-pink-300'
+                                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+                                        : 'bg-white text-blue-600 border border-blue-300'
                                 }`}
                                 data-testid="button-filter-video"
                             >
@@ -1048,8 +1048,8 @@ const ProfilePage = () => {
                                 onClick={() => handleFilterChange('image')}
                                 className={`px-4 py-2 rounded-full text-sm font-bold ${
                                     selectedFilter === 'image'
-                                        ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white'
-                                        : 'bg-white text-pink-600 border border-pink-300'
+                                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+                                        : 'bg-white text-blue-600 border border-blue-300'
                                 }`}
                                 data-testid="button-filter-image"
                             >
@@ -1070,7 +1070,7 @@ const ProfilePage = () => {
                                     transition={{ delay: index * 0.05 }}
                                     whileHover={{ scale: 1.05 }}
                                     onClick={() => handleContentClick(content.id)}
-                                    className="relative aspect-square bg-gradient-to-br from-pink-100 to-pink-200 rounded-lg overflow-hidden cursor-pointer shadow-md"
+                                    className="relative aspect-square bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg overflow-hidden cursor-pointer shadow-md"
                                     data-testid={`content-${content.id}`}
                                 >
                                     {content.type === 'video' ? (
@@ -1114,9 +1114,9 @@ const ProfilePage = () => {
                                 animate={{ y: [0, -10, 0] }}
                                 transition={{ duration: 3, repeat: Infinity }}
                             >
-                                <Video className="w-16 h-16 mx-auto text-pink-300 mb-4" />
+                                <Video className="w-16 h-16 mx-auto text-blue-300 mb-4" />
                             </motion.div>
-                            <p className="text-pink-600 font-medium">まだ投稿がありません</p>
+                            <p className="text-blue-600 font-medium">まだ投稿がありません</p>
                         </div>
                     )}
                 </div>
@@ -1139,7 +1139,7 @@ const ProfilePage = () => {
                             onClick={(e) => e.stopPropagation()}
                             className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
                         >
-                            <div className="bg-gradient-to-r from-pink-500 to-pink-600 text-white p-6">
+                            <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-xl font-bold">プロフィールを共有</h3>
                                     <motion.button
@@ -1157,7 +1157,7 @@ const ProfilePage = () => {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={handleCopyLink}
-                                    className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center space-x-2"
+                                    className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl font-bold shadow-lg flex items-center justify-center space-x-2"
                                     data-testid="button-copy-link"
                                 >
                                     <Copy className="w-5 h-5" />
@@ -1199,7 +1199,7 @@ const ProfilePage = () => {
                                 
                                 return (
                                     <>
-                                        <div className="bg-gradient-to-r from-pink-500 to-pink-600 text-white p-6">
+                                        <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-6">
                                             <div className="flex items-center justify-between mb-2">
                                                 <h3 className="text-xl font-bold">{plan.emoji} {plan.title}</h3>
                                                 <button onClick={() => setShowPlanModal(null)} className="text-white">
@@ -1225,10 +1225,10 @@ const ProfilePage = () => {
                                                     <span className="text-gray-600">購入手数料（10%）</span>
                                                     <span className="font-bold text-gray-800">¥{platformFee.toLocaleString()}</span>
                                                 </div>
-                                                <div className="border-t-2 border-pink-200 pt-3 mt-3">
+                                                <div className="border-t-2 border-blue-200 pt-3 mt-3">
                                                     <div className="flex justify-between items-center">
                                                         <span className="text-lg font-bold text-gray-800">お支払い合計</span>
-                                                        <span className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">¥{total.toLocaleString()}</span>
+                                                        <span className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">¥{total.toLocaleString()}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1259,7 +1259,7 @@ const ProfilePage = () => {
                                                 </Elements>
                                             ) : (
                                                 <div className="flex items-center justify-center py-8">
-                                                    <div className="animate-spin w-8 h-8 border-4 border-pink-500 border-t-transparent rounded-full" />
+                                                    <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full" />
                                                 </div>
                                             )}
                                         </div>

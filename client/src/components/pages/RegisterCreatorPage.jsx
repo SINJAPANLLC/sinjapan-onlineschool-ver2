@@ -282,7 +282,7 @@ const RegisterCreatorPage = () => {
     if (checkingStatus) {
         return (
             <div className="min-h-screen bg-white flex items-center justify-center">
-                <Loader2 className="w-8 h-8 text-pink-500 animate-spin" />
+                <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
             </div>
         );
     }
@@ -293,7 +293,7 @@ const RegisterCreatorPage = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="min-h-screen bg-gradient-to-b from-pink-50 to-white p-4 pb-20"
+            className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4 pb-20"
         >
             <div className="max-w-3xl mx-auto">
                 {/* Progress bar */}
@@ -319,7 +319,7 @@ const RegisterCreatorPage = () => {
                                     {step}
                                 </motion.div>
                                 <span className={`text-xs sm:text-sm text-center ${
-                                    active ? 'font-semibold text-pink-600' : 'text-gray-500'
+                                    active ? 'font-semibold text-blue-600' : 'text-gray-500'
                                 }`}>
                                     {label}
                                 </span>
@@ -365,7 +365,7 @@ const RegisterCreatorPage = () => {
                                         className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
                                             touched.name && errors.name
                                                 ? 'border-red-300 focus:ring-red-500 error-field'
-                                                : 'border-gray-200 focus:ring-pink-500 focus:border-transparent'
+                                                : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
                                         }`}
                                     />
                                     <AnimatePresence>
@@ -400,7 +400,7 @@ const RegisterCreatorPage = () => {
                                             className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
                                                 touched.furiganaFamily && errors.furiganaFamily
                                                     ? 'border-red-300 focus:ring-red-500 error-field'
-                                                    : 'border-gray-200 focus:ring-pink-500 focus:border-transparent'
+                                                    : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
                                             }`}
                                         />
                                         <AnimatePresence>
@@ -433,7 +433,7 @@ const RegisterCreatorPage = () => {
                                             className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
                                                 touched.furiganaFirst && errors.furiganaFirst
                                                     ? 'border-red-300 focus:ring-red-500 error-field'
-                                                    : 'border-gray-200 focus:ring-pink-500 focus:border-transparent'
+                                                    : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
                                             }`}
                                         />
                                         <AnimatePresence>
@@ -469,7 +469,7 @@ const RegisterCreatorPage = () => {
                                         className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
                                             touched.address && errors.address
                                                 ? 'border-red-300 focus:ring-red-500 error-field'
-                                                : 'border-gray-200 focus:ring-pink-500 focus:border-transparent'
+                                                : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
                                         }`}
                                     />
                                     <AnimatePresence>
@@ -505,7 +505,7 @@ const RegisterCreatorPage = () => {
                                             className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
                                                 touched.dob && errors.dob
                                                     ? 'border-red-300 focus:ring-red-500 error-field'
-                                                    : 'border-gray-200 focus:ring-pink-500 focus:border-transparent'
+                                                    : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
                                             }`}
                                         />
                                     </div>
@@ -535,7 +535,7 @@ const RegisterCreatorPage = () => {
                                             ? 'border-red-300 error-field'
                                             : 'border-gray-200'
                                     }`}>
-                                        <label className="flex items-center p-4 cursor-pointer hover:bg-pink-50 transition-colors">
+                                        <label className="flex items-center p-4 cursor-pointer hover:bg-blue-50 transition-colors">
                                             <input
                                                 type="radio"
                                                 name="contentKind"
@@ -543,14 +543,14 @@ const RegisterCreatorPage = () => {
                                                 checked={formData.contentKind === "generalAdult"}
                                                 onChange={handleChange}
                                                 onBlur={() => handleBlur('contentKind')}
-                                                className="w-5 h-5 text-pink-600 focus:ring-pink-500"
+                                                className="w-5 h-5 text-blue-600 focus:ring-blue-500"
                                             />
                                             <span className="ml-3 text-gray-900 font-medium">
                                                 {t("register_creator.content_kind.general_adult")}
                                             </span>
                                         </label>
                                         <div className="border-t-2 border-gray-200"></div>
-                                        <label className="flex items-center p-4 cursor-pointer hover:bg-pink-50 transition-colors">
+                                        <label className="flex items-center p-4 cursor-pointer hover:bg-blue-50 transition-colors">
                                             <input
                                                 type="radio"
                                                 name="contentKind"
@@ -558,7 +558,7 @@ const RegisterCreatorPage = () => {
                                                 checked={formData.contentKind === "gayBL"}
                                                 onChange={handleChange}
                                                 onBlur={() => handleBlur('contentKind')}
-                                                className="w-5 h-5 text-pink-600 focus:ring-pink-500"
+                                                className="w-5 h-5 text-blue-600 focus:ring-blue-500"
                                             />
                                             <span className="ml-3 text-gray-900 font-medium">
                                                 {t("register_creator.content_kind.gay_bl")}
@@ -584,7 +584,7 @@ const RegisterCreatorPage = () => {
                                 <div className={`p-5 rounded-xl border-2 transition-all ${
                                     touched.agreed && errors.agreed
                                         ? 'bg-red-50 border-red-300 error-field'
-                                        : 'bg-pink-50 border-pink-200'
+                                        : 'bg-blue-50 border-blue-200'
                                 }`}>
                                     <label className="flex items-start space-x-3 cursor-pointer">
                                         <input
@@ -592,10 +592,10 @@ const RegisterCreatorPage = () => {
                                             name="agreed"
                                             checked={formData.agreed}
                                             onChange={handleChange}
-                                            className="w-5 h-5 text-pink-600 rounded focus:ring-pink-500 mt-0.5 flex-shrink-0"
+                                            className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 mt-0.5 flex-shrink-0"
                                         />
                                         <span className={`text-sm font-medium ${
-                                            touched.agreed && errors.agreed ? 'text-red-700' : 'text-pink-800'
+                                            touched.agreed && errors.agreed ? 'text-red-700' : 'text-blue-800'
                                         }`}>
                                             {t("register_creator.notice")}
                                         </span>
@@ -634,7 +634,7 @@ const RegisterCreatorPage = () => {
                                     whileTap={{ scale: 0.98 }}
                                     type="button"
                                     onClick={handleNext}
-                                    className="flex-1 py-4 px-6 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-xl font-semibold hover:from-pink-600 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                                    className="flex-1 py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
                                 >
                                     <span>{t("register_creator.next")}</span>
                                     <ArrowRight className="w-5 h-5" />
@@ -651,8 +651,8 @@ const RegisterCreatorPage = () => {
                             className="bg-white rounded-2xl shadow-sm p-6 sm:p-8"
                         >
                             <div className="text-center mb-6">
-                                <div className="inline-flex items-center justify-center w-16 h-16 bg-pink-100 rounded-full mb-4">
-                                    <CheckCircle className="w-8 h-8 text-pink-600" />
+                                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
+                                    <CheckCircle className="w-8 h-8 text-blue-600" />
                                 </div>
                                 <h2 className="text-2xl font-bold text-gray-900 mb-2">入力内容の確認</h2>
                                 <p className="text-gray-600">以下の内容で申請を進めてよろしいですか？</p>
@@ -715,7 +715,7 @@ const RegisterCreatorPage = () => {
                                     type="button"
                                     onClick={handleConfirmAndProceed}
                                     disabled={isLoading}
-                                    className="flex-1 py-4 px-6 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-xl font-semibold hover:from-pink-600 hover:to-pink-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 flex items-center justify-center space-x-2"
+                                    className="flex-1 py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 flex items-center justify-center space-x-2"
                                 >
                                     {isLoading ? (
                                         <>

@@ -63,7 +63,7 @@ const RecommendedGenres = ({ likedItems, toggleLike }) => {
                 <motion.div
                     whileHover={{ scale: 1.1, rotate: 180 }}
                     transition={{ duration: 0.3 }}
-                    className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-pink-400 to-pink-600 shadow-md"
+                    className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 shadow-md"
                 >
                     <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-white" strokeWidth={2.5} />
                 </motion.div>
@@ -148,7 +148,7 @@ const RecommendedGenres = ({ likedItems, toggleLike }) => {
                     {t('genres.SeeMore')} 
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
         </motion.div>
     );

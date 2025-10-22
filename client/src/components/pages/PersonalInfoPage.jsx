@@ -137,17 +137,17 @@ const PersonalInfoPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
-          <User className="w-12 h-12 text-pink-500" />
+          <User className="w-12 h-12 text-blue-500" />
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center justify-between z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center justify-between z-10 shadow-lg">
         <div className="flex items-center">
           <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
             <ArrowLeft size={24} />
@@ -175,9 +175,9 @@ const PersonalInfoPage = () => {
         </motion.div>
 
         {/* 基本情報 */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-white border-2 border-pink-100 rounded-2xl p-6 shadow-xl">
-          <h2 className="text-xl font-bold mb-6 flex items-center bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
-            <User className="w-6 h-6 mr-3 text-pink-500" />
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-white border-2 border-blue-100 rounded-2xl p-6 shadow-xl">
+          <h2 className="text-xl font-bold mb-6 flex items-center bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
+            <User className="w-6 h-6 mr-3 text-blue-500" />
             基本情報
           </h2>
           
@@ -192,12 +192,12 @@ const PersonalInfoPage = () => {
                   value={formData.displayName} 
                   onChange={(e) => handleInputChange('displayName', e.target.value)} 
                   placeholder="山田 太郎"
-                  className="w-full px-5 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold shadow-sm" 
+                  className="w-full px-5 py-3 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold shadow-sm" 
                   data-testid="input-displayName" 
                 />
               ) : (
-                <p className="px-5 py-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl flex items-center font-semibold border border-pink-100">
-                  <User className="w-4 h-4 mr-2 text-pink-500" />
+                <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl flex items-center font-semibold border border-blue-100">
+                  <User className="w-4 h-4 mr-2 text-blue-500" />
                   {personalInfo.displayName || '未設定'}
                 </p>
               )}
@@ -212,11 +212,11 @@ const PersonalInfoPage = () => {
                     value={formData.lastName} 
                     onChange={(e) => handleInputChange('lastName', e.target.value)} 
                     placeholder="山田"
-                    className="w-full px-5 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold shadow-sm" 
+                    className="w-full px-5 py-3 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold shadow-sm" 
                     data-testid="input-lastName" 
                   />
                 ) : (
-                  <p className="px-5 py-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl font-semibold border border-pink-100">
+                  <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl font-semibold border border-blue-100">
                     {personalInfo.lastName || '未設定'}
                   </p>
                 )}
@@ -230,11 +230,11 @@ const PersonalInfoPage = () => {
                     value={formData.firstName} 
                     onChange={(e) => handleInputChange('firstName', e.target.value)} 
                     placeholder="太郎"
-                    className="w-full px-5 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold shadow-sm" 
+                    className="w-full px-5 py-3 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold shadow-sm" 
                     data-testid="input-firstName" 
                   />
                 ) : (
-                  <p className="px-5 py-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl font-semibold border border-pink-100">
+                  <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl font-semibold border border-blue-100">
                     {personalInfo.firstName || '未設定'}
                   </p>
                 )}
@@ -243,7 +243,7 @@ const PersonalInfoPage = () => {
 
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
               <label className="block text-sm font-bold text-gray-700 mb-2 flex items-center">
-                <Calendar className="w-4 h-4 mr-2 text-pink-500" />
+                <Calendar className="w-4 h-4 mr-2 text-blue-500" />
                 生年月日
               </label>
               {isEditing ? (
@@ -251,12 +251,12 @@ const PersonalInfoPage = () => {
                   type="date" 
                   value={formData.birthDate} 
                   onChange={(e) => handleInputChange('birthDate', e.target.value)} 
-                  className="w-full px-5 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold shadow-sm" 
+                  className="w-full px-5 py-3 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold shadow-sm" 
                   data-testid="input-birthDate" 
                 />
               ) : (
-                <p className="px-5 py-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl flex items-center font-semibold border border-pink-100">
-                  <Calendar className="w-4 h-4 mr-2 text-pink-500" />
+                <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl flex items-center font-semibold border border-blue-100">
+                  <Calendar className="w-4 h-4 mr-2 text-blue-500" />
                   {personalInfo.birthDate || '未設定'}
                 </p>
               )}
@@ -265,7 +265,7 @@ const PersonalInfoPage = () => {
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.25 }}>
               <label className="block text-sm font-bold text-gray-700 mb-2">性別</label>
               {isEditing ? (
-                <select value={formData.gender} onChange={(e) => handleInputChange('gender', e.target.value)} className="w-full px-5 py-3 border-2 border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold shadow-sm" data-testid="select-gender">
+                <select value={formData.gender} onChange={(e) => handleInputChange('gender', e.target.value)} className="w-full px-5 py-3 border-2 border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold shadow-sm" data-testid="select-gender">
                   <option value="">選択してください</option>
                   <option value="male">男性</option>
                   <option value="female">女性</option>
@@ -273,7 +273,7 @@ const PersonalInfoPage = () => {
                   <option value="prefer_not_to_say">回答しない</option>
                 </select>
               ) : (
-                <p className="px-5 py-3 bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl font-semibold border border-pink-100">
+                <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl font-semibold border border-blue-100">
                   {personalInfo.gender === 'male' ? '男性' : personalInfo.gender === 'female' ? '女性' : personalInfo.gender === 'other' ? 'その他' : personalInfo.gender === 'prefer_not_to_say' ? '回答しない' : '未設定'}
                 </p>
               )}
@@ -289,7 +289,7 @@ const PersonalInfoPage = () => {
               disabled={saving}
               whileHover={{ scale: 1.02 }} 
               whileTap={{ scale: 0.98 }} 
-              className="flex-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all flex items-center justify-center space-x-3 shadow-lg disabled:opacity-50" 
+              className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all flex items-center justify-center space-x-3 shadow-lg disabled:opacity-50" 
               data-testid="button-save"
             >
               <Save className="w-6 h-6" />
@@ -310,15 +310,15 @@ const PersonalInfoPage = () => {
         )}
 
         {/* ヘルプ情報 */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-200 rounded-2xl p-6 relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden">
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
           <div className="flex items-start space-x-4 relative z-10">
             <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 2, repeat: Infinity }}>
-              <Sparkles className="w-6 h-6 text-pink-600 mt-1" />
+              <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
             </motion.div>
             <div>
-              <h4 className="font-bold text-pink-900 mb-2 text-lg">プライバシーについて</h4>
-              <ul className="text-base text-pink-800 space-y-2">
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">プライバシーについて</h4>
+              <ul className="text-base text-blue-800 space-y-2">
                 <li className="flex items-center"><CheckCircle className="w-4 h-4 mr-2" />生年月日は本人確認に使用されます</li>
                 <li className="flex items-center"><CheckCircle className="w-4 h-4 mr-2" />表示名はプロフィールに公開されます</li>
                 <li className="flex items-center"><CheckCircle className="w-4 h-4 mr-2" />姓名は本人確認時に使用される場合があります</li>

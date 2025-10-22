@@ -106,8 +106,8 @@ const PhoneVerificationPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
         </motion.button>
@@ -124,8 +124,8 @@ const PhoneVerificationPage = () => {
           {step === 1 && (
             <motion.div key="step1" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }} className="max-w-md mx-auto">
               <div className="text-center mb-8">
-                <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-20 h-20 bg-gradient-to-br from-pink-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-pink-200 shadow-lg">
-                  <Phone className="w-10 h-10 text-pink-600" />
+                <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3, repeat: Infinity }} className="w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-blue-200 shadow-lg">
+                  <Phone className="w-10 h-10 text-blue-600" />
                 </motion.div>
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">電話番号を入力</h2>
                 <p className="text-gray-600 leading-relaxed">認証用のSMSを送信するために、電話番号を入力してください</p>
@@ -134,7 +134,7 @@ const PhoneVerificationPage = () => {
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-3">電話番号</label>
-                  <input type="tel" value={phoneNumber} onChange={handlePhoneChange} placeholder="090-1234-5678" className="w-full px-5 py-4 border-2 border-pink-200 rounded-2xl focus:ring-2 focus:ring-pink-500 focus:border-transparent text-lg font-semibold shadow-sm" data-testid="input-phone" />
+                  <input type="tel" value={phoneNumber} onChange={handlePhoneChange} placeholder="090-1234-5678" className="w-full px-5 py-4 border-2 border-blue-200 rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-semibold shadow-sm" data-testid="input-phone" />
                   <p className="text-sm text-gray-500 mt-2 font-medium">ハイフンなしで入力してください</p>
                 </div>
 
@@ -145,7 +145,7 @@ const PhoneVerificationPage = () => {
                   </motion.div>
                 )}
 
-                <motion.button onClick={handleSendCode} disabled={isLoading || !phoneNumber} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl disabled:opacity-50 transition-all flex items-center justify-center space-x-3 shadow-lg" data-testid="button-send-code">
+                <motion.button onClick={handleSendCode} disabled={isLoading || !phoneNumber} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl disabled:opacity-50 transition-all flex items-center justify-center space-x-3 shadow-lg" data-testid="button-send-code">
                   {isLoading ? (
                     <>
                       <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
@@ -171,7 +171,7 @@ const PhoneVerificationPage = () => {
                 <h2 className="text-2xl font-bold text-gray-900 mb-3">認証コードを入力</h2>
                 <p className="text-gray-600 mb-3">{phoneNumber} に送信された6桁のコードを入力</p>
                 {countdown > 0 && (
-                  <p className="text-sm font-bold text-pink-600 flex items-center justify-center space-x-2">
+                  <p className="text-sm font-bold text-blue-600 flex items-center justify-center space-x-2">
                     <Clock className="w-5 h-5" />
                     <span>残り {Math.floor(countdown / 60)}:{(countdown % 60).toString().padStart(2, '0')}</span>
                   </p>
@@ -181,7 +181,7 @@ const PhoneVerificationPage = () => {
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-bold text-gray-700 mb-3">認証コード</label>
-                  <input type="text" value={verificationCode} onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder="123456" className="w-full px-5 py-4 border-2 border-pink-200 rounded-2xl focus:ring-2 focus:ring-pink-500 text-lg text-center tracking-widest font-bold shadow-sm" data-testid="input-code" />
+                  <input type="text" value={verificationCode} onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, '').slice(0, 6))} placeholder="123456" className="w-full px-5 py-4 border-2 border-blue-200 rounded-2xl focus:ring-2 focus:ring-blue-500 text-lg text-center tracking-widest font-bold shadow-sm" data-testid="input-code" />
                 </div>
 
                 {error && (
@@ -192,7 +192,7 @@ const PhoneVerificationPage = () => {
                 )}
 
                 <div className="space-y-3">
-                  <motion.button onClick={handleVerifyCode} disabled={isLoading || !verificationCode || verificationCode.length !== 6} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl disabled:opacity-50 transition-all flex items-center justify-center space-x-3 shadow-lg" data-testid="button-verify">
+                  <motion.button onClick={handleVerifyCode} disabled={isLoading || !verificationCode || verificationCode.length !== 6} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl disabled:opacity-50 transition-all flex items-center justify-center space-x-3 shadow-lg" data-testid="button-verify">
                     {isLoading ? (
                       <>
                         <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
@@ -227,20 +227,20 @@ const PhoneVerificationPage = () => {
                 {phoneNumber} が認証済みとして登録されました。
               </p>
 
-              <motion.button onClick={() => navigate('/account')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg">
+              <motion.button onClick={() => navigate('/account')} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-5 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg">
                 アカウントに戻る
               </motion.button>
             </motion.div>
           )}
         </AnimatePresence>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mt-8 bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-200 rounded-2xl p-6 relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mt-8 bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden">
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
           <div className="flex items-start space-x-4 relative z-10">
-            <Sparkles className="w-6 h-6 text-pink-600 mt-1" />
+            <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
             <div>
-              <h4 className="font-bold text-pink-900 mb-2 text-lg">電話番号認証について</h4>
-              <ul className="text-base text-pink-800 space-y-2">
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">電話番号認証について</h4>
+              <ul className="text-base text-blue-800 space-y-2">
                 <li className="flex items-center"><CheckCircle className="w-4 h-4 mr-2" />認証コードは5分間有効です</li>
                 <li className="flex items-center"><CheckCircle className="w-4 h-4 mr-2" />認証は3回まで試行できます</li>
                 <li className="flex items-center"><CheckCircle className="w-4 h-4 mr-2" />認証完了後、安全に管理されます</li>

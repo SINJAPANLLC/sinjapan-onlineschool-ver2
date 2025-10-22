@@ -127,7 +127,7 @@ const VideoPlayer = ({
           onClick={handleProgressClick}
         >
           <div 
-            className="h-full bg-pink-500 rounded-full transition-all"
+            className="h-full bg-blue-500 rounded-full transition-all"
             style={{ width: `${(currentTime / duration) * 100}%` }}
           />
         </div>
@@ -137,7 +137,7 @@ const VideoPlayer = ({
           <div className="flex items-center space-x-3">
             <button
               onClick={togglePlay}
-              className="text-white hover:text-pink-400 transition-colors"
+              className="text-white hover:text-blue-400 transition-colors"
             >
               {isPlaying ? (
                 <Pause className="w-5 h-5" />
@@ -148,7 +148,7 @@ const VideoPlayer = ({
 
             <button
               onClick={toggleMute}
-              className="text-white hover:text-pink-400 transition-colors"
+              className="text-white hover:text-blue-400 transition-colors"
             >
               {isMuted ? (
                 <VolumeX className="w-5 h-5" />
@@ -167,7 +167,7 @@ const VideoPlayer = ({
             <div className="relative">
               <button
                 onClick={() => setShowQualityMenu(!showQualityMenu)}
-                className="text-white hover:text-pink-400 transition-colors flex items-center space-x-1"
+                className="text-white hover:text-blue-400 transition-colors flex items-center space-x-1"
               >
                 <Settings className="w-5 h-5" />
                 <span className="text-sm">{selectedQuality}</span>
@@ -183,7 +183,7 @@ const VideoPlayer = ({
                       className={`w-full text-left px-3 py-2 rounded text-sm transition-colors ${
                         option.available
                           ? selectedQuality === option.id
-                            ? 'bg-pink-500 text-white'
+                            ? 'bg-blue-500 text-white'
                             : 'text-white hover:bg-white hover:bg-opacity-20'
                           : 'text-gray-500 cursor-not-allowed'
                       }`}
@@ -196,7 +196,7 @@ const VideoPlayer = ({
               )}
             </div>
 
-            <button className="text-white hover:text-pink-400 transition-colors">
+            <button className="text-white hover:text-blue-400 transition-colors">
               <Maximize className="w-5 h-5" />
             </button>
           </div>

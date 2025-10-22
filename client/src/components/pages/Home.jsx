@@ -143,7 +143,7 @@ const Home = () => {
       '語学': 'from-green-500 to-green-600',
       'データ分析': 'from-purple-500 to-purple-600',
       'AI/機械学習': 'from-red-500 to-red-600',
-      'デザイン': 'from-pink-500 to-pink-600'
+      'デザイン': 'from-blue-500 to-blue-600'
     };
     return colors[category] || 'from-gray-500 to-gray-600';
   };

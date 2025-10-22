@@ -78,8 +78,8 @@ const CreatorRankingPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
           <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
             <ArrowLeft size={24} />
           </motion.button>
@@ -92,7 +92,7 @@ const CreatorRankingPage = () => {
         </motion.div>
         
         <div className="flex items-center justify-center h-96">
-          <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-16 h-16 border-4 border-pink-500 border-t-transparent rounded-full" />
+          <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full" />
         </div>
         
         <BottomNavigationWithCreator active="account" />
@@ -101,8 +101,8 @@ const CreatorRankingPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
         </motion.button>
@@ -115,14 +115,14 @@ const CreatorRankingPage = () => {
       </motion.div>
 
       <div className="p-6 space-y-6">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl p-5 shadow-xl border-2 border-pink-100">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl p-5 shadow-xl border-2 border-blue-100">
           <h3 className="text-lg font-bold text-gray-900 mb-4 flex items-center">
-            <Sparkles className="w-5 h-5 mr-2 text-pink-500" />
+            <Sparkles className="w-5 h-5 mr-2 text-blue-500" />
             期間選択
           </h3>
           <div className="flex space-x-2">
             {periods.map((period) => (
-              <motion.button key={period.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setSelectedPeriod(period.id)} className={`flex-1 px-4 py-3 rounded-xl text-sm font-bold transition-all shadow-md ${selectedPeriod === period.id ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white' : 'bg-gray-100 text-gray-700'}`} data-testid={`button-period-${period.id}`}>
+              <motion.button key={period.id} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setSelectedPeriod(period.id)} className={`flex-1 px-4 py-3 rounded-xl text-sm font-bold transition-all shadow-md ${selectedPeriod === period.id ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`} data-testid={`button-period-${period.id}`}>
                 {period.name}
               </motion.button>
             ))}
@@ -130,8 +130,8 @@ const CreatorRankingPage = () => {
         </motion.div>
 
         {rankings.length >= 3 ? (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-6 shadow-xl border-2 border-pink-200">
-            <h3 className="text-xl font-bold text-pink-900 mb-6 flex items-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-6 shadow-xl border-2 border-blue-200">
+            <h3 className="text-xl font-bold text-blue-900 mb-6 flex items-center">
               <Crown className="w-6 h-6 mr-2" />
               トップ3
             </h3>
@@ -178,24 +178,24 @@ const CreatorRankingPage = () => {
         <div className="space-y-3">
           <h3 className="text-xl font-bold text-gray-900">全ランキング</h3>
           {rankings.length === 0 ? (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-pink-100">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-blue-100">
               <Trophy className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500 font-medium">ランキングデータがありません</p>
             </motion.div>
           ) : (
             rankings.map((creator, index) => (
-            <motion.div key={creator.rank} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + index * 0.05 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white rounded-2xl p-5 shadow-lg border-2 border-pink-100">
+            <motion.div key={creator.rank} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + index * 0.05 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white rounded-2xl p-5 shadow-lg border-2 border-blue-100">
               <div className="flex items-center space-x-4">
-                <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-pink-100 to-purple-100 rounded-full border-2 border-pink-200">
+                <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full border-2 border-blue-200">
                   {getRankIcon(creator.rank)}
                 </div>
                 <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}>
-                  <img src={creator.avatar} alt={creator.name} className="w-16 h-16 rounded-full object-cover border-2 border-pink-200 shadow-md" />
+                  <img src={creator.avatar} alt={creator.name} className="w-16 h-16 rounded-full object-cover border-2 border-blue-200 shadow-md" />
                 </motion.div>
                 <div className="flex-1">
                   <div className="flex items-center space-x-2">
                     <h4 className="font-bold text-gray-900 text-lg" data-testid={`text-name-${creator.rank}`}>{creator.name}</h4>
-                    {creator.isVerified && <Star className="w-5 h-5 text-pink-500" />}
+                    {creator.isVerified && <Star className="w-5 h-5 text-blue-500" />}
                     {getTrendIcon(creator.trend)}
                   </div>
                   <div className="grid grid-cols-3 gap-2 mt-2">
@@ -205,7 +205,7 @@ const CreatorRankingPage = () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent" data-testid={`text-earnings-${creator.rank}`}>{formatCurrency(creator.earnings)}</p>
+                  <p className="text-xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid={`text-earnings-${creator.rank}`}>{formatCurrency(creator.earnings)}</p>
                   <p className="text-xs text-gray-500 font-medium">月間</p>
                 </div>
               </div>

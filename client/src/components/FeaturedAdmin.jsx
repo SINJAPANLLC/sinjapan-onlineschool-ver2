@@ -271,7 +271,7 @@ const FeaturedAdminPage = () => {
                     <motion.div
                         whileHover={{ scale: 1.1, rotate: 180 }}
                         transition={{ duration: 0.3 }}
-                        className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-pink-400 to-pink-600 shadow-md"
+                        className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 shadow-md"
                     >
                         <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-white" strokeWidth={2.5} />
                     </motion.div>
@@ -294,7 +294,7 @@ const FeaturedAdminPage = () => {
                     <motion.div
                         whileHover={{ scale: 1.1, rotate: 180 }}
                         transition={{ duration: 0.3 }}
-                        className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-pink-400 to-pink-600 shadow-md"
+                        className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 shadow-md"
                         data-testid="icon-featured-star"
                     >
                         <Star className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-white" strokeWidth={2.5} />
@@ -344,7 +344,7 @@ const FeaturedAdminPage = () => {
                                     {/* ランキングバッジ */}
                                     <motion.div 
                                         whileHover={{ scale: 1.1, rotate: 5 }}
-                                        className="absolute top-2 left-2 w-9 h-9 bg-gradient-to-br from-pink-400 via-pink-500 to-pink-600 rounded-full flex items-center justify-center"
+                                        className="absolute top-2 left-2 w-9 h-9 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 rounded-full flex items-center justify-center"
                                         style={{ boxShadow: '0 4px 12px rgba(236, 72, 153, 0.4)' }}
                                         data-testid={`rank-badge-featured-${index + 1}`}
                                     >
@@ -362,7 +362,7 @@ const FeaturedAdminPage = () => {
                                                 damping: 20,
                                                 delay: index * 0.1 + 0.3 
                                             }}
-                                            className="absolute top-2 right-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+                                            className="absolute top-2 right-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
                                             data-testid={`new-badge-featured-${post.id}`}
                                         >
                                             <motion.span
@@ -425,7 +425,7 @@ const FeaturedAdminPage = () => {
                                             data-testid={`like-button-featured-${post.id}`}
                                         >
                                             <Heart 
-                                                className={`w-4 h-4 ${likedPosts.has(post.id) ? 'fill-pink-500 text-pink-500' : 'text-gray-400'}`}
+                                                className={`w-4 h-4 ${likedPosts.has(post.id) ? 'fill-blue-500 text-blue-500' : 'text-gray-400'}`}
                                             />
                                             <span className="text-gray-600">{post.likes + (likedPosts.has(post.id) ? 1 : 0)}</span>
                                         </button>
@@ -435,7 +435,7 @@ const FeaturedAdminPage = () => {
                                             data-testid={`save-button-featured-${post.id}`}
                                         >
                                             <Bookmark 
-                                                className={`w-4 h-4 ${bookmarkedPosts.has(post.id) ? 'fill-pink-500 text-pink-500' : 'text-gray-400'}`}
+                                                className={`w-4 h-4 ${bookmarkedPosts.has(post.id) ? 'fill-blue-500 text-blue-500' : 'text-gray-400'}`}
                                             />
                                             <span className="text-gray-600">{post.bookmarks + (bookmarkedPosts.has(post.id) ? 1 : 0)}</span>
                                         </button>
@@ -470,7 +470,7 @@ const FeaturedAdminPage = () => {
                                     {/* ランキングバッジ - 数字表示 */}
                                     <motion.div 
                                         whileHover={{ scale: 1.15, rotate: 5 }}
-                                        className="w-11 h-11 rounded-full bg-gradient-to-br from-pink-400 via-pink-500 to-pink-600 text-white flex items-center justify-center flex-shrink-0"
+                                        className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 text-white flex items-center justify-center flex-shrink-0"
                                         style={{ boxShadow: '0 4px 12px rgba(236, 72, 153, 0.4)' }}
                                         data-testid={`rank-badge-user-${index + 1}`}
                                     >
@@ -499,7 +499,7 @@ const FeaturedAdminPage = () => {
                                         </h3>
 
                                         <div className="flex items-center gap-2 text-xs">
-                                            <div className="flex items-center gap-0.5 text-pink-500">
+                                            <div className="flex items-center gap-0.5 text-blue-500">
                                                 <Heart size={12} className="fill-current" />
                                                 <span className="font-medium" data-testid={`likes-user-${user.id}`}>{user.likes}</span>
                                             </div>
@@ -515,7 +515,7 @@ const FeaturedAdminPage = () => {
                                         className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border-2 flex items-center gap-1 flex-shrink-0 ${
                                             followedUsers.has(user.id)
                                                 ? "bg-gray-100 border-gray-300 text-gray-700 hover:bg-gray-200"
-                                                : "bg-white border-pink-500 text-pink-500 hover:bg-pink-50"
+                                                : "bg-white border-blue-500 text-blue-500 hover:bg-blue-50"
                                         }`}
                                         data-testid={`follow-button-user-${user.id}`}
                                     >

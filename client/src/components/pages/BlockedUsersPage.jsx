@@ -112,13 +112,13 @@ const BlockedUsersPage = () => {
   const getReasonColor = (reason) => {
     switch (reason) {
       case 'スパム行為':
-        return 'bg-gradient-to-r from-red-100 to-pink-100 text-red-700 border-red-200';
+        return 'bg-gradient-to-r from-red-100 to-blue-100 text-red-700 border-red-200';
       case '不適切なコンテンツ':
-        return 'bg-gradient-to-r from-orange-100 to-pink-100 text-orange-700 border-orange-200';
+        return 'bg-gradient-to-r from-orange-100 to-blue-100 text-orange-700 border-orange-200';
       case '迷惑行為':
-        return 'bg-gradient-to-r from-yellow-100 to-pink-100 text-yellow-700 border-yellow-200';
+        return 'bg-gradient-to-r from-yellow-100 to-blue-100 text-yellow-700 border-yellow-200';
       default:
-        return 'bg-gradient-to-r from-gray-100 to-pink-100 text-gray-700 border-gray-200';
+        return 'bg-gradient-to-r from-gray-100 to-blue-100 text-gray-700 border-gray-200';
     }
   };
 
@@ -128,12 +128,12 @@ const BlockedUsersPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg"
+        className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg"
       >
         <motion.button 
           whileHover={{ scale: 1.1 }}
@@ -166,16 +166,16 @@ const BlockedUsersPage = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl p-4 shadow-xl border-2 border-pink-100"
+          className="bg-white rounded-2xl p-4 shadow-xl border-2 border-blue-100"
         >
           <div className="relative">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-pink-400 w-5 h-5" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400 w-5 h-5" />
             <input
               type="text"
               placeholder="ユーザーを検索..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold"
+              className="w-full pl-12 pr-4 py-3 border-2 border-blue-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold"
               data-testid="input-search"
             />
           </div>
@@ -207,7 +207,7 @@ const BlockedUsersPage = () => {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ delay: index * 0.05 }}
                   whileHover={{ scale: 1.02, y: -2 }}
-                  className="bg-white border-2 border-pink-100 rounded-2xl p-5 shadow-lg"
+                  className="bg-white border-2 border-blue-100 rounded-2xl p-5 shadow-lg"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-4">
@@ -225,7 +225,7 @@ const BlockedUsersPage = () => {
                         <img
                           src={user.avatar}
                           alt={user.name}
-                          className="w-16 h-16 rounded-full object-cover border-2 border-pink-200 shadow-md"
+                          className="w-16 h-16 rounded-full object-cover border-2 border-blue-200 shadow-md"
                         />
                       </motion.div>
                       <div className="flex-1">
@@ -235,7 +235,7 @@ const BlockedUsersPage = () => {
                           <span className={`px-3 py-1 text-xs font-bold rounded-full border ${getReasonColor(user.reason)}`}>
                             {user.reason}
                           </span>
-                          <span className="text-xs text-pink-600 font-semibold bg-pink-50 px-2 py-1 rounded-full">
+                          <span className="text-xs text-blue-600 font-semibold bg-blue-50 px-2 py-1 rounded-full">
                             報告数: {user.reportCount}
                           </span>
                         </div>
@@ -275,7 +275,7 @@ const BlockedUsersPage = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-16 bg-white rounded-2xl border-2 border-pink-100 shadow-lg"
+              className="text-center py-16 bg-white rounded-2xl border-2 border-blue-100 shadow-lg"
             >
               <motion.div
                 animate={{ 
@@ -288,7 +288,7 @@ const BlockedUsersPage = () => {
                   ease: "easeInOut"
                 }}
               >
-                <Shield className="w-20 h-20 text-pink-300 mx-auto mb-6" />
+                <Shield className="w-20 h-20 text-blue-300 mx-auto mb-6" />
               </motion.div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">ブロックしたユーザーがいません</h3>
               <p className="text-gray-500">ブロックしたユーザーがここに表示されます</p>
@@ -301,7 +301,7 @@ const BlockedUsersPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-200 rounded-2xl p-6 relative overflow-hidden"
+          className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden"
         >
           <motion.div
             animate={{ 
@@ -325,24 +325,24 @@ const BlockedUsersPage = () => {
                 ease: "easeInOut"
               }}
             >
-              <Sparkles className="w-6 h-6 text-pink-600 mt-1" />
+              <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
             </motion.div>
             <div>
-              <h4 className="font-bold text-pink-900 mb-2 text-lg">ブロック機能について</h4>
-              <p className="text-base text-pink-800 mb-3 leading-relaxed">
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">ブロック機能について</h4>
+              <p className="text-base text-blue-800 mb-3 leading-relaxed">
                 ブロックしたユーザーは以下の制限を受けます：
               </p>
-              <ul className="text-base text-pink-800 space-y-2">
+              <ul className="text-base text-blue-800 space-y-2">
                 <li className="flex items-center">
-                  <UserX className="w-4 h-4 mr-2 text-pink-600" />
+                  <UserX className="w-4 h-4 mr-2 text-blue-600" />
                   あなたのプロフィールや投稿を見ることができません
                 </li>
                 <li className="flex items-center">
-                  <UserX className="w-4 h-4 mr-2 text-pink-600" />
+                  <UserX className="w-4 h-4 mr-2 text-blue-600" />
                   あなたにメッセージを送ることができません
                 </li>
                 <li className="flex items-center">
-                  <UserX className="w-4 h-4 mr-2 text-pink-600" />
+                  <UserX className="w-4 h-4 mr-2 text-blue-600" />
                   あなたのコンテンツにいいねやコメントをすることができません
                 </li>
               </ul>

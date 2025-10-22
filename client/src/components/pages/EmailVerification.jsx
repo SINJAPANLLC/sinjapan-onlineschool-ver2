@@ -39,11 +39,11 @@ const EmailVerificationNotice = () => {
                 </a>
 
                 <div className="flex justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 11c.71 0 1.44.15 2.06.42a2 2 0 11-3.24 0c.62-.27 1.35-.42 2.06-.42zM15 11V7a3 3 0 10-6 0v4a3 3 0 002.977 2.941A3 3 0 0015 11z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 11v7a3 3 0 003 3h6a3 3 0 003-3v-7" />
                     </svg>
-                    <span className="text-pink-600 font-bold text-3xl ml-2" style={{ fontFamily: 'poppins, sans-serif' }}>
+                    <span className="text-blue-600 font-bold text-3xl ml-2" style={{ fontFamily: 'poppins, sans-serif' }}>
                         {t('emailVerification.brand')}
                     </span>
                 </div>

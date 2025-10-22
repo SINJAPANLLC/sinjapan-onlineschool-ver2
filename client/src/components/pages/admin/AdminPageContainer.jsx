@@ -25,7 +25,7 @@ export function AdminPageHeader({ title, description, actions, icon: Icon }) {
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
       <div className="flex items-start space-x-4">
         {Icon && (
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center shadow-lg flex-shrink-0">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-lg flex-shrink-0">
             <Icon className="w-6 h-6 text-white" />
           </div>
         )}
@@ -50,7 +50,7 @@ export function AdminPageHeader({ title, description, actions, icon: Icon }) {
  */
 export function AdminStatsCard({ title, value, icon: Icon, trend, trendValue, color = 'pink' }) {
   const colorClasses = {
-    pink: 'from-pink-500 to-pink-600',
+    pink: 'from-blue-500 to-blue-600',
     blue: 'from-blue-500 to-blue-600',
     green: 'from-green-500 to-green-600',
     purple: 'from-purple-500 to-purple-600',
@@ -117,8 +117,8 @@ export function AdminEmptyState({ icon: Icon, title, description, action }) {
   return (
     <div className="text-center py-12">
       {Icon && (
-        <div className="w-16 h-16 rounded-full bg-pink-100 flex items-center justify-center mx-auto mb-4">
-          <Icon className="w-8 h-8 text-pink-500" />
+        <div className="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+          <Icon className="w-8 h-8 text-blue-500" />
         </div>
       )}
       <h3 className="text-lg font-medium text-gray-900 mb-2">{title}</h3>
@@ -138,8 +138,8 @@ export function AdminLoadingState({ message = '読み込み中...' }) {
     <div className="flex items-center justify-center py-12">
       <div className="text-center">
         <div className="relative w-16 h-16 mx-auto mb-4">
-          <div className="absolute inset-0 rounded-full border-4 border-pink-200"></div>
-          <div className="absolute inset-0 rounded-full border-4 border-pink-500 border-t-transparent animate-spin"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-blue-200"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-blue-500 border-t-transparent animate-spin"></div>
         </div>
         <p className="text-gray-600 font-medium">{message}</p>
       </div>

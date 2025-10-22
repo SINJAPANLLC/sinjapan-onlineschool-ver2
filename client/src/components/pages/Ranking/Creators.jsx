@@ -422,7 +422,7 @@ const Creator = ({ activeTimeFilter }) => {
                 transition={{ duration: 2, repeat: Infinity }}
                 data-testid="rank-badge-1"
             >
-                <div className="bg-gradient-to-r from-pink-500 to-pink-600 text-white text-lg font-bold px-4 py-2 rounded-full shadow-lg">
+                <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-lg font-bold px-4 py-2 rounded-full shadow-lg">
                     1位
                 </div>
             </motion.div>
@@ -440,7 +440,7 @@ const Creator = ({ activeTimeFilter }) => {
                         <motion.img
                             src={creator.avatar}
                             alt={creator.name}
-                            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-pink-200 shadow-2xl"
+                            className="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-4 border-blue-200 shadow-2xl"
                             whileHover={{ scale: 1.1, rotate: 5 }}
                             transition={{ duration: 0.3 }}
                             data-testid={`img-avatar-${creator.id}`}
@@ -482,16 +482,16 @@ const Creator = ({ activeTimeFilter }) => {
                         whileHover={{ scale: 1.1 }}
                         data-testid={`count-likes-${creator.id}`}
                     >
-                        <Heart className="w-5 h-5 text-pink-500 fill-pink-500" />
-                        <span className="font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">{creator.likes}</span>
+                        <Heart className="w-5 h-5 text-blue-500 fill-blue-500" />
+                        <span className="font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">{creator.likes}</span>
                     </motion.div>
                     <motion.div 
                         className="flex items-center space-x-1.5"
                         whileHover={{ scale: 1.1 }}
                         data-testid={`count-followers-${creator.id}`}
                     >
-                        <Users className="w-5 h-5 text-pink-500 fill-pink-500" />
-                        <span className="font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">{creator.followers}</span>
+                        <Users className="w-5 h-5 text-blue-500 fill-blue-500" />
+                        <span className="font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">{creator.followers}</span>
                         <span className="text-gray-500 text-xs">{t('creatorPage.followers')}</span>
                     </motion.div>
                 </motion.div>
@@ -517,7 +517,7 @@ const Creator = ({ activeTimeFilter }) => {
                     className={`w-full py-3 rounded-xl text-base font-bold transition-all shadow-lg flex items-center justify-center space-x-2 ${
                         isFollowing
                             ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                            : 'bg-gradient-to-r from-pink-500 to-pink-600 text-white hover:from-pink-600 hover:to-pink-700 shadow-pink-200'
+                            : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-blue-200'
                     }`}
                     data-testid={`button-follow-${creator.id}`}
                 >
@@ -555,7 +555,7 @@ const Creator = ({ activeTimeFilter }) => {
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.5 }}
             >
-                <div className="bg-gradient-to-br from-pink-400 to-pink-600 text-white text-sm font-bold px-2.5 py-1.5 rounded-full w-10 h-10 flex items-center justify-center shadow-md" data-testid={`rank-badge-${rank}`}>
+                <div className="bg-gradient-to-br from-blue-400 to-blue-600 text-white text-sm font-bold px-2.5 py-1.5 rounded-full w-10 h-10 flex items-center justify-center shadow-md" data-testid={`rank-badge-${rank}`}>
                     {rank}位
                 </div>
             </motion.div>
@@ -569,7 +569,7 @@ const Creator = ({ activeTimeFilter }) => {
                 <img
                     src={creator.avatar}
                     alt={creator.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-pink-200 shadow-md"
+                    className="w-14 h-14 rounded-full object-cover border-2 border-blue-200 shadow-md"
                     data-testid={`img-avatar-${creator.id}`}
                 />
                 {creator.isVerified && (
@@ -589,12 +589,12 @@ const Creator = ({ activeTimeFilter }) => {
                 </motion.h4>
                 <div className="flex items-center space-x-4 text-xs">
                     <div className="flex items-center space-x-1" data-testid={`count-followers-${creator.id}`}>
-                        <Users className="w-3.5 h-3.5 text-pink-500" />
-                        <span className="font-semibold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">{creator.followers}</span>
+                        <Users className="w-3.5 h-3.5 text-blue-500" />
+                        <span className="font-semibold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">{creator.followers}</span>
                     </div>
                     <div className="flex items-center space-x-1" data-testid={`count-likes-${creator.id}`}>
-                        <Heart className="w-3.5 h-3.5 text-pink-500" />
-                        <span className="font-semibold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">{creator.likes}</span>
+                        <Heart className="w-3.5 h-3.5 text-blue-500" />
+                        <span className="font-semibold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">{creator.likes}</span>
                     </div>
                 </div>
             </div>
@@ -609,7 +609,7 @@ const Creator = ({ activeTimeFilter }) => {
                 className={`flex-shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all shadow-md flex items-center space-x-1 ${
                     isFollowing
                         ? 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                        : 'bg-gradient-to-r from-pink-500 to-pink-600 text-white hover:from-pink-600 hover:to-pink-700 shadow-pink-200'
+                        : 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-blue-200'
                 }`}
                 data-testid={`button-follow-${creator.id}`}
             >
@@ -642,9 +642,9 @@ const Creator = ({ activeTimeFilter }) => {
                         animate={{ rotate: [0, 10, -10, 10, 0] }}
                         transition={{ duration: 2, repeat: Infinity }}
                     >
-                        <Crown className="w-6 h-6 text-pink-600 fill-pink-600" />
+                        <Crown className="w-6 h-6 text-blue-600 fill-blue-600" />
                     </motion.div>
-                    <h2 className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                    <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                         {t('creatorPage.overallRanking')}
                     </h2>
                 </div>
@@ -668,7 +668,7 @@ const Creator = ({ activeTimeFilter }) => {
                     onClick={handleClick}
                     whileHover={{ scale: 1.02, y: -2 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full mt-4 bg-gradient-to-r from-pink-500 to-pink-600 text-white py-3 rounded-xl font-bold hover:from-pink-600 hover:to-pink-700 transition-all shadow-lg shadow-pink-200 flex items-center justify-center space-x-2"
+                    className="w-full mt-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-3 rounded-xl font-bold hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg shadow-blue-200 flex items-center justify-center space-x-2"
                     data-testid="button-show-all-creators"
                 >
                     <Eye className="w-5 h-5" />

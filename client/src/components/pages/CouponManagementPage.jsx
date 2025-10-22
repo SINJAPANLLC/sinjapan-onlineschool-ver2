@@ -276,7 +276,7 @@ const CouponManagementPage = () => {
                 description: ''
               });
             }}
-            className="bg-pink-500 text-white px-3 py-1 rounded-lg text-sm font-medium hover:bg-pink-600 transition-colors"
+            className="bg-blue-500 text-white px-3 py-1 rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors"
           >
             <Plus className="w-4 h-4 inline mr-1" />
             新規作成
@@ -329,7 +329,7 @@ const CouponManagementPage = () => {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             {statusOptions.map(option => (
               <option key={option.id} value={option.id}>{option.name}</option>
@@ -358,7 +358,7 @@ const CouponManagementPage = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="例: 新規ユーザー割引"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -371,7 +371,7 @@ const CouponManagementPage = () => {
                       value={formData.code}
                       onChange={handleInputChange}
                       placeholder="例: WELCOME20"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       required
                     />
                     <button
@@ -392,7 +392,7 @@ const CouponManagementPage = () => {
                     name="type"
                     value={formData.type}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="percentage">パーセント割引</option>
                     <option value="fixed">固定金額割引</option>
@@ -408,7 +408,7 @@ const CouponManagementPage = () => {
                     value={formData.value}
                     onChange={handleInputChange}
                     placeholder={formData.type === 'percentage' ? '20' : '1000'}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -423,7 +423,7 @@ const CouponManagementPage = () => {
                     value={formData.minAmount}
                     onChange={handleInputChange}
                     placeholder="1000"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -434,7 +434,7 @@ const CouponManagementPage = () => {
                     value={formData.maxDiscount}
                     onChange={handleInputChange}
                     placeholder="5000"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -448,7 +448,7 @@ const CouponManagementPage = () => {
                     value={formData.usageLimit}
                     onChange={handleInputChange}
                     placeholder="100 (0 = 無制限)"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 <div>
@@ -458,7 +458,7 @@ const CouponManagementPage = () => {
                     name="validUntil"
                     value={formData.validUntil}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     required
                   />
                 </div>
@@ -472,7 +472,7 @@ const CouponManagementPage = () => {
                   onChange={handleInputChange}
                   placeholder="クーポンの説明を入力してください"
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
 
@@ -486,7 +486,7 @@ const CouponManagementPage = () => {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition-colors"
+                  className="flex-1 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
                 >
                   {editingId ? '更新' : '作成'}
                 </button>
@@ -562,7 +562,7 @@ const CouponManagementPage = () => {
             <p className="text-gray-600 mb-4">新しいクーポンを作成してユーザーに特典を提供しましょう</p>
             <button
               onClick={() => setIsCreating(true)}
-              className="bg-pink-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-pink-600 transition-colors"
+              className="bg-blue-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
             >
               クーポンを作成
             </button>

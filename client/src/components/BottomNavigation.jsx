@@ -26,8 +26,8 @@ const BottomNavigation = ({ active = "Home" }) => {
                             key={item.key}
                             onClick={item.onClick}
                             className={`flex flex-col items-center p-2 transition-all duration-200 relative flex-1
-                ${active.toLowerCase() === item.key ? "text-pink-500 scale-110" : "text-gray-500"}
-                hover:text-pink-500 hover:scale-110`}
+                ${active.toLowerCase() === item.key ? "text-blue-500 scale-110" : "text-gray-500"}
+                hover:text-blue-500 hover:scale-110`}
                         >
                             <div className="relative">
                                 <item.icon size={20} />
@@ -40,7 +40,7 @@ const BottomNavigation = ({ active = "Home" }) => {
                             </div>
                             <span className="text-xs mt-1 whitespace-nowrap">{t(`navigation.${item.key}`)}</span>
                             {active.toLowerCase() === item.key && (
-                                <div className="w-1 h-1 bg-pink-500 rounded-full mt-1" />
+                                <div className="w-1 h-1 bg-blue-500 rounded-full mt-1" />
                             )}
                         </button>
                     ))}

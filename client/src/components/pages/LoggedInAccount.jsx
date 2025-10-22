@@ -89,10 +89,10 @@ const LoggedInAccountPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3 }}
-                className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20"
+                className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20"
             >
                 {/* User profile section with gradient */}
-                <div className="bg-gradient-to-r from-pink-500 to-pink-600 pt-6 pb-20 px-6 relative overflow-hidden">
+                <div className="bg-gradient-to-r from-blue-500 to-blue-600 pt-6 pb-20 px-6 relative overflow-hidden">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -131,7 +131,7 @@ const LoggedInAccountPage = () => {
                             className={`bg-white rounded-2xl shadow-xl p-6 border-2 ${
                                 userData?.creatorStatus === 'pending' ? 'border-yellow-200 bg-yellow-50' :
                                 userData?.creatorStatus === 'rejected' ? 'border-red-200 bg-red-50' :
-                                'border-pink-100'
+                                'border-blue-100'
                             } cursor-pointer overflow-hidden relative`}
                             onClick={() => {
                                 if (userData?.creatorStatus === 'pending') return;
@@ -147,7 +147,7 @@ const LoggedInAccountPage = () => {
                                         className={`w-14 h-14 rounded-xl flex items-center justify-center shadow-lg ${
                                             userData?.creatorStatus === 'pending' ? 'bg-gradient-to-br from-yellow-400 to-yellow-500' :
                                             userData?.creatorStatus === 'rejected' ? 'bg-gradient-to-br from-red-400 to-red-500' :
-                                            'bg-gradient-to-br from-pink-500 to-pink-600'
+                                            'bg-gradient-to-br from-blue-500 to-blue-600'
                                         }`}
                                     >
                                         {userData?.creatorStatus === 'pending' ? (
@@ -162,7 +162,7 @@ const LoggedInAccountPage = () => {
                                         <h2 className={`text-xl font-bold ${
                                             userData?.creatorStatus === 'pending' ? 'text-yellow-600' :
                                             userData?.creatorStatus === 'rejected' ? 'text-red-600' :
-                                            'bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent'
+                                            'bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent'
                                         }`}>
                                             {userData?.creatorStatus === 'pending' ? 'クリエイター申請審査中' :
                                              userData?.creatorStatus === 'rejected' ? 'クリエイター申請却下' :
@@ -177,8 +177,8 @@ const LoggedInAccountPage = () => {
                                 </div>
                                 {userData?.creatorStatus !== 'pending' && userData?.creatorStatus !== 'rejected' && (
                                     <div className="flex items-center space-x-2">
-                                        <span className="text-sm font-medium text-pink-600">今すぐ登録</span>
-                                        <ChevronRight className="w-5 h-5 text-pink-500" />
+                                        <span className="text-sm font-medium text-blue-600">今すぐ登録</span>
+                                        <ChevronRight className="w-5 h-5 text-blue-500" />
                                     </div>
                                 )}
                             </div>
@@ -226,7 +226,7 @@ const LoggedInAccountPage = () => {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
                             whileHover={{ scale: 1.02, y: -2 }}
-                            className="bg-white rounded-2xl shadow-xl p-6 border-2 border-pink-100 cursor-pointer overflow-hidden relative"
+                            className="bg-white rounded-2xl shadow-xl p-6 border-2 border-blue-100 cursor-pointer overflow-hidden relative"
                             onClick={() => handleNavigation('/creator-dashboard')}
                             data-testid="card-creator-dashboard"
                         >
@@ -234,20 +234,20 @@ const LoggedInAccountPage = () => {
                                 <div className="flex items-center space-x-4">
                                     <motion.div
                                         whileHover={{ scale: 1.1 }}
-                                        className="w-14 h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center shadow-lg"
+                                        className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg"
                                     >
                                         <BarChart className="w-7 h-7 text-white" />
                                     </motion.div>
                                     <div>
-                                        <h2 className="text-xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                                        <h2 className="text-xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                                             {t('account.creatorDashboard.title')}
                                         </h2>
                                         <p className="text-sm text-gray-500 mt-1">パフォーマンスを確認</p>
                                     </div>
                                 </div>
                                 <div className="flex items-center space-x-2">
-                                    <span className="text-sm font-medium text-pink-600">{t('account.creatorDashboard.analysis')}</span>
-                                    <ChevronRight className="w-5 h-5 text-pink-500" />
+                                    <span className="text-sm font-medium text-blue-600">{t('account.creatorDashboard.analysis')}</span>
+                                    <ChevronRight className="w-5 h-5 text-blue-500" />
                                 </div>
                             </div>
                         </motion.div>
@@ -265,11 +265,11 @@ const LoggedInAccountPage = () => {
                                     repeat: Infinity,
                                     ease: "easeInOut"
                                 }}
-                                className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
+                                className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
                             >
                                 <CreditCard className="w-4 h-4 text-white" />
                             </motion.div>
-                            <h2 className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                            <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                                 {t('account.purchaseSave.title')}
                             </h2>
                         </div>
@@ -277,57 +277,57 @@ const LoggedInAccountPage = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
-                            className="bg-white rounded-2xl shadow-lg border border-pink-100 overflow-hidden divide-y divide-pink-50"
+                            className="bg-white rounded-2xl shadow-lg border border-blue-100 overflow-hidden divide-y divide-blue-50"
                         >
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/high-quality-plan')}
                                 data-testid="button-high-quality-plan"
                             >
                                 <span className="font-semibold">高画質プラン</span>
-                                <span className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-3 py-1 rounded-full text-sm font-medium">未加入</span>
+                                <span className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">未加入</span>
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/current-plan')}
                                 data-testid="button-current-plan"
                             >
                                 <span className="font-semibold">加入中のプラン</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/payment-methods')}
                                 data-testid="button-payment-methods"
                             >
                                 <span className="font-semibold">支払い方法</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/purchase-history')}
                                 data-testid="button-purchase-history"
                             >
                                 <span className="font-semibold">購入履歴</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/coupons')}
                                 data-testid="button-coupons"
                             >
                                 <span className="font-semibold">クーポン一覧</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                         </motion.div>
                     </div>
@@ -345,11 +345,11 @@ const LoggedInAccountPage = () => {
                                     ease: "easeInOut",
                                     delay: 0.2
                                 }}
-                                className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
+                                className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
                             >
                                 <UserCheck className="w-4 h-4 text-white" />
                             </motion.div>
-                            <h2 className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                            <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                                 {t('account.postsOperations.title')}
                             </h2>
                         </div>
@@ -365,7 +365,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="block w-full text-left px-5 py-4 bg-white border-2 border-pink-100 rounded-2xl hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 text-gray-800 shadow-md transition-all duration-300 font-semibold"
+                                className="block w-full text-left px-5 py-4 bg-white border-2 border-blue-100 rounded-2xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 shadow-md transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/register-creator')}
                                 data-testid="button-register-creator"
                             >
@@ -373,11 +373,11 @@ const LoggedInAccountPage = () => {
                             </motion.button>
                             
                             {/* Creator Management Features */}
-                            <div className="bg-white rounded-2xl shadow-lg border border-pink-100 overflow-hidden divide-y divide-pink-50">
+                            <div className="bg-white rounded-2xl shadow-lg border border-blue-100 overflow-hidden divide-y divide-blue-50">
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/creator-ranking')}
                                     data-testid="button-creator-ranking"
                                 >
@@ -386,7 +386,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/active-plans')}
                                     data-testid="button-active-plans"
                                 >
@@ -395,7 +395,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/my-posts')}
                                     data-testid="button-my-posts"
                                 >
@@ -404,7 +404,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/post-comments')}
                                     data-testid="button-post-comments"
                                 >
@@ -413,7 +413,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/sales-management')}
                                     data-testid="button-sales-management"
                                 >
@@ -422,7 +422,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/bank-account-registration')}
                                     data-testid="button-bank-account"
                                 >
@@ -431,7 +431,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/transfer-request')}
                                     data-testid="button-transfer-request"
                                 >
@@ -440,7 +440,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/coupon-management')}
                                     data-testid="button-coupon-management"
                                 >
@@ -462,11 +462,11 @@ const LoggedInAccountPage = () => {
                                     repeat: Infinity,
                                     ease: "linear"
                                 }}
-                                className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
+                                className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
                             >
                                 <Settings className="w-4 h-4 text-white" />
                             </motion.div>
-                            <h2 className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                            <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                                 {t('account.settings.title')}
                             </h2>
                         </div>
@@ -475,95 +475,95 @@ const LoggedInAccountPage = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="bg-white rounded-2xl shadow-lg border border-pink-100 overflow-hidden divide-y divide-pink-50"
+                            className="bg-white rounded-2xl shadow-lg border border-blue-100 overflow-hidden divide-y divide-blue-50"
                         >
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/languages')}
                                 data-testid="button-language"
                             >
                                 <span>{t('account.settings.language')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
-                            <div className="flex items-center justify-between py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800">
+                            <div className="flex items-center justify-between py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800">
                                 <span className="font-semibold">{t('account.settings.rejectMessage')}</span>
                                 <label className="inline-flex relative items-center cursor-pointer">
                                     <input type="checkbox" className="sr-only peer" />
-                                    <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-gradient-to-r peer-checked:from-pink-500 peer-checked:to-pink-600"></div>
+                                    <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-gradient-to-r peer-checked:from-blue-500 peer-checked:to-blue-600"></div>
                                     <div className="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-5 shadow-md"></div>
                                 </label>
                             </div>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/email-notifications')}
                                 data-testid="button-email-notifications"
                             >
                                 <span>{t('account.settings.emailNotifications')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/follow-list')}
                                 data-testid="button-following"
                             >
                                 <span>{t('account.settings.following')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/blocked-users')}
                                 data-testid="button-blocked-users"
                             >
                                 <span>{t('account.settings.blockedUsers')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/personal-info')}
                                 data-testid="button-personal-info"
                             >
                                 <span>{t('account.settings.personalInfo')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/phone-verification')}
                                 data-testid="button-phone-verification"
                             >
                                 <span>{t('account.settings.phoneVerification')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/email-verification')}
                                 data-testid="button-email-verification"
                             >
                                 <span>{t('account.settings.emailVerification')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => navigate('/settings/notifications')}
                                 data-testid="button-notices"
                             >
                                 <span>{t('account.settings.notices')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                         </motion.div>
                     </div>
@@ -581,11 +581,11 @@ const LoggedInAccountPage = () => {
                                     ease: "easeInOut",
                                     delay: 0.3
                                 }}
-                                className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
+                                className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
                             >
                                 <FileText className="w-4 h-4 text-white" />
                             </motion.div>
-                            <h2 className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                            <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                                 {t('account.about.title')}
                             </h2>
                         </div>
@@ -594,57 +594,57 @@ const LoggedInAccountPage = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5 }}
-                            className="bg-white rounded-2xl shadow-lg border border-pink-100 overflow-hidden divide-y divide-pink-50"
+                            className="bg-white rounded-2xl shadow-lg border border-blue-100 overflow-hidden divide-y divide-blue-50"
                         >
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/terms')}
                                 data-testid="button-terms"
                             >
                                 <span>{t('account.about.terms')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/privacy')}
                                 data-testid="button-privacy"
                             >
                                 <span>{t('account.about.privacy')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/legal')}
                                 data-testid="button-legal"
                             >
                                 <span>{t('account.about.legal')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/guidelines')}
                                 data-testid="button-guidelines"
                             >
                                 <span>{t('account.about.guidelines')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/help')}
                                 data-testid="button-help"
                             >
                                 <span>{t('account.about.help')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                         </motion.div>
                     </div>
@@ -662,11 +662,11 @@ const LoggedInAccountPage = () => {
                                     ease: "easeInOut",
                                     delay: 0.4
                                 }}
-                                className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
+                                className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-md"
                             >
                                 <MoreHorizontal className="w-4 h-4 text-white" />
                             </motion.div>
-                            <h2 className="text-lg font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">
+                            <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">
                                 {t('account.other.title')}
                             </h2>
                         </div>
@@ -674,27 +674,27 @@ const LoggedInAccountPage = () => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.6 }}
-                            className="bg-white rounded-2xl shadow-lg border border-pink-100 overflow-hidden divide-y divide-pink-50"
+                            className="bg-white rounded-2xl shadow-lg border border-blue-100 overflow-hidden divide-y divide-blue-50"
                         >
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/switch-account')}
                                 data-testid="button-switch-account"
                             >
                                 <span>{t('account.other.switchAccount')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-pink-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => setShowLogoutModal(true)}
                                 data-testid="button-logout"
                             >
                                 <span>{t('account.other.logout')}</span>
-                                <ChevronRight className="w-5 h-5 text-pink-400" />
+                                <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
                         </motion.div>
                     </div>
@@ -716,7 +716,7 @@ const LoggedInAccountPage = () => {
                         ease: "easeInOut"
                     }
                 }}
-                className="fixed bottom-24 right-6 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-2xl z-50 border-4 border-white"
+                className="fixed bottom-24 right-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-2xl z-50 border-4 border-white"
                 aria-label="Create new post"
                 data-testid="button-create-post-float"
             >
@@ -736,7 +736,7 @@ const LoggedInAccountPage = () => {
                             initial={{ scale: 0.9, y: 20 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 20 }}
-                            className="bg-white rounded-3xl p-8 w-96 shadow-2xl border-2 border-pink-100"
+                            className="bg-white rounded-3xl p-8 w-96 shadow-2xl border-2 border-blue-100"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <motion.div
@@ -748,7 +748,7 @@ const LoggedInAccountPage = () => {
                                     repeat: Infinity,
                                     ease: "easeInOut"
                                 }}
-                                className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl"
+                                className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl"
                             >
                                 <Bell className="w-8 h-8 text-white" />
                             </motion.div>
@@ -772,7 +772,7 @@ const LoggedInAccountPage = () => {
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                     onClick={handleLogout}
-                                    className="flex-1 px-4 py-3 text-base rounded-2xl bg-gradient-to-r from-pink-500 to-pink-600 text-white font-bold shadow-lg"
+                                    className="flex-1 px-4 py-3 text-base rounded-2xl bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold shadow-lg"
                                     data-testid="button-confirm-logout"
                                 >
                                     {t('account.other.confirm') || 'ログアウト'}
@@ -792,7 +792,7 @@ const LoggedInAccountPage = () => {
                             initial={{ scale: 0.9, y: 20 }}
                             animate={{ scale: 1, y: 0 }}
                             exit={{ scale: 0.9, y: 20 }}
-                            className="bg-white rounded-3xl max-w-sm w-full p-8 shadow-2xl border-2 border-pink-100"
+                            className="bg-white rounded-3xl max-w-sm w-full p-8 shadow-2xl border-2 border-blue-100"
                         >
                             <motion.div
                                 animate={{ 
@@ -803,7 +803,7 @@ const LoggedInAccountPage = () => {
                                     repeat: Infinity,
                                     ease: "easeInOut"
                                 }}
-                                className="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl"
+                                className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl"
                             >
                                 <Crown className="w-8 h-8 text-white" />
                             </motion.div>
@@ -814,7 +814,7 @@ const LoggedInAccountPage = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleRegisterModal}
-                                className="bg-gradient-to-r from-pink-500 to-pink-600 text-white py-4 rounded-full w-full font-bold shadow-xl mb-3"
+                                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-full w-full font-bold shadow-xl mb-3"
                                 data-testid="button-register-creator-modal"
                             >
                                 クリエイター登録

@@ -123,7 +123,7 @@ const AnalyticsDashboard = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
+              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
               data-testid="button-export"
             >
               <Download className="w-4 h-4" />
@@ -144,7 +144,7 @@ const AnalyticsDashboard = () => {
               onClick={() => setTimeRange(range.value)}
               className={`px-4 py-2 rounded-xl font-medium transition-all ${
                 timeRange === range.value
-                  ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-md'
+                  ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-md'
                   : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
               }`}
               data-testid={`button-timerange-${range.value}`}
@@ -230,10 +230,10 @@ const AnalyticsDashboard = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="flex items-center justify-between p-4 rounded-xl hover:bg-pink-50 transition-all"
+                className="flex items-center justify-between p-4 rounded-xl hover:bg-blue-50 transition-all"
               >
                 <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
                     {index + 1}
                   </div>
                   <div>
@@ -259,7 +259,7 @@ const AnalyticsDashboard = () => {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="flex items-center justify-between p-4 rounded-xl hover:bg-pink-50 transition-all"
+                className="flex items-center justify-between p-4 rounded-xl hover:bg-blue-50 transition-all"
               >
                 <div className="flex items-center space-x-3">
                   <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
@@ -298,14 +298,14 @@ const AnalyticsDashboard = () => {
           
           <motion.div
             whileHover={{ y: -4 }}
-            className="p-4 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl"
+            className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl"
           >
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-600">収益成長率</p>
                 <p className="text-2xl font-bold text-gray-900 mt-1">+15.2%</p>
               </div>
-              <TrendingUp className="w-8 h-8 text-pink-600" />
+              <TrendingUp className="w-8 h-8 text-blue-600" />
             </div>
           </motion.div>
           

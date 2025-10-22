@@ -195,7 +195,7 @@ const Ranking = () => {
                     <motion.div
                         whileHover={{ scale: 1.1, rotate: -10 }}
                         transition={{ duration: 0.3 }}
-                        className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-pink-400 to-pink-600 shadow-md"
+                        className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 shadow-md"
                     >
                         <Crown className="w-4 h-4 sm:w-5 sm:h-5 text-white fill-white" strokeWidth={2.5} />
                     </motion.div>
@@ -244,7 +244,7 @@ const Ranking = () => {
                                 {/* ランキングバッジ */}
                                 <motion.div 
                                     whileHover={{ scale: 1.1, rotate: 5 }}
-                                    className="absolute top-2 left-2 w-9 h-9 bg-gradient-to-br from-pink-400 via-pink-500 to-pink-600 rounded-full flex items-center justify-center shadow-lg"
+                                    className="absolute top-2 left-2 w-9 h-9 bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg"
                                     style={{ boxShadow: '0 4px 12px rgba(236, 72, 153, 0.4)' }}
                                 >
                                     <span className="text-white font-black text-sm drop-shadow-md">{index + 1}</span>
@@ -261,7 +261,7 @@ const Ranking = () => {
                                             damping: 20,
                                             delay: index * 0.1 + 0.3 
                                         }}
-                                        className="absolute top-2 right-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+                                        className="absolute top-2 right-2 bg-gradient-to-r from-blue-500 to-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
                                     >
                                         <motion.span
                                             animate={{ scale: [1, 1.1, 1] }}
@@ -311,12 +311,12 @@ const Ranking = () => {
                                     <motion.button 
                                         whileHover={{ scale: 1.1 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="flex items-center gap-1 hover:bg-pink-50 p-1.5 rounded-lg transition-colors"
+                                        className="flex items-center gap-1 hover:bg-blue-50 p-1.5 rounded-lg transition-colors"
                                         onClick={(e) => handleLikeClick(post.id, e)}
                                         data-testid={`like-button-${post.id}`}
                                     >
                                         <Heart 
-                                            className={`w-4 h-4 transition-all ${localLikedPosts.has(post.id) ? 'fill-pink-500 text-pink-500 scale-110' : 'text-gray-400'}`}
+                                            className={`w-4 h-4 transition-all ${localLikedPosts.has(post.id) ? 'fill-blue-500 text-blue-500 scale-110' : 'text-gray-400'}`}
                                             strokeWidth={2.5}
                                         />
                                         <span className="text-gray-600 font-medium">{post.likes}</span>
@@ -324,12 +324,12 @@ const Ranking = () => {
                                     <motion.button 
                                         whileHover={{ scale: 1.1 }}
                                         whileTap={{ scale: 0.95 }}
-                                        className="flex items-center gap-1 hover:bg-pink-50 p-1.5 rounded-lg transition-colors"
+                                        className="flex items-center gap-1 hover:bg-blue-50 p-1.5 rounded-lg transition-colors"
                                         onClick={(e) => handleSaveClick(post.id, e)}
                                         data-testid={`save-button-${post.id}`}
                                     >
                                         <Bookmark 
-                                            className={`w-4 h-4 transition-all ${localSavedPosts.has(post.id) ? 'fill-pink-500 text-pink-500 scale-110' : 'text-gray-400'}`}
+                                            className={`w-4 h-4 transition-all ${localSavedPosts.has(post.id) ? 'fill-blue-500 text-blue-500 scale-110' : 'text-gray-400'}`}
                                             strokeWidth={2.5}
                                         />
                                         <span className="text-gray-600 font-medium">{post.bookmarks}</span>

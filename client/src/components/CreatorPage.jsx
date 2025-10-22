@@ -77,7 +77,7 @@ const CreatorPage = () => {
     // ランキングバッジの色を取得
     const getRankBadgeColor = (rank) => {
         // すべてピンクのグラデーション
-        return "bg-gradient-to-br from-pink-400 to-pink-600 text-white";
+        return "bg-gradient-to-br from-blue-400 to-blue-600 text-white";
     };
 
     const containerVariants = {
@@ -156,7 +156,7 @@ const CreatorPage = () => {
                                         </h3>
 
                                         <div className="flex items-center gap-2 text-xs">
-                                            <div className="flex items-center gap-0.5 text-pink-500">
+                                            <div className="flex items-center gap-0.5 text-blue-500">
                                                 <Heart size={12} className="fill-current drop-shadow-sm" strokeWidth={2.5} />
                                                 <span className="font-semibold">{creator.likes}</span>
                                             </div>
@@ -174,7 +174,7 @@ const CreatorPage = () => {
                                         className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all border-2 flex items-center gap-1 flex-shrink-0 ${
                                             isFollowing
                                                 ? "bg-gray-100 border-gray-300 text-gray-700 hover:bg-gray-200"
-                                                : "bg-white border-pink-500 text-pink-500 hover:bg-pink-50"
+                                                : "bg-white border-blue-500 text-blue-500 hover:bg-blue-50"
                                         }`}
                                         data-testid={`follow-button-${creator.id}`}
                                     >
@@ -214,7 +214,7 @@ const CreatorPage = () => {
                                 →
                             </motion.div>
                         </div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-pink-600 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </motion.button>
                 </motion.div>
             </motion.div>

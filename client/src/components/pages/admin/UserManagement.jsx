@@ -173,7 +173,7 @@ const UserManagement = () => {
 
   const getRoleColor = (role) => {
     switch (role) {
-      case 'creator': return 'text-pink-600 bg-pink-100';
+      case 'creator': return 'text-blue-600 bg-blue-100';
       case 'user': return 'text-blue-600 bg-blue-100';
       default: return 'text-gray-600 bg-gray-100';
     }
@@ -319,7 +319,7 @@ const UserManagement = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
+              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl text-white hover:from-blue-600 hover:to-blue-700 transition-all shadow-md hover:shadow-lg"
               data-testid="button-export"
             >
               <Download className="w-4 h-4" />
@@ -374,7 +374,7 @@ const UserManagement = () => {
                 placeholder="ユーザーを検索..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                 data-testid="input-search"
               />
             </div>
@@ -384,7 +384,7 @@ const UserManagement = () => {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               data-testid="select-status"
             >
               {statusOptions.map(status => (
@@ -399,7 +399,7 @@ const UserManagement = () => {
             <select
               value={filterRole}
               onChange={(e) => setFilterRole(e.target.value)}
-              className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
+              className="w-full px-3 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               data-testid="select-role"
             >
               {roleOptions.map(role => (
@@ -445,7 +445,7 @@ const UserManagement = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.2, delay: index * 0.05 }}
-                  className="hover:bg-pink-50 transition-colors"
+                  className="hover:bg-blue-50 transition-colors"
                   data-testid={`row-user-${user.id}`}
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -453,12 +453,12 @@ const UserManagement = () => {
                       <div className="flex-shrink-0 h-10 w-10">
                         {user.photoURL ? (
                           <img 
-                            className="h-10 w-10 rounded-full object-cover ring-2 ring-pink-100" 
+                            className="h-10 w-10 rounded-full object-cover ring-2 ring-blue-100" 
                             src={user.photoURL} 
                             alt={user.displayName}
                           />
                         ) : (
-                          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center ring-2 ring-pink-100">
+                          <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center ring-2 ring-blue-100">
                             <span className="text-white font-semibold">
                               {user.displayName.charAt(0).toUpperCase()}
                             </span>
@@ -597,7 +597,7 @@ const UserManagement = () => {
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-semibold">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold">
                         {selectedUser.displayName.charAt(0).toUpperCase()}
                       </div>
                     )}
@@ -618,7 +618,7 @@ const UserManagement = () => {
                   onChange={(e) => setBanReason(e.target.value)}
                   placeholder="BAN理由を入力してください..."
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent resize-none"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
                   disabled={isProcessing}
                   data-testid="input-ban-reason"
                 />
@@ -697,7 +697,7 @@ const UserManagement = () => {
                           className="w-12 h-12 rounded-full object-cover"
                         />
                       ) : (
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white font-semibold">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-semibold">
                           {selectedUser.displayName.charAt(0).toUpperCase()}
                         </div>
                       )}

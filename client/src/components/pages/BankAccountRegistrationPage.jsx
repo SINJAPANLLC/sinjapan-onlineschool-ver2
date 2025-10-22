@@ -61,8 +61,8 @@ const BankAccountRegistrationPage = () => {
 
   if (isRegistered) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
           <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
             <ArrowLeft size={24} />
           </motion.button>
@@ -70,7 +70,7 @@ const BankAccountRegistrationPage = () => {
         </motion.div>
 
         <div className="p-6">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-pink-100">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-blue-100">
             <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>
               <CheckCircle className="w-24 h-24 text-green-500 mx-auto mb-6" />
             </motion.div>
@@ -79,7 +79,7 @@ const BankAccountRegistrationPage = () => {
               銀行口座の登録が完了しました。<br />
               収益の振込申請が可能になりました。
             </p>
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/transfer-request')} className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg" data-testid="button-transfer">
+            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/transfer-request')} className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg" data-testid="button-transfer">
               振込申請へ
             </motion.button>
           </motion.div>
@@ -91,8 +91,8 @@ const BankAccountRegistrationPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
         </motion.button>
@@ -117,27 +117,27 @@ const BankAccountRegistrationPage = () => {
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100 space-y-5">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-white rounded-2xl p-6 shadow-xl border-2 border-blue-100 space-y-5">
           <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-            <Sparkles className="w-6 h-6 mr-2 text-pink-500" />
+            <Sparkles className="w-6 h-6 mr-2 text-blue-500" />
             口座情報
           </h3>
 
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">銀行名 *</label>
-            <input type="text" required value={formData.bankName} onChange={(e) => setFormData({...formData, bankName: e.target.value})} className="w-full px-4 py-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold text-lg" placeholder="例: みずほ銀行" data-testid="input-bank-name" />
+            <input type="text" required value={formData.bankName} onChange={(e) => setFormData({...formData, bankName: e.target.value})} className="w-full px-4 py-3 border-2 border-blue-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold text-lg" placeholder="例: みずほ銀行" data-testid="input-bank-name" />
           </div>
 
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">支店名 *</label>
-            <input type="text" required value={formData.branchName} onChange={(e) => setFormData({...formData, branchName: e.target.value})} className="w-full px-4 py-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold text-lg" placeholder="例: 渋谷支店" data-testid="input-branch-name" />
+            <input type="text" required value={formData.branchName} onChange={(e) => setFormData({...formData, branchName: e.target.value})} className="w-full px-4 py-3 border-2 border-blue-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold text-lg" placeholder="例: 渋谷支店" data-testid="input-branch-name" />
           </div>
 
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">口座種別 *</label>
             <div className="grid grid-cols-3 gap-3">
               {accountTypes.map((type) => (
-                <motion.button key={type.id} type="button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setFormData({...formData, accountType: type.id})} className={`px-4 py-3 rounded-xl font-bold transition-all shadow-md ${formData.accountType === type.id ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white' : 'bg-gray-100 text-gray-700'}`} data-testid={`button-account-type-${type.id}`}>
+                <motion.button key={type.id} type="button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setFormData({...formData, accountType: type.id})} className={`px-4 py-3 rounded-xl font-bold transition-all shadow-md ${formData.accountType === type.id ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white' : 'bg-gray-100 text-gray-700'}`} data-testid={`button-account-type-${type.id}`}>
                   {type.name}
                 </motion.button>
               ))}
@@ -146,22 +146,22 @@ const BankAccountRegistrationPage = () => {
 
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">口座番号 *</label>
-            <input type="text" required value={formData.accountNumber} onChange={(e) => setFormData({...formData, accountNumber: e.target.value})} className="w-full px-4 py-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold text-lg" placeholder="例: 1234567" maxLength="7" data-testid="input-account-number" />
+            <input type="text" required value={formData.accountNumber} onChange={(e) => setFormData({...formData, accountNumber: e.target.value})} className="w-full px-4 py-3 border-2 border-blue-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold text-lg" placeholder="例: 1234567" maxLength="7" data-testid="input-account-number" />
           </div>
 
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">口座名義 *</label>
-            <input type="text" required value={formData.accountHolder} onChange={(e) => setFormData({...formData, accountHolder: e.target.value})} className="w-full px-4 py-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-semibold text-lg" placeholder="例: ヤマダタロウ（全角カナ）" data-testid="input-account-holder" />
+            <input type="text" required value={formData.accountHolder} onChange={(e) => setFormData({...formData, accountHolder: e.target.value})} className="w-full px-4 py-3 border-2 border-blue-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-semibold text-lg" placeholder="例: ヤマダタロウ（全角カナ）" data-testid="input-account-holder" />
             <p className="text-xs text-gray-500 mt-1 font-medium">※ 全角カタカナで入力してください</p>
           </div>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-pink-100 to-purple-100 border-2 border-pink-200 rounded-2xl p-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6">
           <div className="flex items-start space-x-4">
-            <AlertCircle className="w-6 h-6 text-pink-600 mt-1" />
+            <AlertCircle className="w-6 h-6 text-blue-600 mt-1" />
             <div>
-              <h4 className="font-bold text-pink-900 mb-2 text-lg">重要事項</h4>
-              <ul className="text-base text-pink-800 space-y-2">
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">重要事項</h4>
+              <ul className="text-base text-blue-800 space-y-2">
                 <li>• 本人名義の口座のみ登録できます</li>
                 <li>• 一度登録すると変更には審査が必要です</li>
                 <li>• 振込手数料は自己負担となります</li>
@@ -170,7 +170,7 @@ const BankAccountRegistrationPage = () => {
           </div>
         </motion.div>
 
-        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center space-x-3 disabled:opacity-50" data-testid="button-submit">
+        <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} type="submit" disabled={isSubmitting} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center space-x-3 disabled:opacity-50" data-testid="button-submit">
           {isSubmitting ? (
             <>
               <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-6 h-6 border-3 border-white border-t-transparent rounded-full" />

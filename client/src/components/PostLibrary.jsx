@@ -17,32 +17,32 @@ const PostLibrary = ({ likedItems }) => {
             label: t("postLibrary.purchased"),
             count: stats.purchased,
             key: 'purchased',
-            gradient: 'from-pink-400 to-pink-600',
-            iconColor: 'text-pink-600'
+            gradient: 'from-blue-400 to-blue-600',
+            iconColor: 'text-blue-600'
         },
         {
             icon: BookmarkCheck,
             label: t("postLibrary.saved"),
             count: stats.saved,
             key: 'saved',
-            gradient: 'from-pink-500 to-rose-500',
-            iconColor: 'text-pink-600'
+            gradient: 'from-blue-500 to-rose-500',
+            iconColor: 'text-blue-600'
         },
         {
             icon: HeartHandshake,
             label: t("postLibrary.liked"),
             count: stats.liked,
             key: 'liked',
-            gradient: 'from-rose-400 to-pink-600',
-            iconColor: 'text-pink-600'
+            gradient: 'from-rose-400 to-blue-600',
+            iconColor: 'text-blue-600'
         },
         {
             icon: History,
             label: t("postLibrary.viewingHistory"),
             count: stats.viewingHistory,
             key: 'viewingHistory',
-            gradient: 'from-pink-500 to-purple-500',
-            iconColor: 'text-pink-600'
+            gradient: 'from-blue-500 to-purple-500',
+            iconColor: 'text-blue-600'
         }
     ];
 
@@ -66,7 +66,7 @@ const PostLibrary = ({ likedItems }) => {
             <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 sm:mb-6 flex items-center">
                 <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-pink-400 to-pink-600 shadow-md"
+                    className="mr-2 p-1.5 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 shadow-md"
                 >
                     <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 text-white" strokeWidth={2.5} />
                 </motion.div>

@@ -80,9 +80,9 @@ const TransferRequestPage = () => {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case 'completed': return 'bg-gradient-to-r from-pink-100 to-pink-200 text-pink-800 border-pink-300';
-      case 'pending': return 'bg-gradient-to-r from-pink-50 to-pink-100 text-pink-600 border-pink-200';
-      default: return 'bg-gradient-to-r from-pink-50 to-pink-100 text-pink-500 border-pink-200';
+      case 'completed': return 'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300';
+      case 'pending': return 'bg-gradient-to-r from-blue-50 to-blue-100 text-blue-600 border-blue-200';
+      default: return 'bg-gradient-to-r from-blue-50 to-blue-100 text-blue-500 border-blue-200';
     }
   };
 
@@ -168,11 +168,11 @@ const TransferRequestPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20 flex items-center justify-center">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full"
+          className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"
         />
       </div>
     );
@@ -180,8 +180,8 @@ const TransferRequestPage = () => {
 
   if (!bankAccount) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
           <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
             <ArrowLeft size={24} />
           </motion.button>
@@ -189,13 +189,13 @@ const TransferRequestPage = () => {
         </motion.div>
 
         <div className="p-6">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-pink-100">
-            <AlertCircle className="w-24 h-24 text-pink-500 mx-auto mb-6" />
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-blue-100">
+            <AlertCircle className="w-24 h-24 text-blue-500 mx-auto mb-6" />
             <h2 className="text-3xl font-bold text-gray-900 mb-3">口座登録が必要です</h2>
             <p className="text-gray-600 mb-6 text-lg">
               振込申請を行うには、まず銀行口座を登録してください。
             </p>
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/bank-account-registration')} className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg" data-testid="button-register-bank">
+            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/bank-account-registration')} className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg" data-testid="button-register-bank">
               口座を登録する
             </motion.button>
           </motion.div>
@@ -208,8 +208,8 @@ const TransferRequestPage = () => {
 
   if (isCompleted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
           <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
             <ArrowLeft size={24} />
           </motion.button>
@@ -217,28 +217,28 @@ const TransferRequestPage = () => {
         </motion.div>
 
         <div className="p-6">
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-pink-100">
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-blue-100">
             <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>
-              <CheckCircle className="w-24 h-24 text-pink-500 mx-auto mb-6" />
+              <CheckCircle className="w-24 h-24 text-blue-500 mx-auto mb-6" />
             </motion.div>
             <h2 className="text-3xl font-bold text-gray-900 mb-3">振込申請完了！</h2>
             <p className="text-gray-600 mb-6 text-lg">
               {isEarlyPayment ? '早払い振込申請を受け付けました。' : '振込申請を受け付けました。'}<br />
               {formatDate(paymentDate)}までに指定口座へ振り込まれます。
             </p>
-            <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-4 border border-pink-100 mb-6">
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-100 mb-6">
               <p className="text-xl font-bold text-gray-900">{formatCurrency(netAmount)}</p>
               <p className="text-sm text-gray-600 font-medium">振込金額（手数料差引後）</p>
             </div>
             {isEarlyPayment && (
-              <div className="bg-gradient-to-r from-pink-100 to-pink-200 rounded-xl p-3 mb-6 border border-pink-300">
-                <p className="text-sm text-pink-800 font-semibold flex items-center justify-center">
+              <div className="bg-gradient-to-r from-blue-100 to-blue-200 rounded-xl p-3 mb-6 border border-blue-300">
+                <p className="text-sm text-blue-800 font-semibold flex items-center justify-center">
                   <Zap className="w-4 h-4 mr-1" />
                   早払い申請（{CONSTANTS.EARLY_PAYMENT_DAYS}営業日以内に振込）
                 </p>
               </div>
             )}
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/sales-management')} className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg" data-testid="button-sales">
+            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/sales-management')} className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all shadow-lg" data-testid="button-sales">
               売上管理へ
             </motion.button>
           </motion.div>
@@ -250,8 +250,8 @@ const TransferRequestPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
-      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
         </motion.button>
@@ -265,22 +265,22 @@ const TransferRequestPage = () => {
 
       <div className="p-6 space-y-6">
         {/* 利用可能残高 */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-6 shadow-xl border-2 border-pink-200 relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-6 shadow-xl border-2 border-blue-200 relative overflow-hidden">
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
           <div className="relative z-10">
-            <h3 className="text-xl font-bold text-pink-900 mb-3 flex items-center">
+            <h3 className="text-xl font-bold text-blue-900 mb-3 flex items-center">
               <TrendingUp className="w-6 h-6 mr-2" />
               利用可能残高
             </h3>
-            <p className="text-4xl font-bold text-pink-900 mb-2" data-testid="text-available-balance">{formatCurrency(availableBalance)}</p>
-            <p className="text-sm text-pink-700 font-medium">最低振込金額: {formatCurrency(CONSTANTS.MINIMUM_TRANSFER_AMOUNT)}</p>
+            <p className="text-4xl font-bold text-blue-900 mb-2" data-testid="text-available-balance">{formatCurrency(availableBalance)}</p>
+            <p className="text-sm text-blue-700 font-medium">最低振込金額: {formatCurrency(CONSTANTS.MINIMUM_TRANSFER_AMOUNT)}</p>
           </div>
         </motion.div>
 
         {/* 振込タイプ選択 */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="bg-white rounded-2xl p-6 shadow-xl border-2 border-blue-100">
           <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-            <Sparkles className="w-6 h-6 mr-2 text-pink-500" />
+            <Sparkles className="w-6 h-6 mr-2 text-blue-500" />
             振込タイプ
           </h3>
           <div className="grid grid-cols-2 gap-4">
@@ -291,14 +291,14 @@ const TransferRequestPage = () => {
               onClick={() => setIsEarlyPayment(false)}
               className={`p-4 rounded-xl border-2 transition-all ${
                 !isEarlyPayment
-                  ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white border-pink-400 shadow-lg'
-                  : 'bg-white text-gray-700 border-pink-100 hover:border-pink-300'
+                  ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white border-blue-400 shadow-lg'
+                  : 'bg-white text-gray-700 border-blue-100 hover:border-blue-300'
               }`}
               data-testid="button-normal-payment"
             >
               <Clock className="w-8 h-8 mx-auto mb-2" />
               <h4 className="font-bold text-sm mb-1">通常振込</h4>
-              <p className={`text-xs ${!isEarlyPayment ? 'text-pink-100' : 'text-gray-500'}`}>
+              <p className={`text-xs ${!isEarlyPayment ? 'text-blue-100' : 'text-gray-500'}`}>
                 末締め翌々5日払い
               </p>
             </motion.button>
@@ -310,14 +310,14 @@ const TransferRequestPage = () => {
               onClick={() => setIsEarlyPayment(true)}
               className={`p-4 rounded-xl border-2 transition-all ${
                 isEarlyPayment
-                  ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white border-pink-400 shadow-lg'
-                  : 'bg-white text-gray-700 border-pink-100 hover:border-pink-300'
+                  ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white border-blue-400 shadow-lg'
+                  : 'bg-white text-gray-700 border-blue-100 hover:border-blue-300'
               }`}
               data-testid="button-early-payment"
             >
               <Zap className="w-8 h-8 mx-auto mb-2" />
               <h4 className="font-bold text-sm mb-1">早払い</h4>
-              <p className={`text-xs ${isEarlyPayment ? 'text-pink-100' : 'text-gray-500'}`}>
+              <p className={`text-xs ${isEarlyPayment ? 'text-blue-100' : 'text-gray-500'}`}>
                 {CONSTANTS.EARLY_PAYMENT_DAYS}営業日以内
               </p>
             </motion.button>
@@ -325,22 +325,22 @@ const TransferRequestPage = () => {
         </motion.div>
 
         {/* 振込金額入力 */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100 space-y-5">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="bg-white rounded-2xl p-6 shadow-xl border-2 border-blue-100 space-y-5">
           <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-            <DollarSign className="w-6 h-6 mr-2 text-pink-500" />
+            <DollarSign className="w-6 h-6 mr-2 text-blue-500" />
             振込金額
           </h3>
 
           <div>
             <label className="block text-sm font-bold text-gray-700 mb-2">振込希望金額 *</label>
             <div className="relative">
-              <input type="number" value={transferAmount} onChange={(e) => setTransferAmount(e.target.value)} className="w-full px-4 py-4 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-bold text-xl" placeholder="金額を入力" min={CONSTANTS.MINIMUM_TRANSFER_AMOUNT} max={availableBalance} data-testid="input-amount" />
+              <input type="number" value={transferAmount} onChange={(e) => setTransferAmount(e.target.value)} className="w-full px-4 py-4 border-2 border-blue-100 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent font-bold text-xl" placeholder="金額を入力" min={CONSTANTS.MINIMUM_TRANSFER_AMOUNT} max={availableBalance} data-testid="input-amount" />
               <span className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold text-lg">円</span>
             </div>
             {!validation.isValid && transferAmount && (
               <div className="mt-2 space-y-1">
                 {validation.errors.map((error, index) => (
-                  <p key={index} className="text-sm text-pink-600 font-medium flex items-center">
+                  <p key={index} className="text-sm text-blue-600 font-medium flex items-center">
                     <AlertCircle className="w-4 h-4 mr-1" />
                     {error}
                   </p>
@@ -350,7 +350,7 @@ const TransferRequestPage = () => {
           </div>
 
           {/* 手数料詳細 */}
-          <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-4 border border-pink-100 space-y-2">
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-100 space-y-2">
             <div className="flex justify-between text-sm"><span className="text-gray-700 font-medium">振込希望金額</span><span className="font-bold" data-testid="text-requested-amount">{formatCurrency(requestedAmount)}</span></div>
             
             {/* システム利用料（税込） */}
@@ -374,29 +374,29 @@ const TransferRequestPage = () => {
             </div>
             
             {/* 総手数料 */}
-            <div className="flex justify-between text-sm border-t border-pink-200 pt-2">
+            <div className="flex justify-between text-sm border-t border-blue-200 pt-2">
               <span className="text-gray-700 font-medium">総手数料</span>
-              <span className="font-bold text-pink-600" data-testid="text-total-fees">{formatCurrency(transferCalculation.totalFees)}</span>
+              <span className="font-bold text-blue-600" data-testid="text-total-fees">{formatCurrency(transferCalculation.totalFees)}</span>
             </div>
             
             {/* 差引振込金額 */}
-            <div className="border-t-2 border-pink-200 pt-2 flex justify-between"><span className="font-bold text-lg">差引振込金額</span><span className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent" data-testid="text-net-amount">{formatCurrency(netAmount)}</span></div>
+            <div className="border-t-2 border-blue-200 pt-2 flex justify-between"><span className="font-bold text-lg">差引振込金額</span><span className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid="text-net-amount">{formatCurrency(netAmount)}</span></div>
           </div>
 
           {/* 支払予定日 */}
-          <div className="bg-gradient-to-r from-pink-100 to-pink-200 rounded-xl p-4 border border-pink-300">
+          <div className="bg-gradient-to-r from-blue-100 to-blue-200 rounded-xl p-4 border border-blue-300">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-pink-900 flex items-center">
+              <span className="text-sm font-bold text-blue-900 flex items-center">
                 <Calendar className="w-4 h-4 mr-2" />
                 支払予定日
               </span>
-              <span className="text-lg font-bold text-pink-900" data-testid="text-payment-date">
+              <span className="text-lg font-bold text-blue-900" data-testid="text-payment-date">
                 {formatDate(paymentDate)}
               </span>
             </div>
           </div>
 
-          <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => setShowConfirm(true)} disabled={!validation.isValid || !transferAmount} className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed" data-testid="button-request">
+          <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => setShowConfirm(true)} disabled={!validation.isValid || !transferAmount} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-5 rounded-2xl font-bold text-xl shadow-xl hover:shadow-2xl transition-all flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed" data-testid="button-request">
             <Send className="w-6 h-6" />
             <span>{isEarlyPayment ? '早払いを申請する' : '振込を申請する'}</span>
           </motion.button>
@@ -406,20 +406,20 @@ const TransferRequestPage = () => {
         <div className="space-y-3">
           <h3 className="text-xl font-bold text-gray-900">振込履歴</h3>
           {recentTransfers.length === 0 ? (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-pink-100">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl p-8 text-center shadow-lg border-2 border-blue-100">
               <Calendar className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-600">振込履歴はありません</p>
             </motion.div>
           ) : (
             recentTransfers.map((transfer, index) => (
-              <motion.div key={transfer.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + index * 0.05 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white rounded-2xl p-5 shadow-lg border-2 border-pink-100" data-testid={`transfer-item-${transfer.id}`}>
+              <motion.div key={transfer.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + index * 0.05 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white rounded-2xl p-5 shadow-lg border-2 border-blue-100" data-testid={`transfer-item-${transfer.id}`}>
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
                       <h4 className="font-bold text-gray-900 text-lg" data-testid={`text-bank-${transfer.id}`}>{transfer.bankName || '銀行名不明'}</h4>
                       <span className={`px-3 py-1 rounded-full text-xs font-bold border ${getStatusColor(transfer.status)}`} data-testid={`text-status-${transfer.id}`}>{getStatusText(transfer.status)}</span>
                       {transfer.type === 'early' && (
-                        <span className="px-2 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-pink-200 to-pink-300 text-pink-800 border border-pink-400 flex items-center" data-testid={`text-type-${transfer.id}`}>
+                        <span className="px-2 py-1 rounded-full text-xs font-bold bg-gradient-to-r from-blue-200 to-blue-300 text-blue-800 border border-blue-400 flex items-center" data-testid={`text-type-${transfer.id}`}>
                           <Zap className="w-3 h-3 mr-1" />
                           {getTypeLabel(transfer.type)}
                         </span>
@@ -428,7 +428,7 @@ const TransferRequestPage = () => {
                     <p className="text-sm text-gray-600 font-medium flex items-center" data-testid={`text-date-${transfer.id}`}><Calendar className="w-4 h-4 mr-1" />{formatDate(transfer.date)}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent" data-testid={`text-amount-${transfer.id}`}>{formatCurrency(transfer.netAmount || 0)}</p>
+                    <p className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid={`text-amount-${transfer.id}`}>{formatCurrency(transfer.netAmount || 0)}</p>
                   </div>
                 </div>
               </motion.div>
@@ -437,12 +437,12 @@ const TransferRequestPage = () => {
         </div>
 
         {/* 振込について（ピンクグラデーション） */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="bg-gradient-to-br from-pink-100 to-pink-200 border-2 border-pink-300 rounded-2xl p-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-blue-300 rounded-2xl p-6">
           <div className="flex items-start space-x-4">
-            <AlertCircle className="w-6 h-6 text-pink-700 mt-1" />
+            <AlertCircle className="w-6 h-6 text-blue-700 mt-1" />
             <div>
-              <h4 className="font-bold text-pink-900 mb-2 text-lg">振込について</h4>
-              <ul className="text-base text-pink-800 space-y-2">
+              <h4 className="font-bold text-blue-900 mb-2 text-lg">振込について</h4>
+              <ul className="text-base text-blue-800 space-y-2">
                 <li>• システム利用料: 税込16.5%</li>
                 <li>• 通常振込: 末締め翌々5日払い（振込手数料: {formatCurrency(CONSTANTS.TRANSFER_FEE)}）</li>
                 <li>• 早払い: {CONSTANTS.EARLY_PAYMENT_DAYS}営業日以内（早払い手数料: 税込8.8%）</li>
@@ -459,25 +459,25 @@ const TransferRequestPage = () => {
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => !isSubmitting && setShowConfirm(false)}>
             <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }} onClick={(e) => e.stopPropagation()} className="bg-white rounded-2xl p-6 w-full max-w-sm">
               <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  {isEarlyPayment ? <Zap className="w-8 h-8 text-pink-600" /> : <Send className="w-8 h-8 text-pink-600" />}
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  {isEarlyPayment ? <Zap className="w-8 h-8 text-blue-600" /> : <Send className="w-8 h-8 text-blue-600" />}
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
                   {isEarlyPayment ? '早払い申請の確認' : '振込申請の確認'}
                 </h3>
                 <p className="text-gray-600 mb-4">以下の金額で{isEarlyPayment ? '早払い' : ''}振込申請を行います</p>
-                <div className="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl p-4 border border-pink-100 mb-3">
-                  <p className="text-3xl font-bold bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent">{formatCurrency(netAmount)}</p>
+                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-100 mb-3">
+                  <p className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">{formatCurrency(netAmount)}</p>
                   <p className="text-xs text-gray-500 mt-1">（手数料{formatCurrency(isEarlyPayment ? transferCalculation.totalFees : transferCalculation.transferFee)}差引後）</p>
                 </div>
-                <div className="bg-gradient-to-r from-pink-100 to-pink-200 rounded-xl p-3 border border-pink-300">
-                  <p className="text-sm text-pink-800 font-semibold">
+                <div className="bg-gradient-to-r from-blue-100 to-blue-200 rounded-xl p-3 border border-blue-300">
+                  <p className="text-sm text-blue-800 font-semibold">
                     支払予定日: {formatDate(paymentDate)}
                   </p>
                 </div>
               </div>
               <div className="space-y-3">
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={handleSubmit} disabled={isSubmitting} className="w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-4 rounded-xl font-bold hover:shadow-lg transition-all flex items-center justify-center space-x-2" data-testid="button-confirm">
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={handleSubmit} disabled={isSubmitting} className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-xl font-bold hover:shadow-lg transition-all flex items-center justify-center space-x-2" data-testid="button-confirm">
                   {isSubmitting ? (
                     <>
                       <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} className="w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
@@ -487,7 +487,7 @@ const TransferRequestPage = () => {
                     <span>申請する</span>
                   )}
                 </motion.button>
-                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => setShowConfirm(false)} disabled={isSubmitting} className="w-full bg-pink-100 text-pink-800 py-4 rounded-xl font-bold hover:bg-pink-200 transition-all" data-testid="button-cancel-confirm">キャンセル</motion.button>
+                <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => setShowConfirm(false)} disabled={isSubmitting} className="w-full bg-blue-100 text-blue-800 py-4 rounded-xl font-bold hover:bg-blue-200 transition-all" data-testid="button-cancel-confirm">キャンセル</motion.button>
               </div>
             </motion.div>
           </div>

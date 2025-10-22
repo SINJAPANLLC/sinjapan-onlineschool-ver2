@@ -72,20 +72,20 @@ const FollowingPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
-          <Users className="w-12 h-12 text-pink-500" />
+          <Users className="w-12 h-12 text-blue-500" />
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
       <motion.div 
         initial={{ opacity: 0, y: -20 }} 
         animate={{ opacity: 1, y: 0 }} 
-        className="sticky top-0 bg-gradient-to-r from-pink-500 to-pink-600 border-b border-pink-300 p-6 flex items-center z-10 shadow-lg"
+        className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg"
       >
         <motion.button 
           whileHover={{ scale: 1.1 }} 
@@ -108,14 +108,14 @@ const FollowingPage = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }} 
           animate={{ opacity: 1, y: 0 }} 
-          className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-5 shadow-xl border-2 border-pink-200"
+          className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-5 shadow-xl border-2 border-blue-200"
         >
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-pink-700 font-semibold mb-1">フォロー中</p>
-              <p className="text-3xl font-bold text-pink-900" data-testid="text-following-count">{following.length}人</p>
+              <p className="text-sm text-blue-700 font-semibold mb-1">フォロー中</p>
+              <p className="text-3xl font-bold text-blue-900" data-testid="text-following-count">{following.length}人</p>
             </div>
-            <Sparkles className="w-12 h-12 text-pink-500" />
+            <Sparkles className="w-12 h-12 text-blue-500" />
           </div>
         </motion.div>
 
@@ -124,7 +124,7 @@ const FollowingPage = () => {
             <motion.div 
               initial={{ opacity: 0 }} 
               animate={{ opacity: 1 }} 
-              className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-pink-100"
+              className="bg-white rounded-2xl p-8 text-center shadow-xl border-2 border-blue-100"
             >
               <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <p className="text-gray-500 font-medium mb-4">フォロー中のクリエイターがいません</p>
@@ -132,7 +132,7 @@ const FollowingPage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate('/ranking')}
-                className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg"
+                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg"
                 data-testid="button-find-creators"
               >
                 クリエイターを探す
@@ -146,14 +146,14 @@ const FollowingPage = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}
                 whileHover={{ scale: 1.02, y: -2 }}
-                className="bg-white rounded-2xl p-5 shadow-lg border-2 border-pink-100"
+                className="bg-white rounded-2xl p-5 shadow-lg border-2 border-blue-100"
               >
                 <div className="flex items-center space-x-4">
                   <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}>
                     <img 
                       src={user.avatar} 
                       alt={user.name} 
-                      className="w-16 h-16 rounded-full object-cover border-2 border-pink-200 shadow-md" 
+                      className="w-16 h-16 rounded-full object-cover border-2 border-blue-200 shadow-md" 
                     />
                   </motion.div>
                   <div className="flex-1">
