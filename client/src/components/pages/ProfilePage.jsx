@@ -86,7 +86,7 @@ const ProfilePage = () => {
                         emoji: userData.emoji || '',
                         username: userData.username || `@user${userId.slice(0, 6)}`,
                         bio: userData.bio || '',
-                        avatar: null, // アイコンのみ使用
+                        avatar: userData.avatar || null,
                         coverImage: userData.coverImage || '/images/logo-school.jpg',
                         isVerified: userData.isVerified || false,
                         stats: {

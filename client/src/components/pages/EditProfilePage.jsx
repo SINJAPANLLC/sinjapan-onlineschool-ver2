@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ArrowLeft,
+  Camera,
   Save,
   User,
   Mail,
@@ -10,16 +11,20 @@ import {
   MapPin,
   CheckCircle,
   GraduationCap,
-  BookOpen
+  BookOpen,
+  Upload
 } from 'lucide-react';
 import BottomNavigationWithCreator from '../BottomNavigationWithCreator';
 import { useAuth } from '../../context/AuthContext';
-import { db } from '../../firebase';
+import { db, storage } from '../../firebase';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 const EditProfilePage = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
+  const avatarInputRef = useRef(null);
+  const coverInputRef = useRef(null);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -33,7 +38,12 @@ const EditProfilePage = () => {
     isCreator: false
   });
 
+  const [avatar, setAvatar] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState(null);
+  const [coverImage, setCoverImage] = useState(null);
+  const [coverPreview, setCoverPreview] = useState('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=200&fit=crop');
   const [isLoading, setIsLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
@@ -57,6 +67,14 @@ const EditProfilePage = () => {
             yearsOfExperience: userData.yearsOfExperience || '',
             isCreator: userData.isCreator || false
           });
+          
+          // 既存の画像を読み込み
+          if (userData.avatar) {
+            setAvatarPreview(userData.avatar);
+          }
+          if (userData.coverImage) {
+            setCoverPreview(userData.coverImage);
+          }
         }
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -74,11 +92,62 @@ const EditProfilePage = () => {
     }));
   };
 
+  const handleAvatarSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert('ファイルサイズは5MB以下にしてください');
+        return;
+      }
+      setAvatar(file);
+      setAvatarPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleCoverSelect = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert('ファイルサイズは5MB以下にしてください');
+        return;
+      }
+      setCoverImage(file);
+      setCoverPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const uploadImage = async (file, path) => {
+    if (!file) return null;
+    
+    const storageRef = ref(storage, `${path}/${currentUser.uid}_${Date.now()}`);
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setUploadProgress(0);
 
     try {
+      let avatarURL = avatarPreview;
+      let coverURL = coverPreview;
+
+      // アバター画像をアップロード
+      if (avatar) {
+        setUploadProgress(25);
+        avatarURL = await uploadImage(avatar, 'avatars');
+      }
+
+      // カバー画像をアップロード
+      if (coverImage) {
+        setUploadProgress(50);
+        coverURL = await uploadImage(coverImage, 'covers');
+      }
+
+      setUploadProgress(75);
+
       const userDocRef = doc(db, 'users', currentUser.uid);
       
       await setDoc(userDocRef, {
@@ -92,8 +161,12 @@ const EditProfilePage = () => {
         expertise: formData.expertise,
         yearsOfExperience: formData.yearsOfExperience,
         isCreator: formData.isCreator,
+        avatar: avatarURL,
+        coverImage: coverURL,
         updatedAt: serverTimestamp()
       }, { merge: true });
+
+      setUploadProgress(100);
 
       setShowSuccess(true);
 
@@ -137,6 +210,83 @@ const EditProfilePage = () => {
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Profile Images */}
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+            {/* Cover Image */}
+            <div className="relative h-48 group">
+              <img
+                src={coverPreview}
+                alt="Cover"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <button
+                  type="button"
+                  onClick={() => coverInputRef.current?.click()}
+                  className="px-6 py-3 bg-white text-gray-800 rounded-xl font-semibold hover:bg-gray-100 transition-all flex items-center gap-2"
+                  data-testid="button-upload-cover"
+                >
+                  <Upload className="w-5 h-5" />
+                  カバー画像を変更
+                </button>
+              </div>
+              <input
+                ref={coverInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleCoverSelect}
+                className="hidden"
+              />
+            </div>
+
+            {/* Avatar */}
+            <div className="relative px-8 pb-8 -mt-16">
+              <div className="relative inline-block">
+                <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden bg-gradient-to-br from-blue-400 to-blue-600 shadow-lg flex items-center justify-center">
+                  {avatarPreview ? (
+                    <img src={avatarPreview} alt="Avatar" className="w-full h-full object-cover" />
+                  ) : (
+                    <User className="w-16 h-16 text-white" />
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => avatarInputRef.current?.click()}
+                  className="absolute bottom-2 right-2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-all shadow-lg"
+                  data-testid="button-upload-avatar"
+                >
+                  <Camera className="w-5 h-5" />
+                </button>
+                <input
+                  ref={avatarInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleAvatarSelect}
+                  className="hidden"
+                />
+              </div>
+              <p className="mt-3 text-sm text-gray-600">
+                推奨: 正方形の画像、最大5MB
+              </p>
+            </div>
+          </div>
+
+          {/* Upload Progress */}
+          {uploadProgress > 0 && uploadProgress < 100 && (
+            <div className="bg-white rounded-2xl shadow-md p-6">
+              <div className="flex items-center gap-3 mb-2">
+                <Upload className="w-5 h-5 text-blue-600 animate-pulse" />
+                <span className="text-sm font-semibold text-gray-700">アップロード中...</span>
+                <span className="text-sm text-gray-600">{uploadProgress}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all"
+                  style={{ width: `${uploadProgress}%` }}
+                />
+              </div>
+            </div>
+          )}
 
           {/* Basic Info */}
           <div className="bg-white rounded-2xl shadow-md p-6">
