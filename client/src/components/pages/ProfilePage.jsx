@@ -642,14 +642,13 @@ const ProfilePage = () => {
                                     ]
                                 }}
                                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                className="rounded-full"
+                                className="rounded-full bg-gradient-to-br from-blue-500 to-blue-700 w-32 h-32 border-4 border-white flex items-center justify-center"
                             >
-                                <img 
-                                    src={profileData.avatar} 
-                                    alt={profileData.name} 
-                                    className="w-32 h-32 rounded-full border-4 border-white object-cover" 
-                                    data-testid="img-avatar" 
-                                />
+                                {profileData.isCreator || profileData.isInstructor ? (
+                                    <GraduationCap className="w-16 h-16 text-white" />
+                                ) : (
+                                    <User className="w-16 h-16 text-white" />
+                                )}
                             </motion.div>
                             {profileData.isVerified && (
                                 <motion.div 

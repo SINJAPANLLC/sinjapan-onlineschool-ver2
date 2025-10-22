@@ -41,6 +41,7 @@ The platform is built with a React frontend, leveraging Vite for tooling, Tailwi
 *   **Square決済エラー修正**: SQUARE_LOCATION_IDをオプショナルに変更し、サンドボックス環境での動作を改善。
 *   **ログアウト機能追加**: AuthContextにlogout関数を追加し、完全なログアウトハンドラーを実装。ユーザーのオンラインステータスを適切に更新。
 *   **サムネイル画像表示修正**: Home.jsx、RankingPage.jsx、GenreDataPage.jsxのサンプルデータで、ローカル画像パス（`/logo-school.jpg`）をUnsplashとPravatar.ccのプレースホルダーURLに変更。すべてのコースサムネイルとアバター画像が正しく表示されるようになりました。
+*   **アバターアイコン表示変更**: AccountPageとProfilePageで、Firestoreに保存されたアバター画像を表示せず、役割に応じたアイコン（講師: 🎓、学生: 👤）のみを表示するように変更。古いロゴが表示される問題を解決。
 
 ### New Features
 *   **CourseDetailPage実装**: `/course/:id`ルートに完全なコース詳細ページを実装しました。
