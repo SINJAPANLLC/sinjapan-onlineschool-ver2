@@ -33,7 +33,6 @@ const CreatePostPage = () => {
     category: 'programming',
     level: 'beginner',
     duration: '',
-    price: '',
     language: 'ja',
   });
 
@@ -144,7 +143,6 @@ const CreatePostPage = () => {
     if (!formData.title.trim()) newErrors.title = 'コース名を入力してください';
     if (!formData.description.trim()) newErrors.description = '説明を入力してください';
     if (!formData.duration) newErrors.duration = '総学習時間を入力してください';
-    if (!formData.price) newErrors.price = '価格を入力してください';
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -338,22 +336,6 @@ const CreatePostPage = () => {
                     data-testid="input-duration"
                   />
                   {errors.duration && <p className="text-red-500 text-sm mt-1">{errors.duration}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    価格（円） *
-                  </label>
-                  <input
-                    type="number"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleInputChange}
-                    className={`w-full px-4 py-3 border-2 ${errors.price ? 'border-red-300' : 'border-gray-200'} rounded-xl focus:outline-none focus:border-blue-500`}
-                    placeholder="12800"
-                    data-testid="input-price"
-                  />
-                  {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price}</p>}
                 </div>
               </div>
 
