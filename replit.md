@@ -64,7 +64,12 @@ The platform features a React frontend built with Vite, Tailwind CSS, Framer Mot
 *   Localized error messages (Japanese) for user authentication and uploads
 
 ## Recent Changes (October 22, 2025 - Latest Update - Complete Platform Branding)
-*   **🎨 COMPLETE PLATFORM BRANDING (October 22, 2025 - Latest)**:
+*   **✨ NEW FEATURES & BRANDING UPDATES (October 22, 2025 - Latest)**:
+    - **講師登録ページ完全リニューアル**: 4ステップの直感的な登録フロー（基本情報、講師情報、教える内容、確認）
+    - **ProfilePageにサブスク加入カード追加**: 他の講師のプロフィールで加入中のサブスクリプション状態を表示
+    - **用語統一完了**: 「クリエイター」→「講師」、「コンテンツを投稿」→「コースを作成」に統一
+    - **LoggedInAccountPage更新**: 「コースを作成するには講師登録が必要」などの表現を修正
+*   **🎨 COMPLETE PLATFORM BRANDING (October 22, 2025)**:
     - **Removed Pink Animations**: Converted all pink boxShadow animations to blue (rgba(236,72,153) → rgba(59,130,246)) in 8 files
     - **Profile Cover Overlay**: Restored original light overlay (removed excessive blue overlay)
     - **Only-U Rebranding**: Changed all "Only-U" references to "SIN JAPAN SCHOOL" across 8 files

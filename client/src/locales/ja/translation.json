@@ -45,8 +45,8 @@
         },
         "postsOperations": {
             "title": "投稿/運営/売上",
-            "description": "クリエイターとして登録すると、コンテンツの投稿や管理、売上の確認ができます。",
-            "registerCreator": "クリエイターとして登録"
+            "description": "講師として登録すると、コースの作成や管理、収益の確認ができます。",
+            "registerCreator": "講師として登録"
         },
         "settings": {
             "title": "設定",

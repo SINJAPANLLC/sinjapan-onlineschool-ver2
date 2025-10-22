@@ -171,7 +171,7 @@ const LoggedInAccountPage = () => {
                                         <p className="text-sm text-gray-500 mt-1">
                                             {userData?.creatorStatus === 'pending' ? '承認までお待ちください' :
                                              userData?.creatorStatus === 'rejected' ? 'サポートにお問い合わせください' :
-                                             'コンテンツをコースするには登録が必要'}
+                                             'コースを作成するには講師登録が必要'}
                                         </p>
                                     </div>
                                 </div>
@@ -190,7 +190,7 @@ const LoggedInAccountPage = () => {
                                 >
                                     <p className="text-sm text-yellow-800 flex items-center">
                                         <AlertTriangle className="w-4 h-4 mr-2" />
-                                        管理者が申請を確認しています。承認されるまでコンテンツのコースはできません。
+                                        管理者が申請を確認しています。承認されるまでコースの作成はできません。
                                     </p>
                                 </motion.div>
                             )}
@@ -213,7 +213,7 @@ const LoggedInAccountPage = () => {
                                     <h2 className="text-xl font-bold text-green-600">
                                         講師承認済み
                                     </h2>
-                                    <p className="text-sm text-gray-500 mt-1">コンテンツのコースが可能です</p>
+                                    <p className="text-sm text-gray-500 mt-1">コースの作成が可能です</p>
                                 </div>
                             </div>
                         </motion.div>

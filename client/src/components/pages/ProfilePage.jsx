@@ -133,6 +133,7 @@ const ProfilePage = () => {
     const [loading, setLoading] = useState(true);
     const [userPosts, setUserPosts] = useState([]);
     const [userNotFound, setUserNotFound] = useState(false);
+    const [userSubscriptions, setUserSubscriptions] = useState([]);
 
     // Check for subscription status from URL params
     useEffect(() => {
@@ -190,8 +191,16 @@ const ProfilePage = () => {
                     if (currentUser && currentUser.uid !== userId) {
                         const currentUserDoc = await getDoc(doc(db, 'users', currentUser.uid));
                         if (currentUserDoc.exists()) {
-                            const following = currentUserDoc.data().following || [];
+                            const currentUserData = currentUserDoc.data();
+                            const following = currentUserData.following || [];
                             setIsFollowing(following.includes(userId));
+                            
+                            // サブスクリプション加入状態を確認
+                            const subscriptions = currentUserData.subscriptions || [];
+                            const activeSubscriptions = subscriptions.filter(sub => 
+                                sub.instructorId === userId && sub.status === 'active'
+                            );
+                            setUserSubscriptions(activeSubscriptions);
                         }
                     }
                 } else {
@@ -869,6 +878,57 @@ const ProfilePage = () => {
                         </div>
                     </motion.div>
                 </motion.div>
+
+                {/* Subscription Status Card */}
+                {!isOwnProfile && currentUser && userSubscriptions.length > 0 && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.45 }}
+                        className="mb-6 bg-gradient-to-br from-green-50 via-emerald-50 to-green-50 rounded-2xl p-5 shadow-xl border-2 border-green-200 relative overflow-hidden"
+                    >
+                        <motion.div
+                            animate={{ rotate: [0, 360] }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            className="absolute -top-10 -right-10 w-32 h-32 bg-green-300/30 rounded-full blur-2xl"
+                        />
+                        <div className="relative z-10">
+                            <div className="flex items-center mb-3">
+                                <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
+                                <span className="text-sm font-bold text-green-800">加入中のサブスクリプション</span>
+                            </div>
+                            <div className="space-y-2">
+                                {userSubscriptions.map((sub, index) => (
+                                    <motion.div
+                                        key={index}
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: 0.5 + index * 0.05 }}
+                                        className="bg-white/80 backdrop-blur-sm rounded-xl p-3 border border-green-200"
+                                    >
+                                        <div className="flex items-center justify-between">
+                                            <div>
+                                                <p className="font-semibold text-gray-800">{sub.planName || 'プレミアムプラン'}</p>
+                                                <p className="text-xs text-gray-500 mt-1">
+                                                    {sub.nextBillingDate ? `次回更新: ${new Date(sub.nextBillingDate).toLocaleDateString('ja-JP')}` : '有効期限なし'}
+                                                </p>
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="bg-gradient-to-r from-green-500 to-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                                                    加入中
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                            <p className="text-xs text-green-700 mt-3 flex items-center">
+                                <Star className="w-3 h-3 mr-1" />
+                                この講師のコースにアクセスできます
+                            </p>
+                        </div>
+                    </motion.div>
+                )}
 
                 {/* Bio - Elegant Card */}
                 {profileData.bio && (

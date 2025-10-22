@@ -1,741 +1,656 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-    CalendarDays, 
-    User, 
-    MapPin, 
-    CheckCircle, 
-    AlertCircle,
-    Info,
-    ArrowLeft,
-    ArrowRight,
-    Loader2
+  GraduationCap,
+  User,
+  Mail,
+  Phone,
+  BookOpen,
+  Award,
+  FileText,
+  CheckCircle,
+  AlertCircle,
+  ArrowLeft,
+  ArrowRight,
+  Loader2,
+  Upload,
+  X
 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { db } from '../../firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
 
 const RegisterCreatorPage = () => {
-    const { t } = useTranslation();
-    const navigate = useNavigate();
-    const { currentUser } = useAuth();
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    // Step 1: 基本情報
+    fullName: '',
+    email: currentUser?.email || '',
+    phone: '',
     
-    const [formData, setFormData] = useState({
-        name: '',
-        furiganaFamily: '',
-        furiganaFirst: '',
-        address: '',
-        dob: '',
-        contentKind: '',
-        agreed: false,
-    });
+    // Step 2: 講師情報
+    expertise: [],
+    qualifications: '',
+    teachingExperience: '',
     
-    const [errors, setErrors] = useState({});
-    const [touched, setTouched] = useState({});
-    const [isLoading, setIsLoading] = useState(false);
-    const [showConfirmation, setShowConfirmation] = useState(false);
-    const [checkingStatus, setCheckingStatus] = useState(false);
+    // Step 3: 教える内容
+    subjects: [],
+    coursePlan: '',
+    teachingStyle: '',
+    
+    // Step 4: 自己紹介
+    bio: '',
+    motivation: '',
+    
+    // 同意
+    agreedToTerms: false
+  });
+  
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
 
-    // Check if user is logged in
-    useEffect(() => {
-        if (!currentUser) {
-            console.log('No current user, redirecting to login');
-            navigate('/login');
-            return;
-        }
-        
-        // Optional: Check creator status (commented out for now)
-        /*
-        const checkCreatorStatus = async () => {
-            try {
-                const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
-                if (userDoc.exists()) {
-                    const userData = userDoc.data();
-                    
-                    console.log('User data:', {
-                        isCreator: userData.isCreator,
-                        creatorStatus: userData.creatorStatus
-                    });
-                    
-                    // If already a creator, redirect to dashboard
-                    if (userData.isCreator === true) {
-                        console.log('User is already a creator, redirecting to dashboard');
-                        alert('既に講師として登録済みです。');
-                        navigate('/creator-dashboard');
-                        return;
-                    }
-                    
-                    // If application is pending, show message
-                    if (userData.creatorStatus === 'pending') {
-                        console.log('Creator application is pending');
-                        alert('講師申請は現在審査中です。結果をお待ちください。');
-                        navigate('/account');
-                        return;
-                    }
-                    
-                    console.log('User can proceed with registration');
-                }
-            } catch (error) {
-                console.error('Error checking creator status:', error);
-            }
-        };
+  // 専門分野の選択肢
+  const expertiseOptions = [
+    { value: 'programming', label: 'プログラミング' },
+    { value: 'language', label: '語学' },
+    { value: 'business', label: 'ビジネス' },
+    { value: 'design', label: 'デザイン' },
+    { value: 'marketing', label: 'マーケティング' },
+    { value: 'data-science', label: 'データサイエンス' },
+    { value: 'music', label: '音楽' },
+    { value: 'art', label: 'アート' },
+    { value: 'other', label: 'その他' }
+  ];
 
-        checkCreatorStatus();
-        */
-    }, [currentUser, navigate]);
+  // 教える科目の選択肢
+  const subjectOptions = [
+    { value: 'javascript', label: 'JavaScript' },
+    { value: 'python', label: 'Python' },
+    { value: 'english', label: '英語' },
+    { value: 'japanese', label: '日本語' },
+    { value: 'web-design', label: 'Webデザイン' },
+    { value: 'photography', label: '写真撮影' },
+    { value: 'video-editing', label: '動画編集' },
+    { value: 'business-strategy', label: 'ビジネス戦略' },
+    { value: 'other', label: 'その他' }
+  ];
 
-    // Load saved form data from localStorage
-    useEffect(() => {
-        const savedData = localStorage.getItem('creatorRegistrationForm');
-        if (savedData) {
-            try {
-                const parsed = JSON.parse(savedData);
-                setFormData(parsed);
-            } catch (error) {
-                console.error('Failed to load saved form data:', error);
-            }
-        }
-    }, []);
-
-    // Save form data to localStorage
-    useEffect(() => {
-        if (formData.name || formData.furiganaFamily || formData.furiganaFirst) {
-            localStorage.setItem('creatorRegistrationForm', JSON.stringify(formData));
-        }
-    }, [formData]);
-
-    // Validation functions
-    const validateName = (name) => {
-        if (!name || name.trim().length === 0) {
-            return '氏名を入力してください';
-        }
-        if (name.length < 2) {
-            return '氏名は2文字以上で入力してください';
-        }
-        return null;
-    };
-
-    const validateFurigana = (furigana, type) => {
-        if (!furigana || furigana.trim().length === 0) {
-            return `フリガナ（${type}）を入力してください`;
-        }
-        // Check if hiragana only (allow spaces)
-        const hiraganaRegex = /^[ぁ-ん\s]+$/;
-        if (!hiraganaRegex.test(furigana)) {
-            return 'フリガナはひらがなで入力してください';
-        }
-        return null;
-    };
-
-    const validateAddress = (address) => {
-        if (!address || address.trim().length === 0) {
-            return '住所を入力してください';
-        }
-        if (address.length < 5) {
-            return '正確な住所を入力してください';
-        }
-        return null;
-    };
-
-    const validateDob = (dob) => {
-        if (!dob) {
-            return '生年月日を入力してください';
-        }
-        
-        const birthDate = new Date(dob);
-        const today = new Date();
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDiff = today.getMonth() - birthDate.getMonth();
-        
-        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        
-        if (age < 18) {
-            return '18歳以上である必要があります';
-        }
-        
-        if (age > 100) {
-            return '正しい生年月日を入力してください';
-        }
-        
-        return null;
-    };
-
-    const validateContentKind = (contentKind) => {
-        if (!contentKind) {
-            return 'コンテンツの種類を選択してください';
-        }
-        return null;
-    };
-
-    const validateForm = () => {
-        const newErrors = {
-            name: validateName(formData.name),
-            furiganaFamily: validateFurigana(formData.furiganaFamily, '姓'),
-            furiganaFirst: validateFurigana(formData.furiganaFirst, '名'),
-            address: validateAddress(formData.address),
-            dob: validateDob(formData.dob),
-            contentKind: validateContentKind(formData.contentKind),
-            agreed: !formData.agreed ? '同意が必要です' : null
-        };
-
-        setErrors(newErrors);
-        return !Object.values(newErrors).some(error => error !== null);
-    };
-
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        const newValue = type === 'checkbox' ? checked : value;
-        
-        setFormData((prev) => ({
-            ...prev,
-            [name]: newValue,
-        }));
-
-        // Clear error when user starts typing
-        if (errors[name]) {
-            setErrors(prev => ({ ...prev, [name]: null }));
-        }
-    };
-
-    const handleBlur = (fieldName) => {
-        setTouched(prev => ({ ...prev, [fieldName]: true }));
-        
-        // Validate field on blur
-        let error = null;
-        switch (fieldName) {
-            case 'name':
-                error = validateName(formData.name);
-                break;
-            case 'furiganaFamily':
-                error = validateFurigana(formData.furiganaFamily, '姓');
-                break;
-            case 'furiganaFirst':
-                error = validateFurigana(formData.furiganaFirst, '名');
-                break;
-            case 'address':
-                error = validateAddress(formData.address);
-                break;
-            case 'dob':
-                error = validateDob(formData.dob);
-                break;
-            case 'contentKind':
-                error = validateContentKind(formData.contentKind);
-                break;
-            default:
-                break;
-        }
-        
-        if (error) {
-            setErrors(prev => ({ ...prev, [fieldName]: error }));
-        }
-    };
-
-    const handleNext = () => {
-        // Mark all fields as touched
-        setTouched({
-            name: true,
-            furiganaFamily: true,
-            furiganaFirst: true,
-            address: true,
-            dob: true,
-            contentKind: true,
-            agreed: true
-        });
-
-        if (!validateForm()) {
-            // Scroll to first error
-            const firstErrorField = document.querySelector('.error-field');
-            if (firstErrorField) {
-                firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-            return;
-        }
-
-        setShowConfirmation(true);
-    };
-
-    const handleConfirmAndProceed = () => {
-        setIsLoading(true);
-        
-        // データをURLパラメータとして渡して次のページに遷移
-        const data = encodeURIComponent(JSON.stringify(formData));
-        
-        // Clear localStorage after successful submission
-        setTimeout(() => {
-            localStorage.removeItem('creatorRegistrationForm');
-            navigate(`/creator-phone-verification?data=${data}`);
-        }, 500);
-    };
-
-    const handleBack = () => {
-        if (showConfirmation) {
-            setShowConfirmation(false);
-        } else {
-            navigate('/account');
-        }
-    };
-
-    if (checkingStatus) {
-        return (
-            <div className="min-h-screen bg-white flex items-center justify-center">
-                <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-            </div>
-        );
+  useEffect(() => {
+    if (!currentUser) {
+      navigate('/login');
+      return;
     }
 
-    return (
-        <motion.div
+    // 既に講師登録済みかチェック
+    const checkInstructorStatus = async () => {
+      try {
+        const userDoc = await getDoc(doc(db, 'users', currentUser.uid));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          if (userData.isCreator || userData.isInstructor) {
+            alert('既に講師として登録済みです');
+            navigate('/creator-dashboard');
+          }
+        }
+      } catch (error) {
+        console.error('Error checking instructor status:', error);
+      }
+    };
+
+    checkInstructorStatus();
+  }, [currentUser, navigate]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+    
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: null }));
+    }
+  };
+
+  const handleArrayToggle = (field, value) => {
+    setFormData(prev => {
+      const current = prev[field];
+      const updated = current.includes(value)
+        ? current.filter(item => item !== value)
+        : [...current, value];
+      return { ...prev, [field]: updated };
+    });
+  };
+
+  const validateStep = (step) => {
+    const newErrors = {};
+
+    switch (step) {
+      case 1:
+        if (!formData.fullName.trim()) newErrors.fullName = '氏名を入力してください';
+        if (!formData.email.trim()) newErrors.email = 'メールアドレスを入力してください';
+        if (!formData.phone.trim()) newErrors.phone = '電話番号を入力してください';
+        else if (!/^[0-9-]+$/.test(formData.phone)) newErrors.phone = '正しい電話番号を入力してください';
+        break;
+
+      case 2:
+        if (formData.expertise.length === 0) newErrors.expertise = '専門分野を選択してください';
+        if (!formData.qualifications.trim()) newErrors.qualifications = '資格・経歴を入力してください';
+        if (!formData.teachingExperience.trim()) newErrors.teachingExperience = '指導経験を入力してください';
+        break;
+
+      case 3:
+        if (formData.subjects.length === 0) newErrors.subjects = '教える科目を選択してください';
+        if (!formData.coursePlan.trim()) newErrors.coursePlan = 'コース計画を入力してください';
+        if (!formData.teachingStyle.trim()) newErrors.teachingStyle = '指導スタイルを入力してください';
+        break;
+
+      case 4:
+        if (!formData.bio.trim()) newErrors.bio = '自己紹介を入力してください';
+        if (!formData.motivation.trim()) newErrors.motivation = '講師になる理由を入力してください';
+        if (!formData.agreedToTerms) newErrors.agreedToTerms = '利用規約に同意してください';
+        break;
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleNext = () => {
+    if (validateStep(currentStep)) {
+      setCurrentStep(prev => prev + 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(prev => prev - 1);
+      window.scrollTo(0, 0);
+    } else {
+      navigate('/account');
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!validateStep(4)) return;
+
+    setIsLoading(true);
+    try {
+      const userRef = doc(db, 'users', currentUser.uid);
+      await updateDoc(userRef, {
+        isCreator: true,
+        isInstructor: true,
+        instructorProfile: {
+          fullName: formData.fullName,
+          phone: formData.phone,
+          expertise: formData.expertise,
+          qualifications: formData.qualifications,
+          teachingExperience: formData.teachingExperience,
+          subjects: formData.subjects,
+          coursePlan: formData.coursePlan,
+          teachingStyle: formData.teachingStyle,
+          bio: formData.bio,
+          motivation: formData.motivation,
+          registeredAt: serverTimestamp(),
+          status: 'pending'
+        }
+      });
+
+      alert('講師登録が完了しました！審査結果をお待ちください。');
+      navigate('/creator-dashboard');
+    } catch (error) {
+      console.error('Error registering instructor:', error);
+      alert('登録に失敗しました。もう一度お試しください。');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const steps = [
+    { number: 1, label: '基本情報' },
+    { number: 2, label: '講師情報' },
+    { number: 3, label: '教える内容' },
+    { number: 4, label: '確認' }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white pt-8 pb-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4 pb-20"
+            transition={{ duration: 0.6 }}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-14 h-14 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                <GraduationCap className="w-8 h-8" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold">講師登録</h1>
+                <p className="text-blue-100">SIN JAPAN ONLINE SCHOOL</p>
+              </div>
+            </div>
+            <p className="text-blue-100 text-lg">あなたの知識とスキルを共有しましょう</p>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Progress Steps */}
+      <div className="max-w-4xl mx-auto px-6 -mt-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white rounded-2xl shadow-xl p-6 mb-8"
         >
-            <div className="max-w-3xl mx-auto">
-                {/* Progress bar */}
-                <div className="bg-white rounded-2xl shadow-sm p-6 mb-6">
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        {[
-                            { step: 1, label: t("register_creator.progress.step1"), active: true },
-                            { step: 2, label: t("register_creator.progress.step2"), active: false },
-                            { step: 3, label: t("register_creator.progress.step3"), active: false },
-                            { step: 4, label: t("register_creator.progress.step4"), active: false }
-                        ].map(({ step, label, active }) => (
-                            <div key={step} className="flex flex-col items-center">
-                                <motion.div
-                                    initial={false}
-                                    animate={{
-                                        scale: active ? 1.1 : 1,
-                                        backgroundColor: active ? '#3b82f6' : '#e5e7eb'
-                                    }}
-                                    className={`flex items-center justify-center w-10 h-10 rounded-full text-white font-bold mb-2 ${
-                                        active ? 'shadow-lg' : ''
-                                    }`}
-                                >
-                                    {step}
-                                </motion.div>
-                                <span className={`text-xs sm:text-sm text-center ${
-                                    active ? 'font-semibold text-blue-600' : 'text-gray-500'
-                                }`}>
-                                    {label}
-                                </span>
-                            </div>
-                        ))}
-                    </div>
+          <div className="flex items-center justify-between">
+            {steps.map((step, index) => (
+              <div key={step.number} className="flex items-center flex-1">
+                <div className="flex flex-col items-center flex-1">
+                  <motion.div
+                    animate={{
+                      scale: currentStep === step.number ? 1.1 : 1,
+                      backgroundColor: currentStep >= step.number ? '#3b82f6' : '#e5e7eb'
+                    }}
+                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mb-2 shadow-lg"
+                  >
+                    {currentStep > step.number ? (
+                      <CheckCircle className="w-6 h-6" />
+                    ) : (
+                      step.number
+                    )}
+                  </motion.div>
+                  <span className={`text-sm font-semibold text-center ${
+                    currentStep >= step.number ? 'text-blue-600' : 'text-gray-400'
+                  }`}>
+                    {step.label}
+                  </span>
+                </div>
+                {index < steps.length - 1 && (
+                  <div className={`h-1 flex-1 mx-2 rounded transition-colors ${
+                    currentStep > step.number ? 'bg-blue-600' : 'bg-gray-200'
+                  }`} />
+                )}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Form Content */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentStep}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white rounded-2xl shadow-xl p-8 mb-8"
+          >
+            {currentStep === 1 && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">基本情報</h2>
+                
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <User className="inline w-4 h-4 mr-1" />
+                    氏名 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    placeholder="山田 太郎"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
+                      errors.fullName ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-blue-500'
+                    }`}
+                  />
+                  {errors.fullName && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.fullName}
+                    </p>
+                  )}
                 </div>
 
-                <AnimatePresence mode="wait">
-                    {!showConfirmation ? (
-                        <motion.div
-                            key="form"
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: 20 }}
-                            transition={{ duration: 0.3 }}
-                            className="bg-white rounded-2xl shadow-sm p-6 sm:p-8"
-                        >
-                            <h2 className="text-2xl font-bold mb-2 text-gray-900">{t("register_creator.title")}</h2>
-                            <div className="flex items-start space-x-2 mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
-                                <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                                <p className="text-sm text-blue-800">
-                                    {t("register_creator.subtitle")}
-                                </p>
-                            </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <Mail className="inline w-4 h-4 mr-1" />
+                    メールアドレス <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 bg-gray-50 ${
+                      errors.email ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-blue-500'
+                    }`}
+                    readOnly
+                  />
+                  {errors.email && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.email}
+                    </p>
+                  )}
+                </div>
 
-                            {/* Form Fields */}
-                            <div className="space-y-6">
-                                {/* Name */}
-                                <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                        <User className="inline w-4 h-4 mr-1" />
-                                        {t("register_creator.form.name")}
-                                        <span className="text-red-500 ml-1">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        placeholder="山田 太郎"
-                                        value={formData.name}
-                                        onChange={handleChange}
-                                        onBlur={() => handleBlur('name')}
-                                        className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
-                                            touched.name && errors.name
-                                                ? 'border-red-300 focus:ring-red-500 error-field'
-                                                : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
-                                        }`}
-                                    />
-                                    <AnimatePresence>
-                                        {touched.name && errors.name && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: -10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -10 }}
-                                                className="flex items-center space-x-1 mt-2 text-red-600 text-sm"
-                                            >
-                                                <AlertCircle className="w-4 h-4" />
-                                                <span>{errors.name}</span>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <Phone className="inline w-4 h-4 mr-1" />
+                    電話番号 <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="090-1234-5678"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
+                      errors.phone ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-blue-500'
+                    }`}
+                  />
+                  {errors.phone && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.phone}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
 
-                                {/* Furigana */}
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div>
-                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            {t("register_creator.form.furigana_family")}
-                                            <span className="text-red-500 ml-1">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="furiganaFamily"
-                                            placeholder="やまだ"
-                                            value={formData.furiganaFamily}
-                                            onChange={handleChange}
-                                            onBlur={() => handleBlur('furiganaFamily')}
-                                            className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
-                                                touched.furiganaFamily && errors.furiganaFamily
-                                                    ? 'border-red-300 focus:ring-red-500 error-field'
-                                                    : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
-                                            }`}
-                                        />
-                                        <AnimatePresence>
-                                            {touched.furiganaFamily && errors.furiganaFamily && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, y: -10 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: -10 }}
-                                                    className="flex items-center space-x-1 mt-2 text-red-600 text-sm"
-                                                >
-                                                    <AlertCircle className="w-4 h-4" />
-                                                    <span>{errors.furiganaFamily}</span>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </div>
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">講師情報</h2>
+                
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    専門分野 <span className="text-red-500">*</span>
+                  </label>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {expertiseOptions.map(option => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleArrayToggle('expertise', option.value)}
+                        className={`p-3 border-2 rounded-xl font-medium transition-all ${
+                          formData.expertise.includes(option.value)
+                            ? 'border-blue-500 bg-blue-50 text-blue-700'
+                            : 'border-gray-200 hover:border-blue-300'
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                  {errors.expertise && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.expertise}
+                    </p>
+                  )}
+                </div>
 
-                                    <div>
-                                        <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                            {t("register_creator.form.furigana_first")}
-                                            <span className="text-red-500 ml-1">*</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="furiganaFirst"
-                                            placeholder="たろう"
-                                            value={formData.furiganaFirst}
-                                            onChange={handleChange}
-                                            onBlur={() => handleBlur('furiganaFirst')}
-                                            className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
-                                                touched.furiganaFirst && errors.furiganaFirst
-                                                    ? 'border-red-300 focus:ring-red-500 error-field'
-                                                    : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
-                                            }`}
-                                        />
-                                        <AnimatePresence>
-                                            {touched.furiganaFirst && errors.furiganaFirst && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, y: -10 }}
-                                                    animate={{ opacity: 1, y: 0 }}
-                                                    exit={{ opacity: 0, y: -10 }}
-                                                    className="flex items-center space-x-1 mt-2 text-red-600 text-sm"
-                                                >
-                                                    <AlertCircle className="w-4 h-4" />
-                                                    <span>{errors.furiganaFirst}</span>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </div>
-                                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <Award className="inline w-4 h-4 mr-1" />
+                    資格・経歴 <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    name="qualifications"
+                    placeholder="保有している資格、学歴、職歴などを記載してください"
+                    value={formData.qualifications}
+                    onChange={handleChange}
+                    rows={4}
+                    className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 resize-none ${
+                      errors.qualifications ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-blue-500'
+                    }`}
+                  />
+                  {errors.qualifications && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.qualifications}
+                    </p>
+                  )}
+                </div>
 
-                                {/* Address */}
-                                <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                        <MapPin className="inline w-4 h-4 mr-1" />
-                                        {t("register_creator.form.address")}
-                                        <span className="text-red-500 ml-1">*</span>
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="address"
-                                        placeholder="東京都渋谷区○○1-2-3"
-                                        value={formData.address}
-                                        onChange={handleChange}
-                                        onBlur={() => handleBlur('address')}
-                                        className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
-                                            touched.address && errors.address
-                                                ? 'border-red-300 focus:ring-red-500 error-field'
-                                                : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
-                                        }`}
-                                    />
-                                    <AnimatePresence>
-                                        {touched.address && errors.address && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: -10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -10 }}
-                                                className="flex items-center space-x-1 mt-2 text-red-600 text-sm"
-                                            >
-                                                <AlertCircle className="w-4 h-4" />
-                                                <span>{errors.address}</span>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <GraduationCap className="inline w-4 h-4 mr-1" />
+                    指導経験 <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    name="teachingExperience"
+                    placeholder="これまでの指導経験について教えてください"
+                    value={formData.teachingExperience}
+                    onChange={handleChange}
+                    rows={4}
+                    className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 resize-none ${
+                      errors.teachingExperience ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-blue-500'
+                    }`}
+                  />
+                  {errors.teachingExperience && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.teachingExperience}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
 
-                                {/* Date of Birth */}
-                                <div>
-                                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                                        <CalendarDays className="inline w-4 h-4 mr-1" />
-                                        {t("register_creator.form.dob")}
-                                        <span className="text-red-500 ml-1">*</span>
-                                    </label>
-                                    <div className="relative">
-                                        <input
-                                            type="date"
-                                            name="dob"
-                                            value={formData.dob}
-                                            onChange={handleChange}
-                                            onBlur={() => handleBlur('dob')}
-                                            max={new Date(new Date().setFullYear(new Date().getFullYear() - 18)).toISOString().split('T')[0]}
-                                            className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 ${
-                                                touched.dob && errors.dob
-                                                    ? 'border-red-300 focus:ring-red-500 error-field'
-                                                    : 'border-gray-200 focus:ring-blue-500 focus:border-transparent'
-                                            }`}
-                                        />
-                                    </div>
-                                    <AnimatePresence>
-                                        {touched.dob && errors.dob && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: -10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -10 }}
-                                                className="flex items-center space-x-1 mt-2 text-red-600 text-sm"
-                                            >
-                                                <AlertCircle className="w-4 h-4" />
-                                                <span>{errors.dob}</span>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
+            {currentStep === 3 && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">教える内容</h2>
+                
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    教える科目 <span className="text-red-500">*</span>
+                  </label>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {subjectOptions.map(option => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleArrayToggle('subjects', option.value)}
+                        className={`p-3 border-2 rounded-xl font-medium transition-all ${
+                          formData.subjects.includes(option.value)
+                            ? 'border-blue-500 bg-blue-50 text-blue-700'
+                            : 'border-gray-200 hover:border-blue-300'
+                        }`}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                  {errors.subjects && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.subjects}
+                    </p>
+                  )}
+                </div>
 
-                                {/* Content Kind Section */}
-                                <div>
-                                    <h3 className="font-semibold text-gray-900 mb-3">
-                                        {t("register_creator.content_kind.title")}
-                                        <span className="text-red-500 ml-1">*</span>
-                                    </h3>
-                                    <div className={`border-2 rounded-xl overflow-hidden transition-all ${
-                                        touched.contentKind && errors.contentKind
-                                            ? 'border-red-300 error-field'
-                                            : 'border-gray-200'
-                                    }`}>
-                                        <label className="flex items-center p-4 cursor-pointer hover:bg-blue-50 transition-colors">
-                                            <input
-                                                type="radio"
-                                                name="contentKind"
-                                                value="generalAdult"
-                                                checked={formData.contentKind === "generalAdult"}
-                                                onChange={handleChange}
-                                                onBlur={() => handleBlur('contentKind')}
-                                                className="w-5 h-5 text-blue-600 focus:ring-blue-500"
-                                            />
-                                            <span className="ml-3 text-gray-900 font-medium">
-                                                {t("register_creator.content_kind.general_adult")}
-                                            </span>
-                                        </label>
-                                        <div className="border-t-2 border-gray-200"></div>
-                                        <label className="flex items-center p-4 cursor-pointer hover:bg-blue-50 transition-colors">
-                                            <input
-                                                type="radio"
-                                                name="contentKind"
-                                                value="gayBL"
-                                                checked={formData.contentKind === "gayBL"}
-                                                onChange={handleChange}
-                                                onBlur={() => handleBlur('contentKind')}
-                                                className="w-5 h-5 text-blue-600 focus:ring-blue-500"
-                                            />
-                                            <span className="ml-3 text-gray-900 font-medium">
-                                                {t("register_creator.content_kind.gay_bl")}
-                                            </span>
-                                        </label>
-                                    </div>
-                                    <AnimatePresence>
-                                        {touched.contentKind && errors.contentKind && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: -10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -10 }}
-                                                className="flex items-center space-x-1 mt-2 text-red-600 text-sm"
-                                            >
-                                                <AlertCircle className="w-4 h-4" />
-                                                <span>{errors.contentKind}</span>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <BookOpen className="inline w-4 h-4 mr-1" />
+                    コース計画 <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    name="coursePlan"
+                    placeholder="どのようなコースを提供する予定ですか？"
+                    value={formData.coursePlan}
+                    onChange={handleChange}
+                    rows={4}
+                    className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 resize-none ${
+                      errors.coursePlan ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-blue-500'
+                    }`}
+                  />
+                  {errors.coursePlan && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.coursePlan}
+                    </p>
+                  )}
+                </div>
 
-                                {/* Notice box */}
-                                <div className={`p-5 rounded-xl border-2 transition-all ${
-                                    touched.agreed && errors.agreed
-                                        ? 'bg-red-50 border-red-300 error-field'
-                                        : 'bg-blue-50 border-blue-200'
-                                }`}>
-                                    <label className="flex items-start space-x-3 cursor-pointer">
-                                        <input
-                                            type="checkbox"
-                                            name="agreed"
-                                            checked={formData.agreed}
-                                            onChange={handleChange}
-                                            className="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 mt-0.5 flex-shrink-0"
-                                        />
-                                        <span className={`text-sm font-medium ${
-                                            touched.agreed && errors.agreed ? 'text-red-700' : 'text-blue-800'
-                                        }`}>
-                                            {t("register_creator.notice")}
-                                        </span>
-                                    </label>
-                                    <AnimatePresence>
-                                        {touched.agreed && errors.agreed && (
-                                            <motion.div
-                                                initial={{ opacity: 0, y: -10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -10 }}
-                                                className="flex items-center space-x-1 mt-2 text-red-600 text-sm"
-                                            >
-                                                <AlertCircle className="w-4 h-4" />
-                                                <span>{errors.agreed}</span>
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
-                            </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <FileText className="inline w-4 h-4 mr-1" />
+                    指導スタイル <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    name="teachingStyle"
+                    placeholder="あなたの指導スタイルや特徴を教えてください"
+                    value={formData.teachingStyle}
+                    onChange={handleChange}
+                    rows={4}
+                    className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 resize-none ${
+                      errors.teachingStyle ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-blue-500'
+                    }`}
+                  />
+                  {errors.teachingStyle && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.teachingStyle}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
 
-                            {/* Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-3 mt-8">
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    type="button"
-                                    onClick={handleBack}
-                                    className="flex-1 py-4 px-6 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-colors flex items-center justify-center space-x-2"
-                                >
-                                    <ArrowLeft className="w-5 h-5" />
-                                    <span>{t("register_creator.back")}</span>
-                                </motion.button>
+            {currentStep === 4 && (
+              <div className="space-y-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">自己紹介と確認</h2>
+                
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <User className="inline w-4 h-4 mr-1" />
+                    自己紹介 <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    name="bio"
+                    placeholder="学生に向けて自己紹介をしてください"
+                    value={formData.bio}
+                    onChange={handleChange}
+                    rows={5}
+                    className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 resize-none ${
+                      errors.bio ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-blue-500'
+                    }`}
+                  />
+                  {errors.bio && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.bio}
+                    </p>
+                  )}
+                </div>
 
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    type="button"
-                                    onClick={handleNext}
-                                    className="flex-1 py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
-                                >
-                                    <span>{t("register_creator.next")}</span>
-                                    <ArrowRight className="w-5 h-5" />
-                                </motion.button>
-                            </div>
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                            key="confirmation"
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.3 }}
-                            className="bg-white rounded-2xl shadow-sm p-6 sm:p-8"
-                        >
-                            <div className="text-center mb-6">
-                                <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-                                    <CheckCircle className="w-8 h-8 text-blue-600" />
-                                </div>
-                                <h2 className="text-2xl font-bold text-gray-900 mb-2">入力内容の確認</h2>
-                                <p className="text-gray-600">以下の内容で申請を進めてよろしいですか？</p>
-                            </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <GraduationCap className="inline w-4 h-4 mr-1" />
+                    講師になる理由 <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    name="motivation"
+                    placeholder="なぜ講師として教えたいと思いましたか？"
+                    value={formData.motivation}
+                    onChange={handleChange}
+                    rows={5}
+                    className={`w-full p-4 border-2 rounded-xl transition-all focus:outline-none focus:ring-2 resize-none ${
+                      errors.motivation ? 'border-red-300 focus:ring-red-500' : 'border-gray-200 focus:ring-blue-500'
+                    }`}
+                  />
+                  {errors.motivation && (
+                    <p className="text-red-600 text-sm mt-2 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.motivation}
+                    </p>
+                  )}
+                </div>
 
-                            <div className="space-y-4 mb-8">
-                                <div className="bg-gray-50 p-4 rounded-xl">
-                                    <div className="text-sm text-gray-600 mb-1">氏名</div>
-                                    <div className="font-semibold text-gray-900">{formData.name}</div>
-                                </div>
+                <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      name="agreedToTerms"
+                      checked={formData.agreedToTerms}
+                      onChange={handleChange}
+                      className="mt-1 w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                    />
+                    <span className="text-sm text-gray-700">
+                      <a href="/terms" target="_blank" className="text-blue-600 hover:underline font-semibold">利用規約</a>、
+                      <a href="/privacy" target="_blank" className="text-blue-600 hover:underline font-semibold">プライバシーポリシー</a>、
+                      <a href="/guidelines" target="_blank" className="text-blue-600 hover:underline font-semibold">講師ガイドライン</a>
+                      に同意します <span className="text-red-500">*</span>
+                    </span>
+                  </label>
+                  {errors.agreedToTerms && (
+                    <p className="text-red-600 text-sm mt-2 ml-8 flex items-center gap-1">
+                      <AlertCircle className="w-4 h-4" />
+                      {errors.agreedToTerms}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </AnimatePresence>
 
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="bg-gray-50 p-4 rounded-xl">
-                                        <div className="text-sm text-gray-600 mb-1">フリガナ（姓）</div>
-                                        <div className="font-semibold text-gray-900">{formData.furiganaFamily}</div>
-                                    </div>
-                                    <div className="bg-gray-50 p-4 rounded-xl">
-                                        <div className="text-sm text-gray-600 mb-1">フリガナ（名）</div>
-                                        <div className="font-semibold text-gray-900">{formData.furiganaFirst}</div>
-                                    </div>
-                                </div>
-
-                                <div className="bg-gray-50 p-4 rounded-xl">
-                                    <div className="text-sm text-gray-600 mb-1">住所</div>
-                                    <div className="font-semibold text-gray-900">{formData.address}</div>
-                                </div>
-
-                                <div className="bg-gray-50 p-4 rounded-xl">
-                                    <div className="text-sm text-gray-600 mb-1">生年月日</div>
-                                    <div className="font-semibold text-gray-900">{formData.dob}</div>
-                                </div>
-
-                                <div className="bg-gray-50 p-4 rounded-xl">
-                                    <div className="text-sm text-gray-600 mb-1">コンテンツ種類</div>
-                                    <div className="font-semibold text-gray-900">
-                                        {formData.contentKind === 'generalAdult' 
-                                            ? t("register_creator.content_kind.general_adult")
-                                            : t("register_creator.content_kind.gay_bl")
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col sm:flex-row gap-3">
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    type="button"
-                                    onClick={handleBack}
-                                    disabled={isLoading}
-                                    className="flex-1 py-4 px-6 bg-gray-100 text-gray-700 rounded-xl font-semibold hover:bg-gray-200 transition-colors disabled:opacity-50 flex items-center justify-center space-x-2"
-                                >
-                                    <ArrowLeft className="w-5 h-5" />
-                                    <span>修正する</span>
-                                </motion.button>
-
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    type="button"
-                                    onClick={handleConfirmAndProceed}
-                                    disabled={isLoading}
-                                    className="flex-1 py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-semibold hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 flex items-center justify-center space-x-2"
-                                >
-                                    {isLoading ? (
-                                        <>
-                                            <Loader2 className="w-5 h-5 animate-spin" />
-                                            <span>処理中...</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <span>次へ進む</span>
-                                            <ArrowRight className="w-5 h-5" />
-                                        </>
-                                    )}
-                                </motion.button>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </motion.div>
-    );
+        {/* Navigation Buttons */}
+        <div className="flex gap-4">
+          <button
+            onClick={handleBack}
+            className="flex-1 bg-white border-2 border-gray-200 text-gray-700 py-4 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+            data-testid="button-back"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            {currentStep === 1 ? 'キャンセル' : '戻る'}
+          </button>
+          
+          {currentStep < 4 ? (
+            <button
+              onClick={handleNext}
+              className="flex-1 bg-gradient-to-r from-blue-500 to-blue-700 text-white py-4 rounded-xl font-bold hover:shadow-lg transition-all flex items-center justify-center gap-2"
+              data-testid="button-next"
+            >
+              次へ
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          ) : (
+            <button
+              onClick={handleSubmit}
+              disabled={isLoading}
+              className="flex-1 bg-gradient-to-r from-green-500 to-green-700 text-white py-4 rounded-xl font-bold hover:shadow-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              data-testid="button-submit"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  登録中...
+                </>
+              ) : (
+                <>
+                  <CheckCircle className="w-5 h-5" />
+                  登録を完了
+                </>
+              )}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default RegisterCreatorPage;
