@@ -1,0 +1,153 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ヘルパー関数
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && getUserData().role == 'admin';
+    }
+    
+    function isInstructor() {
+      return isAuthenticated() && getUserData().isInstructor == true;
+    }
+    
+    // ユーザー情報
+    match /users/{userId} {
+      // 認証済みユーザーは全ユーザーの基本情報を読める
+      allow read: if isAuthenticated();
+      
+      // 自分のデータのみ作成・更新可能
+      allow create: if isAuthenticated() && isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+    
+    // コース情報
+    match /courses/{courseId} {
+      // 公開されているコースは誰でも閲覧可能
+      allow read: if resource.data.isPublished == true || 
+                     isOwner(resource.data.instructorId) ||
+                     isAdmin();
+      
+      // 講師のみコース作成可能
+      allow create: if isInstructor();
+      
+      // コースの講師または管理者のみ更新・削除可能
+      allow update, delete: if isOwner(resource.data.instructorId) || isAdmin();
+    }
+    
+    // レッスン情報
+    match /lessons/{lessonId} {
+      // レッスンは認証済みユーザーが読める（受講確認は別途）
+      allow read: if isAuthenticated();
+      
+      // レッスンの作成・更新・削除はコース講師のみ
+      allow create, update, delete: if isAuthenticated() && (
+        isOwner(get(/databases/$(database)/documents/courses/$(resource.data.courseId)).data.instructorId) ||
+        isAdmin()
+      );
+    }
+    
+    // 受講履歴
+    match /enrollments/{enrollmentId} {
+      // 本人の受講履歴のみ閲覧可能（講師・管理者は統計として別途取得）
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      
+      // 受講登録は認証済みユーザーが可能
+      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
+      
+      // 更新は本人のみ
+      allow update: if isOwner(resource.data.userId);
+      
+      // 削除は管理者のみ
+      allow delete: if isAdmin();
+    }
+    
+    // 決済情報
+    match /payments/{paymentId} {
+      // 本人と管理者のみ閲覧可能
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      
+      // 作成は認証済みユーザー（システムが作成）
+      allow create: if isAuthenticated();
+      
+      // 更新・削除は管理者のみ
+      allow update, delete: if isAdmin();
+    }
+    
+    // レビュー
+    match /reviews/{reviewId} {
+      // 公開されているレビューは誰でも閲覧可能
+      allow read: if resource.data.isPublished == true || 
+                     isOwner(resource.data.userId) ||
+                     isAdmin();
+      
+      // レビュー作成は認証済みユーザー
+      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
+      
+      // 自分のレビューのみ更新可能
+      allow update: if isOwner(resource.data.userId) || isAdmin();
+      
+      // 削除は本人または管理者
+      allow delete: if isOwner(resource.data.userId) || isAdmin();
+    }
+    
+    // メッセージ
+    match /messages/{messageId} {
+      // 送信者または受信者のみ閲覧可能
+      allow read: if isOwner(resource.data.senderId) || 
+                     isOwner(resource.data.receiverId) ||
+                     isAdmin();
+      
+      // メッセージ作成は認証済みユーザー
+      allow create: if isAuthenticated() && isOwner(request.resource.data.senderId);
+      
+      // 更新は受信者（既読フラグ）または送信者
+      allow update: if isOwner(resource.data.senderId) || 
+                      isOwner(resource.data.receiverId);
+      
+      // 削除は送信者のみ
+      allow delete: if isOwner(resource.data.senderId) || isAdmin();
+    }
+    
+    // 通知
+    match /notifications/{notificationId} {
+      // 本人の通知のみ閲覧可能
+      allow read: if isOwner(resource.data.userId) || isAdmin();
+      
+      // 通知作成はシステム（全ユーザー可能だが、自分宛のみ）
+      allow create: if isAuthenticated() && isOwner(request.resource.data.userId);
+      
+      // 更新は本人のみ（既読フラグ）
+      allow update: if isOwner(resource.data.userId);
+      
+      // 削除は本人または管理者
+      allow delete: if isOwner(resource.data.userId) || isAdmin();
+    }
+    
+    // 学習進捗（レッスン単位）
+    match /lesson_progress/{progressId} {
+      // 本人のみ閲覧可能
+      allow read: if isAuthenticated() && progressId.matches('^' + request.auth.uid + '_.*');
+      
+      // 作成・更新は本人のみ
+      allow create, update: if isAuthenticated() && 
+                               request.resource.data.userId == request.auth.uid;
+      
+      // 削除は管理者のみ
+      allow delete: if isAdmin();
+    }
+  }
+}

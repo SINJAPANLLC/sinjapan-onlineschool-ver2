@@ -1,0 +1,127 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // ヘルパー関数
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    
+    function getUserData() {
+      return firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && getUserData().role == 'admin';
+    }
+    
+    function isInstructor() {
+      return isAuthenticated() && getUserData().isInstructor == true;
+    }
+    
+    // 検証関数
+    function isImage() {
+      return request.resource.contentType.matches('image/.*');
+    }
+    
+    function isVideo() {
+      return request.resource.contentType.matches('video/.*');
+    }
+    
+    function isPDF() {
+      return request.resource.contentType == 'application/pdf';
+    }
+    
+    function isValidFileSize(maxSizeMB) {
+      return request.resource.size < maxSizeMB * 1024 * 1024;
+    }
+    
+    // 公開ファイル（コースサムネイル、ユーザーアバター）
+    match /public/{allPaths=**} {
+      // 誰でも読める
+      allow read: if true;
+      
+      // 認証済みユーザーのみアップロード可能
+      allow write: if isAuthenticated();
+    }
+    
+    // コースサムネイル
+    match /public/course-thumbnails/{courseId}/{fileName} {
+      allow read: if true;
+      allow write: if isInstructor() && isImage() && isValidFileSize(5);
+    }
+    
+    // コースカバー画像
+    match /public/course-covers/{courseId}/{fileName} {
+      allow read: if true;
+      allow write: if isInstructor() && isImage() && isValidFileSize(10);
+    }
+    
+    // ユーザーアバター
+    match /public/user-avatars/{userId}/{fileName} {
+      allow read: if true;
+      allow write: if isOwner(userId) && isImage() && isValidFileSize(5);
+    }
+    
+    // 修了証明書（公開）
+    match /public/certificates/{userId}/{certificateId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // 保護されたファイル（コース動画、レッスン動画）
+    match /protected/{allPaths=**} {
+      // 認証済みユーザーのみ読める（詳細な受講確認はアプリ側で）
+      allow read: if isAuthenticated();
+      allow write: if isInstructor() || isAdmin();
+    }
+    
+    // コース動画（プレビュー）
+    match /protected/course-videos/{courseId}/{fileName} {
+      allow read: if isAuthenticated();
+      allow write: if isInstructor() && isVideo() && isValidFileSize(500);
+    }
+    
+    // レッスン動画
+    match /protected/lesson-videos/{courseId}/{lessonId}/{fileName} {
+      // 受講者のみアクセス可能（Firestoreで確認）
+      allow read: if isAuthenticated() && (
+        exists(/databases/(default)/documents/enrollments/$(request.auth.uid + '_' + courseId)) ||
+        isInstructor() ||
+        isAdmin()
+      );
+      allow write: if isInstructor() && isVideo() && isValidFileSize(1000);
+    }
+    
+    // コース教材（PDF、ZIP）
+    match /protected/course-materials/{courseId}/{fileName} {
+      allow read: if isAuthenticated() && (
+        exists(/databases/(default)/documents/enrollments/$(request.auth.uid + '_' + courseId)) ||
+        isInstructor() ||
+        isAdmin()
+      );
+      allow write: if isInstructor() && isValidFileSize(50);
+    }
+    
+    // プライベートファイル（KYC書類、請求書）
+    match /private/{userId}/{allPaths=**} {
+      // 本人と管理者のみアクセス可能
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+    
+    // KYC書類（講師の本人確認書類）
+    match /private/kyc-documents/{userId}/{fileName} {
+      allow read, write: if isOwner(userId) || isAdmin();
+    }
+    
+    // 請求書・領収書
+    match /private/invoices/{userId}/{fileName} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if isAdmin();
+    }
+  }
+}
