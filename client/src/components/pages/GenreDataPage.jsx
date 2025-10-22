@@ -124,7 +124,7 @@ const GenrePage = () => {
             bookmarks: 788,
             timeAgo: '1 day ago',
             type: 'video',
-            thumbnail: '/sample-1.png',
+            thumbnail: '/logo-school.jpg',
             user: {
                 id: 'creator_1',
                 name: '姫木(ナン)/TOKYO',
@@ -139,7 +139,7 @@ const GenrePage = () => {
             bookmarks: 633,
             timeAgo: '1 day ago',
             type: 'video',
-            thumbnail: '/sample-2.png',
+            thumbnail: '/logo-school.jpg',
             user: {
                 id: 'creator_2',
                 name: 'じじのハメ撮り...',
@@ -154,7 +154,7 @@ const GenrePage = () => {
             bookmarks: 498,
             timeAgo: '2 days ago',
             type: 'video',
-            thumbnail: '/sample-3.jpg',
+            thumbnail: '/logo-school.jpg',
             user: {
                 id: 'creator_3',
                 name: '人気講師 A',
@@ -169,7 +169,7 @@ const GenrePage = () => {
             bookmarks: 387,
             timeAgo: '3 days ago',
             type: 'video',
-            thumbnail: '/sample-1.png',
+            thumbnail: '/logo-school.jpg',
             user: {
                 id: 'creator_4',
                 name: '人気講師 B',

@@ -172,7 +172,7 @@ const ProfilePage = () => {
                         username: userData.username || `@user${userId.slice(0, 6)}`,
                         bio: userData.bio || '',
                         avatar: userData.photoURL || userData.avatar || 'https://via.placeholder.com/150',
-                        coverImage: userData.coverImage || '/images/sample-1.png',
+                        coverImage: userData.coverImage || '/images/logo-school.jpg',
                         isVerified: userData.isVerified || false,
                         stats: {
                             posts: userData.postsCount || 0,
@@ -203,7 +203,7 @@ const ProfilePage = () => {
                         username: '@user',
                         bio: '',
                         avatar: 'https://via.placeholder.com/150',
-                        coverImage: '/images/sample-1.png',
+                        coverImage: '/images/logo-school.jpg',
                         isVerified: false,
                         stats: {
                             posts: 0,
@@ -234,7 +234,7 @@ const ProfilePage = () => {
                     username: '@user',
                     bio: 'このユーザーは存在しないか、データの取得に失敗しました。',
                     avatar: 'https://via.placeholder.com/150',
-                    coverImage: '/images/sample-1.png',
+                    coverImage: '/images/logo-school.jpg',
                     isVerified: false,
                     stats: {
                         posts: 0,

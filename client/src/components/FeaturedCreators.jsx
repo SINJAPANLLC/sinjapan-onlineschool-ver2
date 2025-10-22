@@ -28,9 +28,9 @@ const FeaturedCreators = () => {
                 // データがない場合はデフォルトの静的画像を使用
                 if (slidersData.length === 0) {
                     setSliderImages([
-                        { id: '1', imageUrl: '/slider-1.png', title: '' },
-                        { id: '2', imageUrl: '/slider-2.png', title: '' },
-                        { id: '3', imageUrl: '/slider-3.png', title: '' },
+                        { id: '1', imageUrl: '/logo-school.jpg', title: '' },
+                        { id: '2', imageUrl: '/logo-school.jpg', title: '' },
+                        { id: '3', imageUrl: '/logo-school.jpg', title: '' },
                         { id: '4', imageUrl: '/slider-4.png', title: '' },
                         { id: '5', imageUrl: '/slider-5.png', title: '' },
                         { id: '6', imageUrl: '/slider-6.png', title: '' },
@@ -47,9 +47,9 @@ const FeaturedCreators = () => {
                 console.error('Error loading sliders:', error);
                 // エラーの場合もデフォルト画像を使用
                 setSliderImages([
-                    { id: '1', imageUrl: '/slider-1.png', title: '' },
-                    { id: '2', imageUrl: '/slider-2.png', title: '' },
-                    { id: '3', imageUrl: '/slider-3.png', title: '' },
+                    { id: '1', imageUrl: '/logo-school.jpg', title: '' },
+                    { id: '2', imageUrl: '/logo-school.jpg', title: '' },
+                    { id: '3', imageUrl: '/logo-school.jpg', title: '' },
                     { id: '4', imageUrl: '/slider-4.png', title: '' },
                     { id: '5', imageUrl: '/slider-5.png', title: '' },
                     { id: '6', imageUrl: '/slider-6.png', title: '' },

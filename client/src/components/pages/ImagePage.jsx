@@ -50,7 +50,7 @@ const ImagePage = () => {
             avatar: '/logo-school.jpg',
             isVerified: true
         },
-        imageUrl: '/images/sample-1.png',
+        imageUrl: '/images/logo-school.jpg',
         views: 8750,
         likes: 456,
         comments: 89,
@@ -64,8 +64,8 @@ const ImagePage = () => {
 
     // 複数画像のサンプル（ギャラリー表示用）
     const galleryImages = [
-        '/images/sample-1.png',
-        '/images/sample-2.png',
+        '/images/logo-school.jpg',
+        '/images/logo-school.jpg',
         '/images/sample-3.png'
     ];
 
