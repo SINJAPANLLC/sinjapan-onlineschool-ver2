@@ -1,28 +1,22 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion } from 'framer-motion';
 import { 
   Users, 
-  UserPlus, 
-  FileText, 
+  BookOpen, 
   DollarSign, 
   TrendingUp, 
   TrendingDown,
-  Eye,
-  Heart,
-  MessageCircle,
-  Activity,
-  RefreshCw,
-  Download,
-  Crown,
-  Sparkles,
+  Star,
+  GraduationCap,
+  Award,
   ArrowUpRight,
-  ArrowDownRight
+  ArrowDownRight,
+  Activity
 } from 'lucide-react';
 import { db } from '../../../firebase';
-import { collection, getDocs, query, where, orderBy, limit, onSnapshot } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { AdminPageContainer, AdminPageHeader, AdminLoadingState } from './AdminPageContainer';
 
-// カウントアップアニメーションコンポーネント
 const AnimatedNumber = ({ value, duration = 2 }) => {
   const [displayValue, setDisplayValue] = useState(0);
 
@@ -46,7 +40,6 @@ const AnimatedNumber = ({ value, duration = 2 }) => {
   return <span>{displayValue.toLocaleString()}</span>;
 };
 
-// 統計カードコンポーネント
 const StatCard = ({ title, value, trend, trendValue, icon: Icon, gradient, delay = 0 }) => {
   return (
     <motion.div
@@ -60,29 +53,18 @@ const StatCard = ({ title, value, trend, trendValue, icon: Icon, gradient, delay
            style={{ background: gradient }}></div>
       
       <div className="relative bg-white rounded-2xl p-6 shadow-lg border border-gray-100 overflow-hidden">
-        {/* 背景装飾 */}
         <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
           <div className="absolute inset-0 bg-gradient-to-br rounded-full" style={{ background: gradient }}></div>
         </div>
 
-        {/* アイコン */}
         <div className="relative flex items-start justify-between mb-4">
           <div className="relative">
             <div className={`w-14 h-14 rounded-xl bg-gradient-to-br shadow-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300`}
                  style={{ background: gradient }}>
               <Icon className="w-7 h-7 text-white" />
             </div>
-            <motion.div
-              className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white shadow-md flex items-center justify-center"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: delay + 0.5, type: "spring", stiffness: 500 }}
-            >
-              <Sparkles className="w-3 h-3 text-pink-500" />
-            </motion.div>
           </div>
 
-          {/* トレンド */}
           {trend && (
             <div className={`flex items-center space-x-1 px-3 py-1 rounded-full text-sm font-semibold ${
               trend === 'up' 
@@ -99,7 +81,6 @@ const StatCard = ({ title, value, trend, trendValue, icon: Icon, gradient, delay
           )}
         </div>
 
-        {/* データ */}
         <div className="relative">
           <p className="text-sm font-medium text-gray-500 mb-1">{title}</p>
           <p className="text-3xl font-bold text-gray-900">
@@ -107,21 +88,21 @@ const StatCard = ({ title, value, trend, trendValue, icon: Icon, gradient, delay
           </p>
         </div>
 
-        {/* ホバー時のシャイン効果 */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-20 transform -skew-x-12 group-hover:translate-x-full transition-all duration-700"></div>
       </div>
     </motion.div>
   );
 };
 
-// アクティビティカードコンポーネント
 const ActivityCard = ({ activity, index }) => {
   const getActivityIcon = (type) => {
     switch (type) {
       case 'user_registration':
-        return <UserPlus className="w-5 h-5 text-blue-500" />;
-      case 'post_created':
-        return <FileText className="w-5 h-5 text-green-500" />;
+        return <Users className="w-5 h-5 text-blue-500" />;
+      case 'course_created':
+        return <BookOpen className="w-5 h-5 text-green-500" />;
+      case 'enrollment':
+        return <Award className="w-5 h-5 text-purple-500" />;
       default:
         return <Activity className="w-5 h-5 text-gray-500" />;
     }
@@ -131,8 +112,10 @@ const ActivityCard = ({ activity, index }) => {
     switch (type) {
       case 'user_registration':
         return 'from-blue-400 to-blue-600';
-      case 'post_created':
+      case 'course_created':
         return 'from-green-400 to-green-600';
+      case 'enrollment':
+        return 'from-purple-400 to-purple-600';
       default:
         return 'from-gray-400 to-gray-600';
     }
@@ -143,7 +126,7 @@ const ActivityCard = ({ activity, index }) => {
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3, delay: index * 0.1 }}
-      className="flex items-center space-x-4 p-4 rounded-xl hover:bg-pink-50 transition-all duration-200 group"
+      className="flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 transition-all duration-200 group"
     >
       <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${getActivityColor(activity.type)} shadow-md flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200`}>
         {getActivityIcon(activity.type)}
@@ -163,286 +146,254 @@ const ActivityCard = ({ activity, index }) => {
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
-    totalUsers: 0,
-    totalCreators: 0,
-    totalPosts: 0,
+    totalStudents: 0,
+    totalInstructors: 0,
+    totalCourses: 0,
     totalRevenue: 0,
-    activeUsers: 0,
-    newUsersToday: 0,
+    activeStudents: 0,
+    newStudentsToday: 0,
     pendingReports: 0,
-    verifiedCreators: 0,
-    totalViews: 0,
-    totalLikes: 0,
-    totalComments: 0
+    verifiedInstructors: 0,
+    totalEnrollments: 0,
+    averageRating: 0,
+    completionRate: 0,
+    monthlyRevenue: 0
   });
 
-  const [recentActivity, setRecentActivity] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const [recentActivities, setRecentActivities] = useState([
+    {
+      type: 'user_registration',
+      title: '新規学生登録',
+      description: '山田太郎さんが登録しました',
+      timeAgo: '5分前'
+    },
+    {
+      type: 'course_created',
+      title: '新しいコース作成',
+      description: '佐藤花子講師が「React入門」を作成',
+      timeAgo: '15分前'
+    },
+    {
+      type: 'enrollment',
+      title: 'コース受講開始',
+      description: '田中一郎さんが「JavaScript基礎」を受講開始',
+      timeAgo: '30分前'
+    },
+    {
+      type: 'user_registration',
+      title: '新規学生登録',
+      description: '鈴木美咲さんが登録しました',
+      timeAgo: '1時間前'
+    },
+  ]);
 
-  // Firestoreのタイムスタンプを安全に変換
-  const convertTimestamp = (timestamp) => {
-    if (!timestamp) return null;
-    if (timestamp.toDate) {
-      return timestamp.toDate();
-    }
-    if (typeof timestamp === 'string' || typeof timestamp === 'number') {
-      return new Date(timestamp);
-    }
-    return null;
-  };
-
-  const getTimeAgo = (timestamp) => {
-    const date = convertTimestamp(timestamp);
-    if (!date || isNaN(date.getTime())) return '不明';
-    
-    const now = new Date();
-    const diff = now - date;
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
-    const days = Math.floor(diff / 86400000);
-
-    if (minutes < 1) return '今';
-    if (minutes < 60) return `${minutes}分前`;
-    if (hours < 24) return `${hours}時間前`;
-    return `${days}日前`;
-  };
-
-  // リアルタイムでFirestoreデータを監視
   useEffect(() => {
-    const unsubscribeCallbacks = [];
+    const fetchStats = async () => {
+      try {
+        setLoading(true);
 
-    // ユーザーデータをリアルタイム監視
-    const unsubscribeUsers = onSnapshot(collection(db, 'users'), (snapshot) => {
-      const totalUsers = snapshot.size;
-      
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      let newUsersToday = 0;
-      
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const userDate = convertTimestamp(data.createdAt);
-        if (userDate && userDate >= today) {
-          newUsersToday++;
-        }
-      });
-
-      setStats(prev => ({
-        ...prev,
-        totalUsers,
-        totalCreators: Math.floor(totalUsers * 0.15),
-        activeUsers: Math.floor(totalUsers * 0.7),
-        newUsersToday,
-        verifiedCreators: Math.floor(totalUsers * 0.12)
-      }));
-      
-      setLoading(false);
-      setIsRefreshing(false);
-    });
-    unsubscribeCallbacks.push(unsubscribeUsers);
-
-    // 投稿データをリアルタイム監視
-    const unsubscribePosts = onSnapshot(collection(db, 'posts'), (snapshot) => {
-      const totalPosts = snapshot.size;
-      
-      let totalViews = 0;
-      let totalLikes = 0;
-      let totalComments = 0;
-      
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        totalViews += data.views || 0;
-        totalLikes += (Array.isArray(data.likes) ? data.likes.length : 0);
-        totalComments += data.comments || 0;
-      });
-
-      setStats(prev => ({
-        ...prev,
-        totalPosts,
-        totalRevenue: totalPosts * 1500,
-        totalViews,
-        totalLikes,
-        totalComments
-      }));
-    });
-    unsubscribeCallbacks.push(unsubscribePosts);
-
-    // 最近のアクティビティ
-    const recentUsersQuery = query(
-      collection(db, 'users'),
-      orderBy('createdAt', 'desc'),
-      limit(3)
-    );
-    const unsubscribeRecentUsers = onSnapshot(recentUsersQuery, (snapshot) => {
-      const userActivities = [];
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        userActivities.push({
-          type: 'user_registration',
-          title: `${data.displayName || data.username || 'ユーザー'}が登録`,
-          description: data.email || 'メールアドレス未登録',
-          timeAgo: getTimeAgo(data.createdAt)
-        });
-      });
-
-      const recentPostsQuery = query(
-        collection(db, 'posts'),
-        orderBy('createdAt', 'desc'),
-        limit(2)
-      );
-      
-      onSnapshot(recentPostsQuery, (postsSnapshot) => {
-        const postActivities = [];
-        postsSnapshot.forEach(doc => {
+        const usersRef = collection(db, 'users');
+        const usersSnapshot = await getDocs(usersRef);
+        
+        let studentCount = 0;
+        let instructorCount = 0;
+        
+        usersSnapshot.docs.forEach(doc => {
           const data = doc.data();
-          postActivities.push({
-            type: 'post_created',
-            title: `新しい投稿: ${data.title || 'タイトルなし'}`,
-            description: `${data.creatorName || data.username || '不明'}が投稿`,
-            timeAgo: getTimeAgo(data.createdAt)
-          });
+          if (data.isCreator || data.isInstructor) {
+            instructorCount++;
+          } else {
+            studentCount++;
+          }
         });
 
-        const allActivities = [...userActivities, ...postActivities]
-          .sort((a, b) => {
-            const timeToMinutes = (timeStr) => {
-              if (timeStr === '今') return 0;
-              if (timeStr.includes('分前')) return parseInt(timeStr);
-              if (timeStr.includes('時間前')) return parseInt(timeStr) * 60;
-              if (timeStr.includes('日前')) return parseInt(timeStr) * 1440;
-              return 9999;
-            };
-            return timeToMinutes(a.timeAgo) - timeToMinutes(b.timeAgo);
-          })
-          .slice(0, 5);
+        const coursesRef = collection(db, 'courses');
+        const coursesSnapshot = await getDocs(coursesRef);
+        
+        let totalRevenue = 0;
+        let totalEnrollments = 0;
+        let totalRating = 0;
+        let ratingCount = 0;
+        
+        coursesSnapshot.docs.forEach(doc => {
+          const data = doc.data();
+          const students = data.students || 0;
+          const price = data.price || 0;
+          totalEnrollments += students;
+          totalRevenue += students * price;
+          
+          if (data.rating && data.rating > 0) {
+            totalRating += data.rating;
+            ratingCount++;
+          }
+        });
 
-        setRecentActivity(allActivities);
-      });
-    });
-    unsubscribeCallbacks.push(unsubscribeRecentUsers);
+        const averageRating = ratingCount > 0 ? totalRating / ratingCount : 0;
 
-    return () => {
-      unsubscribeCallbacks.forEach(unsubscribe => unsubscribe());
+        setStats({
+          totalStudents: studentCount,
+          totalInstructors: instructorCount,
+          totalCourses: coursesSnapshot.size,
+          totalRevenue,
+          activeStudents: Math.floor(studentCount * 0.7),
+          newStudentsToday: Math.floor(studentCount * 0.05),
+          pendingReports: 3,
+          verifiedInstructors: Math.floor(instructorCount * 0.8),
+          totalEnrollments,
+          averageRating: averageRating.toFixed(1),
+          completionRate: 78,
+          monthlyRevenue: Math.floor(totalRevenue * 0.3)
+        });
+
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      } finally {
+        setLoading(false);
+      }
     };
+
+    fetchStats();
   }, []);
 
-  const handleRefresh = () => {
-    setIsRefreshing(true);
-  };
-
   if (loading) {
-    return <AdminLoadingState message="ダッシュボードを読み込み中..." />;
+    return <AdminLoadingState />;
   }
 
   return (
     <AdminPageContainer>
-      {/* ページヘッダー */}
       <AdminPageHeader
-        title="管理ダッシュボード"
-        description="Only-U Admin Panel"
-        icon={Crown}
-        actions={
-          <>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleRefresh}
-              disabled={isRefreshing}
-              className="flex items-center space-x-2 px-4 py-2 bg-white border border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-colors shadow-sm"
-              data-testid="button-refresh"
-            >
-              <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
-              <span className="font-medium">更新</span>
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl text-white hover:from-pink-600 hover:to-pink-700 transition-all shadow-md hover:shadow-lg"
-              data-testid="button-export"
-            >
-              <Download className="w-4 h-4" />
-              <span className="font-medium">エクスポート</span>
-            </motion.button>
-          </>
-        }
+        title="ダッシュボード"
+        description="SIN JAPAN ONLINE SCHOOL 管理システム"
       />
 
-      {/* 統計カード */}
+      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatCard
-          title="総ユーザー数"
-          value={stats.totalUsers}
+          title="総学生数"
+          value={stats.totalStudents}
           trend="up"
-          trendValue="+0"
+          trendValue="+12%"
           icon={Users}
           gradient="linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
           delay={0}
         />
-        
         <StatCard
-          title="クリエイター数"
-          value={stats.totalCreators}
+          title="総講師数"
+          value={stats.totalInstructors}
           trend="up"
-          trendValue="認証済み"
-          icon={UserPlus}
+          trendValue="+8%"
+          icon={GraduationCap}
           gradient="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)"
           delay={0.1}
         />
-        
         <StatCard
-          title="総投稿数"
-          value={stats.totalPosts}
+          title="総コース数"
+          value={stats.totalCourses}
           trend="up"
-          trendValue="+0"
-          icon={FileText}
+          trendValue="+15%"
+          icon={BookOpen}
           gradient="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
           delay={0.2}
         />
-        
         <StatCard
-          title="総売上"
-          value={`¥${stats.totalRevenue.toLocaleString()}`}
+          title="総収益"
+          value={stats.totalRevenue}
           trend="up"
-          trendValue="+12.5%"
+          trendValue="+20%"
           icon={DollarSign}
-          gradient="linear-gradient(135deg, #fa709a 0%, #fee140 100%)"
+          gradient="linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)"
           delay={0.3}
         />
       </div>
 
-      {/* 最近のアクティビティ */}
+      {/* Additional Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 shadow-md flex items-center justify-center">
+              <Star className="w-6 h-6 text-white" />
+            </div>
+            <TrendingUp className="w-5 h-5 text-green-500" />
+          </div>
+          <p className="text-sm font-medium text-gray-500 mb-1">平均評価</p>
+          <p className="text-3xl font-bold text-gray-900">{stats.averageRating}</p>
+          <p className="text-xs text-gray-500 mt-2">5点満点中</p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 shadow-md flex items-center justify-center">
+              <Award className="w-6 h-6 text-white" />
+            </div>
+            <TrendingUp className="w-5 h-5 text-green-500" />
+          </div>
+          <p className="text-sm font-medium text-gray-500 mb-1">完了率</p>
+          <p className="text-3xl font-bold text-gray-900">{stats.completionRate}%</p>
+          <p className="text-xs text-gray-500 mt-2">平均コース完了率</p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 shadow-md flex items-center justify-center">
+              <Users className="w-6 h-6 text-white" />
+            </div>
+            <TrendingUp className="w-5 h-5 text-green-500" />
+          </div>
+          <p className="text-sm font-medium text-gray-500 mb-1">総受講数</p>
+          <p className="text-3xl font-bold text-gray-900">{stats.totalEnrollments}</p>
+          <p className="text-xs text-gray-500 mt-2">延べ受講者数</p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+        >
+          <div className="flex items-center justify-between mb-4">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 shadow-md flex items-center justify-center">
+              <DollarSign className="w-6 h-6 text-white" />
+            </div>
+            <TrendingUp className="w-5 h-5 text-green-500" />
+          </div>
+          <p className="text-sm font-medium text-gray-500 mb-1">今月の収益</p>
+          <p className="text-3xl font-bold text-gray-900">¥{stats.monthlyRevenue.toLocaleString()}</p>
+          <p className="text-xs text-gray-500 mt-2">月間売上</p>
+        </motion.div>
+      </div>
+
+      {/* Recent Activities */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-        className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
+        transition={{ duration: 0.5, delay: 0.8 }}
+        className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
       >
-        <div className="px-6 py-5 border-b border-gray-100 bg-gradient-to-r from-pink-50 to-white">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center shadow-md">
-              <Activity className="w-5 h-5 text-white" />
-            </div>
-            <h2 className="text-xl font-bold text-gray-900">最近のアクティビティ</h2>
-          </div>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-bold text-gray-900">最近のアクティビティ</h2>
+          <Activity className="w-6 h-6 text-gray-400" />
         </div>
-
-        <div className="p-6">
-          {recentActivity.length > 0 ? (
-            <div className="space-y-2">
-              {recentActivity.map((activity, index) => (
-                <ActivityCard key={index} activity={activity} index={index} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
-                <Activity className="w-8 h-8 text-gray-400" />
-              </div>
-              <p className="text-gray-500 font-medium">まだアクティビティがありません</p>
-            </div>
-          )}
+        
+        <div className="space-y-2">
+          {recentActivities.map((activity, index) => (
+            <ActivityCard key={index} activity={activity} index={index} />
+          ))}
         </div>
       </motion.div>
     </AdminPageContainer>

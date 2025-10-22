@@ -1,28 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
-    ArrowLeft,
-    Camera,
-    Upload,
-    Save,
-    X,
-    User,
-    Mail,
-    Globe,
-    Calendar,
-    MapPin,
-    Edit3,
-    CheckCircle,
-    AlertCircle,
-    Eye,
-    EyeOff,
-    Lock,
-    Shield,
-    Plus,
-    Trash2,
-    Star,
-    DollarSign
+  ArrowLeft,
+  Camera,
+  Save,
+  User,
+  Mail,
+  Globe,
+  MapPin,
+  CheckCircle,
+  GraduationCap,
+  BookOpen
 } from 'lucide-react';
 import BottomNavigationWithCreator from '../BottomNavigationWithCreator';
 import { useAuth } from '../../context/AuthContext';
@@ -30,898 +19,420 @@ import { db } from '../../firebase';
 import { doc, getDoc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 const EditProfilePage = () => {
-    const navigate = useNavigate();
-    const { currentUser } = useAuth();
-    const fileInputRef = useRef(null);
-    const coverInputRef = useRef(null);
-    
-    const [formData, setFormData] = useState({
-        name: '',
-        emoji: '',
-        username: '',
-        bio: '',
-        email: '',
-        website: '',
-        birthday: '',
-        location: '',
-        isPrivate: false,
-        allowMessages: true,
-        showOnlineStatus: true,
-        allowTagging: true
-    });
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const fileInputRef = useRef(null);
+  const coverInputRef = useRef(null);
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    username: '',
+    bio: '',
+    email: '',
+    website: '',
+    location: '',
+    expertise: '',
+    yearsOfExperience: '',
+    isInstructor: false
+  });
 
-    const [avatar, setAvatar] = useState('https://via.placeholder.com/150');
-    const [coverImage, setCoverImage] = useState('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=200&fit=crop');
-    const [isLoading, setIsLoading] = useState(false);
-    const [errors, setErrors] = useState({});
-    const [showSuccess, setShowSuccess] = useState(false);
-    const [subscriptionPlans, setSubscriptionPlans] = useState([]);
-    const [showAddPlan, setShowAddPlan] = useState(false);
-    const [editingPlan, setEditingPlan] = useState(null);
+  const [avatar, setAvatar] = useState('/logo192.png');
+  const [coverImage, setCoverImage] = useState('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=200&fit=crop');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
-    // Firestoreからユーザーデータを取得
-    useEffect(() => {
-        const fetchUserData = async () => {
-            if (!currentUser) return;
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!currentUser) return;
 
-            try {
-                const userDocRef = doc(db, 'users', currentUser.uid);
-                const userDoc = await getDoc(userDocRef);
+      try {
+        const userDocRef = doc(db, 'users', currentUser.uid);
+        const userDoc = await getDoc(userDocRef);
 
-                if (userDoc.exists()) {
-                    const userData = userDoc.data();
-                    setFormData({
-                        name: userData.displayName || userData.name || '',
-                        emoji: userData.emoji || '',
-                        username: userData.username || '',
-                        bio: userData.bio || '',
-                        email: userData.email || currentUser.email || '',
-                        website: userData.website || '',
-                        birthday: userData.birthday || '',
-                        location: userData.location || '',
-                        isPrivate: userData.isPrivate || false,
-                        allowMessages: userData.allowMessages !== undefined ? userData.allowMessages : true,
-                        showOnlineStatus: userData.showOnlineStatus !== undefined ? userData.showOnlineStatus : true,
-                        allowTagging: userData.allowTagging !== undefined ? userData.allowTagging : true
-                    });
-                    setAvatar(userData.photoURL || userData.avatar || 'https://via.placeholder.com/150');
-                    setCoverImage(userData.coverImage || 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=200&fit=crop');
-                    setSubscriptionPlans(userData.subscriptionPlans || []);
-                }
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        };
-
-        fetchUserData();
-    }, [currentUser]);
-
-    const handleInputChange = (e) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-        
-        if (errors[name]) {
-            setErrors(prev => ({
-                ...prev,
-                [name]: ''
-            }));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setFormData({
+            name: userData.displayName || userData.name || '',
+            username: userData.username || '',
+            bio: userData.bio || '',
+            email: userData.email || currentUser.email || '',
+            website: userData.website || '',
+            location: userData.location || '',
+            expertise: userData.expertise || '',
+            yearsOfExperience: userData.yearsOfExperience || '',
+            isInstructor: userData.isCreator || userData.isInstructor || false
+          });
+          setAvatar(userData.photoURL || userData.avatar || '/logo192.png');
+          setCoverImage(userData.coverImage || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=200&fit=crop');
         }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
     };
 
-    const handleAvatarUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setAvatar(e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+    fetchUserData();
+  }, [currentUser]);
 
-    const handleCoverUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setCoverImage(e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
 
-    const validateForm = () => {
-        const newErrors = {};
-        
-        if (!formData.name.trim()) {
-            newErrors.name = '名前は必須です';
-        }
-        
-        if (!formData.username.trim()) {
-            newErrors.username = 'ユーザー名は必須です';
-        } else if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
-            newErrors.username = 'ユーザー名は英数字とアンダースコアのみ使用できます';
-        }
-        
-        if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = '有効なメールアドレスを入力してください';
-        }
-        
-        if (formData.website && !/^https?:\/\/.+/.test(formData.website)) {
-            newErrors.website = '有効なURLを入力してください（http://またはhttps://で始まる）';
-        }
-        
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
+  const handleAvatarUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setAvatar(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-    const handleSave = async () => {
-        if (!validateForm() || !currentUser) {
-            return;
-        }
+  const handleCoverUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setCoverImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-        setIsLoading(true);
-        try {
-            const userDocRef = doc(db, 'users', currentUser.uid);
-            
-            // setDocとmerge: trueを使用して、ドキュメントが存在しない場合でも作成できるようにする
-            await setDoc(userDocRef, {
-                displayName: formData.name,
-                name: formData.name,
-                emoji: formData.emoji,
-                username: formData.username,
-                bio: formData.bio,
-                email: formData.email,
-                website: formData.website,
-                birthday: formData.birthday,
-                location: formData.location,
-                isPrivate: formData.isPrivate,
-                allowMessages: formData.allowMessages,
-                showOnlineStatus: formData.showOnlineStatus,
-                allowTagging: formData.allowTagging,
-                photoURL: avatar,
-                avatar: avatar,
-                coverImage: coverImage,
-                subscriptionPlans: subscriptionPlans,
-                updatedAt: serverTimestamp()
-            }, { merge: true });
-            
-            setShowSuccess(true);
-            setTimeout(() => {
-                navigate(`/profile/${currentUser.uid}`, { replace: true });
-            }, 2000);
-        } catch (error) {
-            console.error('プロフィール保存に失敗しました:', error);
-            alert('プロフィールの保存に失敗しました。しばらくしてからお試しください。');
-        } finally {
-            setIsLoading(false);
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-    const handleCancel = () => {
-        if (window.confirm('変更を保存せずに終了しますか？')) {
-            navigate(-1);
-        }
-    };
+    try {
+      const userDocRef = doc(db, 'users', currentUser.uid);
+      
+      await setDoc(userDocRef, {
+        displayName: formData.name,
+        name: formData.name,
+        username: formData.username,
+        bio: formData.bio,
+        email: formData.email,
+        website: formData.website,
+        location: formData.location,
+        expertise: formData.expertise,
+        yearsOfExperience: formData.yearsOfExperience,
+        isInstructor: formData.isInstructor,
+        isCreator: formData.isInstructor,
+        photoURL: avatar,
+        avatar: avatar,
+        coverImage: coverImage,
+        updatedAt: serverTimestamp()
+      }, { merge: true });
 
-    const handleAddPlan = () => {
-        setEditingPlan({
-            id: Date.now().toString(),
-            title: '',
-            emoji: '',
-            price: '',
-            posts: '',
-            description: '',
-            isRecommended: false
-        });
-        setShowAddPlan(true);
-    };
+      setShowSuccess(true);
 
-    const handleEditPlan = (plan) => {
-        setEditingPlan({ ...plan });
-        setShowAddPlan(true);
-    };
+      setTimeout(() => {
+        setShowSuccess(false);
+        navigate('/account');
+      }, 2000);
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('プロフィールの更新に失敗しました');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-    const handleSavePlan = () => {
-        if (!editingPlan.title || !editingPlan.price) {
-            alert('タイトルと価格は必須です');
-            return;
-        }
-
-        const existingIndex = subscriptionPlans.findIndex(p => p.id === editingPlan.id);
-        if (existingIndex >= 0) {
-            const updated = [...subscriptionPlans];
-            updated[existingIndex] = editingPlan;
-            setSubscriptionPlans(updated);
-        } else {
-            setSubscriptionPlans([...subscriptionPlans, editingPlan]);
-        }
-
-        setShowAddPlan(false);
-        setEditingPlan(null);
-    };
-
-    const handleDeletePlan = (planId) => {
-        if (window.confirm('このプランを削除しますか？')) {
-            setSubscriptionPlans(subscriptionPlans.filter(p => p.id !== planId));
-        }
-    };
-
-    const handlePlanInputChange = (field, value) => {
-        setEditingPlan(prev => ({
-            ...prev,
-            [field]: value
-        }));
-    };
-
-    return (
-        <div className="min-h-screen bg-gradient-to-br from-pink-50 via-white to-pink-100 pb-20">
-            {/* Header */}
-            <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="flex items-center justify-between p-4 bg-gradient-to-r from-pink-500 to-pink-600 text-white sticky top-0 z-20 shadow-lg"
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-24">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white sticky top-0 z-40 shadow-lg">
+        <div className="max-w-4xl mx-auto px-4 py-6">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate(-1)}
+              className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all"
+              data-testid="button-back"
             >
-                <motion.button 
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={handleCancel} 
-                    className="p-2 hover:bg-white/20 rounded-full"
-                    data-testid="button-cancel"
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+                <User className="w-7 h-7" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold">プロフィール編集</h1>
+                <p className="text-sm text-blue-100">あなたの情報を更新</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Cover Image */}
+          <div className="bg-white rounded-2xl shadow-md overflow-hidden">
+            <div className="relative h-48 group">
+              <img
+                src={coverImage}
+                alt="Cover"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <button
+                  type="button"
+                  onClick={() => coverInputRef.current?.click()}
+                  className="px-6 py-3 bg-white text-gray-800 rounded-xl font-semibold hover:bg-gray-100 transition-all"
+                  data-testid="button-upload-cover"
                 >
-                    <ArrowLeft size={20} />
-                </motion.button>
-                <h1 className="text-lg font-bold">プロフィールを編集</h1>
-                <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleSave}
-                    disabled={isLoading}
-                    className="bg-white text-pink-600 px-4 py-2 rounded-full text-sm font-bold hover:bg-pink-50 disabled:bg-gray-300 disabled:text-gray-500 transition-colors shadow-lg"
-                    data-testid="button-save"
-                >
-                    {isLoading ? '保存中...' : '保存'}
-                </motion.button>
-            </motion.div>
-
-            {/* Success Message */}
-            <AnimatePresence>
-                {showSuccess && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="bg-gradient-to-r from-green-500 to-green-600 text-white p-4 m-4 rounded-2xl shadow-lg"
-                    >
-                        <div className="flex items-center">
-                            <CheckCircle className="w-5 h-5 mr-2" />
-                            <p className="font-bold">プロフィールが正常に保存されました！</p>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
-            <div className="p-4 space-y-6">
-                {/* Profile Images */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100"
-                >
-                    <h2 className="text-lg font-bold text-pink-900 mb-4 flex items-center">
-                        <Camera className="w-5 h-5 mr-2" />
-                        プロフィール画像
-                    </h2>
-                    
-                    {/* Avatar */}
-                    <div className="flex items-center space-x-4 mb-6">
-                        <div className="relative">
-                            <img
-                                src={avatar}
-                                alt="Avatar"
-                                className="w-20 h-20 rounded-full object-cover border-2 border-pink-200 shadow-md"
-                                data-testid="img-avatar-preview"
-                            />
-                            <motion.button
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                onClick={() => fileInputRef.current?.click()}
-                                className="absolute -bottom-1 -right-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white p-2 rounded-full shadow-lg"
-                                data-testid="button-upload-avatar"
-                            >
-                                <Camera size={16} />
-                            </motion.button>
-                        </div>
-                        <div>
-                            <h3 className="font-bold text-pink-900">プロフィール画像</h3>
-                            <p className="text-sm text-pink-600">推奨サイズ: 400x400px</p>
-                        </div>
-                    </div>
-
-                    {/* Cover Image */}
-                    <div className="space-y-2">
-                        <h3 className="font-bold text-pink-900">カバー画像</h3>
-                        <div className="relative">
-                            <img
-                                src={coverImage}
-                                alt="Cover"
-                                className="w-full h-32 object-cover rounded-lg border-2 border-pink-100"
-                                data-testid="img-cover-preview"
-                            />
-                            <motion.button
-                                whileHover={{ opacity: 1 }}
-                                onClick={() => coverInputRef.current?.click()}
-                                className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity rounded-lg"
-                                data-testid="button-upload-cover"
-                            >
-                                <div className="bg-white/20 backdrop-blur-sm rounded-lg p-3">
-                                    <Upload size={20} className="text-white" />
-                                </div>
-                            </motion.button>
-                        </div>
-                        <p className="text-sm text-pink-600">推奨サイズ: 1200x400px</p>
-                    </div>
-
-                    <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleAvatarUpload}
-                        className="hidden"
-                    />
-                    <input
-                        ref={coverInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleCoverUpload}
-                        className="hidden"
-                    />
-                </motion.div>
-
-                {/* Basic Information */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 }}
-                    className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100"
-                >
-                    <h2 className="text-lg font-bold text-pink-900 mb-4 flex items-center">
-                        <User className="w-5 h-5 mr-2" />
-                        基本情報
-                    </h2>
-                    
-                    <div className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-bold text-pink-900 mb-2">
-                                名前 *
-                            </label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleInputChange}
-                                className={`w-full p-3 border-2 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent ${
-                                    errors.name ? 'border-red-500' : 'border-pink-100'
-                                }`}
-                                placeholder="名前を入力"
-                                data-testid="input-name"
-                            />
-                            {errors.name && (
-                                <p className="text-red-500 text-sm mt-1 flex items-center">
-                                    <AlertCircle size={16} className="mr-1" />
-                                    {errors.name}
-                                </p>
-                            )}
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-bold text-pink-900 mb-2">
-                                絵文字・アイコン
-                            </label>
-                            <input
-                                type="text"
-                                name="emoji"
-                                value={formData.emoji}
-                                onChange={handleInputChange}
-                                className="w-full p-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                                placeholder="🍼"
-                                maxLength={5}
-                                data-testid="input-emoji"
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-bold text-pink-900 mb-2">
-                                ユーザー名 *
-                            </label>
-                            <div className="flex items-center">
-                                <span className="text-pink-500 mr-2 font-bold">@</span>
-                                <input
-                                    type="text"
-                                    name="username"
-                                    value={formData.username}
-                                    onChange={handleInputChange}
-                                    className={`flex-1 p-3 border-2 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent ${
-                                        errors.username ? 'border-red-500' : 'border-pink-100'
-                                    }`}
-                                    placeholder="ユーザー名を入力"
-                                    data-testid="input-username"
-                                />
-                            </div>
-                            {errors.username && (
-                                <p className="text-red-500 text-sm mt-1 flex items-center">
-                                    <AlertCircle size={16} className="mr-1" />
-                                    {errors.username}
-                                </p>
-                            )}
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-bold text-pink-900 mb-2">
-                                自己紹介
-                            </label>
-                            <textarea
-                                name="bio"
-                                value={formData.bio}
-                                onChange={handleInputChange}
-                                rows={4}
-                                className="w-full p-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent resize-none"
-                                placeholder="自己紹介を入力..."
-                                maxLength={500}
-                                data-testid="input-bio"
-                            />
-                            <p className="text-sm text-pink-600 mt-1">
-                                {formData.bio.length}/500文字
-                            </p>
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Contact Information */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100"
-                >
-                    <h2 className="text-lg font-bold text-pink-900 mb-4 flex items-center">
-                        <Mail className="w-5 h-5 mr-2" />
-                        連絡先情報
-                    </h2>
-                    
-                    <div className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-bold text-pink-900 mb-2">
-                                メールアドレス
-                            </label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleInputChange}
-                                className={`w-full p-3 border-2 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent ${
-                                    errors.email ? 'border-red-500' : 'border-pink-100'
-                                }`}
-                                placeholder="メールアドレスを入力"
-                                data-testid="input-email"
-                            />
-                            {errors.email && (
-                                <p className="text-red-500 text-sm mt-1 flex items-center">
-                                    <AlertCircle size={16} className="mr-1" />
-                                    {errors.email}
-                                </p>
-                            )}
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-bold text-pink-900 mb-2">
-                                ウェブサイト
-                            </label>
-                            <div className="flex items-center">
-                                <Globe className="w-5 h-5 text-pink-400 mr-2" />
-                                <input
-                                    type="url"
-                                    name="website"
-                                    value={formData.website}
-                                    onChange={handleInputChange}
-                                    className={`flex-1 p-3 border-2 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent ${
-                                        errors.website ? 'border-red-500' : 'border-pink-100'
-                                    }`}
-                                    placeholder="https://example.com"
-                                    data-testid="input-website"
-                                />
-                            </div>
-                            {errors.website && (
-                                <p className="text-red-500 text-sm mt-1 flex items-center">
-                                    <AlertCircle size={16} className="mr-1" />
-                                    {errors.website}
-                                </p>
-                            )}
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-bold text-pink-900 mb-2">
-                                生年月日
-                            </label>
-                            <div className="flex items-center">
-                                <Calendar className="w-5 h-5 text-pink-400 mr-2" />
-                                <input
-                                    type="date"
-                                    name="birthday"
-                                    value={formData.birthday}
-                                    onChange={handleInputChange}
-                                    className="flex-1 p-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                                    data-testid="input-birthday"
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-bold text-pink-900 mb-2">
-                                場所
-                            </label>
-                            <div className="flex items-center">
-                                <MapPin className="w-5 h-5 text-pink-400 mr-2" />
-                                <input
-                                    type="text"
-                                    name="location"
-                                    value={formData.location}
-                                    onChange={handleInputChange}
-                                    className="flex-1 p-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                                    placeholder="場所を入力"
-                                    data-testid="input-location"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Subscription Plans */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100"
-                >
-                    <div className="flex items-center justify-between mb-4">
-                        <h2 className="text-lg font-bold text-pink-900 flex items-center">
-                            <Star className="w-5 h-5 mr-2" />
-                            サブスクリプションプラン
-                        </h2>
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={handleAddPlan}
-                            className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg flex items-center space-x-2"
-                            data-testid="button-add-plan"
-                        >
-                            <Plus className="w-4 h-4" />
-                            <span>プラン追加</span>
-                        </motion.button>
-                    </div>
-
-                    {subscriptionPlans.length > 0 ? (
-                        <div className="space-y-3">
-                            {subscriptionPlans.map((plan, index) => (
-                                <motion.div
-                                    key={plan.id}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.05 }}
-                                    className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl p-4 border-2 border-pink-200"
-                                >
-                                    <div className="flex items-start justify-between">
-                                        <div className="flex-1">
-                                            <h3 className="font-bold text-pink-900 flex items-center">
-                                                {plan.emoji && <span className="mr-2">{plan.emoji}</span>}
-                                                {plan.title}
-                                                {plan.isRecommended && (
-                                                    <span className="ml-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white text-xs px-2 py-1 rounded-full">
-                                                        おすすめ
-                                                    </span>
-                                                )}
-                                            </h3>
-                                            <p className="text-sm text-pink-700 mt-1">{plan.price} • {plan.posts}投稿</p>
-                                            <p className="text-sm text-pink-600 mt-2">{plan.description}</p>
-                                        </div>
-                                        <div className="flex space-x-2 ml-4">
-                                            <motion.button
-                                                whileHover={{ scale: 1.1 }}
-                                                whileTap={{ scale: 0.9 }}
-                                                onClick={() => handleEditPlan(plan)}
-                                                className="p-2 bg-white text-pink-600 rounded-lg hover:bg-pink-50"
-                                                data-testid={`button-edit-plan-${plan.id}`}
-                                            >
-                                                <Edit3 className="w-4 h-4" />
-                                            </motion.button>
-                                            <motion.button
-                                                whileHover={{ scale: 1.1 }}
-                                                whileTap={{ scale: 0.9 }}
-                                                onClick={() => handleDeletePlan(plan.id)}
-                                                className="p-2 bg-white text-red-500 rounded-lg hover:bg-red-50"
-                                                data-testid={`button-delete-plan-${plan.id}`}
-                                            >
-                                                <Trash2 className="w-4 h-4" />
-                                            </motion.button>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    ) : (
-                        <div className="text-center py-8 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl border-2 border-dashed border-pink-300">
-                            <Star className="w-12 h-12 mx-auto text-pink-300 mb-3" />
-                            <p className="text-pink-600 font-medium mb-3">サブスクリプションプランがありません</p>
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={handleAddPlan}
-                                className="bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg"
-                                data-testid="button-add-first-plan"
-                            >
-                                最初のプランを追加
-                            </motion.button>
-                        </div>
-                    )}
-                </motion.div>
-
-                {/* Privacy Settings */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="bg-white rounded-2xl p-6 shadow-xl border-2 border-pink-100"
-                >
-                    <h2 className="text-lg font-bold text-pink-900 mb-4 flex items-center">
-                        <Shield className="w-5 h-5 mr-2" />
-                        プライバシー設定
-                    </h2>
-                    
-                    <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <h3 className="font-bold text-pink-900">プライベートアカウント</h3>
-                                <p className="text-sm text-pink-600">フォロワーを承認制にする</p>
-                            </div>
-                            <motion.button
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setFormData(prev => ({ ...prev, isPrivate: !prev.isPrivate }))}
-                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                                    formData.isPrivate ? 'bg-gradient-to-r from-pink-500 to-pink-600' : 'bg-gray-300'
-                                }`}
-                                data-testid="toggle-private"
-                            >
-                                <motion.span
-                                    animate={{ x: formData.isPrivate ? 20 : 4 }}
-                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    className="inline-block h-4 w-4 rounded-full bg-white shadow-md"
-                                />
-                            </motion.button>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <h3 className="font-bold text-pink-900">メッセージ受信</h3>
-                                <p className="text-sm text-pink-600">他のユーザーからのメッセージを許可</p>
-                            </div>
-                            <motion.button
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setFormData(prev => ({ ...prev, allowMessages: !prev.allowMessages }))}
-                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                                    formData.allowMessages ? 'bg-gradient-to-r from-pink-500 to-pink-600' : 'bg-gray-300'
-                                }`}
-                                data-testid="toggle-messages"
-                            >
-                                <motion.span
-                                    animate={{ x: formData.allowMessages ? 20 : 4 }}
-                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    className="inline-block h-4 w-4 rounded-full bg-white shadow-md"
-                                />
-                            </motion.button>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <h3 className="font-bold text-pink-900">オンライン状態表示</h3>
-                                <p className="text-sm text-pink-600">オンライン状態を他のユーザーに表示</p>
-                            </div>
-                            <motion.button
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setFormData(prev => ({ ...prev, showOnlineStatus: !prev.showOnlineStatus }))}
-                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                                    formData.showOnlineStatus ? 'bg-gradient-to-r from-pink-500 to-pink-600' : 'bg-gray-300'
-                                }`}
-                                data-testid="toggle-online-status"
-                            >
-                                <motion.span
-                                    animate={{ x: formData.showOnlineStatus ? 20 : 4 }}
-                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    className="inline-block h-4 w-4 rounded-full bg-white shadow-md"
-                                />
-                            </motion.button>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <h3 className="font-bold text-pink-900">タグ付け許可</h3>
-                                <p className="text-sm text-pink-600">他のユーザーによるタグ付けを許可</p>
-                            </div>
-                            <motion.button
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => setFormData(prev => ({ ...prev, allowTagging: !prev.allowTagging }))}
-                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                                    formData.allowTagging ? 'bg-gradient-to-r from-pink-500 to-pink-600' : 'bg-gray-300'
-                                }`}
-                                data-testid="toggle-tagging"
-                            >
-                                <motion.span
-                                    animate={{ x: formData.allowTagging ? 20 : 4 }}
-                                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                    className="inline-block h-4 w-4 rounded-full bg-white shadow-md"
-                                />
-                            </motion.button>
-                        </div>
-                    </div>
-                </motion.div>
+                  カバー画像を変更
+                </button>
+              </div>
+              <input
+                ref={coverInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleCoverUpload}
+                className="hidden"
+              />
             </div>
 
-            {/* Add/Edit Plan Modal */}
-            <AnimatePresence>
-                {showAddPlan && editingPlan && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-                        onClick={() => setShowAddPlan(false)}
-                    >
-                        <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            onClick={(e) => e.stopPropagation()}
-                            className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
-                        >
-                            <div className="bg-gradient-to-r from-pink-500 to-pink-600 text-white p-6">
-                                <div className="flex items-center justify-between">
-                                    <h3 className="text-xl font-bold">
-                                        {subscriptionPlans.find(p => p.id === editingPlan.id) ? 'プランを編集' : 'プランを追加'}
-                                    </h3>
-                                    <motion.button
-                                        whileHover={{ scale: 1.1, rotate: 90 }}
-                                        whileTap={{ scale: 0.9 }}
-                                        onClick={() => setShowAddPlan(false)}
-                                        className="p-2 hover:bg-white/20 rounded-full transition-colors"
-                                        data-testid="button-close-plan-modal"
-                                    >
-                                        <X className="w-5 h-5" />
-                                    </motion.button>
-                                </div>
-                            </div>
-                            <div className="p-6 space-y-4 max-h-96 overflow-y-auto">
-                                <div>
-                                    <label className="block text-sm font-bold text-pink-900 mb-2">
-                                        プラン名 *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={editingPlan.title}
-                                        onChange={(e) => handlePlanInputChange('title', e.target.value)}
-                                        className="w-full p-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                                        placeholder="例: 最新見放題プラン"
-                                        data-testid="input-plan-title"
-                                    />
-                                </div>
+            {/* Avatar */}
+            <div className="relative px-8 pb-8 -mt-16">
+              <div className="relative inline-block">
+                <div className="w-32 h-32 rounded-full border-4 border-white overflow-hidden bg-white shadow-lg">
+                  <img src={avatar} alt="Avatar" className="w-full h-full object-cover" />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="absolute bottom-2 right-2 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition-all shadow-lg"
+                  data-testid="button-upload-avatar"
+                >
+                  <Camera className="w-5 h-5" />
+                </button>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleAvatarUpload}
+                  className="hidden"
+                />
+              </div>
+            </div>
+          </div>
 
-                                <div>
-                                    <label className="block text-sm font-bold text-pink-900 mb-2">
-                                        絵文字
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={editingPlan.emoji}
-                                        onChange={(e) => handlePlanInputChange('emoji', e.target.value)}
-                                        className="w-full p-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                                        placeholder="🍼💕"
-                                        maxLength={10}
-                                        data-testid="input-plan-emoji"
-                                    />
-                                </div>
+          {/* Basic Info */}
+          <div className="bg-white rounded-2xl shadow-md p-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <User className="w-6 h-6 text-blue-600" />
+              基本情報
+            </h2>
 
-                                <div>
-                                    <label className="block text-sm font-bold text-pink-900 mb-2">
-                                        価格 *
-                                    </label>
-                                    <input
-                                        type="text"
-                                        value={editingPlan.price}
-                                        onChange={(e) => handlePlanInputChange('price', e.target.value)}
-                                        className="w-full p-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                                        placeholder="例: ¥3,980/月"
-                                        data-testid="input-plan-price"
-                                    />
-                                </div>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  お名前 *
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500"
+                  placeholder="山田太郎"
+                  data-testid="input-name"
+                />
+              </div>
 
-                                <div>
-                                    <label className="block text-sm font-bold text-pink-900 mb-2">
-                                        投稿数
-                                    </label>
-                                    <input
-                                        type="number"
-                                        value={editingPlan.posts}
-                                        onChange={(e) => handlePlanInputChange('posts', e.target.value)}
-                                        className="w-full p-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent"
-                                        placeholder="30"
-                                        data-testid="input-plan-posts"
-                                    />
-                                </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  ユーザー名
+                </label>
+                <input
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500"
+                  placeholder="yamada_taro"
+                  data-testid="input-username"
+                />
+              </div>
 
-                                <div>
-                                    <label className="block text-sm font-bold text-pink-900 mb-2">
-                                        説明
-                                    </label>
-                                    <textarea
-                                        value={editingPlan.description}
-                                        onChange={(e) => handlePlanInputChange('description', e.target.value)}
-                                        rows={3}
-                                        className="w-full p-3 border-2 border-pink-100 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent resize-none"
-                                        placeholder="プランの説明を入力..."
-                                        data-testid="input-plan-description"
-                                    />
-                                </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  自己紹介
+                </label>
+                <textarea
+                  name="bio"
+                  value={formData.bio}
+                  onChange={handleInputChange}
+                  rows={4}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500"
+                  placeholder="あなたについて教えてください"
+                  data-testid="input-bio"
+                />
+              </div>
 
-                                <div className="flex items-center justify-between">
-                                    <label className="text-sm font-bold text-pink-900">
-                                        おすすめプラン
-                                    </label>
-                                    <motion.button
-                                        whileTap={{ scale: 0.95 }}
-                                        onClick={() => handlePlanInputChange('isRecommended', !editingPlan.isRecommended)}
-                                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                                            editingPlan.isRecommended ? 'bg-gradient-to-r from-pink-500 to-pink-600' : 'bg-gray-300'
-                                        }`}
-                                        data-testid="toggle-plan-recommended"
-                                    >
-                                        <motion.span
-                                            animate={{ x: editingPlan.isRecommended ? 20 : 4 }}
-                                            transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                                            className="inline-block h-4 w-4 rounded-full bg-white shadow-md"
-                                        />
-                                    </motion.button>
-                                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    メールアドレス
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500"
+                    placeholder="example@email.com"
+                    data-testid="input-email"
+                  />
+                </div>
 
-                                <div className="flex space-x-3 pt-4">
-                                    <motion.button
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        onClick={() => setShowAddPlan(false)}
-                                        className="flex-1 bg-gray-200 text-gray-700 py-3 rounded-xl font-bold"
-                                        data-testid="button-cancel-plan-modal"
-                                    >
-                                        キャンセル
-                                    </motion.button>
-                                    <motion.button
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        onClick={handleSavePlan}
-                                        className="flex-1 bg-gradient-to-r from-pink-500 to-pink-600 text-white py-3 rounded-xl font-bold shadow-lg"
-                                        data-testid="button-save-plan-modal"
-                                    >
-                                        保存
-                                    </motion.button>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    ウェブサイト
+                  </label>
+                  <input
+                    type="url"
+                    name="website"
+                    value={formData.website}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500"
+                    placeholder="https://example.com"
+                    data-testid="input-website"
+                  />
+                </div>
+              </div>
 
-            <BottomNavigationWithCreator active="account" />
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  所在地
+                </label>
+                <input
+                  type="text"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500"
+                  placeholder="東京、日本"
+                  data-testid="input-location"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Instructor Info */}
+          <div className="bg-white rounded-2xl shadow-md p-6">
+            <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+              <GraduationCap className="w-6 h-6 text-blue-600" />
+              講師情報
+            </h2>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-xl">
+                <input
+                  type="checkbox"
+                  name="isInstructor"
+                  checked={formData.isInstructor}
+                  onChange={handleInputChange}
+                  className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                  data-testid="checkbox-instructor"
+                />
+                <div>
+                  <label className="font-semibold text-gray-800">講師として登録</label>
+                  <p className="text-sm text-gray-600">コースを作成して知識を共有しましょう</p>
+                </div>
+              </div>
+
+              {formData.isInstructor && (
+                <>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      専門分野
+                    </label>
+                    <input
+                      type="text"
+                      name="expertise"
+                      value={formData.expertise}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500"
+                      placeholder="例: Web開発、データサイエンス"
+                      data-testid="input-expertise"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      経験年数
+                    </label>
+                    <input
+                      type="text"
+                      name="yearsOfExperience"
+                      value={formData.yearsOfExperience}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500"
+                      placeholder="5年"
+                      data-testid="input-experience"
+                    />
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <div className="flex gap-4">
+            <button
+              type="button"
+              onClick={() => navigate(-1)}
+              className="flex-1 px-6 py-4 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition-all"
+              data-testid="button-cancel"
+            >
+              キャンセル
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="flex-1 px-6 py-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-xl font-semibold hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              data-testid="button-save"
+            >
+              {isLoading ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  保存中...
+                </>
+              ) : (
+                <>
+                  <Save className="w-5 h-5" />
+                  保存
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      {/* Success Modal */}
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center"
+          >
+            <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">更新完了！</h3>
+            <p className="text-gray-600">プロフィールが正常に更新されました。</p>
+          </motion.div>
         </div>
-    );
+      )}
+
+      <BottomNavigationWithCreator active="account" />
+    </div>
+  );
 };
 
 export default EditProfilePage;
