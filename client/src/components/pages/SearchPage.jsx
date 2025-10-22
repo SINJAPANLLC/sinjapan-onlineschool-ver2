@@ -1,63 +1,82 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Hash, Triangle, Search, Sparkles } from 'lucide-react';
+import { ArrowLeft, Search, BookOpen, GraduationCap, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import BottomNavigationWithCreator from '../BottomNavigationWithCreator';
-
-const dummyData = {
-    freeWords: [
-        { id: 1, label: '"k"' }
-    ],
-    genres: [
-        { id: 1, label: 'ギャル' },
-        { id: 2, label: 'オナニー' },
-        { id: 3, label: '潮吹き' },
-        { id: 4, label: '熟女' },
-    ],
-    tags: [
-        { id: 1, label: '美女' },
-        { id: 2, label: 'かわいい' },
-        { id: 3, label: 'オナニー' },
-        { id: 4, label: 'ギャル' },
-    ],
-    creators: [
-        { id: 1, name: '💎👑裏垢日本👑💎', followers: '381,306', posts: '2,624', avatar: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=80&h=80&fit=crop' },
-        { id: 2, name: '莉奈', followers: '280,559', posts: '171', avatar: 'https://images.unsplash.com/photo-1551782450-17144efb9c50?w=80&h=80&fit=crop' },
-        { id: 3, name: 'えむ。', followers: '不明', posts: 'N/A', avatar: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=80&h=80&fit=crop' },
-    ]
-};
 
 const SearchPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const navigate = useNavigate();
 
-    // ジャンルをクリックした時の処理
-    const handleGenreClick = (genreName) => {
-        navigate(`/genre/${encodeURIComponent(genreName)}`);
+    const categories = [
+        { id: 'programming', label: 'プログラミング', count: 245 },
+        { id: 'design', label: 'デザイン', count: 178 },
+        { id: 'business', label: 'ビジネス', count: 156 },
+        { id: 'language', label: '語学', count: 134 },
+        { id: 'data', label: 'データサイエンス', count: 98 },
+        { id: 'marketing', label: 'マーケティング', count: 87 },
+    ];
+
+    const popularSearches = [
+        'JavaScript',
+        'Python',
+        'React',
+        'デザイン思考',
+        'ビジネス英語',
+        'SQL',
+        'UI/UX',
+        'マーケティング基礎'
+    ];
+
+    const topInstructors = [
+        { 
+            id: 1, 
+            name: '山田太郎', 
+            students: 5420, 
+            courses: 12, 
+            avatar: '/logo192.png',
+            expertise: 'プログラミング'
+        },
+        { 
+            id: 2, 
+            name: '佐藤花子', 
+            students: 4890, 
+            courses: 8, 
+            avatar: '/logo192.png',
+            expertise: 'デザイン'
+        },
+        { 
+            id: 3, 
+            name: '田中美咲', 
+            students: 3560, 
+            courses: 15, 
+            avatar: '/logo192.png',
+            expertise: 'ビジネス'
+        },
+    ];
+
+    const handleCategoryClick = (categoryId) => {
+        navigate(`/feed?category=${categoryId}`);
     };
 
-    // タグをクリックした時の処理
-    const handleTagClick = (tagName) => {
-        navigate(`/genre/${encodeURIComponent(tagName)}`);
-    };
-
-    // クリエイターをクリックした時の処理
-    const handleCreatorClick = (creatorId) => {
-        navigate(`/profile/${creatorId}`);
-    };
-
-    // フリーワード検索を実行
-    const handleFreeWordSearch = () => {
+    const handleSearch = () => {
         if (searchTerm.trim()) {
             navigate(`/feed?search=${encodeURIComponent(searchTerm)}`);
         }
     };
 
-    // キーボードでエンターキーが押された時の処理
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            handleFreeWordSearch();
+            handleSearch();
         }
+    };
+
+    const handlePopularSearch = (term) => {
+        navigate(`/feed?search=${encodeURIComponent(term)}`);
+    };
+
+    const handleInstructorClick = (instructorId) => {
+        navigate(`/profile/${instructorId}`);
     };
 
     return (
@@ -66,234 +85,170 @@ const SearchPage = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
-            className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col pb-20"
+            className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20"
         >
-            {/* Header with back and search input */}
-            <div className="flex items-center p-4 border-b border-gray-200 bg-white/95 backdrop-blur-md sticky top-0 z-10 shadow-sm">
-                <motion.button 
-                    onClick={() => navigate(-1)} 
-                    className="text-pink-600 mr-3 p-2 hover:bg-gradient-to-br hover:from-pink-50 hover:to-rose-50 rounded-full transition-all"
-                    whileHover={{ scale: 1.1, rotate: -10 }}
-                    whileTap={{ scale: 0.9 }}
-                >
-                    <ArrowLeft size={24} strokeWidth={2.5} />
-                </motion.button>
-                <div className="relative flex-grow">
-                    <motion.div
-                        className="absolute left-3 top-1/2 transform -translate-y-1/2 text-pink-500"
-                        animate={{ 
-                            rotate: [0, 10, -10, 0],
-                            scale: [1, 1.1, 1]
-                        }}
-                        transition={{ duration: 3, repeat: Infinity }}
-                    >
-                        <Search size={20} strokeWidth={2.5} />
-                    </motion.div>
-                    <input
-                        type="text"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        placeholder="検索キーワードを入力してください"
-                        className="w-full pl-10 pr-10 py-2.5 border-2 border-pink-300 rounded-full focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all font-medium"
-                        data-testid="input-search"
-                    />
-                    {searchTerm && (
-                        <motion.button 
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            onClick={() => setSearchTerm('')} 
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-pink-600 font-bold text-lg"
-                            whileHover={{ scale: 1.2, rotate: 90 }}
-                            whileTap={{ scale: 0.9 }}
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-600 to-blue-800 text-white sticky top-0 z-40 shadow-lg">
+                <div className="p-6">
+                    <div className="flex items-center gap-3 mb-4">
+                        <button 
+                            onClick={() => navigate(-1)} 
+                            className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/30 transition-all"
+                            data-testid="button-back"
                         >
-                            ✕
-                        </motion.button>
-                    )}
+                            <ArrowLeft size={24} />
+                        </button>
+                        <div>
+                            <h1 className="text-2xl font-bold">コース検索</h1>
+                            <p className="text-sm text-blue-100">学びたいコースを見つけよう</p>
+                        </div>
+                    </div>
+
+                    {/* Search Input */}
+                    <div className="relative">
+                        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-300 w-5 h-5" />
+                        <input
+                            type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                            placeholder="コース名、講師名、キーワードで検索"
+                            className="w-full pl-12 pr-12 py-4 bg-white/95 backdrop-blur-sm border-2 border-white/30 rounded-2xl focus:outline-none focus:ring-2 focus:ring-white text-gray-800 font-medium shadow-lg"
+                            data-testid="input-search"
+                        />
+                        {searchTerm && (
+                            <button 
+                                onClick={() => setSearchTerm('')} 
+                                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-600"
+                            >
+                                <X size={20} />
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
 
-            {/* Search results sections */}
-            <div className="flex-grow p-4 overflow-auto">
-
-                {/* Free word search */}
+            <div className="p-6 space-y-6">
+                {/* Search Results */}
                 <AnimatePresence>
                     {searchTerm && (
                         <motion.div 
-                            className="mb-6"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
+                            className="bg-white rounded-2xl p-6 shadow-lg"
                         >
-                            <motion.h3 
-                                className="font-bold text-lg bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-3"
-                                animate={{ opacity: [0.8, 1, 0.8] }}
-                                transition={{ duration: 2, repeat: Infinity }}
+                            <button
+                                onClick={handleSearch}
+                                className="w-full flex items-center gap-3 p-4 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-xl hover:shadow-lg transition-all"
+                                data-testid="button-search-submit"
                             >
-                                フリーワード検索
-                            </motion.h3>
-                            <motion.div 
-                                className="flex items-center space-x-3 bg-gradient-to-r from-pink-50 to-rose-50 border-2 border-pink-300 cursor-pointer p-3 rounded-xl shadow-sm"
-                                onClick={handleFreeWordSearch}
-                                whileHover={{ scale: 1.02, x: 5 }}
-                                whileTap={{ scale: 0.98 }}
-                                data-testid="button-search-freeword"
-                            >
-                                <motion.div
-                                    animate={{ 
-                                        rotate: [0, 360],
-                                        scale: [1, 1.2, 1]
-                                    }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                >
-                                    <Sparkles className="w-5 h-5 text-pink-600" strokeWidth={2.5} />
-                                </motion.div>
-                                <span className="font-bold bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent italic">{`"${searchTerm}"`}</span>
-                            </motion.div>
+                                <Search className="w-5 h-5" />
+                                <span className="font-semibold">「{searchTerm}」で検索</span>
+                            </button>
                         </motion.div>
                     )}
                 </AnimatePresence>
 
-                {/* Genre */}
-                <motion.div 
-                    className="mb-6"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
+                {/* Categories */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-white rounded-2xl p-6 shadow-lg"
+                >
+                    <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <BookOpen className="w-6 h-6 text-blue-600" />
+                        カテゴリ
+                    </h2>
+                    <div className="grid grid-cols-2 gap-3">
+                        {categories.map((category, index) => (
+                            <motion.button
+                                key={category.id}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.05 * index }}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => handleCategoryClick(category.id)}
+                                className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 rounded-xl text-left transition-all border-2 border-blue-200"
+                                data-testid={`category-${category.id}`}
+                            >
+                                <div className="font-bold text-gray-800">{category.label}</div>
+                                <div className="text-sm text-gray-600 mt-1">{category.count}コース</div>
+                            </motion.button>
+                        ))}
+                    </div>
+                </motion.div>
+
+                {/* Popular Searches */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
+                    className="bg-white rounded-2xl p-6 shadow-lg"
                 >
-                    <motion.h3 
-                        className="font-bold text-lg bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-3"
-                        animate={{ opacity: [0.8, 1, 0.8] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                    >
-                        ジャンル
-                    </motion.h3>
-                    {dummyData.genres.map((genre, index) => (
-                        <motion.div 
-                            key={genre.id} 
-                            className="flex items-center space-x-3 mb-3 cursor-pointer bg-gradient-to-r from-pink-50/50 to-rose-50/50 border border-pink-200 p-3 rounded-xl shadow-sm hover:border-pink-400 transition-all"
-                            onClick={() => handleGenreClick(genre.label)}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.2 + index * 0.05 }}
-                            whileHover={{ scale: 1.02, x: 5 }}
-                            whileTap={{ scale: 0.98 }}
-                            data-testid={`button-genre-${genre.id}`}
-                        >
-                            <motion.div
-                                className="w-10 h-10 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full flex items-center justify-center shadow-md"
-                                animate={{ 
-                                    rotate: [0, 5, -5, 0],
-                                    scale: [1, 1.05, 1]
-                                }}
-                                transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
+                    <h2 className="text-xl font-bold text-gray-800 mb-4">人気の検索キーワード</h2>
+                    <div className="flex flex-wrap gap-2">
+                        {popularSearches.map((term, index) => (
+                            <motion.button
+                                key={index}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.05 * index }}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
+                                onClick={() => handlePopularSearch(term)}
+                                className="px-4 py-2 bg-gradient-to-r from-blue-100 to-blue-200 hover:from-blue-200 hover:to-blue-300 text-blue-800 rounded-full font-semibold text-sm transition-all"
+                                data-testid={`popular-search-${index}`}
                             >
-                                <Triangle className="w-5 h-5 text-white" strokeWidth={2.5} />
-                            </motion.div>
-                            <span className="font-bold text-gray-800">{genre.label}</span>
-                        </motion.div>
-                    ))}
+                                {term}
+                            </motion.button>
+                        ))}
+                    </div>
                 </motion.div>
 
-                {/* Tags */}
-                <motion.div 
-                    className="mb-6"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
+                {/* Top Instructors */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-white rounded-2xl p-6 shadow-lg"
                 >
-                    <motion.h3 
-                        className="font-bold text-lg bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-3"
-                        animate={{ opacity: [0.8, 1, 0.8] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                    >
-                        タグ
-                    </motion.h3>
-                    {dummyData.tags.map((tag, index) => (
-                        <motion.div 
-                            key={tag.id} 
-                            className="flex items-center space-x-3 mb-3 cursor-pointer bg-gradient-to-r from-purple-50/50 to-pink-50/50 border border-purple-200 p-3 rounded-xl shadow-sm hover:border-pink-400 transition-all"
-                            onClick={() => handleTagClick(tag.label)}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.4 + index * 0.05 }}
-                            whileHover={{ scale: 1.02, x: 5 }}
-                            whileTap={{ scale: 0.98 }}
-                            data-testid={`button-tag-${tag.id}`}
-                        >
+                    <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                        <GraduationCap className="w-6 h-6 text-blue-600" />
+                        人気講師
+                    </h2>
+                    <div className="space-y-3">
+                        {topInstructors.map((instructor, index) => (
                             <motion.div
-                                className="w-10 h-10 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center shadow-md"
-                                animate={{ 
-                                    rotate: [0, -5, 5, 0],
-                                    scale: [1, 1.05, 1]
-                                }}
-                                transition={{ duration: 2, repeat: Infinity, delay: index * 0.2 }}
+                                key={instructor.id}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.05 * index }}
+                                onClick={() => handleInstructorClick(instructor.id)}
+                                className="flex items-center gap-4 p-4 bg-gradient-to-r from-gray-50 to-gray-100 hover:from-blue-50 hover:to-blue-100 rounded-xl cursor-pointer transition-all border-2 border-transparent hover:border-blue-200"
+                                data-testid={`instructor-${instructor.id}`}
                             >
-                                <Hash className="w-5 h-5 text-white" strokeWidth={2.5} />
-                            </motion.div>
-                            <span className="font-bold text-gray-800">{tag.label}</span>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-                {/* Creator */}
-                <motion.div 
-                    className="mb-6"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 }}
-                >
-                    <motion.h3 
-                        className="font-bold text-lg bg-gradient-to-r from-pink-500 to-pink-600 bg-clip-text text-transparent mb-3"
-                        animate={{ opacity: [0.8, 1, 0.8] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                    >
-                        クリエイター
-                    </motion.h3>
-                    {dummyData.creators.map((creator, index) => (
-                        <motion.div 
-                            key={creator.id} 
-                            className="flex items-center space-x-4 mb-4 cursor-pointer bg-gradient-to-r from-blue-50/50 to-pink-50/50 border-2 border-blue-200 p-3 rounded-xl shadow-sm hover:border-pink-400 transition-all"
-                            onClick={() => handleCreatorClick(creator.id)}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.6 + index * 0.05 }}
-                            whileHover={{ scale: 1.02, x: 5 }}
-                            whileTap={{ scale: 0.98 }}
-                            data-testid={`button-creator-${creator.id}`}
-                        >
-                            <div className="relative w-12 h-12 rounded-full overflow-hidden shadow-lg">
-                                <motion.img
-                                    src={creator.avatar}
-                                    alt={creator.name}
-                                    className="w-full h-full object-cover"
-                                    animate={{
-                                        scale: [1, 1.1, 1],
-                                    }}
-                                    transition={{
-                                        duration: 8,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }}
+                                <img
+                                    src={instructor.avatar}
+                                    alt={instructor.name}
+                                    className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-md"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-pink-500/20 to-transparent" />
-                            </div>
-                            <div className="flex-1">
-                                <div className="flex items-center space-x-1">
-                                    <span className="font-bold bg-gradient-to-r from-pink-600 to-pink-700 bg-clip-text text-transparent truncate max-w-xs">
-                                        {creator.name}
-                                    </span>
+                                <div className="flex-1">
+                                    <h3 className="font-bold text-gray-800">{instructor.name}</h3>
+                                    <p className="text-sm text-gray-600">{instructor.expertise}</p>
+                                    <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
+                                        <span>{instructor.students.toLocaleString()}人の学生</span>
+                                        <span>{instructor.courses}コース</span>
+                                    </div>
                                 </div>
-                                <p className="text-gray-600 text-xs font-medium">
-                                    {creator.followers} フォロワー &nbsp;|&nbsp; {creator.posts} 投稿
-                                </p>
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        ))}
+                    </div>
                 </motion.div>
-
             </div>
-            <BottomNavigationWithCreator active="account" />
+
+            <BottomNavigationWithCreator active="feed" />
         </motion.div>
     );
 };
