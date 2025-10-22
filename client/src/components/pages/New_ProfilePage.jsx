@@ -25,7 +25,7 @@ const EnhancedProfilePage = () => {
     const [profile] = useState({
         name: currentUser?.displayName || 'User Name',
         username: currentUser?.displayName || 'User Name',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop',
+        avatar: '/logo-school.jpg',
         verified: true,
         stats: {
             posts: 293,
@@ -175,7 +175,7 @@ return (
         {/* NEW: Background Image Header */}
         <div className="relative h-48 sm:h-64">
             <img
-                src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=400&fit=crop"
+                src="/logo-school.jpg"
                 alt="Cover"
                 className="w-full h-full object-cover"
             />

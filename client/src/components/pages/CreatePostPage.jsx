@@ -165,7 +165,7 @@ const CreatePostPage = () => {
         tags: tags.filter(t => t.trim()),
         instructorId: currentUser.uid,
         instructorName: currentUser.displayName || 'Unknown',
-        thumbnail: thumbnail || '/logo192.png',
+        thumbnail: thumbnail || '/logo-school.jpg',
         students: 0,
         rating: 0,
         reviews: 0,

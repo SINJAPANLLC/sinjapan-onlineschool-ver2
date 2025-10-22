@@ -35,7 +35,7 @@ const PostCommentsPage = () => {
         return {
           id: doc.id,
           title: data.title || 'タイトルなし',
-          thumbnail: data.thumbnailUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=600&fit=crop',
+          thumbnail: data.thumbnailUrl || '/logo-school.jpg',
           totalComments: data.commentsCount || 0,
           unreadComments: data.unreadCommentsCount || 0,
           lastCommentAt: data.lastCommentAt?.toDate?.() || new Date()
@@ -68,7 +68,7 @@ const PostCommentsPage = () => {
           postTitle: data.postTitle || 'タイトルなし',
           user: {
             name: data.userName || 'ユーザー',
-            avatar: data.userAvatar || 'https://images.unsplash.com/photo-1494790108755-2616c933448c?w=100&h=100&fit=crop&crop=face',
+            avatar: data.userAvatar || '/logo-school.jpg',
             isVerified: data.userVerified || false
           },
           content: data.content || '',

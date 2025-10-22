@@ -47,7 +47,7 @@ const ImagePage = () => {
         creator: {
             name: 'ミルク',
             username: '@milk_av',
-            avatar: 'https://images.unsplash.com/photo-1494790108755-2616c933448c?w=150&h=150&fit=crop&crop=face',
+            avatar: '/logo-school.jpg',
             isVerified: true
         },
         imageUrl: '/images/sample-1.png',
@@ -74,7 +74,7 @@ const ImagePage = () => {
             id: 1,
             user: {
                 name: 'ファン1',
-                avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face',
+                avatar: '/logo-school.jpg',
                 username: '@fan1'
             },
             content: 'とても美しい写真ですね！',
@@ -85,7 +85,7 @@ const ImagePage = () => {
             id: 2,
             user: {
                 name: 'ファン2',
-                avatar: 'https://images.unsplash.com/photo-1494790108755-2616c933448c?w=40&h=40&fit=crop&crop=face',
+                avatar: '/logo-school.jpg',
                 username: '@fan2'
             },
             content: 'いつも素晴らしいコンテンツをありがとうございます！',

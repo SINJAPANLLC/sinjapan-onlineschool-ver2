@@ -128,7 +128,7 @@ const GenrePage = () => {
             user: {
                 id: 'creator_1',
                 name: '姫木(ナン)/TOKYO',
-                avatar: 'https://images.unsplash.com/photo-1494790108755-2616c933448c?w=150&h=150&fit=crop&crop=face'
+                avatar: '/logo-school.jpg'
             }
         },
         {

@@ -75,6 +75,14 @@ The platform features a React frontend built with Vite, Tailwind CSS, Framer Mot
 *   **Company Update**: Changed operating company from "合同会社SIN JAPAN KANAGAWA" to "合同会社SIN JAPAN"
 *   **New Legal Pages**: Created Commercial Transactions (特定商取引法) and Content Guidelines pages
 *   **Admin Account**: Set up admin credentials (info@sinjapan.jp / Kazuya8008)
+*   **Legal Notice Update**: Removed "運営統括責任者" section per user request
+*   **Logo Integration**: Replaced all sample/placeholder images with official "SCHOOL SIN JAPAN" logo (`/logo-school.jpg`):
+    - Course thumbnails in Home, Feed, Ranking pages
+    - Instructor/student avatars in all pages
+    - Profile and cover images
+    - Admin panel user avatars
+    - Comment and messaging system avatars
+    - All placeholder images replaced with logo across 15+ files
 
 ## External Dependencies
 *   **Firebase**: Authentication, Realtime Database, Firestore

@@ -326,7 +326,7 @@ const UserContentPage = () => {
                 >
                     <div className="relative w-6 h-6 mr-2 rounded-full overflow-hidden shadow-sm">
                         <motion.img
-                            src={post.user?.avatar || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=20&h=20&fit=crop"}
+                            src={post.user?.avatar || "/logo-school.jpg"}
                             alt="Author"
                             className="w-full h-full object-cover"
                             animate={{ scale: [1, 1.1, 1] }}

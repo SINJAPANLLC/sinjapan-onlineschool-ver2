@@ -157,7 +157,7 @@ const CurrentPlanPage = () => {
                 <motion.div key={creator.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }} whileHover={{ scale: 1.02, y: -2 }} className="bg-white border-2 border-pink-100 rounded-2xl p-6 shadow-xl">
                   <div className="flex items-center space-x-4 mb-4">
                     <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}>
-                      <img src={creator.avatar || 'https://via.placeholder.com/100'} alt={creator.name} className="w-16 h-16 rounded-full object-cover border-2 border-pink-200 shadow-md" />
+                      <img src={creator.avatar || '/logo-school.jpg'} alt={creator.name} className="w-16 h-16 rounded-full object-cover border-2 border-pink-200 shadow-md" />
                     </motion.div>
                     <div className="flex-1">
                       <h3 className="text-xl font-bold text-gray-900" data-testid={`text-creator-name-${creator.id}`}>{creator.name}</h3>

@@ -333,7 +333,7 @@ export default function Users() {
                                                     alt={user.name}
                                                     className="w-10 h-10 rounded-full object-cover ring-2 ring-pink-100"
                                                     onError={(e) => {
-                                                        e.target.src = 'https://via.placeholder.com/40x40?text=U';
+                                                        e.target.src = '/logo-school.jpg';
                                                     }}
                                                 />
                                             ) : (

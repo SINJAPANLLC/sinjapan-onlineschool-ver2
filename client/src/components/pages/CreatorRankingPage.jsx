@@ -33,7 +33,7 @@ const CreatorRankingPage = () => {
           rank: index + 1,
           id: doc.id,
           name: data.displayName || data.name || '名無しさん',
-          avatar: data.photoURL || data.avatar || 'https://images.unsplash.com/photo-1494790108755-2616c933448c?w=100&h=100&fit=crop&crop=face',
+          avatar: data.photoURL || data.avatar || '/logo-school.jpg',
           followers: data.followers || 0,
           likes: data.totalLikes || 0,
           views: data.totalViews || 0,
