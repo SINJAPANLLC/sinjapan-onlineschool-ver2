@@ -7,7 +7,7 @@ SIN JAPAN ONLINE SCHOOL is a comprehensive online learning platform providing qu
 I prefer iterative development with clear communication on changes. Please ask before making major architectural changes or introducing new dependencies. For UI/UX, maintain the consistent blue gradient design throughout all pages. Ensure all interactive elements have `data-testid` attributes for testing purposes.
 
 ## System Architecture
-The platform features a React frontend built with Vite, Tailwind CSS, Framer Motion for animations, and i18next for internationalization. The backend utilizes Express.js with MongoDB (Mongoose) for data persistence. Firebase is central to user authentication, real-time messaging, and Firestore for data management. Replit Object Storage (Google Cloud Storage-based) handles large media uploads. Supabase is integrated for additional backend services.
+The platform features a React frontend built with Vite, Tailwind CSS, Framer Motion for animations, and i18next for internationalization. The backend utilizes Express.js for API endpoints. **Firebase (school-ec82e project)** is the primary data store, providing user authentication, Firestore Database for all application data, Realtime Database for messaging, and Firebase Storage for user-uploaded media. Replit Object Storage (Google Cloud Storage-based) handles large course video files. Square payment integration handles all monetary transactions.
 
 **Key Features:**
 *   **User Management**: Secure authentication via Firebase, student and instructor profiles with KYC/Identity verification for instructors.
@@ -74,8 +74,6 @@ The platform features a React frontend built with Vite, Tailwind CSS, Framer Mot
 *   **Legal Pages**: Updated Terms of Service and Privacy Policy for educational platform
 *   **Company Update**: Changed operating company from "合同会社SIN JAPAN KANAGAWA" to "合同会社SIN JAPAN"
 *   **New Legal Pages**: Created Commercial Transactions (特定商取引法) and Content Guidelines pages
-*   **Admin Account**: Set up admin credentials (info@sinjapan.jp / Kazuya8008)
-*   **Legal Notice Update**: Removed "運営統括責任者" section per user request
 *   **Logo Integration**: Replaced all sample/placeholder images with official "SCHOOL SIN JAPAN" logo (`/logo-school.jpg`):
     - Course thumbnails in Home, Feed, Ranking pages
     - Instructor/student avatars in all pages
@@ -98,12 +96,19 @@ The platform features a React frontend built with Vite, Tailwind CSS, Framer Mot
     - Organized menu sections for learning management, payments, support
     - Separate instructor menu sections: Dashboard, course management, earnings, student management
     - Improved logout modal with confirmation
+*   **🔥 NEW FIREBASE PROJECT (October 22, 2025)**:
+    - **Migrated to dedicated Firebase project**: school-ec82e (separate from other apps)
+    - **Firebase Services Enabled**: Authentication (email/password + Google), Firestore Database, Firebase Storage, Realtime Database, Analytics
+    - **Security Rules Deployed**: Production-ready Firestore and Storage security rules with role-based access control
+    - **Admin Account Created**: info@sinjapan.jp (UID: tBIDRMedxOZTHmEXiVhqgAWKGmH3) with admin, instructor privileges
+    - **Object Storage**: Replit Object Storage bucket configured (sin-japan-school-media)
+    - **Environment Variables**: All Firebase config variables set, Object Storage paths configured
+    - **Database Schema**: Comprehensive Firestore schema designed for users, courses, lessons, enrollments, payments, reviews, messages, notifications, progress tracking
 
 ## External Dependencies
-*   **Firebase**: Authentication, Realtime Database, Firestore
-*   **Replit Object Storage**: Large-scale video/image storage (Google Cloud Storage-based)
-*   **Supabase**: Additional backend services
-*   **MongoDB**: Primary database
+*   **Firebase (school-ec82e)**: Authentication, Firestore Database, Realtime Database, Storage, Analytics - **PRIMARY DATA STORE**
+*   **Replit Object Storage**: Large-scale video/image storage (sin-japan-school-media bucket)
+*   **Square**: Payment processing (replacing Stripe for Japanese market)
 *   **React**: Frontend library
 *   **Vite**: Frontend build tool
 *   **Tailwind CSS**: Utility-first CSS framework
@@ -111,8 +116,6 @@ The platform features a React frontend built with Vite, Tailwind CSS, Framer Mot
 *   **i18next**: Internationalization framework
 *   **Headless UI**: Unstyled, accessible UI components
 *   **Express.js**: Backend web application framework
-*   **Mongoose**: MongoDB ODM
-*   **Stripe**: Payment processing
 *   **Uppy**: File upload library
 
 ## Known Integrations
