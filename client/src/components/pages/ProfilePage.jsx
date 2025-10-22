@@ -302,7 +302,7 @@ const ProfilePage = () => {
             const postsRef = collection(db, 'posts');
             const q = query(
                 postsRef, 
-                where('userId', '==', userId)
+                where('creatorId', '==', userId)
             );
             const querySnapshot = await getDocs(q);
 
