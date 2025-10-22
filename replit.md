@@ -63,7 +63,12 @@ The platform features a React frontend built with Vite, Tailwind CSS, Framer Mot
 *   Firestore query optimizations (limiting, ordering, batching) for performance
 *   Localized error messages (Japanese) for user authentication and uploads
 
-## Recent Changes (October 22, 2025 - Latest Update)
+## Recent Changes (October 22, 2025 - Latest Update - Image Cleanup)
+*   **🖼️ IMAGE CLEANUP (October 22, 2025 - Latest)**:
+    - **Deleted All Sample Images**: Removed sample-1.png, sample-2.png, sample-3.jpg, slider-1.png, slider-2.png, slider-3.png, logo.svg, logo.webp
+    - **Unified to Single Logo**: All 83+ image references now use `/logo-school.jpg` (67KB)
+    - **Remaining Files**: Only essential files remain (logo-school.jpg, favicons, app icons)
+    - **Route Addition**: Added `/ranking` route alias for ranking page access
 *   **Platform Transformation**: Complete conversion from social media platform to online learning platform
 *   **Terminology Update**: Standardized all references to use educational terminology (courses, instructors, students)
 *   **Design Overhaul**: Applied consistent blue gradient theme across ALL pages (replaced pink gradients)
