@@ -310,7 +310,7 @@ const RegisterCreatorPage = () => {
                                     initial={false}
                                     animate={{
                                         scale: active ? 1.1 : 1,
-                                        backgroundColor: active ? '#ec4899' : '#e5e7eb'
+                                        backgroundColor: active ? '#3b82f6' : '#e5e7eb'
                                     }}
                                     className={`flex items-center justify-center w-10 h-10 rounded-full text-white font-bold mb-2 ${
                                         active ? 'shadow-lg' : ''

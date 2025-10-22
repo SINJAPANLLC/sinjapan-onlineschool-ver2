@@ -74,7 +74,7 @@ export function ObjectUploader({
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={() => setShowModal(true)}
-        className={buttonClassName || "bg-gradient-to-r from-pink-500 to-pink-600 text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all"}
+        className={buttonClassName || "bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:shadow-lg transition-all"}
         data-testid="button-open-uploader"
       >
         {children}

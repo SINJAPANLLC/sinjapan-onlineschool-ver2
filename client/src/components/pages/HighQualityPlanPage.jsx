@@ -248,7 +248,7 @@ const HighQualityPlanPage = () => {
     appearance: {
       theme: 'stripe',
       variables: {
-        colorPrimary: '#ec4899',
+        colorPrimary: '#3b82f6',
         colorBackground: '#ffffff',
         colorText: '#1f2937',
         colorDanger: '#ef4444',

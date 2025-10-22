@@ -618,7 +618,7 @@ const ProfilePage = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.5 }}
-                    className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/10 to-blue-600/30" 
+                    className="absolute inset-0 bg-gradient-to-b from-blue-400/60 via-blue-500/70 to-blue-600/80" 
                 />
                 {/* Floating particles effect */}
                 <motion.div
@@ -1242,7 +1242,7 @@ const ProfilePage = () => {
                                                         appearance: {
                                                             theme: 'stripe',
                                                             variables: {
-                                                                colorPrimary: '#ec4899',
+                                                                colorPrimary: '#3b82f6',
                                                                 colorBackground: '#ffffff',
                                                                 colorText: '#1f2937',
                                                                 colorDanger: '#ef4444',

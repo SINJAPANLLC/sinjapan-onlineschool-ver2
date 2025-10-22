@@ -140,7 +140,7 @@ const RecommendedGenres = ({ likedItems, toggleLike }) => {
                 className="relative w-full mt-6 overflow-hidden rounded-full py-3.5 font-medium transition-all text-sm sm:text-base flex items-center justify-center gap-2 group"
                 data-testid="button-see-more-genres"
                 style={{
-                    background: 'linear-gradient(135deg, #ec4899 0%, #f43f5e 100%)',
+                    background: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)',
                     boxShadow: '0 4px 15px rgba(236, 72, 153, 0.3)'
                 }}
             >
