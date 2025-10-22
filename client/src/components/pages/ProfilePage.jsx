@@ -225,7 +225,7 @@ const ProfilePage = () => {
         try {
             // Firestoreからコースを取得
             // Note: orderByを削除してインデックス不要にし、クライアント側でソート
-            const postsRef = collection(db, 'posts');
+            const postsRef = collection(db, 'courses');
             const q = query(
                 postsRef, 
                 where('creatorId', '==', userId)

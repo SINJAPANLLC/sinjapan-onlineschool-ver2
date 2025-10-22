@@ -53,7 +53,6 @@ const SocialFeedScreen = () => {
       lessons: 120,
       level: 'beginner',
       category: 'programming',
-      price: 12800,
       description: 'JavaScriptの基礎から応用まで、実践的なプロジェクトを通して学びます。',
       tags: ['JavaScript', 'Web開発', '初心者向け']
     },
@@ -69,7 +68,6 @@ const SocialFeedScreen = () => {
       lessons: 90,
       level: 'intermediate',
       category: 'programming',
-      price: 15800,
       description: 'Reactを使った実践的なアプリケーション開発を学びます。',
       tags: ['React', 'フロントエンド', 'JavaScript']
     },
@@ -85,7 +83,6 @@ const SocialFeedScreen = () => {
       lessons: 60,
       level: 'intermediate',
       category: 'language',
-      price: 9800,
       description: 'ビジネスシーンで使える実践的な英会話を身につけます。',
       tags: ['英語', 'ビジネス', '会話']
     },
@@ -101,7 +98,6 @@ const SocialFeedScreen = () => {
       lessons: 150,
       level: 'advanced',
       category: 'data',
-      price: 18800,
       description: 'Pythonを使った機械学習の基礎から実装まで学びます。',
       tags: ['Python', 'AI', '機械学習']
     },
@@ -117,7 +113,6 @@ const SocialFeedScreen = () => {
       lessons: 80,
       level: 'beginner',
       category: 'design',
-      price: 13800,
       description: 'ユーザー体験を重視したデザインの基礎から実践まで。',
       tags: ['UX', 'UI', 'デザイン']
     },
@@ -133,7 +128,6 @@ const SocialFeedScreen = () => {
       lessons: 50,
       level: 'intermediate',
       category: 'business',
-      price: 11800,
       description: '効果的なビジネス戦略とマーケティング手法を学びます。',
       tags: ['マーケティング', '戦略', 'ビジネス']
     },
@@ -352,18 +346,13 @@ const SocialFeedScreen = () => {
                   ))}
                 </div>
 
-                {/* Price and Action */}
-                <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                  <div>
-                    <div className="text-2xl font-bold text-blue-600">
-                      ¥{course.price.toLocaleString()}
-                    </div>
-                  </div>
+                {/* Action */}
+                <div className="flex items-center justify-end pt-3 border-t border-gray-100">
                   <button
                     className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-700 text-white rounded-lg font-semibold hover:shadow-lg transition-all"
                     data-testid={`button-enroll-${course.id}`}
                   >
-                    詳細
+                    詳細を見る
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>

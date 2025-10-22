@@ -120,8 +120,7 @@ const Home = () => {
       level: '中級',
       duration: '20時間',
       rating: 4.9,
-      students: 1450,
-      price: '¥12,800'
+      students: 1450
     },
     {
       id: 6,
@@ -132,8 +131,7 @@ const Home = () => {
       level: '初級',
       duration: '14時間',
       rating: 4.8,
-      students: 980,
-      price: '¥9,800'
+      students: 980
     }
   ];
 

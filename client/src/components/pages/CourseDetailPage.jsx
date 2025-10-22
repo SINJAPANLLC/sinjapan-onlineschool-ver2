@@ -303,19 +303,16 @@ const CourseDetailPage = () => {
                 ) : (
                   <div>
                     <div className="text-center mb-6">
-                      <p className="text-3xl font-bold text-gray-800 mb-2">
-                        {course.price > 0 ? `¥${course.price.toLocaleString()}` : '無料'}
-                      </p>
-                      {course.price > 0 && (
-                        <p className="text-sm text-gray-600">講師のサブスクリプションで受講可能</p>
-                      )}
+                      <p className="text-sm text-gray-600 mb-2">このコースは</p>
+                      <p className="text-xl font-bold text-gray-800 mb-2">講師のサブスクリプションで受講可能</p>
+                      <p className="text-sm text-gray-600">講師プロフィールから購読してください</p>
                     </div>
                     <button
-                      onClick={handleEnroll}
+                      onClick={() => navigate(`/profile/${course.instructorId}`)}
                       className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transition-all mb-3"
-                      data-testid="button-enroll"
+                      data-testid="button-view-instructor"
                     >
-                      {course.price > 0 ? 'サブスクリプションで受講' : 'コースに登録'}
+                      講師プロフィールを見る
                     </button>
                     <div className="flex gap-2">
                       <button className="flex-1 border-2 border-gray-200 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-50 transition-all flex items-center justify-center gap-2">
