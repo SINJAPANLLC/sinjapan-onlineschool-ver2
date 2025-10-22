@@ -23,7 +23,9 @@ import {
     ExternalLink,
     Sparkles,
     X,
-    Trash2
+    Trash2,
+    User,
+    GraduationCap
 } from 'lucide-react';
 import BottomNavigationWithCreator from '../BottomNavigationWithCreator';
 import { useAuth } from '../../context/AuthContext';
