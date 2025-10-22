@@ -58,12 +58,6 @@ const LegalNotice = () => {
                             <p className="text-gray-700 text-lg font-semibold">合同会社SIN JAPAN</p>
                         </div>
 
-                        {/* 運営統括責任者 */}
-                        <div className="border-l-4 border-blue-500 pl-6 py-2">
-                            <h2 className="text-xl font-bold text-gray-800 mb-3">運営統括責任者</h2>
-                            <p className="text-gray-700">代表社員 榎本翔太</p>
-                        </div>
-
                         {/* 所在地 */}
                         <div className="border-l-4 border-blue-500 pl-6 py-2">
                             <h2 className="text-xl font-bold text-gray-800 mb-3 flex items-center gap-2">
