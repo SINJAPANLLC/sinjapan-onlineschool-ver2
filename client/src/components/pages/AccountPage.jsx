@@ -39,7 +39,6 @@ const AccountPage = () => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [isCreator, setIsInstructor] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [userAvatar, setUserAvatar] = useState(null);
 
   // 学生用の統計
   const studentStats = {
@@ -70,7 +69,6 @@ const AccountPage = () => {
           const userData = userDoc.data();
           // 後方互換性：isCreatorとisInstructor両方をチェック
           setIsInstructor(userData.isCreator || userData.isInstructor || false);
-          setUserAvatar(userData.avatar || null);
         }
       } catch (error) {
         console.error('講師ステータス取得エラー:', error);
@@ -177,10 +175,8 @@ const AccountPage = () => {
           className="max-w-6xl mx-auto"
         >
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-4 border-white/30 shadow-xl overflow-hidden">
-              {userAvatar ? (
-                <img src={userAvatar} alt="Avatar" className="w-full h-full object-cover" />
-              ) : isCreator ? (
+            <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-4 border-white/30 shadow-xl">
+              {isCreator ? (
                 <GraduationCap className="w-10 h-10" />
               ) : (
                 <User className="w-10 h-10" />
