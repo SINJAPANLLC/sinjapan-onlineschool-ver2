@@ -63,7 +63,7 @@ The platform features a React frontend built with Vite, Tailwind CSS, Framer Mot
 *   Firestore query optimizations (limiting, ordering, batching) for performance
 *   Localized error messages (Japanese) for user authentication and uploads
 
-## Recent Changes (October 22, 2025)
+## Recent Changes (October 22, 2025 - Latest Update)
 *   **Platform Transformation**: Complete conversion from social media platform to online learning platform
 *   **Terminology Update**: Standardized all references to use educational terminology (courses, instructors, students)
 *   **Design Overhaul**: Applied consistent blue gradient theme across ALL pages (replaced pink gradients)
@@ -83,6 +83,21 @@ The platform features a React frontend built with Vite, Tailwind CSS, Framer Mot
     - Admin panel user avatars
     - Comment and messaging system avatars
     - All placeholder images replaced with logo across 15+ files
+*   **Bottom Navigation Redesign**: Completely redesigned for educational platform:
+    - Changed accent color from pink/purple to blue gradient
+    - Updated icons: Trophy (rankings), BookOpen (courses), GraduationCap (instructor dashboard)
+    - Changed terminology: "クリエイター" → "講師" (Instructor)
+    - Educational-themed navigation labels
+    - Blue gradient highlights for active items
+*   **Account Page Rebuild**: Fully redesigned account/profile page:
+    - Dual-mode support: Student view and Instructor view
+    - Student stats: Enrolled courses, completed courses, study hours, certificates
+    - Instructor stats: Total courses, total students, earnings, average rating
+    - Instructor registration banner for students
+    - Blue gradient design throughout
+    - Organized menu sections for learning management, payments, support
+    - Separate instructor menu sections: Dashboard, course management, earnings, student management
+    - Improved logout modal with confirmation
 
 ## External Dependencies
 *   **Firebase**: Authentication, Realtime Database, Firestore

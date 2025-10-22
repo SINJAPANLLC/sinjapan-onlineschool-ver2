@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, Star, Crown, User, MessageCircle, Plus, BarChart3 } from "lucide-react";
+import { Home, BookOpen, Trophy, User, MessageCircle, Plus, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -12,26 +12,26 @@ const BottomNavigationWithCreator = ({ active = "Home" }) => {
     const { unreadCount } = useUnreadMessages();
     const { canCreatePosts, canAccessDashboard } = useCreator();
 
-    // 基本のナビゲーション項目
+    // 基本のナビゲーション項目（学生用）
     const baseItems = [
-        { icon: Home, key: "home", onClick: () => navigate("/") },
-        { icon: Star, key: "feed", onClick: () => navigate("/feed") },
-        { icon: Crown, key: "ranking", onClick: () => navigate("/rankingpage") },
-        { icon: MessageCircle, key: "messages", onClick: () => navigate("/messages") },
-        { icon: User, key: "account", onClick: () => navigate("/account") },
+        { icon: Home, key: "home", label: "ホーム", onClick: () => navigate("/") },
+        { icon: BookOpen, key: "feed", label: "コース", onClick: () => navigate("/feed") },
+        { icon: Trophy, key: "ranking", label: "ランキング", onClick: () => navigate("/rankingpage") },
+        { icon: MessageCircle, key: "messages", label: "メッセージ", onClick: () => navigate("/messages") },
+        { icon: User, key: "account", label: "アカウント", onClick: () => navigate("/account") },
     ];
 
-    // クリエイター用の追加項目
-    const creatorItems = [
-        { icon: Plus, key: "create", onClick: () => navigate("/create-post") },
-        { icon: BarChart3, key: "dashboard", onClick: () => navigate("/creator-dashboard") },
+    // 講師用の追加項目
+    const instructorItems = [
+        { icon: Plus, key: "create", label: "コース作成", onClick: () => navigate("/create-post") },
+        { icon: GraduationCap, key: "dashboard", label: "講師", onClick: () => navigate("/creator-dashboard") },
     ];
 
-    // クリエイターが承認されている場合のみ追加項目を含める
-    const items = canCreatePosts ? [...baseItems, ...creatorItems] : baseItems;
+    // 講師が承認されている場合のみ追加項目を含める
+    const items = canCreatePosts ? [...baseItems, ...instructorItems] : baseItems;
 
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-50 shadow-sm">
+        <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-blue-100 z-50 shadow-lg">
             <div className="max-w-6xl mx-auto">
                 <div className="flex items-center justify-around py-3 px-2">
                     {items.map((item) => {
@@ -51,56 +51,58 @@ const BottomNavigationWithCreator = ({ active = "Home" }) => {
                                     transition={{ duration: 0.2 }}
                                 >
                                     <motion.div
-                                        className={`p-2 rounded-full transition-all duration-300 ${
+                                        className={`p-2 rounded-xl transition-all duration-300 ${
                                             isActive 
-                                                ? "bg-gradient-to-r from-pink-400 to-pink-500" 
+                                                ? "bg-gradient-to-r from-blue-500 to-blue-600" 
                                                 : "bg-transparent"
                                         }`}
                                         animate={isActive ? {
-                                            boxShadow: "0 2px 8px rgba(236, 72, 153, 0.3)"
+                                            boxShadow: "0 4px 12px rgba(59, 130, 246, 0.3)"
                                         } : {}}
                                     >
                                         <item.icon 
                                             size={24} 
-                                            strokeWidth={2} 
+                                            strokeWidth={2.5} 
                                             className={`${
                                                 isActive ? "text-white" : "text-gray-400"
-                                            }`}
+                                            } transition-colors duration-200`}
                                         />
                                     </motion.div>
                                     
-                                    {/* Show unread count badge for messages */}
+                                    {/* 未読メッセージバッジ */}
                                     {item.key === "messages" && unreadCount > 0 && (
                                         <motion.div 
                                             initial={{ scale: 0 }}
                                             animate={{ scale: 1 }}
-                                            className="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-xs rounded-full min-w-[18px] h-[18px] flex items-center justify-center font-bold border-2 border-white"
+                                            className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full min-w-[20px] h-[20px] flex items-center justify-center font-bold border-2 border-white shadow-lg"
                                         >
                                             {unreadCount > 99 ? '99+' : unreadCount}
                                         </motion.div>
                                     )}
-                                    {/* Show special badge for creator features */}
+                                    
+                                    {/* 講師機能のバッジ */}
                                     {item.key === "create" && canCreatePosts && (
                                         <motion.div 
                                             animate={{ scale: [1, 1.2, 1] }}
                                             transition={{ duration: 2, repeat: Infinity }}
-                                            className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-pink-500 rounded-full border-2 border-white"
+                                            className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white shadow-lg"
                                         />
                                     )}
                                     {item.key === "dashboard" && canAccessDashboard && (
                                         <motion.div 
                                             animate={{ scale: [1, 1.2, 1] }}
                                             transition={{ duration: 2, repeat: Infinity }}
-                                            className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-purple-500 rounded-full border-2 border-white"
+                                            className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full border-2 border-white shadow-lg"
                                         />
                                     )}
                                 </motion.div>
+                                
                                 <span 
-                                    className={`${item.key === 'dashboard' ? 'text-[6px]' : 'text-[10px]'} font-medium text-center transition-colors duration-200 whitespace-nowrap ${
-                                        isActive ? "text-pink-500" : "text-gray-400"
+                                    className={`text-[10px] font-semibold text-center transition-colors duration-200 whitespace-nowrap ${
+                                        isActive ? "text-blue-600" : "text-gray-500"
                                     }`}
                                 >
-                                    {t(`navigation.${item.key}`)}
+                                    {item.label}
                                 </span>
                             </motion.button>
                         );
