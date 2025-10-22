@@ -1062,33 +1062,48 @@ const ProfilePage = () => {
                                     </motion.div>
                                 )}
                                 <div className="relative z-10">
-                                    <div className="flex items-start justify-between mb-3">
-                                        <div>
-                                            <h4 className="font-black text-xl bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent flex items-center mb-2">
-                                                {plan.emoji && <span className="mr-2 text-2xl">{plan.emoji}</span>}
-                                                {plan.title}
-                                            </h4>
-                                            <div className="flex items-center text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full inline-flex">
-                                                <Video className="w-3 h-3 mr-1" />
-                                                {plan.posts}コース
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-col items-end gap-2">
-                                            <div className="text-right">
-                                                <div className="font-black text-3xl bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">{calculateTotalPrice(plan.price)}</div>
-                                                <div className="text-xs text-blue-500 font-medium mt-1">税・手数料込</div>
-                                            </div>
-                                            <motion.button
-                                                whileHover={{ scale: 1.05 }}
-                                                whileTap={{ scale: 0.95 }}
-                                                className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-full font-bold shadow-lg text-sm"
-                                                data-testid={`button-subscribe-${plan.id}`}
-                                            >
-                                                加入する
-                                            </motion.button>
+                                    <div className="mb-4">
+                                        <h4 className="font-black text-xl bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent flex items-center mb-2">
+                                            {plan.emoji && <span className="mr-2 text-2xl">{plan.emoji}</span>}
+                                            {plan.name || plan.title}
+                                        </h4>
+                                        <div className="flex items-center text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full inline-flex">
+                                            <Video className="w-3 h-3 mr-1" />
+                                            すべてのコースにアクセス
                                         </div>
                                     </div>
-                                    <p className="text-sm text-blue-900 leading-relaxed mt-3">{plan.description}</p>
+                                    
+                                    <p className="text-sm text-blue-900 leading-relaxed mb-4">{plan.description}</p>
+                                    
+                                    {plan.features && plan.features.length > 0 && (
+                                        <div className="mb-4 space-y-2">
+                                            {plan.features.map((feature, idx) => (
+                                                <div key={idx} className="flex items-center text-sm text-blue-800">
+                                                    <CheckCircle className="w-4 h-4 mr-2 text-blue-500" />
+                                                    {feature}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                    
+                                    <div className="flex items-center justify-between pt-4 border-t border-blue-100">
+                                        <div className="text-left">
+                                            <div className="font-black text-3xl bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">{calculateTotalPrice(plan.price)}</div>
+                                            <div className="text-xs text-blue-500 font-medium mt-1">税・手数料込 / 月</div>
+                                        </div>
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                handlePlanConfirm(plan.id);
+                                            }}
+                                            className="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-3 rounded-full font-bold shadow-lg text-sm"
+                                            data-testid={`button-subscribe-${plan.id}`}
+                                        >
+                                            加入する
+                                        </motion.button>
+                                    </div>
                                 </div>
                             </motion.div>
                         ))}
