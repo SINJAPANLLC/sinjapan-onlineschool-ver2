@@ -176,12 +176,8 @@ const AccountPage = () => {
         >
           <div className="flex items-center gap-4 mb-6">
             <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-4 border-white/30 shadow-xl">
-              {currentUser?.photoURL ? (
-                <img
-                  src={currentUser.photoURL}
-                  alt="Profile"
-                  className="w-full h-full rounded-full object-cover"
-                />
+              {isCreator ? (
+                <GraduationCap className="w-10 h-10" />
               ) : (
                 <User className="w-10 h-10" />
               )}
