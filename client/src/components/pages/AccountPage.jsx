@@ -175,13 +175,6 @@ const AccountPage = () => {
           className="max-w-6xl mx-auto"
         >
           <div className="flex items-center gap-4 mb-6">
-            <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center border-4 border-white/30 shadow-xl">
-              {isCreator ? (
-                <GraduationCap className="w-10 h-10" />
-              ) : (
-                <User className="w-10 h-10" />
-              )}
-            </div>
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-1">
                 <h1 className="text-2xl font-bold" data-testid="text-username">
