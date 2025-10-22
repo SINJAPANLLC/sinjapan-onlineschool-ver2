@@ -124,11 +124,11 @@ const GenrePage = () => {
             bookmarks: 788,
             timeAgo: '1 day ago',
             type: 'video',
-            thumbnail: '/logo-school.jpg',
+            thumbnail: 'https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=400&h=300&fit=crop',
             user: {
                 id: 'creator_1',
                 name: '姫木(ナン)/TOKYO',
-                avatar: '/logo-school.jpg'
+                avatar: 'https://i.pravatar.cc/150?img=1'
             }
         },
         {
@@ -139,7 +139,7 @@ const GenrePage = () => {
             bookmarks: 633,
             timeAgo: '1 day ago',
             type: 'video',
-            thumbnail: '/logo-school.jpg',
+            thumbnail: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=300&fit=crop',
             user: {
                 id: 'creator_2',
                 name: 'じじのハメ撮り...',
@@ -154,7 +154,7 @@ const GenrePage = () => {
             bookmarks: 498,
             timeAgo: '2 days ago',
             type: 'video',
-            thumbnail: '/logo-school.jpg',
+            thumbnail: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=300&fit=crop',
             user: {
                 id: 'creator_3',
                 name: '人気講師 A',
@@ -169,7 +169,7 @@ const GenrePage = () => {
             bookmarks: 387,
             timeAgo: '3 days ago',
             type: 'video',
-            thumbnail: '/logo-school.jpg',
+            thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
             user: {
                 id: 'creator_4',
                 name: '人気講師 B',

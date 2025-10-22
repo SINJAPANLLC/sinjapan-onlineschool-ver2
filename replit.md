@@ -40,6 +40,7 @@ The platform is built with a React frontend, leveraging Vite for tooling, Tailwi
 *   **管理者ログイン修正**: AdminLogin.jsxでHTTPメソッドが誤って`'COURSE'`になっていた問題を修正。`'POST'`に変更し、管理者ログインが正常に動作するようになりました。
 *   **Square決済エラー修正**: SQUARE_LOCATION_IDをオプショナルに変更し、サンドボックス環境での動作を改善。
 *   **ログアウト機能追加**: AuthContextにlogout関数を追加し、完全なログアウトハンドラーを実装。ユーザーのオンラインステータスを適切に更新。
+*   **サムネイル画像表示修正**: Home.jsx、RankingPage.jsx、GenreDataPage.jsxのサンプルデータで、ローカル画像パス（`/logo-school.jpg`）をUnsplashとPravatar.ccのプレースホルダーURLに変更。すべてのコースサムネイルとアバター画像が正しく表示されるようになりました。
 
 ### New Features
 *   **CourseDetailPage実装**: `/course/:id`ルートに完全なコース詳細ページを実装しました。
