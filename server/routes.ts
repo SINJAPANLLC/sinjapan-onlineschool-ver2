@@ -8,12 +8,12 @@ import { ObjectStorageService } from "./objectStorage";
 
 // Initialize Stripe with secret key from environment variables
 // Reference: blueprint:javascript_stripe integration
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
-}
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2025-09-30.clover",
-});
+// Make Stripe optional - only initialize if key is provided
+const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: "2025-09-30.clover",
+    })
+  : null;
 
 // Ensure SESSION_SECRET is available (required for secure session tokens)
 // Fail fast if SESSION_SECRET is not configured
@@ -537,6 +537,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Reference: blueprint:javascript_stripe integration
   app.post("/api/create-payment-intent", async (req, res) => {
     try {
+      if (!stripe) {
+        return res.status(503).json({ error: "Payment service not configured" });
+      }
+
       const { amount, currency = "jpy", planId, planName } = req.body;
       
       // Validate amount
@@ -828,6 +832,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Reference: blueprint:javascript_stripe integration
   app.post("/api/create-subscription-checkout", async (req, res) => {
     try {
+      if (!stripe) {
+        return res.status(503).json({ error: "Payment service not configured" });
+      }
+
       const { planId, planTitle, planPrice, creatorId, creatorName } = req.body;
 
       if (!planId || !planTitle || !planPrice || !creatorId) {
@@ -885,6 +893,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Reference: blueprint:javascript_stripe integration
   app.post("/api/create-subscription-payment-intent", async (req, res) => {
     try {
+      if (!stripe) {
+        return res.status(503).json({ error: "Payment service not configured" });
+      }
+
       const { planId, planTitle, planPrice, creatorId, creatorName } = req.body;
 
       if (!planId || !planTitle || !planPrice || !creatorId) {
