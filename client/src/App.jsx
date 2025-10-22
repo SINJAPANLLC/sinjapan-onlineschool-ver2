@@ -39,6 +39,7 @@ import PurchaseHistoryPage from './components/pages/PurchaseHistoryPage';
 import CouponListPage from './components/pages/CouponListPage';
 import CreatorRankingPage from './components/pages/CreatorRankingPage';
 import ActivePlansPage from './components/pages/ActivePlansPage';
+import CreatePlanPage from './components/pages/CreatePlanPage';
 import MyPostsPage from './components/pages/MyPostsPage';
 import PostCommentsPage from './components/pages/PostCommentsPage';
 import SalesManagementPage from './components/pages/SalesManagementPage';
@@ -167,6 +168,7 @@ const AppRoutes = () => {
       <Route path="/coupons" element={<ProtectedRoute><CouponListPage /></ProtectedRoute>} />
       <Route path="/creator-ranking" element={<ProtectedRoute><CreatorRankingPage /></ProtectedRoute>} />
       <Route path="/active-plans" element={<ProtectedRoute><ActivePlansPage /></ProtectedRoute>} />
+      <Route path="/create-plan" element={<ProtectedRoute><CreatePlanPage /></ProtectedRoute>} />
       <Route path="/my-posts" element={<ProtectedRoute><MyPostsPage /></ProtectedRoute>} />
       <Route path="/post-comments" element={<ProtectedRoute><PostCommentsPage /></ProtectedRoute>} />
       <Route path="/sales-management" element={<ProtectedRoute><SalesManagementPage /></ProtectedRoute>} />

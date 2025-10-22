@@ -29,7 +29,7 @@ import {
 import BottomNavigationWithCreator from '../BottomNavigationWithCreator';
 import { useAuth } from '../../context/AuthContext';
 import { db } from '../../firebase';
-import { doc, getDoc, collection, query, where, getDocs, updateDoc, increment, arrayUnion, arrayRemove, deleteDoc, orderBy, limit } from 'firebase/firestore';
+import { doc, getDoc, collection, query, where, getDocs, updateDoc, increment, arrayUnion, arrayRemove, deleteDoc, orderBy, limit, setDoc, serverTimestamp } from 'firebase/firestore';
 
 // Initialize Stripe - only if public key is configured
 const stripePromise = import.meta.env.VITE_STRIPE_PUBLIC_KEY 
@@ -74,7 +74,7 @@ const PaymentForm = ({ plan, onSuccess, onCancel }) => {
                 setIsProcessing(false);
             } else if (paymentIntent && paymentIntent.status === 'succeeded') {
                 // Payment successful
-                onSuccess();
+                onSuccess(plan);
             } else {
                 setErrorMessage('決済の処理中です。しばらくお待ちください。');
                 setIsProcessing(false);
@@ -182,10 +182,22 @@ const ProfilePage = () => {
                             following: userData.followingCount || 0
                         },
                         genreRankings: userData.genreRankings || [],
-                        subscriptionPlans: userData.subscriptionPlans || []
+                        subscriptionPlans: []
                     });
 
-                    setSubscriptionPlans(userData.subscriptionPlans || []);
+                    // Fetch subscription plans from subcollection
+                    try {
+                        const plansRef = collection(db, 'users', userId, 'subscriptionPlans');
+                        const plansSnapshot = await getDocs(plansRef);
+                        const plans = plansSnapshot.docs.map(doc => ({
+                            id: doc.id,
+                            ...doc.data()
+                        }));
+                        setSubscriptionPlans(plans);
+                    } catch (error) {
+                        console.error('Error fetching subscription plans:', error);
+                        setSubscriptionPlans([]);
+                    }
                     
                     // フォロー状態を確認
                     if (currentUser && currentUser.uid !== userId) {
@@ -473,11 +485,39 @@ const ProfilePage = () => {
         }
     };
 
-    const handlePaymentSuccess = () => {
-        alert('決済が完了しました！サブスクリプションが有効になりました。');
-        setShowPlanModal(null);
-        setClientSecret('');
-        window.location.reload();
+    const handlePaymentSuccess = async (planData) => {
+        if (!currentUser || !planData) return;
+
+        try {
+            // Save subscription to user's subscriptions subcollection
+            const subscriptionRef = doc(db, 'users', currentUser.uid, 'subscriptions', planData.planId);
+            await setDoc(subscriptionRef, {
+                instructorId: planData.creatorId,
+                instructorName: profileData?.name || 'Unknown',
+                planId: planData.planId,
+                planName: planData.planName,
+                price: planData.priceValue,
+                status: 'active',
+                startDate: serverTimestamp(),
+                nextBillingDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+                createdAt: serverTimestamp()
+            });
+
+            // Update instructor's plan subscriber count
+            const instructorPlanRef = doc(db, 'users', planData.creatorId, 'subscriptionPlans', planData.planId);
+            await updateDoc(instructorPlanRef, {
+                subscribers: increment(1),
+                revenue: increment(planData.priceValue)
+            });
+
+            alert('✅ 決済が完了しました！サブスクリプションが有効になりました。');
+            setShowPlanModal(null);
+            setClientSecret('');
+            window.location.reload();
+        } catch (error) {
+            console.error('Error saving subscription:', error);
+            alert('⚠️ 決済は完了しましたが、サブスクリプション情報の保存に失敗しました。サポートにお問い合わせください。');
+        }
     };
 
     const handlePaymentCancel = () => {
@@ -1312,7 +1352,14 @@ const ProfilePage = () => {
                                                     }}
                                                 >
                                                     <PaymentForm
-                                                        plan={{ ...plan, total, creatorId: profileData.id }}
+                                                        plan={{ 
+                                                            ...plan, 
+                                                            total, 
+                                                            creatorId: profileData.id,
+                                                            planId: plan.id,
+                                                            planName: plan.name,
+                                                            priceValue: basePrice
+                                                        }}
                                                         onSuccess={handlePaymentSuccess}
                                                         onCancel={handlePaymentCancel}
                                                     />

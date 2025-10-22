@@ -1,19 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Plus, Edit3, Trash2, Users, DollarSign, Calendar, Eye, EyeOff, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import BottomNavigationWithCreator from '../BottomNavigationWithCreator';
+import { useAuth } from '../../context/AuthContext';
+import { db } from '../../firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 const ActivePlansPage = () => {
   const navigate = useNavigate();
+  const { currentUser } = useAuth();
   const [showInactive, setShowInactive] = useState(false);
+  const [plans, setPlans] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const plans = [
-    { id: 1, name: 'ベーシックプラン', price: 1980, subscribers: 1250, revenue: 2475000, status: 'active', description: '基本的なコンテンツを提供するプラン', features: ['月5本の動画コース', 'DM機能', '基本サポート'], createdAt: '2024-01-15', lastUpdated: '2024-01-20' },
-    { id: 2, name: 'プレミアムプラン', price: 3980, subscribers: 850, revenue: 3383000, status: 'active', description: '高品質なコンテンツと特別な特典', features: ['月10本の動画コース', 'DM機能', '優先サポート', '限定コンテンツ'], createdAt: '2024-01-10', lastUpdated: '2024-01-18' },
-    { id: 3, name: 'VIPプラン', price: 5980, subscribers: 420, revenue: 2511600, status: 'active', description: '最高級のコンテンツと専用サービス', features: ['無制限動画コース', 'DM機能', '24時間サポート', '限定コンテンツ', '個別相談'], createdAt: '2024-01-05', lastUpdated: '2024-01-22' },
-    { id: 4, name: 'テストプラン', price: 500, subscribers: 0, revenue: 0, status: 'inactive', description: 'テスト用のプラン', features: ['テスト機能'], createdAt: '2024-01-25', lastUpdated: '2024-01-25' }
-  ];
+  // Fetch plans from Firestore
+  useEffect(() => {
+    const fetchPlans = async () => {
+      if (!currentUser) {
+        navigate('/login');
+        return;
+      }
+
+      try {
+        setLoading(true);
+        const plansRef = collection(db, 'users', currentUser.uid, 'subscriptionPlans');
+        const plansSnapshot = await getDocs(plansRef);
+        
+        const fetchedPlans = plansSnapshot.docs.map(doc => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            name: data.name || 'プラン名未設定',
+            price: data.priceValue || 0,
+            subscribers: data.subscribers || 0,
+            revenue: data.revenue || 0,
+            status: data.status || 'active',
+            description: data.description || '',
+            features: data.features || [],
+            createdAt: data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleDateString('ja-JP') : '不明',
+            lastUpdated: data.updatedAt ? new Date(data.updatedAt.seconds * 1000).toLocaleDateString('ja-JP') : '不明'
+          };
+        });
+        
+        setPlans(fetchedPlans);
+      } catch (error) {
+        console.error('Error fetching plans:', error);
+        alert('プランの取得に失敗しました');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPlans();
+  }, [currentUser, navigate]);
 
   const activePlans = plans.filter(plan => plan.status === 'active');
   const inactivePlans = plans.filter(plan => plan.status === 'inactive');
@@ -43,6 +83,18 @@ const ActivePlansPage = () => {
 
   const totalRevenue = activePlans.reduce((sum, plan) => sum + plan.revenue, 0);
   const totalSubscribers = activePlans.reduce((sum, plan) => sum + plan.subscribers, 0);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">

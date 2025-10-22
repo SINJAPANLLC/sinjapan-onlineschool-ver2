@@ -13,7 +13,9 @@ import {
     ChevronDown,
     Film,
     Maximize,
-    Minimize
+    Minimize,
+    Lock,
+    User
 } from 'lucide-react';
 import BottomNavigationWithCreator from '../BottomNavigationWithCreator';
 import { useUserInteractions } from '../../hooks/useUserInteractions';
@@ -57,6 +59,8 @@ const VideoPage = () => {
     const [loadingComments, setLoadingComments] = useState(false);
     const [showOptionsModal, setShowOptionsModal] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+    const [hasSubscription, setHasSubscription] = useState(false);
+    const [checkingSubscription, setCheckingSubscription] = useState(true);
     const containerRef = useRef(null);
     const { currentUser } = useAuth();
 
@@ -147,6 +151,37 @@ const VideoPage = () => {
                         tags: postData.tags || [],
                         userId: postData.userId
                     });
+                    
+                    // Check subscription access
+                    setCheckingSubscription(true);
+                    if (currentUser) {
+                        // Allow access if viewing own content
+                        if (currentUser.uid === postData.userId) {
+                            setHasSubscription(true);
+                            setCheckingSubscription(false);
+                        } else {
+                            // Check if user has active subscription to this instructor
+                            try {
+                                const subscriptionsRef = collection(db, 'users', currentUser.uid, 'subscriptions');
+                                const subscriptionsSnapshot = await getDocs(subscriptionsRef);
+                                
+                                const hasActiveSubscription = subscriptionsSnapshot.docs.some(doc => {
+                                    const sub = doc.data();
+                                    return sub.instructorId === postData.userId && sub.status === 'active';
+                                });
+                                
+                                setHasSubscription(hasActiveSubscription);
+                            } catch (error) {
+                                console.error('Error checking subscription:', error);
+                                setHasSubscription(false);
+                            } finally {
+                                setCheckingSubscription(false);
+                            }
+                        }
+                    } else {
+                        setHasSubscription(false);
+                        setCheckingSubscription(false);
+                    }
                     
                     // 視聴履歴を保存（ログイン済みユーザーのみ）
                     if (currentUser) {
@@ -505,37 +540,85 @@ const VideoPage = () => {
 
                 {/* Main Content */}
                 <div className="w-full h-full relative">
-                    {/* Background Video/Image */}
-                    <div className="absolute inset-0">
-                        {videoData.type === 'video' ? (
-                            <video
-                                ref={videoRef}
-                                src={videoData.videoUrl}
-                                poster={videoData.thumbnail}
-                                className={`w-full h-full ${isVerticalVideo ? 'object-cover' : 'object-contain'}`}
-                                loop
-                                playsInline
-                                muted={isMuted}
-                                preload="auto"
-                                onLoadedMetadata={(e) => {
-                                    const video = e.target;
-                                    setIsVerticalVideo(video.videoHeight > video.videoWidth);
-                                }}
-                                onClick={toggleVideoPlayback}
-                                data-testid="video-player"
+                    {checkingSubscription ? (
+                        /* Checking subscription status */
+                        <div className="absolute inset-0 bg-black flex items-center justify-center">
+                            <motion.div
+                                animate={{ rotate: 360 }}
+                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full"
                             />
-                        ) : (
-                            <img
-                                src={videoData.imageUrl}
-                                alt={videoData.title}
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                    console.error('Image load error:', e);
-                                    e.target.src = '/logo-school.jpg';
-                                }}
-                            />
-                        )}
-                    </div>
+                        </div>
+                    ) : !hasSubscription ? (
+                        /* Subscription required screen */
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 flex items-center justify-center p-6">
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="text-center"
+                            >
+                                <motion.div
+                                    animate={{ scale: [1, 1.1, 1] }}
+                                    transition={{ duration: 2, repeat: Infinity }}
+                                    className="mb-6"
+                                >
+                                    <Lock className="w-20 h-20 text-white mx-auto" />
+                                </motion.div>
+                                <h2 className="text-white text-2xl font-bold mb-3">
+                                    このコンテンツは<br />サブスクリプション限定です
+                                </h2>
+                                <p className="text-white/80 text-sm mb-6">
+                                    講師のサブスクリプションに加入すると<br />
+                                    すべてのコースを視聴できます
+                                </p>
+                                <motion.button
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    onClick={() => navigate(`/profile/${videoData.userId}`)}
+                                    className="bg-white text-blue-600 px-8 py-3 rounded-xl font-bold shadow-lg flex items-center gap-2 mx-auto"
+                                    data-testid="button-subscribe"
+                                >
+                                    <User className="w-5 h-5" />
+                                    講師のプロフィールを見る
+                                </motion.button>
+                            </motion.div>
+                        </div>
+                    ) : (
+                        /* Video content (has subscription) */
+                        <>
+                            {/* Background Video/Image */}
+                            <div className="absolute inset-0">
+                                {videoData.type === 'video' ? (
+                                    <video
+                                        ref={videoRef}
+                                        src={videoData.videoUrl}
+                                        poster={videoData.thumbnail}
+                                        className={`w-full h-full ${isVerticalVideo ? 'object-cover' : 'object-contain'}`}
+                                        loop
+                                        playsInline
+                                        muted={isMuted}
+                                        preload="auto"
+                                        onLoadedMetadata={(e) => {
+                                            const video = e.target;
+                                            setIsVerticalVideo(video.videoHeight > video.videoWidth);
+                                        }}
+                                        onClick={toggleVideoPlayback}
+                                        data-testid="video-player"
+                                    />
+                                ) : (
+                                    <img
+                                        src={videoData.imageUrl}
+                                        alt={videoData.title}
+                                        className="w-full h-full object-cover"
+                                        onError={(e) => {
+                                            console.error('Image load error:', e);
+                                            e.target.src = '/logo-school.jpg';
+                                        }}
+                                    />
+                                )}
+                            </div>
+                        </>
+                    )}
 
                     {/* Center Play Button for videos */}
                     {videoData.type === 'video' && !isVideoPlaying && (
