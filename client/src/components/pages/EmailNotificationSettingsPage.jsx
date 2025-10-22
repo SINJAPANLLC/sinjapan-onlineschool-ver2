@@ -63,7 +63,7 @@ const EmailNotificationSettingsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full transition-colors" data-testid="button-back">
           <ArrowLeft size={24} />
@@ -80,7 +80,7 @@ const EmailNotificationSettingsPage = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl p-6 shadow-xl border-2 border-blue-100">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">通知設定の概要</h2>
-            <div className="flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-purple-100 px-4 py-2 rounded-full border border-blue-200">
+            <div className="flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-blue-100 px-4 py-2 rounded-full border border-blue-200">
               <Bell className="w-5 h-5 text-blue-600" />
               <span className="text-sm font-bold text-blue-700">
                 {Object.values(notifications).filter(Boolean).length} / {Object.keys(notifications).length} 有効
@@ -94,7 +94,7 @@ const EmailNotificationSettingsPage = () => {
             <motion.div key={item.id} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.05 }} whileHover={{ scale: 1.02, x: 5 }} className="bg-white border-2 border-blue-100 rounded-2xl p-5 shadow-lg">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                  <motion.div animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }} className="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center border-2 border-blue-200">
+                  <motion.div animate={{ y: [0, -3, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: index * 0.2 }} className="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-100 rounded-full flex items-center justify-center border-2 border-blue-200">
                     <item.icon className="w-6 h-6 text-blue-600" />
                   </motion.div>
                   <div className="flex-1">
@@ -136,7 +136,7 @@ const EmailNotificationSettingsPage = () => {
           )}
         </motion.button>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-gradient-to-br from-blue-100 to-blue-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden">
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
           <div className="flex items-start space-x-4 relative z-10">
             <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>

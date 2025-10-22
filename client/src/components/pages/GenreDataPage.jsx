@@ -7,14 +7,14 @@ import { useUserInteractions } from '../../hooks/useUserInteractions';
 import { useUserStats } from '../../context/UserStatsContext';
 
 export const genreData = [
-    { name: '運営Pik UP', count: '410,177 posts', color: 'from-blue-500 to-purple-600' },
-    { name: 'ハメ撮り', count: '147,577 posts', color: 'from-purple-500 to-indigo-600' },
+    { name: '運営Pik UP', count: '410,177 posts', color: 'from-blue-500 to-blue-600' },
+    { name: 'ハメ撮り', count: '147,577 posts', color: 'from-blue-500 to-indigo-600' },
     { name: 'オナニー', count: '104,474 posts', color: 'from-red-500 to-blue-600' },
     { name: 'フェラチオ', count: '96,852 posts', color: 'from-orange-500 to-red-600' },
     { name: '複数プレイ', count: '83,925 posts', color: 'from-green-500 to-teal-600' },
-    { name: '人妻', count: '72,199 posts', color: 'from-blue-500 to-purple-600' },
+    { name: '人妻', count: '72,199 posts', color: 'from-blue-500 to-blue-600' },
     { name: '潮吹き', count: '65,989 posts', color: 'from-blue-500 to-red-600' },
-    { name: 'アブノーマル', count: '60,114 posts', color: 'from-purple-500 to-blue-600' }
+    { name: 'アブノーマル', count: '60,114 posts', color: 'from-blue-500 to-blue-600' }
 ];
 
 const GenrePage = () => {
@@ -193,7 +193,7 @@ const GenrePage = () => {
                 <div className="flex items-center justify-between p-4 bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-10 shadow-sm">
                     <motion.button 
                         onClick={() => navigate(-1)} 
-                        className="p-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all"
+                        className="p-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-50 rounded-full transition-all"
                         whileHover={{ scale: 1.1, rotate: -10 }}
                         whileTap={{ scale: 0.9 }}
                     >

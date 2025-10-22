@@ -370,7 +370,7 @@ export default function Users() {
                                                 {user.followersCount}
                                             </span>
                                             <span className="text-gray-500">/</span>
-                                            <span className="px-2 py-1 bg-purple-100 text-purple-800 rounded-full font-medium">
+                                            <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full font-medium">
                                                 {user.followingCount}
                                             </span>
                                         </div>

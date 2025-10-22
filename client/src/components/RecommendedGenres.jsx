@@ -148,7 +148,7 @@ const RecommendedGenres = ({ likedItems, toggleLike }) => {
                     {t('genres.SeeMore')} 
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-rose-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.button>
         </motion.div>
     );

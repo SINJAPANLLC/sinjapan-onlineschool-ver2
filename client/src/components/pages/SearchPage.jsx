@@ -34,7 +34,7 @@ const SearchPage = () => {
             name: '山田太郎', 
             students: 5420, 
             courses: 12, 
-            avatar: '/logo192.png',
+            avatar: '/logo-school.jpg',
             expertise: 'プログラミング'
         },
         { 
@@ -42,7 +42,7 @@ const SearchPage = () => {
             name: '佐藤花子', 
             students: 4890, 
             courses: 8, 
-            avatar: '/logo192.png',
+            avatar: '/logo-school.jpg',
             expertise: 'デザイン'
         },
         { 
@@ -50,7 +50,7 @@ const SearchPage = () => {
             name: '田中美咲', 
             students: 3560, 
             courses: 15, 
-            avatar: '/logo192.png',
+            avatar: '/logo-school.jpg',
             expertise: 'ビジネス'
         },
     ];

@@ -277,7 +277,7 @@ const GenreNavigationSystem = () => {
             title: 'プレイ',
             description: '騎乗位、フェラチオなどプレイ内容に応じたジャンル',
             icon: Play,
-            color: 'text-purple-500'
+            color: 'text-blue-500'
         },
         {
             id: 'situation',
@@ -356,7 +356,7 @@ const GenreNavigationSystem = () => {
                             whileHover={{ scale: 1.1, rotate: -10 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => window.history.back()}
-                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all group"
+                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-50 rounded-full transition-all group"
                         >
                             <ArrowLeft className="w-5 h-5 text-gray-600 group-hover:text-blue-500 transition-colors" strokeWidth={2.5} />
                         </motion.button>

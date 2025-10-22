@@ -42,14 +42,14 @@ export const notifications = [
 ];
 
 export const genreData = [
-    { id: 1, nameKey: "amateur", count: 0, color: "from-blue-500 to-purple-600" },
-    { id: 2, nameKey: "personalFilming", count: 0, color: "from-purple-500 to-indigo-600" },
+    { id: 1, nameKey: "amateur", count: 0, color: "from-blue-500 to-blue-600" },
+    { id: 2, nameKey: "personalFilming", count: 0, color: "from-blue-500 to-indigo-600" },
     { id: 3, nameKey: "marriedWoman", count: 0, color: "from-red-500 to-blue-600" },
     { id: 4, nameKey: "largeBreasts", count: 0, color: "from-orange-500 to-red-600" },
     { id: 5, nameKey: "pervert", count: 0, color: "from-green-500 to-teal-600" },
-    { id: 6, nameKey: "homeVideo", count: 0, color: "from-blue-500 to-purple-600" },
+    { id: 6, nameKey: "homeVideo", count: 0, color: "from-blue-500 to-blue-600" },
     { id: 7, nameKey: "beautifulWoman", count: 0, color: "from-blue-500 to-red-600" },
-    { id: 8, nameKey: "beautifulBreasts", count: 0, color: "from-purple-500 to-blue-600" }
+    { id: 8, nameKey: "beautifulBreasts", count: 0, color: "from-blue-500 to-blue-600" }
 ];
 
 // ジャンル名のマッピング（nameKey → Firestoreのgenres配列に保存されている値）

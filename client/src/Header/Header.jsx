@@ -76,7 +76,7 @@ const Header = () => {
                         <motion.button
                             whileHover={{ scale: 1.1, rotate: 15 }}
                             whileTap={{ scale: 0.95 }}
-                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all relative group"
+                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-50 rounded-full transition-all relative group"
                             onClick={() => navigate('/settings/notifications')}
                             data-testid="button-notifications"
                         >
@@ -93,7 +93,7 @@ const Header = () => {
                         <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.95 }}
-                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all group"
+                            className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-50 rounded-full transition-all group"
                             onClick={() => navigate('/search')}
                             data-testid="button-search"
                         >

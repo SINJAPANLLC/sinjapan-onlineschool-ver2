@@ -156,7 +156,7 @@ const SocialFeedScreen = () => {
   const getLevelBadgeColor = (level) => {
     if (level === 'beginner') return 'bg-green-100 text-green-700';
     if (level === 'intermediate') return 'bg-blue-100 text-blue-700';
-    if (level === 'advanced') return 'bg-purple-100 text-purple-700';
+    if (level === 'advanced') return 'bg-blue-100 text-blue-700';
     return 'bg-gray-100 text-gray-700';
   };
 

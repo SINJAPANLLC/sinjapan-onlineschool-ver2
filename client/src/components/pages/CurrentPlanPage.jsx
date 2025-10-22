@@ -98,7 +98,7 @@ const CurrentPlanPage = () => {
   const totalAmount = totalBasePrice + totalServiceFee;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
@@ -137,7 +137,7 @@ const CurrentPlanPage = () => {
           </motion.div>
         ) : (
           <>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-6 border-2 border-blue-200 shadow-xl relative overflow-hidden">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-blue-100 rounded-2xl p-6 border-2 border-blue-200 shadow-xl relative overflow-hidden">
               <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
               <div className="flex items-center justify-between mb-4 relative z-10">
                 <div>
@@ -186,10 +186,10 @@ const CurrentPlanPage = () => {
                   )}
 
                   {creator.usage && (
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 border border-blue-100 mb-4">
+                    <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl p-4 border border-blue-100 mb-4">
                       <div className="grid grid-cols-3 gap-3 text-center">
                         <div><p className="text-2xl font-bold text-blue-600" data-testid={`text-videos-watched-${creator.id}`}>{creator.usage.videosWatched || 0}</p><p className="text-xs text-gray-600 font-medium">視聴数</p></div>
-                        <div><p className="text-2xl font-bold text-purple-600" data-testid={`text-messages-sent-${creator.id}`}>{creator.usage.messagesSent || 0}</p><p className="text-xs text-gray-600 font-medium">メッセージ</p></div>
+                        <div><p className="text-2xl font-bold text-blue-600" data-testid={`text-messages-sent-${creator.id}`}>{creator.usage.messagesSent || 0}</p><p className="text-xs text-gray-600 font-medium">メッセージ</p></div>
                         <div><p className="text-xs font-bold text-gray-900" data-testid={`text-last-activity-${creator.id}`}>{creator.usage.lastActivity || '-'}</p><p className="text-xs text-gray-600 font-medium">最終活動</p></div>
                       </div>
                     </div>

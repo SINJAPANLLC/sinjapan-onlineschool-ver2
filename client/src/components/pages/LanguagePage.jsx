@@ -23,7 +23,7 @@ const LanguageSettings = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -76,7 +76,7 @@ const LanguageSettings = () => {
                             </label>
                             <motion.div
                                 whileHover={{ scale: 1.02 }}
-                                className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border-2 border-blue-200"
+                                className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl border-2 border-blue-200"
                             >
                                 <CheckCircle className="w-6 h-6 text-blue-500" />
                                 <span className="font-bold text-gray-900 text-lg">
@@ -124,7 +124,7 @@ const LanguageSettings = () => {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.1 + index * 0.05 }}
                                 whileHover={{ scale: 1.05, x: 5 }}
-                                className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border border-blue-100 cursor-pointer"
+                                className="flex items-center space-x-3 p-4 bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl border border-blue-100 cursor-pointer"
                             >
                                 <motion.div
                                     animate={{ 
@@ -154,7 +154,7 @@ const LanguageSettings = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden"
+                    className="bg-gradient-to-br from-blue-100 to-blue-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden"
                 >
                     <motion.div
                         animate={{ 

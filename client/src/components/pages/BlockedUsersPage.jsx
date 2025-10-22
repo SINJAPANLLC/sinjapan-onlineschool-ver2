@@ -128,7 +128,7 @@ const BlockedUsersPage = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -301,7 +301,7 @@ const BlockedUsersPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden"
+          className="bg-gradient-to-br from-blue-100 to-blue-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden"
         >
           <motion.div
             animate={{ 

@@ -110,7 +110,7 @@ const FollowListPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center">
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
           <Users className="w-12 h-12 text-blue-500" />
         </motion.div>
@@ -119,7 +119,7 @@ const FollowListPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -276,7 +276,7 @@ const FollowListPage = () => {
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 0.1 + tagIndex * 0.05 }}
                           whileHover={{ scale: 1.1 }}
-                          className="px-3 py-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 text-xs font-bold rounded-full border border-blue-200"
+                          className="px-3 py-1 bg-gradient-to-r from-blue-100 to-blue-100 text-blue-700 text-xs font-bold rounded-full border border-blue-200"
                         >
                           #{tag}
                         </motion.span>

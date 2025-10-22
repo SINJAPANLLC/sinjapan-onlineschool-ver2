@@ -65,7 +65,7 @@ const AdminLoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center p-4 relative overflow-hidden">
             {/* Decorative background elements */}
             <motion.div
                 animate={{ 
@@ -90,7 +90,7 @@ const AdminLoginPage = () => {
                     ease: "easeInOut",
                     delay: 0.5
                 }}
-                className="absolute bottom-0 left-0 w-96 h-96 bg-purple-300/30 rounded-full blur-3xl"
+                className="absolute bottom-0 left-0 w-96 h-96 bg-blue-300/30 rounded-full blur-3xl"
             />
 
             {/* Floating sparkles */}

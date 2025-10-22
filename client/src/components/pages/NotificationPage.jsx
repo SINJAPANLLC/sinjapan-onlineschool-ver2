@@ -154,7 +154,7 @@ const NotificationPage = () => {
             <div className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-gray-200 p-4 flex items-center z-10 shadow-sm">
                 <motion.button 
                     onClick={() => navigate(-1)} 
-                    className="text-blue-600 mr-4 p-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all"
+                    className="text-blue-600 mr-4 p-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-50 rounded-full transition-all"
                     whileHover={{ scale: 1.1, rotate: -10 }}
                     whileTap={{ scale: 0.9 }}
                 >
@@ -204,7 +204,7 @@ const NotificationPage = () => {
                                 onClick={() => setCurrentPage(index)}
                                 className={`p-4 border-2 rounded-xl cursor-pointer transition-all shadow-sm ${
                                     currentPage === index 
-                                        ? 'border-blue-500 bg-gradient-to-r from-blue-50 to-rose-50' 
+                                        ? 'border-blue-500 bg-gradient-to-r from-blue-50 to-blue-50' 
                                         : 'border-gray-200 hover:border-blue-300'
                                 }`}
                                 initial={{ opacity: 0, x: -20 }}
@@ -280,7 +280,7 @@ const NotificationPage = () => {
                                 {currentNotification.notices.map((notice, idx) => (
                                     <motion.div 
                                         key={notice.id} 
-                                        className="flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-br from-blue-50 to-rose-50 border border-blue-200 rounded-full shadow-sm"
+                                        className="flex items-center space-x-2 px-3 py-1.5 bg-gradient-to-br from-blue-50 to-blue-50 border border-blue-200 rounded-full shadow-sm"
                                         initial={{ scale: 0 }}
                                         animate={{ scale: 1 }}
                                         transition={{ delay: 0.3 + idx * 0.1 }}

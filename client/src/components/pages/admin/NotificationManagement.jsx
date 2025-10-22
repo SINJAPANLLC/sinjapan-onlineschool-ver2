@@ -319,7 +319,7 @@ const NotificationManagement = () => {
                     <p className="text-sm text-gray-600 mb-1">タイプ</p>
                     <p className="text-lg font-semibold text-gray-900">{notification.type === 'system' ? 'システム' : notification.type === 'marketing' ? 'マーケティング' : '一般'}</p>
                   </div>
-                  <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                  <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
                     <p className="text-sm text-gray-600 mb-1">対象</p>
                     <p className="text-lg font-semibold text-gray-900">{notification.target === 'all' ? '全ユーザー' : '特定ユーザー'}</p>
                   </div>

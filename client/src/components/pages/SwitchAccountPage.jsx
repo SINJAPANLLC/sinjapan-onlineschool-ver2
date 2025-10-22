@@ -116,7 +116,7 @@ const SwitchAccountPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -177,7 +177,7 @@ const SwitchAccountPage = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleAddAccount}
-            className="w-full flex items-center justify-center space-x-3 p-5 border-2 border-dashed border-blue-300 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 hover:from-blue-100 hover:to-purple-100 transition-all"
+            className="w-full flex items-center justify-center space-x-3 p-5 border-2 border-dashed border-blue-300 rounded-xl bg-gradient-to-r from-blue-50 to-blue-50 hover:from-blue-100 hover:to-blue-100 transition-all"
             data-testid="button-add-account"
           >
             <Plus className="w-6 h-6 text-blue-600" />
@@ -336,7 +336,7 @@ const SwitchAccountPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden"
+          className="bg-gradient-to-br from-blue-100 to-blue-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden"
         >
           <motion.div
             animate={{ 

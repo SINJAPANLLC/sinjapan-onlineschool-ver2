@@ -89,7 +89,7 @@ const LoggedInAccountPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3 }}
-                className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20"
+                className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20"
             >
                 {/* User profile section with gradient */}
                 <div className="bg-gradient-to-r from-blue-500 to-blue-600 pt-6 pb-20 px-6 relative overflow-hidden">
@@ -282,7 +282,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/high-quality-plan')}
                                 data-testid="button-high-quality-plan"
                             >
@@ -292,7 +292,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/current-plan')}
                                 data-testid="button-current-plan"
                             >
@@ -302,7 +302,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/payment-methods')}
                                 data-testid="button-payment-methods"
                             >
@@ -312,7 +312,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/purchase-history')}
                                 data-testid="button-purchase-history"
                             >
@@ -322,7 +322,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300"
                                 onClick={() => handleNavigation('/coupons')}
                                 data-testid="button-coupons"
                             >
@@ -365,7 +365,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.02, y: -2 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="block w-full text-left px-5 py-4 bg-white border-2 border-blue-100 rounded-2xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 shadow-md transition-all duration-300 font-semibold"
+                                className="block w-full text-left px-5 py-4 bg-white border-2 border-blue-100 rounded-2xl hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 text-gray-800 shadow-md transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/register-creator')}
                                 data-testid="button-register-creator"
                             >
@@ -377,7 +377,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/creator-ranking')}
                                     data-testid="button-creator-ranking"
                                 >
@@ -386,7 +386,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/active-plans')}
                                     data-testid="button-active-plans"
                                 >
@@ -395,7 +395,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/my-posts')}
                                     data-testid="button-my-posts"
                                 >
@@ -404,7 +404,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/post-comments')}
                                     data-testid="button-post-comments"
                                 >
@@ -413,7 +413,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/sales-management')}
                                     data-testid="button-sales-management"
                                 >
@@ -422,7 +422,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/bank-account-registration')}
                                     data-testid="button-bank-account"
                                 >
@@ -431,7 +431,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/transfer-request')}
                                     data-testid="button-transfer-request"
                                 >
@@ -440,7 +440,7 @@ const LoggedInAccountPage = () => {
                                 <motion.button 
                                     whileHover={{ scale: 1.01, x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 text-gray-800 transition-all duration-300 font-semibold" 
+                                    className="block w-full text-left px-5 py-4 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 text-gray-800 transition-all duration-300 font-semibold" 
                                     onClick={() => handleNavigation('/coupon-management')}
                                     data-testid="button-coupon-management"
                                 >
@@ -480,14 +480,14 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/languages')}
                                 data-testid="button-language"
                             >
                                 <span>{t('account.settings.language')}</span>
                                 <ChevronRight className="w-5 h-5 text-blue-400" />
                             </motion.button>
-                            <div className="flex items-center justify-between py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800">
+                            <div className="flex items-center justify-between py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800">
                                 <span className="font-semibold">{t('account.settings.rejectMessage')}</span>
                                 <label className="inline-flex relative items-center cursor-pointer">
                                     <input type="checkbox" className="sr-only peer" />
@@ -498,7 +498,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/email-notifications')}
                                 data-testid="button-email-notifications"
                             >
@@ -508,7 +508,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/follow-list')}
                                 data-testid="button-following"
                             >
@@ -518,7 +518,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/blocked-users')}
                                 data-testid="button-blocked-users"
                             >
@@ -528,7 +528,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/personal-info')}
                                 data-testid="button-personal-info"
                             >
@@ -538,7 +538,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/phone-verification')}
                                 data-testid="button-phone-verification"
                             >
@@ -548,7 +548,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/email-verification')}
                                 data-testid="button-email-verification"
                             >
@@ -558,7 +558,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => navigate('/settings/notifications')}
                                 data-testid="button-notices"
                             >
@@ -599,7 +599,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/terms')}
                                 data-testid="button-terms"
                             >
@@ -609,7 +609,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/privacy')}
                                 data-testid="button-privacy"
                             >
@@ -619,7 +619,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/legal')}
                                 data-testid="button-legal"
                             >
@@ -629,7 +629,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/guidelines')}
                                 data-testid="button-guidelines"
                             >
@@ -639,7 +639,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/settings/help')}
                                 data-testid="button-help"
                             >
@@ -679,7 +679,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => handleNavigation('/switch-account')}
                                 data-testid="button-switch-account"
                             >
@@ -689,7 +689,7 @@ const LoggedInAccountPage = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.01, x: 5 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 w-full text-gray-800 transition-all duration-300 font-semibold"
+                                className="flex justify-between items-center py-4 px-5 hover:bg-gradient-to-r hover:from-blue-50 hover:to-blue-50 w-full text-gray-800 transition-all duration-300 font-semibold"
                                 onClick={() => setShowLogoutModal(true)}
                                 data-testid="button-logout"
                             >

@@ -35,7 +35,7 @@ const CreatorRegistrationCompletePage = () => {
     }, [navigate]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-gradient-to-b from-blue-50 via-white to-blue-50 flex items-center justify-center p-4">
             <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -43,7 +43,7 @@ const CreatorRegistrationCompletePage = () => {
                 className="max-w-2xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden"
             >
                 {/* Success Header */}
-                <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-center">
+                <div className="bg-gradient-to-r from-blue-500 to-blue-600 p-8 text-center">
                     <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
@@ -145,13 +145,13 @@ const CreatorRegistrationCompletePage = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8 }}
-                        className="bg-gradient-to-r from-purple-50 to-blue-50 p-6 rounded-2xl mb-6"
+                        className="bg-gradient-to-r from-blue-50 to-blue-50 p-6 rounded-2xl mb-6"
                     >
                         <div className="flex items-start space-x-3 mb-4">
-                            <Sparkles className="w-6 h-6 text-purple-600 flex-shrink-0 mt-0.5" />
+                            <Sparkles className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" />
                             <div>
-                                <h3 className="font-bold text-purple-900 mb-2">次のステップ</h3>
-                                <ul className="space-y-2 text-sm text-purple-800">
+                                <h3 className="font-bold text-blue-900 mb-2">次のステップ</h3>
+                                <ul className="space-y-2 text-sm text-blue-800">
                                     <li className="flex items-start">
                                         <span className="mr-2">•</span>
                                         <span>審査には通常<strong>1〜3営業日</strong>かかります</span>
@@ -186,7 +186,7 @@ const CreatorRegistrationCompletePage = () => {
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => navigate('/account')}
-                            className="w-full py-4 px-6 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-bold hover:from-blue-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+                            className="w-full py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-bold hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
                         >
                             <Home className="w-5 h-5" />
                             <span>アカウントページへ戻る</span>
@@ -205,10 +205,10 @@ const CreatorRegistrationCompletePage = () => {
 
                 {/* Decorative Elements */}
                 <div className="absolute top-0 right-0 -z-10 opacity-10">
-                    <div className="w-64 h-64 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full blur-3xl" />
+                    <div className="w-64 h-64 bg-gradient-to-br from-blue-500 to-blue-500 rounded-full blur-3xl" />
                 </div>
                 <div className="absolute bottom-0 left-0 -z-10 opacity-10">
-                    <div className="w-64 h-64 bg-gradient-to-tr from-purple-500 to-blue-500 rounded-full blur-3xl" />
+                    <div className="w-64 h-64 bg-gradient-to-tr from-blue-500 to-blue-500 rounded-full blur-3xl" />
                 </div>
             </motion.div>
         </div>

@@ -531,7 +531,7 @@ const VideoPage = () => {
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
                                     console.error('Image load error:', e);
-                                    e.target.src = '/logo192.png';
+                                    e.target.src = '/logo-school.jpg';
                                 }}
                             />
                         )}

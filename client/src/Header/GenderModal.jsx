@@ -95,7 +95,7 @@ const GenderSelectionModal = ({ isOpen, onClose, selectedGender, onGenderSelect,
                     <div className="mt-8 space-y-3">
                         <button
                             onClick={handleShowClick}
-                            className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 rounded-2xl font-bold text-lg hover:shadow-lg transform transition-all hover:scale-105 active:scale-95"
+                            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-2xl font-bold text-lg hover:shadow-lg transform transition-all hover:scale-105 active:scale-95"
                         >
                             {t('gender.show')}
                         </button>

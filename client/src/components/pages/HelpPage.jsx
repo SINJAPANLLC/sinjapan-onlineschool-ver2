@@ -37,7 +37,7 @@ const HelpPage = () => {
   const helpCategories = [
     { id: 'all', name: 'すべて', icon: HelpCircle, color: 'from-blue-500 to-blue-600' },
     { id: 'getting-started', name: 'はじめに', icon: BookOpen, color: 'from-green-500 to-green-600' },
-    { id: 'learning', name: '学習', icon: GraduationCap, color: 'from-purple-500 to-purple-600' },
+    { id: 'learning', name: '学習', icon: GraduationCap, color: 'from-blue-500 to-blue-600' },
     { id: 'instructor', name: '講師', icon: User, color: 'from-orange-500 to-orange-600' },
     { id: 'account', name: 'アカウント', icon: User, color: 'from-indigo-500 to-indigo-600' },
     { id: 'billing', name: '料金・支払い', icon: CreditCard, color: 'from-red-500 to-red-600' },

@@ -21,7 +21,7 @@ const FeaturedAdminPage = () => {
         {
             id: 1,
             name: "Jukiya",
-            avatar: "/logo192.png",
+            avatar: "/logo-school.jpg",
             likes: "33K",
             followers: "253K",
             isVerified: true
@@ -29,7 +29,7 @@ const FeaturedAdminPage = () => {
         {
             id: 2,
             name: "The daily life of a secret a...",
-            avatar: "/logo192.png",
+            avatar: "/logo-school.jpg",
             likes: "64.6K",
             followers: "101.6K",
             isVerified: false
@@ -37,7 +37,7 @@ const FeaturedAdminPage = () => {
         {
             id: 3,
             name: "Male -YUU- NTR with a b...",
-            avatar: "/logo192.png",
+            avatar: "/logo-school.jpg",
             likes: "56.0K",
             followers: "106.3K",
             isVerified: true
@@ -45,7 +45,7 @@ const FeaturedAdminPage = () => {
         {
             id: 4,
             name: "🔥🔥Secret Account Jap...",
-            avatar: "/logo192.png",
+            avatar: "/logo-school.jpg",
             likes: "254.4K",
             followers: "379.2K",
             isVerified: true
@@ -53,7 +53,7 @@ const FeaturedAdminPage = () => {
         {
             id: 5,
             name: "SNAPTOKYO",
-            avatar: "/logo192.png",
+            avatar: "/logo-school.jpg",
             likes: "186.8K",
             followers: "229.1K",
             isVerified: false
@@ -61,7 +61,7 @@ const FeaturedAdminPage = () => {
         {
             id: 6,
             name: "Squirting Rurutan🩵",
-            avatar: "/logo192.png",
+            avatar: "/logo-school.jpg",
             likes: "16.7K",
             followers: "118.5K",
             isVerified: true
@@ -153,7 +153,7 @@ const FeaturedAdminPage = () => {
                 duration: "00:06",
                 user: {
                     name: "Sakura",
-                    avatar: "/logo192.png",
+                    avatar: "/logo-school.jpg",
                     timeAgo: "3日前",
                     followers: 25300
                 },
@@ -167,7 +167,7 @@ const FeaturedAdminPage = () => {
                 duration: "49:30",
                 user: {
                     name: "Big Breasts Academy",
-                    avatar: "/logo192.png",
+                    avatar: "/logo-school.jpg",
                     timeAgo: "1日前",
                     followers: 101600
                 },
@@ -181,7 +181,7 @@ const FeaturedAdminPage = () => {
                 duration: "Limited",
                 user: {
                     name: "Yoga Teacher",
-                    avatar: "/logo192.png",
+                    avatar: "/logo-school.jpg",
                     timeAgo: "2日前",
                     followers: 78900
                 },
@@ -195,7 +195,7 @@ const FeaturedAdminPage = () => {
                 duration: "26:31",
                 user: {
                     name: "Kei",
-                    avatar: "/logo192.png",
+                    avatar: "/logo-school.jpg",
                     timeAgo: "1ヶ月前",
                     followers: 45200
                 },

@@ -87,7 +87,7 @@ const CreatorDashboard = () => {
             rating: data.rating || 0,
             reviews: data.reviews || 0,
             revenue: (data.price || 0) * (data.students || 0),
-            thumbnail: data.thumbnail || '/logo192.png',
+            thumbnail: data.thumbnail || '/logo-school.jpg',
             category: data.category || 'other',
             level: data.level || 'beginner',
             lessons: data.lessons?.length || 0,
@@ -269,8 +269,8 @@ const CreatorDashboard = () => {
             data-testid="stat-rating"
           >
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                <Star className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                <Star className="w-6 h-6 text-blue-600" />
               </div>
               <div className="flex-1">
                 <p className="text-sm text-gray-600">平均評価</p>

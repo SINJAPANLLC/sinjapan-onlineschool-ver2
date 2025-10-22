@@ -83,7 +83,7 @@ const Ranking = () => {
             bookmarks: 788,
             user: {
                 name: "軟派(ナンパ)TOKYO",
-                avatar: "/logo192.png"
+                avatar: "/logo-school.jpg"
             },
             thumbnail: thumbnailImages[0],
             badge: "NEW",
@@ -98,7 +98,7 @@ const Ranking = () => {
             bookmarks: 633,
             user: {
                 name: "じじのハメ撮り...",
-                avatar: "/logo192.png"
+                avatar: "/logo-school.jpg"
             },
             thumbnail: thumbnailImages[1],
             isNew: false,
@@ -112,7 +112,7 @@ const Ranking = () => {
             bookmarks: 3100,
             user: {
                 name: "一緒に働きませんか？",
-                avatar: "/logo192.png"
+                avatar: "/logo-school.jpg"
             },
             thumbnail: thumbnailImages[2],
             badge: "HOT",
@@ -127,7 +127,7 @@ const Ranking = () => {
             bookmarks: 528,
             user: {
                 name: "白豚",
-                avatar: "/logo192.png"
+                avatar: "/logo-school.jpg"
             },
             thumbnail: thumbnailImages[0],
             isNew: false,
@@ -141,7 +141,7 @@ const Ranking = () => {
             bookmarks: 480,
             user: {
                 name: "クリエイター5",
-                avatar: "/logo192.png"
+                avatar: "/logo-school.jpg"
             },
             thumbnail: thumbnailImages[1],
             isNew: true,
@@ -155,7 +155,7 @@ const Ranking = () => {
             bookmarks: 750,
             user: {
                 name: "クリエイター6",
-                avatar: "/logo192.png"
+                avatar: "/logo-school.jpg"
             },
             thumbnail: thumbnailImages[2],
             isNew: false,
@@ -261,7 +261,7 @@ const Ranking = () => {
                                             damping: 20,
                                             delay: index * 0.1 + 0.3 
                                         }}
-                                        className="absolute top-2 right-2 bg-gradient-to-r from-blue-500 to-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
+                                        className="absolute top-2 right-2 bg-gradient-to-r from-blue-500 to-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg"
                                     >
                                         <motion.span
                                             animate={{ scale: [1, 1.1, 1] }}

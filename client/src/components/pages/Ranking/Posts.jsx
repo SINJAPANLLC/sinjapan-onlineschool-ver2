@@ -1184,7 +1184,7 @@ const RankingCourses = ({ activeTimeFilter = 'Daily' }) => {
                     >
                         <Crown className="w-6 h-6 text-blue-500 fill-blue-500" />
                     </motion.div>
-                    <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">{title}</h2>
+                    <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">{title}</h2>
                 </div>
             </motion.div>
 
@@ -1276,7 +1276,7 @@ const RankingCourses = ({ activeTimeFilter = 'Daily' }) => {
                                     >
                                         <Crown className="w-6 h-6 text-blue-500 fill-blue-500" />
                                     </motion.div>
-                                    <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">{t('rankingPage.overallRanking')}</h2>
+                                    <h2 className="text-lg font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent">{t('rankingPage.overallRanking')}</h2>
                                 </div>
                                 <div className="text-xs text-gray-500 hidden sm:block">
                                     👉 スワイプ

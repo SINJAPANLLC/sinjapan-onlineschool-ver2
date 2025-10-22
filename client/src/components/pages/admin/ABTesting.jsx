@@ -346,7 +346,7 @@ const ABTesting = () => {
                       )}
                     </div>
                     <p className="text-gray-600 mb-3">{test.description}</p>
-                    <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-4 rounded-xl">
+                    <div className="bg-gradient-to-br from-blue-50 to-blue-50 p-4 rounded-xl">
                       <p className="text-sm font-medium text-gray-700 mb-1">仮説</p>
                       <p className="text-sm text-gray-600 italic">"{test.hypothesis}"</p>
                     </div>
@@ -423,7 +423,7 @@ const ABTesting = () => {
                     <p className="text-sm text-gray-600 mb-1">信頼度</p>
                     <p className="text-2xl font-bold text-gray-900">{test.confidence.toFixed(1)}%</p>
                   </div>
-                  <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                  <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
                     <p className="text-sm text-gray-600 mb-1">改善率</p>
                     <div className="flex items-center justify-center space-x-2">
                       {getImprovementIcon(test.improvement)}

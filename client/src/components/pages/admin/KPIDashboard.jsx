@@ -201,7 +201,7 @@ const KPIDashboard = () => {
       case 'revenue': return <DollarSign className="w-5 h-5 text-green-500" />;
       case 'users': return <Users className="w-5 h-5 text-blue-500" />;
       case 'engagement': return <Heart className="w-5 h-5 text-blue-500" />;
-      case 'conversion': return <Target className="w-5 h-5 text-purple-500" />;
+      case 'conversion': return <Target className="w-5 h-5 text-blue-500" />;
       default: return <BarChart3 className="w-5 h-5 text-gray-500" />;
     }
   };
@@ -373,7 +373,7 @@ const KPIDashboard = () => {
                     <p className="text-sm text-gray-600 mb-1">現在値</p>
                     <p className="text-2xl font-bold text-gray-900">{kpi.currentValue.toLocaleString()} {kpi.unit}</p>
                   </div>
-                  <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl">
+                  <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl">
                     <p className="text-sm text-gray-600 mb-1">目標値</p>
                     <p className="text-2xl font-bold text-gray-900">{kpi.targetValue.toLocaleString()} {kpi.unit}</p>
                   </div>

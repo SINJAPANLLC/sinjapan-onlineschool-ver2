@@ -73,7 +73,7 @@ const PurchaseHistoryPage = () => {
   const totalSpent = purchases.filter(p => p.status === 'completed').reduce((sum, p) => sum + p.amount, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
@@ -87,7 +87,7 @@ const PurchaseHistoryPage = () => {
       </motion.div>
 
       <div className="p-6 space-y-6">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-6 border-2 border-blue-200 shadow-xl relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-blue-100 rounded-2xl p-6 border-2 border-blue-200 shadow-xl relative overflow-hidden">
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
           <h2 className="text-xl font-bold text-blue-900 mb-4 relative z-10">購入統計</h2>
           <div className="flex items-center justify-between relative z-10">
@@ -139,7 +139,7 @@ const PurchaseHistoryPage = () => {
                 </div>
               </div>
               <div className="flex space-x-2">
-                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex-1 bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 py-2 rounded-xl font-bold text-sm hover:shadow-md transition-all flex items-center justify-center space-x-1" data-testid={`button-view-${purchase.id}`}>
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="flex-1 bg-gradient-to-r from-blue-100 to-blue-100 text-blue-700 py-2 rounded-xl font-bold text-sm hover:shadow-md transition-all flex items-center justify-center space-x-1" data-testid={`button-view-${purchase.id}`}>
                   <Eye className="w-4 h-4" />
                   <span>詳細</span>
                 </motion.button>
@@ -152,7 +152,7 @@ const PurchaseHistoryPage = () => {
           ))}
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-blue-100 to-blue-100 border-2 border-blue-200 rounded-2xl p-6">
           <div className="flex items-start space-x-4">
             <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
             <div>

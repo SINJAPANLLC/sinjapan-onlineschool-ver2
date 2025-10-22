@@ -47,7 +47,7 @@ const MyPostsPage = () => {
           id: doc.id,
           title: data.title || 'タイトルなし',
           description: data.description || '',
-          thumbnail: data.thumbnail || '/logo192.png',
+          thumbnail: data.thumbnail || '/logo-school.jpg',
           category: data.category || 'other',
           level: data.level || 'beginner',
           status: data.status || 'draft',

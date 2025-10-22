@@ -61,7 +61,7 @@ const CouponListPage = () => {
   const getCategoryColor = (category) => {
     switch (category) {
       case '新規会員': return 'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300';
-      case 'プラン': return 'bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 border-purple-300';
+      case 'プラン': return 'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300';
       case '特別': return 'bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border-blue-300';
       case '一般': return 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 border-gray-300';
       default: return 'bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800 border-gray-300';
@@ -78,7 +78,7 @@ const CouponListPage = () => {
   const expiredCoupons = coupons.filter(coupon => coupon.status === 'expired');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center z-10 shadow-lg">
         <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
           <ArrowLeft size={24} />
@@ -92,7 +92,7 @@ const CouponListPage = () => {
       </motion.div>
 
       <div className="p-6 space-y-6">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-6 border-2 border-blue-200 shadow-xl relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-gradient-to-br from-blue-100 to-blue-100 rounded-2xl p-6 border-2 border-blue-200 shadow-xl relative overflow-hidden">
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
           <div className="flex items-center justify-between relative z-10">
             <div>
@@ -124,7 +124,7 @@ const CouponListPage = () => {
                       <span className="flex items-center"><Clock className="w-4 h-4 mr-1" />残り{getDaysUntilExpiry(coupon.validUntil)}日</span>
                     </div>
                   </div>
-                  <div className="text-center bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl p-3 border-2 border-blue-200">
+                  <div className="text-center bg-gradient-to-br from-blue-100 to-blue-100 rounded-xl p-3 border-2 border-blue-200">
                     <div className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-blue-600 bg-clip-text text-transparent" data-testid={`text-discount-${coupon.id}`}>
                       {coupon.type === 'percentage' ? `${coupon.discount}%` : `¥${coupon.discount.toLocaleString()}`}
                     </div>
@@ -132,7 +132,7 @@ const CouponListPage = () => {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-3 border border-blue-100 mb-3">
+                <div className="bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl p-3 border border-blue-100 mb-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <Tag className="w-4 h-4 text-blue-500" />
@@ -170,7 +170,7 @@ const CouponListPage = () => {
           </div>
         )}
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="bg-gradient-to-br from-blue-100 to-blue-100 border-2 border-blue-200 rounded-2xl p-6">
           <div className="flex items-start space-x-4">
             <Sparkles className="w-6 h-6 text-blue-600 mt-1" />
             <div>

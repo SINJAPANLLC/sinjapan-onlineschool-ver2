@@ -341,7 +341,7 @@ export default function FeaturedPickupManagement() {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                      <div className="w-full h-full bg-gradient-to-br from-blue-100 to-blue-100 flex items-center justify-center">
                         <Star className="w-8 h-8 text-blue-400" />
                       </div>
                     )}

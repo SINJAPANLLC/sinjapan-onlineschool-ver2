@@ -137,7 +137,7 @@ const PersonalInfoPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 flex items-center justify-center">
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }}>
           <User className="w-12 h-12 text-blue-500" />
         </motion.div>
@@ -146,7 +146,7 @@ const PersonalInfoPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 pb-20">
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="sticky top-0 bg-gradient-to-r from-blue-500 to-blue-600 border-b border-blue-300 p-6 flex items-center justify-between z-10 shadow-lg">
         <div className="flex items-center">
           <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => navigate(-1)} className="text-white mr-4 p-2 hover:bg-white/20 rounded-full" data-testid="button-back">
@@ -196,7 +196,7 @@ const PersonalInfoPage = () => {
                   data-testid="input-displayName" 
                 />
               ) : (
-                <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl flex items-center font-semibold border border-blue-100">
+                <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl flex items-center font-semibold border border-blue-100">
                   <User className="w-4 h-4 mr-2 text-blue-500" />
                   {personalInfo.displayName || '未設定'}
                 </p>
@@ -216,7 +216,7 @@ const PersonalInfoPage = () => {
                     data-testid="input-lastName" 
                   />
                 ) : (
-                  <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl font-semibold border border-blue-100">
+                  <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl font-semibold border border-blue-100">
                     {personalInfo.lastName || '未設定'}
                   </p>
                 )}
@@ -234,7 +234,7 @@ const PersonalInfoPage = () => {
                     data-testid="input-firstName" 
                   />
                 ) : (
-                  <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl font-semibold border border-blue-100">
+                  <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl font-semibold border border-blue-100">
                     {personalInfo.firstName || '未設定'}
                   </p>
                 )}
@@ -255,7 +255,7 @@ const PersonalInfoPage = () => {
                   data-testid="input-birthDate" 
                 />
               ) : (
-                <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl flex items-center font-semibold border border-blue-100">
+                <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl flex items-center font-semibold border border-blue-100">
                   <Calendar className="w-4 h-4 mr-2 text-blue-500" />
                   {personalInfo.birthDate || '未設定'}
                 </p>
@@ -273,7 +273,7 @@ const PersonalInfoPage = () => {
                   <option value="prefer_not_to_say">回答しない</option>
                 </select>
               ) : (
-                <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl font-semibold border border-blue-100">
+                <p className="px-5 py-3 bg-gradient-to-r from-blue-50 to-blue-50 rounded-xl font-semibold border border-blue-100">
                   {personalInfo.gender === 'male' ? '男性' : personalInfo.gender === 'female' ? '女性' : personalInfo.gender === 'other' ? 'その他' : personalInfo.gender === 'prefer_not_to_say' ? '回答しない' : '未設定'}
                 </p>
               )}
@@ -310,7 +310,7 @@ const PersonalInfoPage = () => {
         )}
 
         {/* ヘルプ情報 */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-gradient-to-br from-blue-100 to-purple-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="bg-gradient-to-br from-blue-100 to-blue-100 border-2 border-blue-200 rounded-2xl p-6 relative overflow-hidden">
           <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute -top-10 -right-10 w-32 h-32 bg-white/30 rounded-full blur-2xl" />
           <div className="flex items-start space-x-4 relative z-10">
             <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 2, repeat: Infinity }}>

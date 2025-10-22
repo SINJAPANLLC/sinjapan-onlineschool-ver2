@@ -25,7 +25,7 @@ const PostLibrary = ({ likedItems }) => {
             label: t("postLibrary.saved"),
             count: stats.saved,
             key: 'saved',
-            gradient: 'from-blue-500 to-rose-500',
+            gradient: 'from-blue-500 to-blue-500',
             iconColor: 'text-blue-600'
         },
         {
@@ -33,7 +33,7 @@ const PostLibrary = ({ likedItems }) => {
             label: t("postLibrary.liked"),
             count: stats.liked,
             key: 'liked',
-            gradient: 'from-rose-400 to-blue-600',
+            gradient: 'from-blue-400 to-blue-600',
             iconColor: 'text-blue-600'
         },
         {
@@ -41,7 +41,7 @@ const PostLibrary = ({ likedItems }) => {
             label: t("postLibrary.viewingHistory"),
             count: stats.viewingHistory,
             key: 'viewingHistory',
-            gradient: 'from-blue-500 to-purple-500',
+            gradient: 'from-blue-500 to-blue-500',
             iconColor: 'text-blue-600'
         }
     ];

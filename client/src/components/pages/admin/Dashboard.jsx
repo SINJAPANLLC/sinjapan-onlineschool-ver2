@@ -102,7 +102,7 @@ const ActivityCard = ({ activity, index }) => {
       case 'course_created':
         return <BookOpen className="w-5 h-5 text-green-500" />;
       case 'enrollment':
-        return <Award className="w-5 h-5 text-purple-500" />;
+        return <Award className="w-5 h-5 text-blue-500" />;
       default:
         return <Activity className="w-5 h-5 text-gray-500" />;
     }
@@ -115,7 +115,7 @@ const ActivityCard = ({ activity, index }) => {
       case 'course_created':
         return 'from-green-400 to-green-600';
       case 'enrollment':
-        return 'from-purple-400 to-purple-600';
+        return 'from-blue-400 to-blue-600';
       default:
         return 'from-gray-400 to-gray-600';
     }
@@ -350,7 +350,7 @@ export default function Dashboard() {
           className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
         >
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 shadow-md flex items-center justify-center">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 shadow-md flex items-center justify-center">
               <Users className="w-6 h-6 text-white" />
             </div>
             <TrendingUp className="w-5 h-5 text-green-500" />

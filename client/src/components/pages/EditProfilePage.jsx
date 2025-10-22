@@ -36,7 +36,7 @@ const EditProfilePage = () => {
     isCreator: false
   });
 
-  const [avatar, setAvatar] = useState('/logo192.png');
+  const [avatar, setAvatar] = useState('/logo-school.jpg');
   const [coverImage, setCoverImage] = useState('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=200&fit=crop');
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -62,7 +62,7 @@ const EditProfilePage = () => {
             yearsOfExperience: userData.yearsOfExperience || '',
             isCreator: userData.isCreator || false
           });
-          setAvatar(userData.photoURL || userData.avatar || '/logo192.png');
+          setAvatar(userData.photoURL || userData.avatar || '/logo-school.jpg');
           setCoverImage(userData.coverImage || 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=200&fit=crop');
         }
       } catch (error) {

@@ -141,7 +141,7 @@ const Home = () => {
     const colors = {
       'プログラミング': 'from-blue-500 to-blue-600',
       '語学': 'from-green-500 to-green-600',
-      'データ分析': 'from-purple-500 to-purple-600',
+      'データ分析': 'from-blue-500 to-blue-600',
       'AI/機械学習': 'from-red-500 to-red-600',
       'デザイン': 'from-blue-500 to-blue-600'
     };

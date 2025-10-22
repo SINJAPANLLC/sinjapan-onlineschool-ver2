@@ -176,7 +176,7 @@ export default function Verification() {
     const getTypeColor = (type) => {
         switch (type) {
             case 'KYC': return 'text-blue-600 bg-blue-100';
-            case 'Age Check': return 'text-purple-600 bg-purple-100';
+            case 'Age Check': return 'text-blue-600 bg-blue-100';
             case 'Identity': return 'text-green-600 bg-green-100';
             case 'Business': return 'text-orange-600 bg-orange-100';
             default: return 'text-gray-600 bg-gray-100';

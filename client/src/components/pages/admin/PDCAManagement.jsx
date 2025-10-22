@@ -195,7 +195,7 @@ const PDCAManagement = () => {
       case 'planning': return 'bg-blue-100 text-blue-700';
       case 'doing': return 'bg-yellow-100 text-yellow-700';
       case 'checking': return 'bg-orange-100 text-orange-700';
-      case 'acting': return 'bg-purple-100 text-purple-700';
+      case 'acting': return 'bg-blue-100 text-blue-700';
       case 'completed': return 'bg-green-100 text-green-700';
       default: return 'bg-gray-100 text-gray-700';
     }
@@ -206,7 +206,7 @@ const PDCAManagement = () => {
       case 'Plan': return <Target className="w-5 h-5 text-blue-500" />;
       case 'Do': return <Play className="w-5 h-5 text-yellow-500" />;
       case 'Check': return <CheckSquare className="w-5 h-5 text-orange-500" />;
-      case 'Act': return <RotateCcw className="w-5 h-5 text-purple-500" />;
+      case 'Act': return <RotateCcw className="w-5 h-5 text-blue-500" />;
       default: return <Target className="w-5 h-5 text-gray-500" />;
     }
   };

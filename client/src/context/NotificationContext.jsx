@@ -78,8 +78,8 @@ export const NotificationProvider = ({ children }) => {
         const registration = await navigator.serviceWorker.ready;
         await registration.showNotification(notification.title, {
           body: notification.message,
-          icon: '/logo192.png',
-          badge: '/logo192.png',
+          icon: '/logo-school.jpg',
+          badge: '/logo-school.jpg',
           data: notification.data,
           tag: notification.id,
           requireInteraction: notification.priority === PRIORITY.URGENT,

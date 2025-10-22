@@ -232,7 +232,7 @@ const NotificationPage = () => {
                 <div className="flex items-center justify-between p-4 bg-white/95 backdrop-blur-md sticky top-0 z-10 border-b border-gray-200 shadow-sm">
                     <motion.button 
                         onClick={() => navigate(-1)} 
-                        className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all group"
+                        className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-50 rounded-full transition-all group"
                         whileHover={{ scale: 1.1, rotate: -10 }}
                         whileTap={{ scale: 0.9 }}
                     >
@@ -258,7 +258,7 @@ const NotificationPage = () => {
                     </div>
                     <motion.button 
                         onClick={deleteAllNotifications}
-                        className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all group"
+                        className="p-2.5 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-50 rounded-full transition-all group"
                         title="すべて削除"
                         whileHover={{ scale: 1.1, rotate: 10 }}
                         whileTap={{ scale: 0.9 }}

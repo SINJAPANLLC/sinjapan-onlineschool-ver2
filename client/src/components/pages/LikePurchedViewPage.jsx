@@ -379,7 +379,7 @@ const UserContentPage = () => {
                 <div className="flex items-center justify-between p-4 bg-white/95 backdrop-blur-md border-b border-gray-200 sticky top-0 z-10 shadow-sm">
                     <motion.button 
                         onClick={() => navigate(-1)} 
-                        className="p-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-rose-50 rounded-full transition-all"
+                        className="p-2 hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-50 rounded-full transition-all"
                         whileHover={{ scale: 1.1, rotate: -10 }}
                         whileTap={{ scale: 0.9 }}
                     >
