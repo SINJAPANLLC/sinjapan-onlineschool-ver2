@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { loadStripe } from '@stripe/stripe-js';
-import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import SquarePaymentForm from '../SquarePaymentForm';
 import { 
     ArrowLeft, 
     Share2, 
@@ -31,90 +30,6 @@ import { useAuth } from '../../context/AuthContext';
 import { db } from '../../firebase';
 import { doc, getDoc, collection, query, where, getDocs, updateDoc, increment, arrayUnion, arrayRemove, deleteDoc, orderBy, limit, setDoc, serverTimestamp } from 'firebase/firestore';
 
-// Initialize Stripe - only if public key is configured
-const stripePromise = import.meta.env.VITE_STRIPE_PUBLIC_KEY 
-    ? loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY)
-    : null;
-
-// Payment Form Component
-const PaymentForm = ({ plan, onSuccess, onCancel }) => {
-    const stripe = useStripe();
-    const elements = useElements();
-    const [errorMessage, setErrorMessage] = useState('');
-    const [isProcessing, setIsProcessing] = useState(false);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        if (!stripe || !elements) {
-            return;
-        }
-
-        setIsProcessing(true);
-        setErrorMessage('');
-
-        try {
-            const { error: submitError } = await elements.submit();
-            if (submitError) {
-                setErrorMessage(submitError.message || '決済情報の確認に失敗しました');
-                setIsProcessing(false);
-                return;
-            }
-
-            const { error, paymentIntent } = await stripe.confirmPayment({
-                elements,
-                confirmParams: {
-                    return_url: `${window.location.origin}/profile/${plan.creatorId}?subscription=success&plan=${plan.id}`,
-                },
-                redirect: 'if_required',
-            });
-
-            if (error) {
-                setErrorMessage(error.message || '決済に失敗しました');
-                setIsProcessing(false);
-            } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-                // Payment successful
-                onSuccess(plan);
-            } else {
-                setErrorMessage('決済の処理中です。しばらくお待ちください。');
-                setIsProcessing(false);
-            }
-        } catch (err) {
-            console.error('Payment error:', err);
-            setErrorMessage('決済処理中にエラーが発生しました');
-            setIsProcessing(false);
-        }
-    };
-
-    return (
-        <form onSubmit={handleSubmit} className="space-y-4">
-            <PaymentElement />
-            {errorMessage && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
-                    {errorMessage}
-                </div>
-            )}
-            <div className="flex space-x-3">
-                <button
-                    type="button"
-                    onClick={onCancel}
-                    disabled={isProcessing}
-                    className="flex-1 bg-gray-200 text-gray-700 py-4 rounded-xl font-bold disabled:opacity-50"
-                >
-                    キャンセル
-                </button>
-                <button
-                    type="submit"
-                    disabled={!stripe || isProcessing}
-                    className="flex-1 bg-gradient-to-r from-blue-500 to-blue-600 text-white py-4 rounded-xl font-bold shadow-lg disabled:opacity-50"
-                >
-                    {isProcessing ? '処理中...' : `¥${plan.total.toLocaleString()}を支払う`}
-                </button>
-            </div>
-        </form>
-    );
-};
-
 const ProfilePage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -126,7 +41,6 @@ const ProfilePage = () => {
     const [isFollowing, setIsFollowing] = useState(false);
     const [showShareModal, setShowShareModal] = useState(false);
     const [showPlanModal, setShowPlanModal] = useState(null);
-    const [clientSecret, setClientSecret] = useState('');
     const [contentData, setContentData] = useState([]);
     const [profileData, setProfileData] = useState(null);
     const [subscriptionPlans, setSubscriptionPlans] = useState([]);
@@ -456,29 +370,8 @@ const ProfilePage = () => {
                 return;
             }
 
-            // Create Payment Intent for in-app payment
-            const response = await fetch('/api/create-subscription-payment-intent', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    planId: plan.id,
-                    planTitle: plan.title,
-                    planPrice: plan.price,
-                    creatorId: profileData.id,
-                    creatorName: profileData.name,
-                }),
-            });
-
-            const data = await response.json();
-
-            if (data.clientSecret) {
-                setClientSecret(data.clientSecret);
-                setShowPlanModal(planId);
-            } else {
-                throw new Error('Payment Intentの作成に失敗しました');
-            }
+            // Show Square payment modal
+            setShowPlanModal(planId);
         } catch (error) {
             console.error('決済の準備に失敗しました:', error);
             alert('決済の準備に失敗しました。しばらくしてからお試しください。');
@@ -522,7 +415,6 @@ const ProfilePage = () => {
 
     const handlePaymentCancel = () => {
         setShowPlanModal(null);
-        setClientSecret('');
     };
 
     const handleContentLike = async (contentId) => {
@@ -1348,42 +1240,19 @@ const ProfilePage = () => {
                                                 </div>
                                             </div>
 
-                                            {/* Stripe Payment Form */}
-                                            {clientSecret ? (
-                                                <Elements
-                                                    stripe={stripePromise}
-                                                    options={{
-                                                        clientSecret,
-                                                        appearance: {
-                                                            theme: 'stripe',
-                                                            variables: {
-                                                                colorPrimary: '#3b82f6',
-                                                                colorBackground: '#ffffff',
-                                                                colorText: '#1f2937',
-                                                                colorDanger: '#ef4444',
-                                                                borderRadius: '12px',
-                                                            },
-                                                        },
-                                                    }}
-                                                >
-                                                    <PaymentForm
-                                                        plan={{ 
-                                                            ...plan, 
-                                                            total, 
-                                                            creatorId: profileData.id,
-                                                            planId: plan.id,
-                                                            planName: plan.name,
-                                                            priceValue: basePrice
-                                                        }}
-                                                        onSuccess={handlePaymentSuccess}
-                                                        onCancel={handlePaymentCancel}
-                                                    />
-                                                </Elements>
-                                            ) : (
-                                                <div className="flex items-center justify-center py-8">
-                                                    <div className="animate-spin w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full" />
-                                                </div>
-                                            )}
+                                            {/* Square Payment Form */}
+                                            <SquarePaymentForm
+                                                amount={total}
+                                                planData={{ 
+                                                    planId: plan.id,
+                                                    planName: plan.name || plan.title,
+                                                    priceValue: basePrice,
+                                                    creatorId: profileData.id,
+                                                    instructorName: profileData.name
+                                                }}
+                                                onSuccess={handlePaymentSuccess}
+                                                onCancel={handlePaymentCancel}
+                                            />
                                         </div>
                                     </>
                                 );

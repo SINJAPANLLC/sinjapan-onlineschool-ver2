@@ -15,6 +15,11 @@ const stripe = process.env.STRIPE_SECRET_KEY
     })
   : null;
 
+// Square configuration
+const SQUARE_ACCESS_TOKEN = process.env.SQUARE_ACCESS_TOKEN || '';
+const SQUARE_LOCATION_ID = process.env.SQUARE_LOCATION_ID || '';
+const SQUARE_APPLICATION_ID = process.env.SQUARE_APPLICATION_ID || '';
+
 // Ensure SESSION_SECRET is available (required for secure session tokens)
 // Fail fast if SESSION_SECRET is not configured
 if (!process.env.SESSION_SECRET) {
@@ -993,6 +998,59 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error: any) {
       console.error('Error uploading file:', error);
       res.status(500).json({ error: 'Failed to upload file: ' + error.message });
+    }
+  });
+
+  // Square Payment endpoint for subscription payments
+  app.post("/api/square-payment", async (req, res) => {
+    try {
+      if (!SQUARE_ACCESS_TOKEN) {
+        return res.status(503).json({ error: "Square payment service not configured" });
+      }
+
+      const { sourceId, amount, planId, planName, instructorId, instructorName } = req.body;
+
+      if (!sourceId || !amount || !planId || !instructorId) {
+        return res.status(400).json({ error: 'Missing required payment fields' });
+      }
+
+      // Use Square Payments API
+      const response = await fetch('https://connect.squareup.com/v2/payments', {
+        method: 'POST',
+        headers: {
+          'Square-Version': '2024-10-17',
+          'Authorization': `Bearer ${SQUARE_ACCESS_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          source_id: sourceId,
+          idempotency_key: crypto.randomUUID(),
+          amount_money: {
+            amount: amount,
+            currency: 'JPY',
+          },
+          location_id: SQUARE_LOCATION_ID || undefined,
+          note: `Subscription: ${planName} - Instructor: ${instructorName}`,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error('Square payment error:', data);
+        return res.status(response.status).json({ 
+          error: data.errors?.[0]?.detail || 'Payment failed' 
+        });
+      }
+
+      res.json({ 
+        success: true,
+        paymentId: data.payment.id,
+        status: data.payment.status
+      });
+    } catch (error: any) {
+      console.error('Error processing Square payment:', error);
+      res.status(500).json({ error: 'Payment processing failed: ' + error.message });
     }
   });
 
